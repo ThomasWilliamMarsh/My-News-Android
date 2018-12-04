@@ -1,0 +1,34 @@
+apply plugin: 'java-library'
+
+apply plugin: 'kotlin'
+
+configurations {
+    provided
+}
+
+sourceSets {
+    main {
+        compileClasspath += configurations.provided
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:' + rootProject.RxJavaVersion
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
+
+    // Testing
+    testImplementation 'junit:junit:' + rootProject.jUnitVersion
+
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+}
+
+sourceCompatibility = "1.7"
+targetCompatibility = "1.7"

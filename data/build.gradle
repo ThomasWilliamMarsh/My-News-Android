@@ -1,0 +1,61 @@
+apply plugin: 'com.android.library'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':domain')
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:' + rootProject.retrofitVersion
+
+    //Gson
+    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
+
+    //Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+
+    //RxJava
+    implementation 'io.reactivex.rxjava2:rxjava:' + rootProject.RxJavaVersion
+    implementation 'io.reactivex.rxjava2:rxandroid:' + rootProject.RxAndroidVersion
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
+
+    //Testing
+    testImplementation 'junit:junit:' + rootProject.jUnitVersion
+    testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
+
+    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
+}

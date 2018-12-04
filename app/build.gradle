@@ -1,0 +1,90 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
+
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "info.tommarsh.cleanbase"
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    androidExtensions {
+        experimental = true
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    implementation project(':domain')
+    implementation project(':data')
+
+    // Kotlin
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+
+    //Google
+    implementation 'com.google.android.material:material:' + rootProject.supportLibVersion
+    implementation 'androidx.appcompat:appcompat:' + rootProject.supportLibVersion
+    implementation 'androidx.cardview:cardview:' + rootProject.supportLibVersion
+    implementation 'androidx.recyclerview:recyclerview:' + rootProject.supportLibVersion
+    implementation 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
+
+    //Dagger
+    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
+    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+
+    //Lifecycle
+    implementation 'androidx.lifecycle:lifecycle-extensions:' + rootProject.lifecycleVersion
+    testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
+
+    //Paging
+    implementation 'androidx.paging:paging-runtime:' + rootProject.pagingVersion
+
+    //Rx
+    implementation 'io.reactivex.rxjava2:rxjava:' + rootProject.RxJavaVersion
+
+    //Coroutines
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
+    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
+
+    //Ktx
+    implementation 'androidx.core:core-ktx:' + rootProject.ktxVersion
+
+    //Testing
+    testImplementation 'junit:junit:' + rootProject.jUnitVersion
+    testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
+    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:' + rootProject.retrofitVersion
+
+    //Gson
+    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
+
+    //Espresso
+    androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.espressoVersion
+    androidTestImplementation 'androidx.test:runner:' + rootProject.espressoRunnerVersion
+    androidTestImplementation 'androidx.test:rules:'  + rootProject.espressoRunnerVersion
+    androidTestImplementation 'androidx.test.espresso:espresso-contrib:' + rootProject.espressoVersion
+    androidTestImplementation 'androidx.test.espresso:espresso-intents:' + rootProject.espressoVersion
+}
+
+kapt {
+    generateStubs = true
+}
