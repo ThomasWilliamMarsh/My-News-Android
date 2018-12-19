@@ -1,3 +1,0 @@
-package info.tommarsh.cleanbase
-
-class ViewModelFactoryTest

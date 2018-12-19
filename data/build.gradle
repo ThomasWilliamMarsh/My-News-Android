@@ -1,9 +1,6 @@
 apply plugin: 'com.android.library'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -16,7 +13,6 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
@@ -25,18 +21,13 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     implementation project(':domain')
-
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
-    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:' + rootProject.retrofitVersion
+    implementation project(':core')
 
     //Gson
     implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
@@ -44,9 +35,12 @@ dependencies {
     //Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
 
-    //RxJava
-    implementation 'io.reactivex.rxjava2:rxjava:' + rootProject.RxJavaVersion
-    implementation 'io.reactivex.rxjava2:rxandroid:' + rootProject.RxAndroidVersion
+    //Room
+    implementation  'androidx.room:room-runtime:' + rootProject.roomVersion
+    kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
+
+    //LiveData
+    implementation 'androidx.lifecycle:lifecycle-livedata:' + rootProject.lifecycleVersion
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
@@ -54,6 +48,7 @@ dependencies {
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
+    testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
 

@@ -1,9 +1,6 @@
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: 'kotlin-kapt'
 
 android {
@@ -15,6 +12,8 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField 'String', 'BASE_URL', '"https://newsapi.org"'
     }
     buildTypes {
         release {
@@ -32,6 +31,7 @@ dependencies {
 
     implementation project(':domain')
     implementation project(':data')
+    implementation project(':core')
 
     // Kotlin
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
@@ -51,18 +51,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-extensions:' + rootProject.lifecycleVersion
     testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
 
-    //Paging
-    implementation 'androidx.paging:paging-runtime:' + rootProject.pagingVersion
-
-    //Rx
-    implementation 'io.reactivex.rxjava2:rxjava:' + rootProject.RxJavaVersion
-
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
-
-    //Ktx
-    implementation 'androidx.core:core-ktx:' + rootProject.ktxVersion
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
@@ -72,15 +63,22 @@ dependencies {
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
     implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
-    implementation 'com.squareup.retrofit2:adapter-rxjava2:' + rootProject.retrofitVersion
 
     //Gson
     implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
 
+    //Navigation
+    implementation "android.arch.navigation:navigation-fragment:1.0.0-alpha09" // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-ui:1.0.0-alpha09" // use -ktx for Kotlin
+
+    //Room
+    implementation  'androidx.room:room-runtime:' + rootProject.roomVersion
+    kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
+
     //Espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.espressoVersion
     androidTestImplementation 'androidx.test:runner:' + rootProject.espressoRunnerVersion
-    androidTestImplementation 'androidx.test:rules:'  + rootProject.espressoRunnerVersion
+    androidTestImplementation 'androidx.test:rules:' + rootProject.espressoRunnerVersion
     androidTestImplementation 'androidx.test.espresso:espresso-contrib:' + rootProject.espressoVersion
     androidTestImplementation 'androidx.test.espresso:espresso-intents:' + rootProject.espressoVersion
 }

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item android:id="@+id/navigation_top_news"
+          android:icon="@drawable/ic_newspaper"
+          android:title="@string/top_news"/>
+
+    <item android:id="@+id/navigation_my_news"
+          android:icon="@drawable/ic_shape"
+          android:title="@string/my_news"/>
+
+    <item android:id="@+id/navigation_search"
+          android:icon="@drawable/ic_magnify"
+          android:title="@string/search"/>
+
+</menu>

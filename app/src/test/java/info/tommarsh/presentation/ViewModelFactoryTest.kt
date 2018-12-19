@@ -1,0 +1,3 @@
+package info.tommarsh.presentation
+
+class ViewModelFactoryTest
