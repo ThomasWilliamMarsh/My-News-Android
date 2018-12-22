@@ -6,6 +6,59 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ToolbarStyle" parent="Theme.AppCompat">
+        <item name="android:textColorPrimary">@android:color/white</item>
+        <item name="android:textColorSecondary">@android:color/white</item>
+        <item name="actionMenuTextColor">@android:color/white</item>
+    </style>
+
+    <style name="MainArticleText">
+        <item name="android:textSize">@dimen/main_article_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">@dimen/small_padding</item>
+        <item name="android:paddingStart">@dimen/normal_padding</item>
+        <item name="android:paddingBottom">@dimen/normal_padding</item>
+        <item name="android:paddingEnd">@dimen/normal_padding</item>
+    </style>
+
+    <style name="ArticleText">
+        <item name="android:textSize">@dimen/article_text_size</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">@dimen/small_padding</item>
+        <item name="android:ellipsize">end</item>
+    </style>
+
+    <style name="UpdatedMainArticleText">
+        <item name="android:textSize">@dimen/bottom_line_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingStart">@dimen/normal_padding</item>
+        <item name="android:paddingBottom">@dimen/small_padding</item>
+        <item name="android:paddingTop">@dimen/small_padding</item>
+    </style>
+
+    <style name="UpdatedArticleText">
+        <item name="android:textSize">@dimen/bottom_line_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:paddingStart">@dimen/small_padding</item>
+        <item name="android:paddingBottom">@dimen/small_padding</item>
+        <item name="android:paddingTop">@dimen/small_padding</item>
+    </style>
+
+    <style name="DividerText">
+        <item name="android:textSize">@dimen/bottom_line_text_size</item>
+        <item name="android:textStyle">normal</item>
+    </style>
+
+    <style name="AuthorText">
+        <item name="android:textSize">@dimen/bottom_line_text_size</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+        <item name="android:paddingEnd">@dimen/normal_padding</item>
     </style>
 
 </resources>

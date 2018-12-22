@@ -12,10 +12,9 @@ class ErrorLiveData @Inject constructor() : LiveData<NetworkException>() {
 
     private val pending = AtomicBoolean(false)
 
-    @MainThread
     fun setError(value: NetworkException) {
         pending.set(true)
-        super.setValue(value)
+        super.postValue(value)
     }
 
     @MainThread

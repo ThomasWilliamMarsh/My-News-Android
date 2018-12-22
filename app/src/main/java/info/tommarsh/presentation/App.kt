@@ -12,10 +12,12 @@ class App : Application() {
     private val graph: ApplicationComponent by lazy {
         DaggerApplicationComponent
             .builder()
-            .applicationModule(ApplicationModule(this))
-            .networkModule(NetworkModule())
+            .application(this)
+            .appModule(ApplicationModule)
+            .networkModule(NetworkModule)
             .build()
     }
+
 
     companion object {
         fun graph(context: Context) = (context.applicationContext as App).graph

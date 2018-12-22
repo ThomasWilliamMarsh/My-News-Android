@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/article_root"
+        android:clickable="true"
+        android:focusable="true"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/normal_margin">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless">
+
+        <ImageView
+                android:id="@+id/article_image"
+                android:layout_width="0dp"
+                android:layout_height="@dimen/article_image_size"
+                android:contentDescription="@string/content_description_image_article"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true"
+                app:layout_constraintWidth_percent=".3"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+                android:id="@+id/article_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                style="@style/ArticleText"
+                tools:text="Flights suspended by drones at Gatwick"
+                app:layout_constraintStart_toEndOf="@id/article_image"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/article_updated"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0"/>
+
+        <TextView
+                android:id="@+id/article_updated"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="@style/UpdatedArticleText"
+                tools:text="16 mins ago"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toEndOf="@id/article_image"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/article_divider"/>
+
+        <TextView
+                android:id="@+id/article_divider"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:gravity="center"
+                android:text="@string/divider_text"
+                style="@style/DividerText"
+                app:layout_constraintStart_toEndOf="@id/article_updated"
+                app:layout_constraintTop_toTopOf="@id/article_updated"
+                app:layout_constraintBottom_toBottomOf="@id/article_updated"
+                app:layout_constraintEnd_toStartOf="@id/article_author"/>
+
+        <TextView
+                android:id="@+id/article_author"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:gravity="center|start"
+                style="@style/AuthorText"
+                tools:text="BBC News"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/article_divider"
+                app:layout_constraintTop_toTopOf="@id/article_updated"
+                app:layout_constraintBottom_toBottomOf="@id/article_updated"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

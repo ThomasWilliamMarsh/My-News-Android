@@ -11,12 +11,16 @@ class NetworkHelper @Inject constructor(private val connectionManager: Connectio
         call: Call<Data>,
         mapper: Mapper<Data, Domain>
     ): Outcome<Domain> {
-        val response = call.execute()
-        return when {
-            response.body() == null -> Outcome.Error(NoResponseException())
-            !response.isSuccessful -> Outcome.Error(ServerException())
-            !connectionManager.isConnected -> Outcome.Error(NoInternetException())
-            else -> Outcome.Success(mapper.map(response.body()!!))
+        return try {
+            val response = call.execute()
+            when {
+                response.body() == null -> Outcome.Error(NoResponseException())
+                !response.isSuccessful -> Outcome.Error(ServerException())
+                !connectionManager.isConnected -> Outcome.Error(NoInternetException())
+                else -> Outcome.Success(mapper.map(response.body()!!))
+            }
+        } catch (exception: Exception) {
+            Outcome.Error(ServerException())
         }
     }
 }

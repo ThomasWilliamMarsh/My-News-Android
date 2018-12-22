@@ -21,6 +21,6 @@ class LocalDataStore
 
     fun saveBreakingNews(items: List<ArticleModel>) {
         val model = items.map { domainMapper.map(it) }
-        dao.insertBreakingArticles(*model.toTypedArray())
+        dao.replaceBreakingArticles(model)
     }
 }

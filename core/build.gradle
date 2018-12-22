@@ -28,6 +28,10 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    //Support
+    implementation 'androidx.recyclerview:recyclerview:' + rootProject.supportLibVersion
+    implementation 'com.google.android.material:material:' + rootProject.supportLibVersion
+
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
 
@@ -48,8 +52,14 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
 
+    //Browser
+    implementation "com.android.support:customtabs:" + rootProject.tabVersion
+
     //Time parsing
     api 'joda-time:joda-time:' + rootProject.jodaTimeVersion
+
+    //Picasso
+    implementation 'com.squareup.picasso:picasso:' + rootProject.picassoVersion
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion

@@ -1,32 +1,25 @@
 package info.tommarsh.presentation.ui.article
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.appcompat.app.AppCompatActivity
+import androidx.navigation.Navigation.findNavController
+import androidx.navigation.ui.NavigationUI.setupWithNavController
+import info.tommarsh.core.extensions.snack
 import info.tommarsh.presentation.R
-import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
-import info.tommarsh.presentation.ui.base.BaseActivity
+import kotlinx.android.synthetic.main.activity_articles.*
 
-class ArticlesActivity : BaseActivity() {
-
-    private val viewModel: TopNewsViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(TopNewsViewModel::class.java)
-    }
+class ArticlesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_articles)
+        setSupportActionBar(articles_toolbar)
 
-        component.inject(this)
+        val controller = findNavController(this, R.id.nav_host_fragment)
+        setupWithNavController(bottom_navigation, controller)
+    }
 
-        viewModel.getBreakingNews().observe(this, Observer {
-            val items = it
-            print(items.toString())
-        })
-
-        viewModel.errors.observe(this, Observer {
-            val error = it
-            print(error.toString())
-        })
+    fun setError(message: String) {
+        articles_root.snack(message)
     }
 }

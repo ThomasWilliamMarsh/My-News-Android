@@ -9,8 +9,8 @@
           android:icon="@drawable/ic_shape"
           android:title="@string/my_news"/>
 
-    <item android:id="@+id/navigation_search"
-          android:icon="@drawable/ic_magnify"
-          android:title="@string/search"/>
+    <item android:id="@+id/navigation_videos"
+          android:icon="@drawable/ic_video"
+          android:title="@string/videos"/>
 
 </menu>

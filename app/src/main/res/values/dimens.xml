@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_article_text_size">26sp</dimen>
+    <dimen name="small_padding">4dp</dimen>
+    <dimen name="normal_padding">8dp</dimen>
+    <dimen name="article_text_size">14sp</dimen>
+    <dimen name="bottom_line_text_size">10sp</dimen>
+    <dimen name="main_article_image_size">216dp</dimen>
+    <dimen name="article_image_size">72dp</dimen>
+    <dimen name="normal_margin">8dp</dimen>
+</resources>

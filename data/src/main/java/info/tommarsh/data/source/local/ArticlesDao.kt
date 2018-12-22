@@ -1,14 +1,17 @@
 package info.tommarsh.data.source.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import info.tommarsh.data.model.local.Article
 
 @Dao
 interface ArticlesDao {
+
+    @Transaction
+    fun replaceBreakingArticles(articles: List<Article>) {
+        deleteArticles()
+        insertBreakingArticles(*articles.toTypedArray())
+    }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertBreakingArticles(vararg articles: Article)

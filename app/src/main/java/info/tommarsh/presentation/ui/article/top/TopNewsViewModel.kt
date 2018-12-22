@@ -15,12 +15,11 @@ class TopNewsViewModel
     private val repository: ArticleRepository,
     private val mapper: ArticleViewModelMapper
 ) : ViewModel(), CoroutineScope {
+
     private val job = Job()
 
     override val coroutineContext: CoroutineContext
         get() = job + Dispatchers.Main
-
-    val errors = repository.errors
 
     init {
         refreshBreakingNews()
@@ -32,7 +31,9 @@ class TopNewsViewModel
         }
     }
 
-    private fun refreshBreakingNews() {
+    fun getErrors() = repository.errors
+
+    fun refreshBreakingNews() {
         launch {
             withContext(Dispatchers.IO) {
                 repository.refreshBreakingNews()

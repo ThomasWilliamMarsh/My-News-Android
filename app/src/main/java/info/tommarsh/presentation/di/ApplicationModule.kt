@@ -1,27 +1,20 @@
 package info.tommarsh.presentation.di
 
-import android.content.Context
+import android.app.Application
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
-import info.tommarsh.data.ArticleDataRepository
 import info.tommarsh.data.source.local.ArticlesDatabase
-import info.tommarsh.domain.source.ArticleRepository
-import info.tommarsh.presentation.App
 
 @Module
-class ApplicationModule(private val app: App) {
+object ApplicationModule {
 
     @Provides
-    fun provideContext() = app.applicationContext
+    @JvmStatic
+    fun provideDb(app: Application) =
+        Room.databaseBuilder(app.applicationContext, ArticlesDatabase::class.java, "articles-db").build()
 
     @Provides
-    fun provideDb(app: Context) = Room.databaseBuilder(app, ArticlesDatabase::class.java, "articles-db").build()
-
-    @Provides
+    @JvmStatic
     fun provideDao(db: ArticlesDatabase) = db.articlesDao()
-
-    @Provides
-    fun provideRepository(repository: ArticleDataRepository): ArticleRepository =
-        repository
 }
