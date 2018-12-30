@@ -12,8 +12,8 @@ import info.tommarsh.core.network.NetworkException
 import info.tommarsh.presentation.App
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.ui.article.BaseFragment
 import info.tommarsh.presentation.ui.article.top.adapter.TopNewsAdapter
+import info.tommarsh.presentation.ui.base.BaseFragment
 import kotlinx.android.synthetic.main.fragment_top_news.*
 
 class TopNewsFragment : BaseFragment() {
@@ -41,7 +41,7 @@ class TopNewsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getBreakingNews().observe(viewLifecycleOwner, Observer(::onArticlesReceived))
+        viewModel.getArticlesObservable().observe(viewLifecycleOwner, Observer(::onArticlesReceived))
         viewModel.getErrors().observe(viewLifecycleOwner, Observer(::onError))
     }
 

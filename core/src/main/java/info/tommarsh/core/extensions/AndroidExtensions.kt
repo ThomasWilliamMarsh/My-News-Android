@@ -1,6 +1,7 @@
 package info.tommarsh.core.extensions
 
 import android.view.Menu
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.DiffUtil
 
 //region listadapter
@@ -14,4 +15,8 @@ fun <T> getDiffUtilItemCallback(compare: (T, T) -> Boolean) =
 
 //region menu
 inline fun <reified T> Menu.getActionItem(item: Int): T = findItem(item).actionView as T
+//endregion
+
+//region Activity
+inline fun <reified T> AppCompatActivity.service(type: String) = getSystemService(type) as T
 //endregion

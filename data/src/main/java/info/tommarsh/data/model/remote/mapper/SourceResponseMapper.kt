@@ -9,7 +9,7 @@ class SourceResponseMapper
 @Inject constructor() : Mapper<SourceResponse, SourceModel> {
 
     override fun map(from: SourceResponse) = SourceModel(
-        id = from.id,
-        name = from.name
+        id = from.id.orEmpty(),
+        name = from.name.orEmpty()
     )
 }

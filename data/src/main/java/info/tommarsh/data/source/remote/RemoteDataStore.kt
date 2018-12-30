@@ -16,4 +16,8 @@ class RemoteDataStore
     fun getBreakingNews(): Outcome<List<ArticleModel>> {
         return networkHelper.callApi(api.getBreakingNews(), mapper)
     }
+
+    fun searchArticles(query: String): Outcome<List<ArticleModel>> {
+        return networkHelper.callApi(api.searchArticles(query), mapper)
+    }
 }

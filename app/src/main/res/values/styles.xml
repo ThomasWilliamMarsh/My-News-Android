@@ -31,6 +31,7 @@
         <item name="android:textStyle">bold</item>
         <item name="android:padding">@dimen/small_padding</item>
         <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">2</item>
     </style>
 
     <style name="UpdatedMainArticleText">
@@ -55,6 +56,8 @@
     </style>
 
     <style name="AuthorText">
+        <item name="android:ellipsize">end</item>
+        <item name="android:maxLines">1</item>
         <item name="android:textSize">@dimen/bottom_line_text_size</item>
         <item name="android:textStyle">normal</item>
         <item name="android:textColor">@color/colorPrimary</item>

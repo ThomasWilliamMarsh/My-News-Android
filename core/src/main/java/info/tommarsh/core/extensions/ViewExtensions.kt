@@ -21,6 +21,18 @@ fun View.ArticleClickListener(url: String) = View.OnClickListener {
         .build()
     intent.launchUrl(context, Uri.parse(url))
 }
+
+fun View.makeVisible() {
+    visibility = View.VISIBLE
+}
+
+fun View.makeInvisible() {
+    visibility = View.INVISIBLE
+}
+
+fun View.makeGone() {
+    visibility = View.GONE
+}
 //endRegion
 
 //region ViewGroup

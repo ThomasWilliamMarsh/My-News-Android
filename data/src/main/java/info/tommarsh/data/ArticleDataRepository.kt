@@ -17,7 +17,7 @@ class ArticleDataRepository
 
     override val errors = ErrorLiveData()
 
-    override fun getBreakingNews(source: String): LiveData<List<ArticleModel>> = local.getBreakingNews()
+    override fun getBreakingNewsObservable(source: String): LiveData<List<ArticleModel>> = local.getBreakingNews()
 
     override fun refreshBreakingNews() {
         val networkItems = remote.getBreakingNews()
@@ -26,6 +26,8 @@ class ArticleDataRepository
             is Outcome.Error -> errors.setError(networkItems.error)
         }
     }
+
+    override fun searchArticles(query: String) = remote.searchArticles(query)
 
     override fun getCategory(category: String): LiveData<List<ArticleModel>> {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.

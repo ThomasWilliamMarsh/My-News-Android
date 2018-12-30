@@ -11,4 +11,11 @@ interface ArticleApiService {
 
     @GET("/v2/top-headlines")
     fun getCategory(@Query("category") category: String): Call<ArticlesResponse>
+
+    @GET("/v2/everything")
+    fun searchArticles(
+        @Query("q") query: String,
+        @Query("sources") sources: String = "bbc-news",
+        @Query("sortBy") sortBy: String = "publishedAt"
+    ): Call<ArticlesResponse>
 }

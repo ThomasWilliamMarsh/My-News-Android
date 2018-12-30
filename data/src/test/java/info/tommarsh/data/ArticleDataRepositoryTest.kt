@@ -44,7 +44,7 @@ class ArticleDataRepositoryTest {
     fun `Get breaking news from db and network, and persist`() {
         whenever(localDataStore.getBreakingNews()).thenReturn(MutableLiveData())
 
-        repository.getBreakingNews("")
+        repository.getBreakingNewsObservable("")
 
         verify(localDataStore).getBreakingNews()
     }

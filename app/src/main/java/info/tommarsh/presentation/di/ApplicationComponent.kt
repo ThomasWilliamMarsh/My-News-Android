@@ -4,6 +4,7 @@ import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
 import info.tommarsh.presentation.ui.article.top.TopNewsFragment
+import info.tommarsh.presentation.ui.search.SearchActivity
 import javax.inject.Singleton
 
 @Singleton
@@ -24,4 +25,6 @@ interface ApplicationComponent {
     }
 
     fun inject(fragment: TopNewsFragment)
+
+    fun inject(activity: SearchActivity)
 }

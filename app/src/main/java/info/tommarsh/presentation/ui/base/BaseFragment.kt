@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article
+package info.tommarsh.presentation.ui.base
 
 import androidx.fragment.app.Fragment
 import info.tommarsh.presentation.ViewModelFactory
