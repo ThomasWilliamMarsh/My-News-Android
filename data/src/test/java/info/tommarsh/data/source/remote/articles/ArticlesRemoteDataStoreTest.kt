@@ -1,4 +1,4 @@
-package info.tommarsh.data.source.remote
+package info.tommarsh.data.source.remote.articles
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
@@ -15,7 +15,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class RemoteDataStoreTest {
+class ArticlesRemoteDataStoreTest {
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -23,7 +23,7 @@ class RemoteDataStoreTest {
     private val mapper = mock<ArticleResponseMapper>()
     private val network = mock<NetworkHelper>()
     private val api = mock<ArticleApiService>()
-    private val remoteDataStore = RemoteDataStore(mapper, network, api)
+    private val remoteDataStore = ArticlesRemoteDataStore(mapper, network, api)
 
     @Test
     fun `Get breaking news from network`() = runBlocking {

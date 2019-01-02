@@ -6,7 +6,7 @@
 
     <application
             android:allowBackup="true"
-            android:name="info.tommarsh.presentation.App"
+            android:name="info.tommarsh.presentation.NewsApp"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
@@ -28,6 +28,7 @@
             </intent-filter>
 
         </activity>
+        <activity android:name=".ui.categories.CategoryChoiceActivity"/>
     </application>
 
 </manifest>

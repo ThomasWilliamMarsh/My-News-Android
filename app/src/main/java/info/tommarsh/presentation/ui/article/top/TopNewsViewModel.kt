@@ -22,7 +22,7 @@ class TopNewsViewModel
     }
 
     fun getArticlesObservable(): LiveData<List<ArticleViewModel>> {
-        return Transformations.map(repository.getBreakingNewsObservable("")) { domain ->
+        return Transformations.map(repository.getBreakingNews("")) { domain ->
             domain.map { mapper.map(it) }
         }
     }

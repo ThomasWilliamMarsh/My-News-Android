@@ -1,4 +1,4 @@
-package info.tommarsh.data.source.local
+package info.tommarsh.data.source.local.articles
 
 import androidx.lifecycle.LiveData
 import androidx.room.*

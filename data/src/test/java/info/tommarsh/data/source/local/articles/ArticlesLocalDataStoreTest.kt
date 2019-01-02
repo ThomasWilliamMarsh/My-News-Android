@@ -1,4 +1,4 @@
-package info.tommarsh.data.source.local
+package info.tommarsh.data.source.local.articles
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.LiveData
@@ -15,7 +15,7 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
 
-class LocalDataStoreTest {
+class ArticlesLocalDataStoreTest {
 
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
@@ -27,7 +27,8 @@ class LocalDataStoreTest {
     private val domainToDataMapper = mock<ArticleDomainToDataMapper> {
         on { map(articleModel) }.thenReturn(article)
     }
-    private val localDataStore = LocalDataStore(dao, dataToDomainMapper, domainToDataMapper)
+    private val localDataStore =
+        ArticlesLocalDataStore(dao, dataToDomainMapper, domainToDataMapper)
     private val articleLiveData = MutableLiveData<List<Article>>()
 
     @Test

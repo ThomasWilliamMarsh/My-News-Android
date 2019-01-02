@@ -1,4 +1,4 @@
-package info.tommarsh.data.source.local
+package info.tommarsh.data.source.local.articles
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
@@ -7,20 +7,20 @@ import info.tommarsh.data.model.local.mapper.ArticleDomainToDataMapper
 import info.tommarsh.domain.model.ArticleModel
 import javax.inject.Inject
 
-class LocalDataStore
+class ArticlesLocalDataStore
 @Inject constructor(
-    private val dao: ArticlesDao,
+    private val articlesDao: ArticlesDao,
     private val dataMapper: ArticleDataToDomainMapper,
     private val domainMapper: ArticleDomainToDataMapper
 ) {
 
     fun getBreakingNews(): LiveData<List<ArticleModel>> {
-        val model = dao.getBreakingArticles()
+        val model = articlesDao.getBreakingArticles()
         return Transformations.map(model) { domain -> domain.map { dataMapper.map(it) } }
     }
 
     fun saveBreakingNews(items: List<ArticleModel>) {
         val model = items.map { domainMapper.map(it) }
-        dao.replaceBreakingArticles(model)
+        articlesDao.replaceBreakingArticles(model)
     }
 }

@@ -9,11 +9,12 @@ interface ArticleRepository {
 
     val errors: ErrorLiveData
 
-    fun getBreakingNewsObservable(source: String): LiveData<List<ArticleModel>>
+    fun getBreakingNews(source: String): LiveData<List<ArticleModel>>
 
-    fun searchArticles(query: String): Outcome<List<ArticleModel>>
+    fun getArticlesForCategory(category: String): List<ArticleModel>
 
     fun refreshBreakingNews()
 
-    fun getCategory(category: String): LiveData<List<ArticleModel>>
+    fun searchArticles(query: String): Outcome<List<ArticleModel>>
+
 }

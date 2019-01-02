@@ -7,7 +7,7 @@ import info.tommarsh.presentation.di.ApplicationModule
 import info.tommarsh.presentation.di.DaggerApplicationComponent
 import info.tommarsh.presentation.di.NetworkModule
 
-class App : Application() {
+class NewsApp : Application() {
 
     private val graph: ApplicationComponent by lazy {
         DaggerApplicationComponent
@@ -20,6 +20,6 @@ class App : Application() {
 
 
     companion object {
-        fun graph(context: Context) = (context.applicationContext as App).graph
+        fun graph(context: Context) = (context.applicationContext as NewsApp).graph
     }
 }

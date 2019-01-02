@@ -3,7 +3,9 @@ package info.tommarsh.presentation.di
 import android.app.Application
 import dagger.BindsInstance
 import dagger.Component
+import info.tommarsh.presentation.ui.article.categories.CategoriesFragment
 import info.tommarsh.presentation.ui.article.top.TopNewsFragment
+import info.tommarsh.presentation.ui.categories.CategoryChoiceActivity
 import info.tommarsh.presentation.ui.search.SearchActivity
 import javax.inject.Singleton
 
@@ -26,5 +28,9 @@ interface ApplicationComponent {
 
     fun inject(fragment: TopNewsFragment)
 
+    fun inject(fragment: CategoriesFragment)
+
     fun inject(activity: SearchActivity)
+
+    fun inject(activity: CategoryChoiceActivity)
 }

@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import dagger.Module
 import dagger.Provides
 import info.tommarsh.core.network.ApiInterceptor
-import info.tommarsh.data.source.remote.ArticleApiService
+import info.tommarsh.data.source.remote.articles.ArticleApiService
 import info.tommarsh.presentation.BuildConfig
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

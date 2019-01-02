@@ -19,4 +19,6 @@
 
     </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
+    <include layout="@layout/layout_add_categories"/>
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

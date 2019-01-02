@@ -1,4 +1,4 @@
-package info.tommarsh.data.source.remote
+package info.tommarsh.data.source.remote.articles
 
 import info.tommarsh.data.model.remote.ArticlesResponse
 import retrofit2.Call
@@ -10,7 +10,7 @@ interface ArticleApiService {
     fun getBreakingNews(@Query("sources") sources: String = "bbc-news"): Call<ArticlesResponse>
 
     @GET("/v2/top-headlines")
-    fun getCategory(@Query("category") category: String): Call<ArticlesResponse>
+    fun getArticlesForCategory(@Query("category") category: String): Call<ArticlesResponse>
 
     @GET("/v2/everything")
     fun searchArticles(

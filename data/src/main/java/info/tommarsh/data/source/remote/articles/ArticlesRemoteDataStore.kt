@@ -1,4 +1,4 @@
-package info.tommarsh.data.source.remote
+package info.tommarsh.data.source.remote.articles
 
 import info.tommarsh.core.network.NetworkHelper
 import info.tommarsh.core.network.Outcome
@@ -6,7 +6,7 @@ import info.tommarsh.data.model.remote.mapper.ArticleResponseMapper
 import info.tommarsh.domain.model.ArticleModel
 import javax.inject.Inject
 
-class RemoteDataStore
+class ArticlesRemoteDataStore
 @Inject constructor(
     private val mapper: ArticleResponseMapper,
     private val networkHelper: NetworkHelper,
@@ -19,5 +19,9 @@ class RemoteDataStore
 
     fun searchArticles(query: String): Outcome<List<ArticleModel>> {
         return networkHelper.callApi(api.searchArticles(query), mapper)
+    }
+
+    fun getArticleForCategory(category: String): Outcome<List<ArticleModel>> {
+        return networkHelper.callApi(api.getArticlesForCategory(category), mapper)
     }
 }

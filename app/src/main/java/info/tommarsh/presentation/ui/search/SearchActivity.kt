@@ -11,7 +11,7 @@ import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.core.extensions.service
 import info.tommarsh.core.extensions.snack
 import info.tommarsh.core.network.NetworkException
-import info.tommarsh.presentation.App
+import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.ViewModelFactory
 import info.tommarsh.presentation.model.ArticleViewModel
@@ -35,14 +35,10 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_search)
         setSupportActionBar(search_toolbar)
-        App.graph(this).inject(this)
-
+        graph(this).inject(this)
         setUpViewModel()
-
         setUpRecyclerView()
-
         setUpSearchView()
-
         onIntent(intent)
     }
 
