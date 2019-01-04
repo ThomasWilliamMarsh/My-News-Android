@@ -14,4 +14,7 @@
     <fragment android:id="@+id/navigation_videos"
               android:name="info.tommarsh.presentation.ui.article.videos.VideosFragment"
               android:label="VideosFragment"/>
+    <activity android:id="@+id/navigation_choice"
+              android:name="info.tommarsh.presentation.ui.categories.CategoryChoiceActivity"
+              android:label="CategoryChoiceActivity"/>
 </navigation>

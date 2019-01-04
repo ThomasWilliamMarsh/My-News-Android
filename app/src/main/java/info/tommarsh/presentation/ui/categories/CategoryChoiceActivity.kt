@@ -23,7 +23,7 @@ class CategoryChoiceActivity : AppCompatActivity() {
         ViewModelProviders.of(this, factory).get(CategoryChoiceViewModel::class.java)
     }
 
-    private val adapter = CategoryChoiceAdapter()
+    private val adapter = CategoryChoiceAdapter(::onCategorySelected)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,5 +45,10 @@ class CategoryChoiceActivity : AppCompatActivity() {
 
     private fun onCategories(categories: List<CategoryViewModel>) {
         adapter.submitList(categories)
+    }
+
+    private fun onCategorySelected(category: CategoryViewModel) {
+        category.selected = !category.selected
+        viewModel.updateCategory(category)
     }
 }

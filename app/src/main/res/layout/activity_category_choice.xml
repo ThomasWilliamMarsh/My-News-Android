@@ -19,7 +19,6 @@
                 android:layout_height="?attr/actionBarSize"
                 android:theme="@style/ToolbarStyle"
                 app:title="@string/edit_my_news"
-                app:layout_scrollFlags="scroll|enterAlways"
                 style="ToolbarStyle"/>
 
     </com.google.android.material.appbar.AppBarLayout>

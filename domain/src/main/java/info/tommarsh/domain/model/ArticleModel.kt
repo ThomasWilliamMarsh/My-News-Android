@@ -9,5 +9,6 @@ data class ArticleModel(
     val source: SourceModel,
     val title: String,
     val url: String,
-    val urlToImage: String
+    val urlToImage: String,
+    var category: String = "top-news"
 )

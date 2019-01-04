@@ -8,7 +8,6 @@ import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import info.tommarsh.presentation.ui.base.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class TopNewsViewModel
@@ -30,10 +29,6 @@ class TopNewsViewModel
     fun getErrors() = repository.errors
 
     fun refreshBreakingNews() {
-        launch {
-            withContext(Dispatchers.IO) {
-                repository.refreshBreakingNews()
-            }
-        }
+        launch(Dispatchers.IO) { repository.refreshBreakingNews() }
     }
 }

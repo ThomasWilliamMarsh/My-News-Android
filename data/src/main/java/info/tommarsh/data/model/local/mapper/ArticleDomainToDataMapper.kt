@@ -6,7 +6,9 @@ import info.tommarsh.domain.model.ArticleModel
 import javax.inject.Inject
 
 class ArticleDomainToDataMapper
-@Inject constructor(private val sourceMapper: SourceDomainToDataMapper) : Mapper<ArticleModel, Article> {
+@Inject constructor(
+    private val sourceMapper: SourceDomainToDataMapper
+) : Mapper<ArticleModel, Article> {
 
     override fun map(from: ArticleModel) = Article(
         author = from.author,
@@ -16,6 +18,7 @@ class ArticleDomainToDataMapper
         source = sourceMapper.map(from.source),
         title = from.title,
         url = from.url,
-        urlToImage = from.urlToImage
+        urlToImage = from.urlToImage,
+        category = from.category
     )
 }

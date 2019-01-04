@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_plus_circle_outline" />
-                            <entry key="sourceFile" value="$USER_HOME$/Downloads/plus-circle-outline.svg" />
+                            <entry key="outputName" value="ic_minus_circle_outline" />
+                            <entry key="sourceFile" value="$USER_HOME$/Downloads/minus-circle-outline.svg" />
                           </map>
                         </option>
                       </PersistentState>

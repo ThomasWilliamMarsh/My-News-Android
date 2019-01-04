@@ -9,18 +9,30 @@ interface ArticlesDao {
 
     @Transaction
     fun replaceBreakingArticles(articles: List<Article>) {
-        deleteArticles()
-        insertBreakingArticles(*articles.toTypedArray())
+        deleteBreakingArticles()
+        insertArticles(*articles.toTypedArray())
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertBreakingArticles(vararg articles: Article)
+    fun insertArticles(vararg articles: Article)
 
-    @Query("SELECT * FROM ARTICLE_TABLE")
+    @Query("SELECT * FROM ARTICLE_TABLE WHERE category == 'top-news'")
     fun getBreakingArticles(): LiveData<List<Article>>
 
-    @Query("DELETE FROM ARTICLE_TABLE")
-    fun deleteArticles(): Int
+    @Transaction
+    fun replaceFeed(articles: List<Article>) {
+        deleteFeed()
+        insertArticles(*articles.toTypedArray())
+    }
+
+    @Query("SELECT * FROM ARTICLE_TABLE WHERE category != 'top-news'")
+    fun getFeed(): LiveData<List<Article>>
+
+    @Query("DELETE FROM ARTICLE_TABLE WHERE category != 'top-news'")
+    fun deleteFeed()
+
+    @Query("DELETE FROM ARTICLE_TABLE WHERE category == 'top-news'")
+    fun deleteBreakingArticles(): Int
 
     @Query("DELETE FROM SOURCE_TABLE")
     fun deleteSources(): Int

@@ -19,8 +19,20 @@ class ArticlesLocalDataStore
         return Transformations.map(model) { domain -> domain.map { dataMapper.map(it) } }
     }
 
+    fun getFeed(): LiveData<List<ArticleModel>> {
+        val model = articlesDao.getFeed()
+        return Transformations.map(model) { domain -> domain.map { dataMapper.map(it) } }
+    }
+
     fun saveBreakingNews(items: List<ArticleModel>) {
         val model = items.map { domainMapper.map(it) }
         articlesDao.replaceBreakingArticles(model)
+    }
+
+    fun saveFeed(items: List<ArticleModel>) {
+        val model = items.map {
+            domainMapper.map(it)
+        }
+        articlesDao.replaceFeed(model)
     }
 }

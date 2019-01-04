@@ -13,9 +13,9 @@ interface CategoryDao {
     @Query("SELECT * FROM CATEGORY_TABLE")
     fun getCategories(): LiveData<List<Category>>
 
-    @Query("SELECT * FROM CATEGORY_TABLE WHERE selected = \'true\'")
-    fun getSelectedCategories(): LiveData<List<Category>>
+    @Query("SELECT * FROM CATEGORY_TABLE WHERE selected = :selected")
+    fun getSelectedCategories(selected: Boolean = true): LiveData<List<Category>>
 
     @Update
-    fun updateCategories(vararg categories: Category)
+    fun updateCategory(category: Category)
 }

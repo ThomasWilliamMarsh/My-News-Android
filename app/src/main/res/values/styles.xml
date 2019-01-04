@@ -65,6 +65,11 @@
         <item name="android:textStyle">normal</item>
     </style>
 
+    <style name="CategoryHeaderText">
+        <item name="android:textSize">@dimen/category_header_text_size</item>
+        <item name="android:paddingEnd">@dimen/normal_padding</item>
+    </style>
+
     <style name="AuthorText">
         <item name="android:ellipsize">end</item>
         <item name="android:maxLines">1</item>

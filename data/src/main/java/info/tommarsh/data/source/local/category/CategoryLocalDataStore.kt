@@ -14,17 +14,18 @@ class CategoryLocalDataStore
     private val domainMapper: CategoryDomainToDataMapper
 ) {
 
-    fun getCategories(): LiveData<List<CategoryModel>> = Transformations.map(dao.getCategories()) { model ->
-        model.map { dataMapper.map(it) }
-    }
+    fun getCategories(): LiveData<List<CategoryModel>> =
+        Transformations.map(dao.getCategories()) { model ->
+            model.map { dataMapper.map(it) }
+        }
 
     fun getSelectedCategories(): LiveData<List<CategoryModel>> =
         Transformations.map(dao.getSelectedCategories()) { model ->
             model.map { dataMapper.map(it) }
         }
 
-    fun updateCategories(categories: List<CategoryModel>) {
-        val model = categories.map { domainMapper.map(it) }
-        dao.updateCategories(*model.toTypedArray())
+    fun updateCategory(category: CategoryModel) {
+        val model = domainMapper.map(category)
+        dao.updateCategory(model)
     }
 }

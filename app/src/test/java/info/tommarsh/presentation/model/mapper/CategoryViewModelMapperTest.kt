@@ -7,7 +7,7 @@ import org.junit.Test
 
 class CategoryViewModelMapperTest {
 
-    private val mapper = CategoryViewModelMapper()
+    private val mapper = CategoryDomainToViewModelMapper()
 
     @Test
     fun `Map to presentation layer`() {

@@ -12,8 +12,9 @@ class CategoryDataRepository
     private val local: CategoryLocalDataStore,
     override val errors: ErrorLiveData
 ) : CategoryRepository {
-
     override fun getSelectedCategories() = local.getSelectedCategories()
 
     override fun getCategories(): LiveData<List<CategoryModel>> = local.getCategories()
+
+    override fun updateCategory(category: CategoryModel) = local.updateCategory(category)
 }
