@@ -8,8 +8,9 @@ import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
+import com.bumptech.glide.Glide
+import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
-import com.squareup.picasso.Picasso
 import info.tommarsh.core.R
 
 
@@ -40,9 +41,9 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View = LayoutInflater.from(con
 //endregion
 
 //region ImageView
-fun ImageView.loadUrl(url: String) = Picasso.get()
+fun ImageView.loadUrl(url: String) = Glide.with(context)
     .load(url)
-    .fit()
+    .apply(RequestOptions.centerCropTransform())
     .into(this)
 //endregion
 

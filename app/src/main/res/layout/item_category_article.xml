@@ -15,7 +15,6 @@
                    android:layout_width="0dp"
                    android:layout_height="0dp"
                    android:contentDescription="@string/content_description_image_article"
-                   android:scaleType="fitCenter"
                    android:adjustViewBounds="true"
                    app:layout_constraintHeight_min="@dimen/feed_article_min_height"
                    app:layout_constraintVertical_chainStyle="packed"

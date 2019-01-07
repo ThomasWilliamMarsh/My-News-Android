@@ -60,8 +60,9 @@ dependencies {
     //Time parsing
     api 'joda-time:joda-time:' + rootProject.jodaTimeVersion
 
-    //Picasso
-    implementation 'com.squareup.picasso:picasso:' + rootProject.picassoVersion
+    //Glide
+    api 'com.github.bumptech.glide:glide:' + rootProject.glideVersion
+    kapt 'com.github.bumptech.glide:compiler:' + rootProject.glideVersion
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion

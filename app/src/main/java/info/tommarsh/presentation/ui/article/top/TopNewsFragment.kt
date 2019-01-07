@@ -1,13 +1,12 @@
 package info.tommarsh.presentation.ui.article.top
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import info.tommarsh.core.extensions.snack
 import info.tommarsh.core.network.NetworkException
 import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
@@ -45,6 +44,11 @@ class TopNewsFragment : BaseFragment() {
         viewModel.getErrors().observe(viewLifecycleOwner, Observer(::onError))
     }
 
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.default_toolbar_menu, menu)
+    }
+
     private fun onArticlesReceived(articles: List<ArticleViewModel>?) {
         adapter.submitList(articles)
         refresh_top_news.isRefreshing = false
@@ -52,5 +56,6 @@ class TopNewsFragment : BaseFragment() {
 
     private fun onError(error: NetworkException) {
         refresh_top_news.isRefreshing = false
+        refresh_top_news.snack(error.localizedMessage)
     }
 }

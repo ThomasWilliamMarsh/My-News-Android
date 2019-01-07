@@ -19,7 +19,6 @@ import info.tommarsh.presentation.ui.search.adapter.SearchAdapter
 import kotlinx.android.synthetic.main.activity_search.*
 import javax.inject.Inject
 
-
 class SearchActivity : AppCompatActivity() {
 
     private val adapter = SearchAdapter()

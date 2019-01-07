@@ -1,5 +1,7 @@
 package info.tommarsh.presentation.ui.article.videos.adapter.viewholder
 
+import android.content.Intent
+import android.net.Uri
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.core.extensions.inflate
@@ -14,5 +16,13 @@ class PlaylistItemViewholder(parent: ViewGroup) : RecyclerView.ViewHolder(parent
         video_image.loadUrl(playlistItem.thumbnail)
         video_title.text = playlistItem.title
         video_updated.text = playlistItem.publishedAt
+        video_root.setOnClickListener {
+            context.startActivity(
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse(context.getString(R.string.youtube_url, playlistItem.videoId))
+                )
+            )
+        }
     }
 }

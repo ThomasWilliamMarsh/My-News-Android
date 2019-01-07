@@ -1,14 +1,13 @@
 package info.tommarsh.presentation.ui.article.categories
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import info.tommarsh.core.ViewModel
+import info.tommarsh.core.extensions.makeGone
 import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.presentation.NewsApp.Companion.graph
@@ -21,6 +20,8 @@ import kotlinx.android.synthetic.main.layout_add_categories.*
 class CategoriesFragment : BaseFragment() {
 
     private val adapter = CategoriesAdapter()
+
+    private val selectedCategoriesObserver = onSelectedCategories()
 
     private val viewModel: CategoriesViewModel by lazy {
         ViewModelProviders.of(this, factory).get(CategoriesViewModel::class.java)
@@ -38,33 +39,56 @@ class CategoriesFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         add_categories_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_choice))
         my_news_recycler_view.adapter = adapter
-        my_news_recycler_view.layoutManager = GridLayoutManager(context, 2).apply {
-            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (adapter.getItemViewType(position)) {
-                        CategoriesAdapter.TYPE_HEADER -> 2
-                        else -> 1
-                    }
-                }
-            }
-        }
+        my_news_recycler_view.layoutManager = setLayoutManager()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+        super.onCreateOptionsMenu(menu, inflater)
+        inflater?.inflate(R.menu.categories_toolbar_menu, menu)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        viewModel.getSelectedCategories().removeObserver(selectedCategoriesObserver)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.getSelectedCategories().observe(viewLifecycleOwner, selectedCategoriesObserver)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getSelectedCategories().observe(viewLifecycleOwner, Observer(::onSelectedCategories))
         viewModel.getFeed().observe(viewLifecycleOwner, Observer(::onArticleCategories))
     }
 
-    private fun onSelectedCategories(categories: List<CategoryModel>) {
+    private fun onSelectedCategories() = Observer<List<CategoryModel>> { categories ->
         if (categories.isEmpty()) {
             add_categories_root.makeVisible()
         } else {
+            add_categories_root.makeGone()
+            refresh_my_news.setOnRefreshListener {
+                refresh_my_news.isRefreshing = true
+                viewModel.refreshFeed(categories)
+            }
+
             viewModel.refreshFeed(categories)
         }
     }
 
     private fun onArticleCategories(articles: List<ViewModel>) {
+        refresh_my_news.isRefreshing = false
         adapter.submitList(articles)
+    }
+
+    private fun setLayoutManager() = GridLayoutManager(context, 2).apply {
+        spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when (adapter.getItemViewType(position)) {
+                    CategoriesAdapter.TYPE_HEADER -> 2
+                    else -> 1
+                }
+            }
+        }
     }
 }
