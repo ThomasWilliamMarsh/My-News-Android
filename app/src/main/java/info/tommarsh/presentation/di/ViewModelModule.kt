@@ -6,6 +6,7 @@ import dagger.Module
 import dagger.multibindings.IntoMap
 import info.tommarsh.presentation.ui.article.categories.CategoriesViewModel
 import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
+import info.tommarsh.presentation.ui.article.videos.VideosViewModel
 import info.tommarsh.presentation.ui.categories.CategoryChoiceViewModel
 import info.tommarsh.presentation.ui.search.SearchViewModel
 
@@ -26,6 +27,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CategoriesViewModel::class)
     abstract fun bindCategoriesViewModel(viewModel: CategoriesViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(VideosViewModel::class)
+    abstract fun bindVideosViewModel(viewModel: VideosViewModel): ViewModel
 
     @Binds
     @IntoMap

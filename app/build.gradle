@@ -14,6 +14,7 @@ android {
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
         buildConfigField 'String', 'BASE_URL', '"https://newsapi.org"'
+        buildConfigField 'String', 'YOUTUBE_BASE_URL', '"https://www.googleapis.com/youtube/v3/"'
     }
     buildTypes {
         release {
