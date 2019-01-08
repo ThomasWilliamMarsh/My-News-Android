@@ -6,7 +6,7 @@ import info.tommarsh.core.network.Outcome
 import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
-import info.tommarsh.presentation.ui.base.BaseViewModel
+import info.tommarsh.presentation.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

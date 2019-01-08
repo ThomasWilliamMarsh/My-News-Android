@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.base
+package info.tommarsh.presentation.ui.common
 
 import android.content.Intent
 import android.os.Bundle

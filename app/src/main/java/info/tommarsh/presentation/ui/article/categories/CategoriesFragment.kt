@@ -6,14 +6,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import info.tommarsh.core.ViewModel
 import info.tommarsh.core.extensions.makeGone
 import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
+import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.article.categories.adapter.CategoriesAdapter
-import info.tommarsh.presentation.ui.base.BaseFragment
+import info.tommarsh.presentation.ui.article.categories.adapter.CategoriesAdapter.Companion.TYPE_HEADER
+import info.tommarsh.presentation.ui.common.BaseFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
 import kotlinx.android.synthetic.main.layout_add_categories.*
 
@@ -76,18 +77,16 @@ class CategoriesFragment : BaseFragment() {
         }
     }
 
-    private fun onArticleCategories(articles: List<ViewModel>) {
+    private fun onArticleCategories(articles: List<ArticleViewModel>) {
         refresh_my_news.isRefreshing = false
-        adapter.submitList(articles)
+        adapter.submitWithHeaders(articles)
     }
 
     private fun setLayoutManager() = GridLayoutManager(context, 2).apply {
         spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return when (adapter.getItemViewType(position)) {
-                    CategoriesAdapter.TYPE_HEADER -> 2
-                    else -> 1
-                }
+            override fun getSpanSize(position: Int) = when (adapter.getItemViewType(position)) {
+                TYPE_HEADER -> 2
+                else -> 1
             }
         }
     }

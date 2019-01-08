@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.base
+package info.tommarsh.presentation.ui.common
 
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.CoroutineScope

@@ -6,7 +6,7 @@ import info.tommarsh.domain.source.CategoryRepository
 import info.tommarsh.presentation.model.CategoryViewModel
 import info.tommarsh.presentation.model.mapper.CategoryDomainToViewModelMapper
 import info.tommarsh.presentation.model.mapper.CategoryViewModelToDomainMapper
-import info.tommarsh.presentation.ui.base.BaseViewModel
+import info.tommarsh.presentation.ui.common.BaseViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject

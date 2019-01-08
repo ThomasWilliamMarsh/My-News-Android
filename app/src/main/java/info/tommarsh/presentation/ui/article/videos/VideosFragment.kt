@@ -5,12 +5,14 @@ import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import info.tommarsh.core.extensions.snack
 import info.tommarsh.core.network.NetworkException
 import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.ui.article.videos.adapter.VideosAdapter
-import info.tommarsh.presentation.ui.base.BaseFragment
+import info.tommarsh.presentation.ui.article.videos.adapter.VideosAdapter.Companion.TYPE_HEADER
+import info.tommarsh.presentation.ui.common.BaseFragment
 import kotlinx.android.synthetic.main.fragment_videos.*
 
 class VideosFragment : BaseFragment() {
@@ -53,13 +55,20 @@ class VideosFragment : BaseFragment() {
 
     private fun onVideos(videos: List<PlaylistItemViewModel>) {
         refresh_video.isRefreshing = false
-        adapter.submitList(videos)
+        adapter.submitListWithHeader(getString(R.string.videos), videos.toMutableList())
     }
 
     private fun onError(error: NetworkException) {
         refresh_video.isRefreshing = false
-        videos_root.snack(error.localizedMessage)
+        refresh_video.snack(error.localizedMessage)
     }
 
-    private fun setLayoutManager() = GridLayoutManager(context, 2)
+    private fun setLayoutManager() = GridLayoutManager(context, 2).apply {
+        spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int) = when (adapter.getItemViewType(position)) {
+                TYPE_HEADER -> 2
+                else -> 1
+            }
+        }
+    }
 }

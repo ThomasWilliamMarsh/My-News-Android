@@ -12,7 +12,7 @@ import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.article.top.adapter.TopNewsAdapter
-import info.tommarsh.presentation.ui.base.BaseFragment
+import info.tommarsh.presentation.ui.common.BaseFragment
 import kotlinx.android.synthetic.main.fragment_top_news.*
 
 class TopNewsFragment : BaseFragment() {
