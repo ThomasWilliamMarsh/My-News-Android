@@ -8,6 +8,8 @@ import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
 import info.tommarsh.domain.model.ArticleModel
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.domain.source.ArticleRepository
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class ArticleDataRepository
@@ -29,21 +31,18 @@ class ArticleDataRepository
 
     override fun getFeed(): LiveData<List<ArticleModel>> = local.getFeed()
 
-    override fun refreshFeed(categories: List<CategoryModel>) {
-        val results = mutableListOf<ArticleModel>()
-        categories.forEach {
-            val networkItems = remote.getArticleForCategory(it.id)
-            when (networkItems) {
-                is Outcome.Success -> results.addAll(networkItems.data.also { c ->
-                    c.forEach { d ->
-                        d.category = it.id
+    override suspend fun refreshFeed(categories: List<CategoryModel>) {
+        coroutineScope {
+            categories.forEach {
+                launch {
+                    val networkItems = remote.getArticleForCategory(it.id)
+                    when (networkItems) {
+                        is Outcome.Success -> local.saveCategory(it.id, networkItems.data)
+                        is Outcome.Error -> errors.setError(networkItems.error)
                     }
-                })
-                is Outcome.Error -> errors.setError(networkItems.error)
+                }
             }
         }
-
-        local.saveFeed(results)
     }
 
     override fun searchArticles(query: String) = remote.searchArticles(query)

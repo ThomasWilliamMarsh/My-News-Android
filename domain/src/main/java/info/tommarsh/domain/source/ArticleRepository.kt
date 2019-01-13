@@ -16,7 +16,7 @@ interface ArticleRepository {
 
     fun getFeed(): LiveData<List<ArticleModel>>
 
-    fun refreshFeed(categories: List<CategoryModel>)
+    suspend fun refreshFeed(categories: List<CategoryModel>)
 
     fun searchArticles(query: String): Outcome<List<ArticleModel>>
 

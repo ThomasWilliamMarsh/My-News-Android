@@ -29,10 +29,10 @@ class ArticlesLocalDataStore
         articlesDao.replaceBreakingArticles(model)
     }
 
-    fun saveFeed(items: List<ArticleModel>) {
+    fun saveCategory(category: String, items: List<ArticleModel>) {
         val model = items.map {
-            domainMapper.map(it)
+            domainMapper.map(it).also { it.category = category }
         }
-        articlesDao.replaceFeed(model)
+        articlesDao.replaceCategories(category, model)
     }
 }

@@ -20,16 +20,16 @@ interface ArticlesDao {
     fun getBreakingArticles(): LiveData<List<Article>>
 
     @Transaction
-    fun replaceFeed(articles: List<Article>) {
-        deleteFeed()
+    fun replaceCategories(category: String, articles: List<Article>) {
+        deleteCategory(category)
         insertArticles(*articles.toTypedArray())
     }
 
     @Query("SELECT * FROM ARTICLE_TABLE WHERE category != 'top-news'")
     fun getFeed(): LiveData<List<Article>>
 
-    @Query("DELETE FROM ARTICLE_TABLE WHERE category != 'top-news'")
-    fun deleteFeed()
+    @Query("DELETE FROM ARTICLE_TABLE WHERE category == :category")
+    fun deleteCategory(category: String)
 
     @Query("DELETE FROM ARTICLE_TABLE WHERE category == 'top-news'")
     fun deleteBreakingArticles(): Int

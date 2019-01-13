@@ -5,7 +5,7 @@ import info.tommarsh.presentation.model.MockModelProvider.categoryViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CategoryViewModelMapperTest {
+class CategoryDomainToViewModelMapperTest {
 
     private val mapper = CategoryDomainToViewModelMapper()
 

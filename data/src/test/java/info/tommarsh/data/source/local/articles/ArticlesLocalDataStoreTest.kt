@@ -45,6 +45,6 @@ class ArticlesLocalDataStoreTest {
 
         localDataStore.saveBreakingNews(listOf(articleModel, articleModel))
 
-        verify(dao).insertBreakingArticles(article, article)
+        verify(dao).replaceBreakingArticles(listOf(article, article))
     }
 }
