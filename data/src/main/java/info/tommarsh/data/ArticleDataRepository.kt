@@ -8,6 +8,9 @@ import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
 import info.tommarsh.domain.model.ArticleModel
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.domain.source.ArticleRepository
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.channels.ReceiveChannel
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -31,19 +34,27 @@ class ArticleDataRepository
 
     override fun getFeed(): LiveData<List<ArticleModel>> = local.getFeed()
 
-    override suspend fun refreshFeed(categories: List<CategoryModel>) {
-        coroutineScope {
-            categories.forEach {
-                launch {
-                    val networkItems = remote.getArticleForCategory(it.id)
-                    when (networkItems) {
-                        is Outcome.Success -> local.saveCategory(it.id, networkItems.data)
-                        is Outcome.Error -> errors.setError(networkItems.error)
-                    }
+    override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
+        val producer = produceArticles(categories)
+        repeat(categories.size) {
+            receiveArticles(categories[it].id, producer)
+        }
+        producer.cancel()
+    }
+
+    private fun CoroutineScope.produceArticles(categories: List<CategoryModel>) = produce {
+        categories.forEach { send(remote.getArticleForCategory(it.id)) }
+    }
+
+    private fun CoroutineScope.receiveArticles(id: String, channel: ReceiveChannel<Outcome<List<ArticleModel>>>) =
+        launch {
+            for (articles in channel) {
+                when (articles) {
+                    is Outcome.Success -> local.saveCategory(id, articles.data)
+                    is Outcome.Error -> errors.setError(articles.error)
                 }
             }
         }
-    }
 
     override fun searchArticles(query: String) = remote.searchArticles(query)
 }
