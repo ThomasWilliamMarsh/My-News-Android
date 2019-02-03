@@ -8,9 +8,8 @@ import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
 import info.tommarsh.domain.model.ArticleModel
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.domain.source.ArticleRepository
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.channels.ReceiveChannel
-import kotlinx.coroutines.channels.produce
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -34,27 +33,29 @@ class ArticleDataRepository
 
     override fun getFeed(): LiveData<List<ArticleModel>> = local.getFeed()
 
-    override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
-        val producer = produceArticles(categories)
-        repeat(categories.size) {
-            receiveArticles(categories[it].id, producer)
-        }
-        producer.cancel()
-    }
-
-    private fun CoroutineScope.produceArticles(categories: List<CategoryModel>) = produce {
-        categories.forEach { send(remote.getArticleForCategory(it.id)) }
-    }
-
-    private fun CoroutineScope.receiveArticles(id: String, channel: ReceiveChannel<Outcome<List<ArticleModel>>>) =
-        launch {
-            for (articles in channel) {
-                when (articles) {
-                    is Outcome.Success -> local.saveCategory(id, articles.data)
-                    is Outcome.Error -> errors.setError(articles.error)
-                }
-            }
-        }
-
     override fun searchArticles(query: String) = remote.searchArticles(query)
+
+    override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
+        val channel = Channel<Outcome<List<ArticleModel>>>()
+
+        categories.forEach {
+            launch { produceArticles(it.id, channel) }
+        }
+
+        repeat(categories.size) {
+            receiveArticles(categories[it].id, channel.receive())
+        }
+    }
+
+    private suspend fun produceArticles(id: String, channel: SendChannel<Outcome<List<ArticleModel>>>) {
+        channel.send(remote.getArticleForCategory(id))
+    }
+
+    private fun receiveArticles(id: String, outcome: Outcome<List<ArticleModel>>) {
+        when (outcome) {
+            is Outcome.Success -> local.saveCategory(id, outcome.data)
+            is Outcome.Error -> errors.setError(outcome.error)
+        }
+    }
+
 }
