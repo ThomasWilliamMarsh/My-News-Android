@@ -2,9 +2,7 @@ package info.tommarsh.presentation.ui.search
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
+import com.nhaarman.mockitokotlin2.*
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.core.network.NetworkException
 import info.tommarsh.core.network.Outcome
@@ -16,6 +14,8 @@ import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.noInternet
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -25,25 +25,40 @@ class SearchViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    private val articlesRepository = mock<ArticleRepository>()
+    private val errorsLiveData = ErrorLiveData()
+    private val articlesRepository = mock<ArticleRepository> {
+        onBlocking { searchArticles("1234") }.thenReturn(Outcome.Error(noInternet))
+        on { errors }.thenReturn(errorsLiveData)
+    }
     private val mapper = mock<ArticleViewModelMapper> {
         on { map(MockModelProvider.articleModel) }.thenReturn(MockModelProvider.articleViewModel)
     }
     private val searchViewModel = SearchViewModel(articlesRepository, mapper)
-    private val observer = mock<Observer<List<ArticleViewModel>>>()
+    private val articlesObserver = mock<Observer<List<ArticleViewModel>>>()
     private val errorObserver = mock<Observer<NetworkException>>()
 
+    @Before
+    fun `Set up`() {
+        searchViewModel.getErrors().observeForever(errorObserver)
+        searchViewModel.articles.observeForever(articlesObserver)
+    }
+
+    @After
+    fun `Tear down`() {
+        searchViewModel.getErrors().removeObserver(errorObserver)
+        searchViewModel.articles.removeObserver(articlesObserver)
+    }
 
     @Test
     fun `Get errors`() {
 
         searchViewModel.getErrors()
 
-        verify(articlesRepository).errors
+        verify(articlesRepository, times(2)).errors
     }
 
     @Test
-    fun `get search results`() = runBlocking {
+    fun `get search results`() = runBlocking{
         whenever(articlesRepository.searchArticles("1234")).thenReturn(
             Outcome.Success(
                 listOf(
@@ -53,20 +68,16 @@ class SearchViewModelTest {
             )
         )
 
-        searchViewModel.getArticlesObservable().observeForever(observer)
-        searchViewModel.searchArticles("1234")
+        searchViewModel.searchArticles("1234").join()
 
         verify(articlesRepository).searchArticles("1234")
-        verify(observer).onChanged(listOf(articleViewModel, articleViewModel))
+        verify(articlesObserver).onChanged(listOf(articleViewModel, articleViewModel))
     }
 
     @Test
-    fun `show error when failing to get search results`() = runBlocking {
-        whenever(articlesRepository.errors).thenReturn(ErrorLiveData())
-        whenever(articlesRepository.searchArticles("1234")).thenReturn(Outcome.Error(noInternet))
+    fun `show error when failing to get search results`() = runBlocking<Unit> {
 
-        searchViewModel.getErrors().observeForever(errorObserver)
-        searchViewModel.searchArticles("1234")
+        searchViewModel.searchArticles("1234").join()
 
         verify(errorObserver).onChanged(noInternet)
     }

@@ -44,7 +44,7 @@ class VideosFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getVideos().observe(viewLifecycleOwner, Observer(::onVideos))
+        viewModel.videos.observe(viewLifecycleOwner, Observer(::onVideos))
         viewModel.getErrors().observe(viewLifecycleOwner, Observer(::onError))
     }
 

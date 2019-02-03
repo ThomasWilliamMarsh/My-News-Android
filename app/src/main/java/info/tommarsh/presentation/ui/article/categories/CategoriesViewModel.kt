@@ -8,7 +8,6 @@ import info.tommarsh.domain.source.CategoryRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import info.tommarsh.presentation.ui.common.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -25,9 +24,7 @@ class CategoriesViewModel
         model.map { mapper.map(it) }
     }
 
-    fun refreshFeed(categories: List<CategoryModel>) {
-        launch(Dispatchers.IO) {
-            articlesRepository.refreshFeed(categories)
-        }
+    fun refreshFeed(categories: List<CategoryModel>) = launch {
+        articlesRepository.refreshFeed(categories)
     }
 }

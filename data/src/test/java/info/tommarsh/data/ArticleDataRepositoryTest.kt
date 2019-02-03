@@ -24,7 +24,7 @@ class ArticleDataRepositoryTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    private val errors = mock<ErrorLiveData>()
+    private val errors = ErrorLiveData()
     private val localDataStore = mock<ArticlesLocalDataStore>()
     private val remoteDataStore = mock<ArticlesRemoteDataStore>()
     private val repository = ArticleDataRepository(localDataStore, remoteDataStore, errors)
@@ -97,6 +97,6 @@ class ArticleDataRepositoryTest {
 
         repository.refreshFeed(listOf(categoryModel, categoryModel))
 
-        verify(errorObserver).onChanged(noInternet)
+        verify(errorObserver, times(2)).onChanged(noInternet)
     }
 }

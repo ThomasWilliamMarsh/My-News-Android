@@ -51,7 +51,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.getArticlesObservable().observe(this, Observer(::onSearchResults))
+        viewModel.articles.observe(this, Observer(::onSearchResults))
         viewModel.getErrors().observe(this, Observer(::onError))
     }
 

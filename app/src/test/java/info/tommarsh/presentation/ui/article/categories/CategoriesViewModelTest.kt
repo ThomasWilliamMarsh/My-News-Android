@@ -7,6 +7,7 @@ import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.domain.source.CategoryRepository
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
+import info.tommarsh.presentation.model.MockModelProvider.categoryModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
@@ -44,5 +45,9 @@ class CategoriesViewModelTest {
 
     @Test
     fun `Refresh feed`() = runBlocking {
+
+        categoryViewModel.refreshFeed(listOf(categoryModel, categoryModel)).join()
+
+        verify(articlesRepository).refreshFeed(listOf(categoryModel, categoryModel))
     }
 }

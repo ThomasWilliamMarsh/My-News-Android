@@ -7,7 +7,6 @@ import info.tommarsh.domain.source.VideoRepository
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
 import info.tommarsh.presentation.ui.common.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -21,19 +20,17 @@ class VideosViewModel
         refreshVideos()
     }
 
-    private val videos = MutableLiveData<List<PlaylistItemViewModel>>()
+    private val _videos = MutableLiveData<List<PlaylistItemViewModel>>()
 
-    fun getVideos(): LiveData<List<PlaylistItemViewModel>> = videos
+    val videos: LiveData<List<PlaylistItemViewModel>> = _videos
 
     fun getErrors() = repository.errors
 
-    fun refreshVideos() {
-        launch(Dispatchers.IO) {
-            val outcome = repository.getPlaylist()
-            when (outcome) {
-                is Outcome.Success -> videos.postValue(outcome.data.items.map { mapper.map(it) })
-                is Outcome.Error -> repository.errors.setError(outcome.error)
-            }
+    fun refreshVideos() = launch {
+        val outcome = repository.getPlaylist()
+        when (outcome) {
+            is Outcome.Success -> _videos.postValue(outcome.data.items.map { mapper.map(it) })
+            is Outcome.Error -> repository.errors.setError(outcome.error)
         }
     }
 }

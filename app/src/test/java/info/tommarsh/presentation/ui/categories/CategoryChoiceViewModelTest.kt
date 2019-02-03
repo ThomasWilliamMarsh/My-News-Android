@@ -3,6 +3,7 @@ package info.tommarsh.presentation.ui.categories
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.verifyBlocking
 import info.tommarsh.domain.source.CategoryRepository
 import info.tommarsh.presentation.model.MockModelProvider.categoryModel
 import info.tommarsh.presentation.model.MockModelProvider.categoryViewModel
@@ -38,7 +39,7 @@ class CategoryChoiceViewModelTest {
     @Test
     fun `Update Category`() = runBlocking {
 
-        runBlocking { categoryChoiceViewModel.updateCategory(categoryViewModel) }
+        categoryChoiceViewModel.updateCategory(categoryViewModel).join()
 
         verify(domainMapper).map(categoryViewModel)
         verify(categoryRepository).updateCategory(categoryModel)

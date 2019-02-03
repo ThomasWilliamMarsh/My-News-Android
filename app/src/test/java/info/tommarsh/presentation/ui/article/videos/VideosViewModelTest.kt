@@ -17,6 +17,8 @@ import info.tommarsh.presentation.model.MockModelProvider.playlistModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
 import kotlinx.coroutines.runBlocking
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -25,35 +27,45 @@ class VideosViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    private val videosRepository = mock<VideoRepository>()
+    private val errorLiveData = ErrorLiveData()
+    private val videosRepository = mock<VideoRepository> {
+        on { errors }.thenReturn(errorLiveData)
+    }
     private val mapper = mock<PlaylistItemViewModelMapper> {
         on { map(playlistItemModel) }.thenReturn(playlistItemViewModel)
     }
     private val videosViewModel = VideosViewModel(videosRepository, mapper)
-    private val observer = mock<Observer<List<PlaylistItemViewModel>>>()
+    private val videosObserver = mock<Observer<List<PlaylistItemViewModel>>>()
     private val errorObserver = mock<Observer<NetworkException>>()
+
+    @Before
+    fun `Set up`() {
+        videosViewModel.getErrors().observeForever(errorObserver)
+        videosViewModel.videos.observeForever(videosObserver)
+    }
+
+    @After
+    fun `Tear down`() {
+        videosViewModel.getErrors().removeObserver(errorObserver)
+        videosViewModel.videos.removeObserver(videosObserver)
+    }
 
     @Test
     fun `Get Videos`() = runBlocking<Unit> {
         whenever(videosRepository.getPlaylist()).thenReturn(Outcome.Success(playlistModel))
 
-        videosViewModel.getVideos().observeForever(observer)
-        videosViewModel.refreshVideos()
+        videosViewModel.refreshVideos().join()
 
-        verify(observer).onChanged(listOf(playlistItemViewModel, playlistItemViewModel))
+        verify(videosObserver).onChanged(listOf(playlistItemViewModel, playlistItemViewModel))
         verify(videosRepository, times(2)).getPlaylist()
     }
 
     @Test
     fun `Get Errors`() = runBlocking {
-        whenever(videosRepository.errors).thenReturn(ErrorLiveData())
-        whenever(videosRepository.getPlaylist())
-            .thenReturn(Outcome.Error(noInternet))
+        whenever(videosRepository.getPlaylist()).thenReturn(Outcome.Error(noInternet))
 
-        videosViewModel.getErrors().observeForever(errorObserver)
-        videosViewModel.refreshVideos()
+        videosViewModel.refreshVideos().join()
 
         verify(errorObserver).onChanged(noInternet)
     }
-
 }

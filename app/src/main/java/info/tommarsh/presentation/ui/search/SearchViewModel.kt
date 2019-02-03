@@ -7,7 +7,6 @@ import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import info.tommarsh.presentation.ui.common.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -17,17 +16,15 @@ class SearchViewModel
     private val mapper: ArticleViewModelMapper
 ) : BaseViewModel() {
 
-    private val articles = MutableLiveData<List<ArticleViewModel>>()
+    private val _articles = MutableLiveData<List<ArticleViewModel>>()
 
-    fun getArticlesObservable(): LiveData<List<ArticleViewModel>> = articles
+    val articles: LiveData<List<ArticleViewModel>> = _articles
 
-    fun searchArticles(query: String) {
-        launch(Dispatchers.IO) {
-            val outcome = repository.searchArticles(query)
-            when (outcome) {
-                is Outcome.Success -> articles.postValue(outcome.data.map { mapper.map(it) })
-                is Outcome.Error -> repository.errors.setError(outcome.error)
-            }
+    fun searchArticles(query: String) = launch {
+        val outcome = repository.searchArticles(query)
+        when (outcome) {
+            is Outcome.Success -> _articles.postValue(outcome.data.map { mapper.map(it) })
+            is Outcome.Error -> repository.errors.setError(outcome.error)
         }
     }
 
