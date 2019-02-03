@@ -14,6 +14,8 @@ import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+typealias TopicOutcome = Pair<String, Outcome<List<ArticleModel>>>
+
 class ArticleDataRepository
 @Inject constructor(
     private val local: ArticlesLocalDataStore,
@@ -36,26 +38,26 @@ class ArticleDataRepository
     override fun searchArticles(query: String) = remote.searchArticles(query)
 
     override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
-        val channel = Channel<Outcome<List<ArticleModel>>>()
+        val channel = Channel<TopicOutcome>()
 
         categories.forEach {
             launch { produceArticles(it.id, channel) }
         }
 
         repeat(categories.size) {
-            receiveArticles(categories[it].id, channel.receive())
+            receiveArticles(channel.receive())
         }
     }
 
-    private suspend fun produceArticles(id: String, channel: SendChannel<Outcome<List<ArticleModel>>>) {
-        channel.send(remote.getArticleForCategory(id))
+    private suspend fun produceArticles(id: String, channel: SendChannel<TopicOutcome>) {
+        channel.send(Pair(id, remote.getArticleForCategory(id)))
     }
 
-    private fun receiveArticles(id: String, outcome: Outcome<List<ArticleModel>>) {
+    private fun receiveArticles(topic: TopicOutcome) {
+        val outcome = topic.second
         when (outcome) {
-            is Outcome.Success -> local.saveCategory(id, outcome.data)
+            is Outcome.Success -> local.saveCategory(topic.first, outcome.data)
             is Outcome.Error -> errors.setError(outcome.error)
         }
     }
-
 }
