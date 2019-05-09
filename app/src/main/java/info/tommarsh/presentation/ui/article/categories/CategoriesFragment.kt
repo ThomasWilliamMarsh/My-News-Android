@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import info.tommarsh.core.extensions.makeGone
 import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.domain.model.CategoryModel
-import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.article.categories.adapter.CategoriesAdapter
@@ -30,7 +29,7 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        graph(context!!).inject(this)
+        fragmentGraph.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

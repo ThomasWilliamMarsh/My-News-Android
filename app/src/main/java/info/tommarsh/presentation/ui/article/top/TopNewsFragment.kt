@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import info.tommarsh.core.extensions.snack
 import info.tommarsh.core.network.NetworkException
-import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.article.top.adapter.TopNewsAdapter
@@ -25,7 +24,7 @@ class TopNewsFragment : BaseFragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        graph(context!!).inject(this)
+        fragmentGraph.inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

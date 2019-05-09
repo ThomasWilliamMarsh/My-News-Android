@@ -1,20 +1,19 @@
 package info.tommarsh.presentation.ui.categories
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import info.tommarsh.presentation.NewsApp.Companion.graph
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.ViewModelFactory
 import info.tommarsh.presentation.model.CategoryViewModel
 import info.tommarsh.presentation.ui.categories.adapter.CategoryChoiceAdapter
+import info.tommarsh.presentation.ui.common.BaseActivity
 import kotlinx.android.synthetic.main.activity_category_choice.*
 import javax.inject.Inject
 
-class CategoryChoiceActivity : AppCompatActivity() {
+class CategoryChoiceActivity : BaseActivity() {
 
     @Inject
     protected lateinit var factory: ViewModelFactory
@@ -27,8 +26,8 @@ class CategoryChoiceActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        activityGraph.inject(this)
         setContentView(R.layout.activity_category_choice)
-        graph(this).inject(this)
         setUpViewModel()
         setUpUi()
     }
