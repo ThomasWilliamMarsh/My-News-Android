@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import info.tommarsh.presentation.NewsApp
+import info.tommarsh.presentation.NewsApp.Companion.applicationGraph
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.ViewModelFactory
 import info.tommarsh.presentation.ui.categories.CategoryChoiceActivity
@@ -18,7 +18,7 @@ open class BaseFragment : Fragment() {
     protected lateinit var factory: ViewModelFactory
 
     val fragmentGraph by lazy {
-        NewsApp.graph(context!!)
+        applicationGraph(context!!)
             .activityComponent
             .create(context as AppCompatActivity)
     }

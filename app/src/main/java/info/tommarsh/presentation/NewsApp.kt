@@ -15,6 +15,6 @@ class NewsApp : Application() {
 
 
     companion object {
-        fun graph(context: Context) = (context.applicationContext as NewsApp).graph
+        fun applicationGraph(context: Context) = (context.applicationContext as NewsApp).graph
     }
 }
