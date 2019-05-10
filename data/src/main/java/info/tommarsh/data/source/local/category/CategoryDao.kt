@@ -8,7 +8,7 @@ import info.tommarsh.data.model.local.Category
 interface CategoryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertCategories(vararg categories: Category)
+    suspend fun insertCategories(vararg categories: Category)
 
     @Query("SELECT * FROM CATEGORY_TABLE")
     fun getCategories(): LiveData<List<Category>>
@@ -17,5 +17,5 @@ interface CategoryDao {
     fun getSelectedCategories(selected: Boolean = true): LiveData<List<Category>>
 
     @Update
-    fun updateCategory(category: Category)
+    suspend fun updateCategory(category: Category)
 }

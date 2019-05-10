@@ -6,6 +6,7 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.core.network.NetworkException
 import info.tommarsh.core.network.Outcome
@@ -17,6 +18,8 @@ import info.tommarsh.presentation.model.MockModelProvider.playlistModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -34,7 +37,12 @@ class VideosViewModelTest {
     private val mapper = mock<PlaylistItemViewModelMapper> {
         on { map(playlistItemModel) }.thenReturn(playlistItemViewModel)
     }
-    private val videosViewModel = VideosViewModel(videosRepository, mapper)
+    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val dispatcherProvider = mock<DispatcherProvider> {
+        on { main() }.thenReturn(testCoroutineDispatcher)
+        on { work() }.thenReturn(testCoroutineDispatcher)
+    }
+    private val videosViewModel = VideosViewModel(videosRepository, mapper, dispatcherProvider)
     private val videosObserver = mock<Observer<List<PlaylistItemViewModel>>>()
     private val errorObserver = mock<Observer<NetworkException>>()
 
@@ -46,6 +54,7 @@ class VideosViewModelTest {
 
     @After
     fun `Tear down`() {
+        testCoroutineDispatcher.cleanupTestCoroutines()
         videosViewModel.getErrors().removeObserver(errorObserver)
         videosViewModel.videos.removeObserver(videosObserver)
     }
@@ -54,17 +63,17 @@ class VideosViewModelTest {
     fun `Get Videos`() = runBlocking<Unit> {
         whenever(videosRepository.getPlaylist()).thenReturn(Outcome.Success(playlistModel))
 
-        videosViewModel.refreshVideos().join()
+        videosViewModel.refreshVideos()
 
         verify(videosObserver).onChanged(listOf(playlistItemViewModel, playlistItemViewModel))
         verify(videosRepository, times(2)).getPlaylist()
     }
 
     @Test
-    fun `Get Errors`() = runBlocking {
+    fun `Get Errors`() = testCoroutineDispatcher.runBlockingTest {
         whenever(videosRepository.getPlaylist()).thenReturn(Outcome.Error(noInternet))
 
-        videosViewModel.refreshVideos().join()
+        videosViewModel.refreshVideos()
 
         verify(errorObserver).onChanged(noInternet)
     }

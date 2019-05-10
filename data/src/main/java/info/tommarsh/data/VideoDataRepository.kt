@@ -10,5 +10,5 @@ class VideoDataRepository
     private val remote: VideoRemoteDataStore,
     override val errors: ErrorLiveData
 ) : VideoRepository {
-    override fun getPlaylist() = remote.getPlaylist()
+    override suspend fun getPlaylist() = remote.getPlaylist()
 }

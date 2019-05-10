@@ -7,5 +7,5 @@ import info.tommarsh.domain.model.PlaylistModel
 interface VideoRepository {
     val errors: ErrorLiveData
 
-    fun getPlaylist(): Outcome<PlaylistModel>
+    suspend fun getPlaylist(): Outcome<PlaylistModel>
 }

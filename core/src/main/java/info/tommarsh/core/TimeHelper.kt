@@ -18,8 +18,14 @@ class TimeHelper
             val then = DateTime(isoString)
             val minutes = Minutes.minutesBetween(then, now)
             when {
-                minutes.isGreaterThan(Minutes.minutes(MINUTES_IN_DAY)) -> "${minutes.toStandardDays().days} days ago"
-                minutes.isGreaterThan(Minutes.minutes(MINUTES_IN_HOUR)) -> "${minutes.toStandardHours().hours} hours ago"
+                minutes.isGreaterThan(Minutes.minutes(MINUTES_IN_DAY - 1)) -> {
+                    val days = minutes.toStandardDays().days
+                    "$days ${if (days > 1) "days" else "day"} ago"
+                }
+                minutes.isGreaterThan(Minutes.minutes(MINUTES_IN_HOUR - 1)) -> {
+                    val hours = minutes.toStandardHours().hours
+                    "$hours ${if (hours > 1) "hours" else "hour"} ago"
+                }
                 else -> "${minutes.minutes} minutes ago"
             }
         } catch (e: IllegalArgumentException) {

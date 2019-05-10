@@ -24,14 +24,14 @@ class ArticlesLocalDataStore
         return Transformations.map(model) { domain -> domain.map { dataMapper.map(it) } }
     }
 
-    fun saveBreakingNews(items: List<ArticleModel>) {
+    suspend fun saveBreakingNews(items: List<ArticleModel>) {
         val model = items.map { domainMapper.map(it) }
         articlesDao.replaceBreakingArticles(model)
     }
 
-    fun saveCategory(category: String, items: List<ArticleModel>) {
+    suspend fun saveCategory(category: String, items: List<ArticleModel>) {
         val model = items.map {
-            domainMapper.map(it).also { it.category = category }
+            domainMapper.map(it).also { article -> article.category = category }
         }
         articlesDao.replaceCategories(category, model)
     }

@@ -8,19 +8,19 @@ import info.tommarsh.data.model.local.Article
 interface ArticlesDao {
 
     @Transaction
-    fun replaceBreakingArticles(articles: List<Article>) {
+    suspend fun replaceBreakingArticles(articles: List<Article>) {
         deleteBreakingArticles()
         insertArticles(*articles.toTypedArray())
     }
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertArticles(vararg articles: Article)
+    suspend fun insertArticles(vararg articles: Article)
 
     @Query("SELECT * FROM ARTICLE_TABLE WHERE category == 'top-news'")
     fun getBreakingArticles(): LiveData<List<Article>>
 
     @Transaction
-    fun replaceCategories(category: String, articles: List<Article>) {
+    suspend fun replaceCategories(category: String, articles: List<Article>) {
         deleteCategory(category)
         insertArticles(*articles.toTypedArray())
     }
@@ -29,11 +29,11 @@ interface ArticlesDao {
     fun getFeed(): LiveData<List<Article>>
 
     @Query("DELETE FROM ARTICLE_TABLE WHERE category == :category")
-    fun deleteCategory(category: String)
+    suspend fun deleteCategory(category: String)
 
     @Query("DELETE FROM ARTICLE_TABLE WHERE category == 'top-news'")
-    fun deleteBreakingArticles(): Int
+    suspend fun deleteBreakingArticles(): Int
 
     @Query("DELETE FROM SOURCE_TABLE")
-    fun deleteSources(): Int
+    suspend fun deleteSources(): Int
 }

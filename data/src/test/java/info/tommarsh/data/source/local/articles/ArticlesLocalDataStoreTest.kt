@@ -11,6 +11,7 @@ import info.tommarsh.data.model.MockProvider.articleModel
 import info.tommarsh.data.model.local.Article
 import info.tommarsh.data.model.local.mapper.ArticleDataToDomainMapper
 import info.tommarsh.data.model.local.mapper.ArticleDomainToDataMapper
+import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -41,7 +42,7 @@ class ArticlesLocalDataStoreTest {
     }
 
     @Test
-    fun `Save breaking news to DB`() {
+    fun `Save breaking news to DB`() = runBlocking {
 
         localDataStore.saveBreakingNews(listOf(articleModel, articleModel))
 

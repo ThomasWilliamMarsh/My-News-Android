@@ -12,12 +12,12 @@ interface ArticleRepository {
 
     fun getBreakingNews(source: String): LiveData<List<ArticleModel>>
 
-    fun refreshBreakingNews()
+    suspend fun refreshBreakingNews()
 
     fun getFeed(): LiveData<List<ArticleModel>>
 
     suspend fun refreshFeed(categories: List<CategoryModel>)
 
-    fun searchArticles(query: String): Outcome<List<ArticleModel>>
+    suspend fun searchArticles(query: String): Outcome<List<ArticleModel>>
 
 }

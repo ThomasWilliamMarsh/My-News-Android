@@ -25,9 +25,8 @@ class ArticleDataRepository
 
     override fun getBreakingNews(source: String): LiveData<List<ArticleModel>> = local.getBreakingNews()
 
-    override fun refreshBreakingNews() {
-        val networkItems = remote.getBreakingNews()
-        when (networkItems) {
+    override suspend fun refreshBreakingNews() {
+        when (val networkItems = remote.getBreakingNews()) {
             is Outcome.Success -> local.saveBreakingNews(networkItems.data)
             is Outcome.Error -> errors.setError(networkItems.error)
         }
@@ -35,7 +34,7 @@ class ArticleDataRepository
 
     override fun getFeed(): LiveData<List<ArticleModel>> = local.getFeed()
 
-    override fun searchArticles(query: String) = remote.searchArticles(query)
+    override suspend fun searchArticles(query: String) = remote.searchArticles(query)
 
     override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
         val channel = Channel<TopicOutcome>()
@@ -53,9 +52,8 @@ class ArticleDataRepository
         channel.send(Pair(id, remote.getArticleForCategory(id)))
     }
 
-    private fun receiveArticles(topic: TopicOutcome) {
-        val outcome = topic.second
-        when (outcome) {
+    private suspend fun receiveArticles(topic: TopicOutcome) {
+        when (val outcome = topic.second) {
             is Outcome.Success -> local.saveCategory(topic.first, outcome.data)
             is Outcome.Error -> errors.setError(outcome.error)
         }

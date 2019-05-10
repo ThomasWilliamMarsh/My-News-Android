@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import dagger.Module
 import dagger.Provides
+import info.tommarsh.core.coroutines.CoroutineDispatcherProvider
+import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.data.source.local.NewsDatabase
 import info.tommarsh.data.source.local.category.PrePopulater
 
@@ -25,4 +27,9 @@ object ApplicationModule {
     @Provides
     @JvmStatic
     fun provideCategoriesDao(db: NewsDatabase) = db.categoriesDao()
+
+    @Provides
+    @JvmStatic
+    fun provideDispatcherProvider(coroutineDispatcherProvider: CoroutineDispatcherProvider): DispatcherProvider =
+        coroutineDispatcherProvider
 }

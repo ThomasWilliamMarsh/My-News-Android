@@ -11,6 +11,7 @@ import info.tommarsh.data.model.MockProvider.categoryModel
 import info.tommarsh.data.source.local.category.CategoryLocalDataStore
 import info.tommarsh.domain.model.CategoryModel
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
@@ -54,7 +55,7 @@ class CategoryDataRepositoryTest {
     }
 
     @Test
-    fun `Update categories`() {
+    fun `Update categories`() = runBlocking {
 
         repository.updateCategory(categoryModel)
 

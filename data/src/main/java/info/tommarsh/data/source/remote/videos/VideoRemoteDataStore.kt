@@ -13,7 +13,7 @@ class VideoRemoteDataStore
     private val mapper: PlaylistResponseMapper
 ) {
 
-    fun getPlaylist(): Outcome<PlaylistModel> {
+    suspend fun getPlaylist(): Outcome<PlaylistModel> {
         return networkHelper.callApi(api.getPlaylistItems(), mapper)
     }
 }

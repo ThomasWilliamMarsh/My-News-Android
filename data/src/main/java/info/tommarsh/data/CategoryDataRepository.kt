@@ -16,5 +16,5 @@ class CategoryDataRepository
 
     override fun getCategories(): LiveData<List<CategoryModel>> = local.getCategories()
 
-    override fun updateCategory(category: CategoryModel) = local.updateCategory(category)
+    override suspend fun updateCategory(category: CategoryModel) = local.updateCategory(category)
 }

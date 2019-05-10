@@ -12,6 +12,7 @@ import info.tommarsh.data.model.MockProvider.noInternet
 import info.tommarsh.data.model.MockProvider.playlistModel
 import info.tommarsh.data.source.remote.videos.VideoRemoteDataStore
 import info.tommarsh.domain.model.PlaylistItemModel
+import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -21,11 +22,8 @@ class VideoDataRepositoryTest {
     private val remoteDataStore = mock<VideoRemoteDataStore>()
     private val repository = VideoDataRepository(remoteDataStore, errors)
 
-    private val errorObserver = mock<Observer<NetworkException>>()
-    private val videosLivedata = MutableLiveData<List<PlaylistItemModel>>()
-
     @Test
-    fun `Get playlist`() {
+    fun `Get playlist`() = runBlocking {
         whenever(remoteDataStore.getPlaylist()).thenReturn(Outcome.Success(playlistModel))
 
         val actual = repository.getPlaylist()
@@ -35,7 +33,7 @@ class VideoDataRepositoryTest {
     }
 
     @Test
-    fun `Fail to get playlist`() {
+    fun `Fail to get playlist`() = runBlocking {
         whenever(remoteDataStore.getPlaylist()).thenReturn(Outcome.Error(noInternet))
 
         val actual = repository.getPlaylist()

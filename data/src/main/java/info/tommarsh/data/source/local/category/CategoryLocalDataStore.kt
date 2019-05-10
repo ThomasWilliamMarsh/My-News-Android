@@ -24,7 +24,7 @@ class CategoryLocalDataStore
             model.map { dataMapper.map(it) }
         }
 
-    fun updateCategory(category: CategoryModel) {
+    suspend fun updateCategory(category: CategoryModel) {
         val model = domainMapper.map(category)
         dao.updateCategory(model)
     }

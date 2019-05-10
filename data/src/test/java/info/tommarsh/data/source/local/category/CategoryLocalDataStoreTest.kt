@@ -9,6 +9,7 @@ import info.tommarsh.data.model.MockProvider.categoryModel
 import info.tommarsh.data.model.local.Category
 import info.tommarsh.data.model.local.mapper.CategoryDataToDomainMapper
 import info.tommarsh.data.model.local.mapper.CategoryDomainToDataMapper
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class CategoryLocalDataStoreTest {
@@ -42,7 +43,7 @@ class CategoryLocalDataStoreTest {
     }
 
     @Test
-    fun `Update category`() {
+    fun `Update category`() = runBlocking {
 
         local.updateCategory(categoryModel)
 

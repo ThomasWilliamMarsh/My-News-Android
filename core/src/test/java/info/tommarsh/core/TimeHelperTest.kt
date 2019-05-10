@@ -13,8 +13,8 @@ class TimeHelperTest {
         val expected = "1 hour ago"
 
         val actual = timeHelper.timeBetween(
-            now = DateTime.parse("2019-01-01T11:00:00+0000"),
-            isoString = "2019-01-01T12:00:00+0000"
+            now = DateTime.parse("2019-01-01T12:00:00+0000"),
+            isoString = "2019-01-01T11:00:00+0000"
         )
 
         assertEquals(expected, actual)

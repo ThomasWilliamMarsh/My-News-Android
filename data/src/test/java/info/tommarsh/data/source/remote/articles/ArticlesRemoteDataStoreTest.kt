@@ -9,6 +9,7 @@ import info.tommarsh.core.network.Outcome
 import info.tommarsh.data.model.MockProvider.articleModel
 import info.tommarsh.data.model.remote.mapper.ArticleResponseMapper
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class ArticlesRemoteDataStoreTest {
@@ -19,7 +20,7 @@ class ArticlesRemoteDataStoreTest {
     private val remoteDataStore = ArticlesRemoteDataStore(mapper, network, api)
 
     @Test
-    fun `Get breaking news from network`() {
+    fun `Get breaking news from network`() = runBlocking {
         whenever(network.callApi(api.getBreakingNews(), mapper))
             .thenReturn(Outcome.Success(listOf(articleModel, articleModel)))
 

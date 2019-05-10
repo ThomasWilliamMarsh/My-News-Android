@@ -9,6 +9,7 @@ import info.tommarsh.core.network.Outcome
 import info.tommarsh.data.model.MockProvider.playlistModel
 import info.tommarsh.data.model.remote.mapper.PlaylistResponseMapper
 import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class VideoRemoteDataStoreTest {
@@ -19,7 +20,7 @@ class VideoRemoteDataStoreTest {
     private val remote = VideoRemoteDataStore(api, network, mapper)
 
     @Test
-    fun `Get Videos from network`() {
+    fun `Get Videos from network`() = runBlocking {
         whenever(network.callApi(api.getPlaylistItems(), mapper))
             .thenReturn(Outcome.Success(playlistModel))
 

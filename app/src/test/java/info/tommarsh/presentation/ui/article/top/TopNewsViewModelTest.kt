@@ -5,10 +5,12 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.verifyBlocking
+import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.presentation.model.MockModelProvider
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -21,7 +23,12 @@ class TopNewsViewModelTest {
     private val mapper = mock<ArticleViewModelMapper> {
         on { map(MockModelProvider.articleModel) }.thenReturn(MockModelProvider.articleViewModel)
     }
-    private val topNewsViewModel = TopNewsViewModel(articlesRepository, mapper)
+    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val dispatcherProvider = mock<DispatcherProvider> {
+        on { main() }.thenReturn(testCoroutineDispatcher)
+        on { work() }.thenReturn(testCoroutineDispatcher)
+    }
+    private val topNewsViewModel = TopNewsViewModel(articlesRepository, mapper, dispatcherProvider)
 
     @Test
     fun `Get breaking news`() {
@@ -42,7 +49,7 @@ class TopNewsViewModelTest {
     @Test
     fun `Refresh breaking news`() = runBlocking {
 
-        topNewsViewModel.refreshBreakingNews().join()
+        topNewsViewModel.refreshBreakingNews()
 
         verify(articlesRepository, times(2)).refreshBreakingNews()
     }

@@ -13,15 +13,15 @@ class ArticlesRemoteDataStore
     private val api: ArticleApiService
 ) {
 
-    fun getBreakingNews(): Outcome<List<ArticleModel>> {
+    suspend fun getBreakingNews(): Outcome<List<ArticleModel>> {
         return networkHelper.callApi(api.getBreakingNews(), mapper)
     }
 
-    fun searchArticles(query: String): Outcome<List<ArticleModel>> {
+    suspend fun searchArticles(query: String): Outcome<List<ArticleModel>> {
         return networkHelper.callApi(api.searchArticles(query), mapper)
     }
 
-    fun getArticleForCategory(category: String): Outcome<List<ArticleModel>> {
+    suspend fun getArticleForCategory(category: String): Outcome<List<ArticleModel>> {
         return networkHelper.callApi(api.getArticlesForCategory(category), mapper)
     }
 }
