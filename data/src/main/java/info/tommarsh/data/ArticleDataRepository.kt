@@ -10,6 +10,8 @@ import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.domain.source.ArticleRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.channels.SendChannel
+import kotlinx.coroutines.channels.consumeEach
+import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -37,19 +39,15 @@ class ArticleDataRepository
     override suspend fun searchArticles(query: String) = remote.searchArticles(query)
 
     override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
-        val channel = Channel<TopicOutcome>()
-
-        categories.forEach {
-            launch { produceArticles(it.id, channel) }
-        }
-
-        repeat(categories.size) {
-            receiveArticles(channel.receive())
-        }
+        produce {
+            categories.forEach {
+                send(produceArticles(it.id))
+            }
+        }.consumeEach { receiveArticles(it) }
     }
 
-    private suspend fun produceArticles(id: String, channel: SendChannel<TopicOutcome>) {
-        channel.send(Pair(id, remote.getArticleForCategory(id)))
+    private suspend fun produceArticles(id: String) : TopicOutcome {
+        return TopicOutcome(id, remote.getArticleForCategory(id))
     }
 
     private suspend fun receiveArticles(topic: TopicOutcome) {
