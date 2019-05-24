@@ -1,6 +1,5 @@
 package info.tommarsh.presentation.ui.article.categories
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
@@ -8,13 +7,14 @@ import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.domain.source.CategoryRepository
+import info.tommarsh.presentation.CoroutinesInstantTaskExecutorRule
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -22,7 +22,7 @@ import org.junit.rules.TestRule
 class CategoriesViewModelTest {
 
     @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
+    var rule: TestRule = CoroutinesInstantTaskExecutorRule()
 
     private val articlesRepository = mock<ArticleRepository> {
         onBlocking { getFeed() }.thenReturn(mock())
@@ -44,13 +44,13 @@ class CategoriesViewModelTest {
 
     private val articleObserver = mock<Observer<List<ArticleViewModel>>>()
 
-    @After
+    @Before
     fun `Tear down`() {
         testCoroutineDispatcher.cleanupTestCoroutines()
     }
 
     @Test
-    fun `Get selected categories`() = testCoroutineDispatcher.runBlockingTest {
+    fun `Get selected categories`() = runBlockingTest {
         val livedata = categoryViewModel.feed
 
         livedata.observeForever(articleObserver)
@@ -60,7 +60,7 @@ class CategoriesViewModelTest {
     }
 
     @Test
-    fun `Get categories Feed`() = testCoroutineDispatcher.runBlockingTest {
+    fun `Get categories Feed`() = runBlockingTest {
 
         categoryViewModel.selectedCategories
 
@@ -68,7 +68,7 @@ class CategoriesViewModelTest {
     }
 
     @Test
-    fun `Refresh feed`() = testCoroutineDispatcher.runBlockingTest {
+    fun `Refresh feed`() = runBlockingTest {
 
         categoryViewModel.refreshFeed()
 

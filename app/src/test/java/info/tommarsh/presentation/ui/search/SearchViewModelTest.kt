@@ -1,6 +1,5 @@
 package info.tommarsh.presentation.ui.search
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
@@ -11,6 +10,7 @@ import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.core.network.NetworkException
 import info.tommarsh.core.network.Outcome
 import info.tommarsh.domain.source.ArticleRepository
+import info.tommarsh.presentation.CoroutinesInstantTaskExecutorRule
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
@@ -27,7 +27,7 @@ import org.junit.rules.TestRule
 class SearchViewModelTest {
 
     @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
+    var rule: TestRule = CoroutinesInstantTaskExecutorRule()
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
     private val errorsLiveData = ErrorLiveData()
@@ -69,7 +69,7 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `get search results`() = testCoroutineDispatcher.runBlockingTest {
+    fun `get search results`() = runBlockingTest {
         whenever(articlesRepository.searchArticles("1234")).thenReturn(
             Outcome.Success(
                 listOf(
@@ -86,7 +86,7 @@ class SearchViewModelTest {
     }
 
     @Test
-    fun `show error when failing to get search results`() = testCoroutineDispatcher.runBlockingTest {
+    fun `show error when failing to get search results`() = runBlockingTest {
 
         searchViewModel.searchArticles("1234")
 

@@ -1,6 +1,5 @@
 package info.tommarsh.presentation.ui.article.videos
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
@@ -11,13 +10,13 @@ import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.core.network.NetworkException
 import info.tommarsh.core.network.Outcome
 import info.tommarsh.domain.source.VideoRepository
+import info.tommarsh.presentation.CoroutinesInstantTaskExecutorRule
 import info.tommarsh.presentation.model.MockModelProvider.noInternet
 import info.tommarsh.presentation.model.MockModelProvider.playlistItemModel
 import info.tommarsh.presentation.model.MockModelProvider.playlistItemViewModel
 import info.tommarsh.presentation.model.MockModelProvider.playlistModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.After
@@ -28,7 +27,7 @@ import org.junit.rules.TestRule
 
 class VideosViewModelTest {
     @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
+    var rule: TestRule = CoroutinesInstantTaskExecutorRule()
 
     private val errorLiveData = ErrorLiveData()
     private val videosRepository = mock<VideoRepository> {
@@ -60,7 +59,7 @@ class VideosViewModelTest {
     }
 
     @Test
-    fun `Get Videos`() = runBlocking<Unit> {
+    fun `Get Videos`() = runBlockingTest {
         whenever(videosRepository.getPlaylist()).thenReturn(Outcome.Success(playlistModel))
 
         videosViewModel.refreshVideos()
@@ -70,7 +69,7 @@ class VideosViewModelTest {
     }
 
     @Test
-    fun `Get Errors`() = testCoroutineDispatcher.runBlockingTest {
+    fun `Get Errors`() = runBlockingTest {
         whenever(videosRepository.getPlaylist()).thenReturn(Outcome.Error(noInternet))
 
         videosViewModel.refreshVideos()

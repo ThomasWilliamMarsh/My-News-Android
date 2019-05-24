@@ -1,7 +1,5 @@
 package info.tommarsh.data
 
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -11,7 +9,6 @@ import info.tommarsh.core.network.Outcome
 import info.tommarsh.data.model.MockProvider.noInternet
 import info.tommarsh.data.model.MockProvider.playlistModel
 import info.tommarsh.data.source.remote.videos.VideoRemoteDataStore
-import info.tommarsh.domain.model.PlaylistItemModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Test
