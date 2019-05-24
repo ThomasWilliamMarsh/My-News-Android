@@ -34,6 +34,7 @@ class TopNewsViewModelTest {
         on { main() }.thenReturn(testCoroutineDispatcher)
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
+    private val observer = mock<Observer<List<ArticleViewModel>>>()
     private val topNewsViewModel = TopNewsViewModel(articlesRepository, mapper, dispatcherProvider)
 
     @After
@@ -43,7 +44,6 @@ class TopNewsViewModelTest {
 
     @Test
     fun `Get breaking news`() = runBlockingTest {
-        val observer = mock<Observer<List<ArticleViewModel>>>()
         val livedata = topNewsViewModel.articles
 
         livedata.observeForever(observer)
