@@ -7,7 +7,6 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.core.network.NetworkException
-import info.tommarsh.data.model.MockProvider.categoryModel
 import info.tommarsh.data.source.local.category.CategoryLocalDataStore
 import info.tommarsh.domain.model.CategoryModel
 import junit.framework.Assert.assertEquals
@@ -57,8 +56,8 @@ class CategoryDataRepositoryTest {
     @Test
     fun `Update categories`() = runBlocking {
 
-        repository.updateCategory(categoryModel)
+        repository.updateCategory("id", true)
 
-        verify(localDataStore).updateCategory(categoryModel)
+        verify(localDataStore).updateCategory("id", true)
     }
 }

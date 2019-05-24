@@ -6,10 +6,12 @@ import info.tommarsh.domain.model.CategoryModel
 import javax.inject.Inject
 
 class CategoryDomainToDataMapper
-@Inject constructor() : Mapper<CategoryModel, Category> {
-    override fun map(from: CategoryModel) = Category(
-        id = from.id,
-        name = from.name,
-        selected = from.selected
-    )
+@Inject constructor() : Mapper<List<CategoryModel>, List<Category>> {
+    override fun map(from: List<CategoryModel>) = from.map {
+        Category(
+            id = it.id,
+            name = it.name,
+            selected = it.selected
+        )
+    }
 }

@@ -16,7 +16,7 @@ import javax.inject.Inject
 class CategoryChoiceActivity : BaseActivity() {
 
     @Inject
-    protected lateinit var factory: ViewModelFactory
+    lateinit var factory: ViewModelFactory
 
     private val viewModel: CategoryChoiceViewModel by lazy {
         ViewModelProviders.of(this, factory).get(CategoryChoiceViewModel::class.java)
@@ -39,7 +39,7 @@ class CategoryChoiceActivity : BaseActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.getCategories().observe(this, Observer(::onCategories))
+        viewModel.categories.observe(this, Observer(::onCategories))
     }
 
     private fun onCategories(categories: List<CategoryViewModel>) {

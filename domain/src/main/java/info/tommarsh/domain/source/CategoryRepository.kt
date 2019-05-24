@@ -12,5 +12,5 @@ interface CategoryRepository {
 
     fun getSelectedCategories(): LiveData<List<CategoryModel>>
 
-    suspend fun updateCategory(category: CategoryModel)
+    suspend fun updateCategory(id: String, selected: Boolean)
 }

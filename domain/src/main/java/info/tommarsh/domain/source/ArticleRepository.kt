@@ -10,11 +10,11 @@ interface ArticleRepository {
 
     val errors: ErrorLiveData
 
-    fun getBreakingNews(source: String): LiveData<List<ArticleModel>>
+    suspend fun getBreakingNews(source: String): LiveData<List<ArticleModel>>
 
     suspend fun refreshBreakingNews()
 
-    fun getFeed(): LiveData<List<ArticleModel>>
+    suspend fun getFeed(): LiveData<List<ArticleModel>>
 
     suspend fun refreshFeed(categories: List<CategoryModel>)
 

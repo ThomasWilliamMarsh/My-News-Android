@@ -48,14 +48,14 @@ class VideosViewModelTest {
 
     @Before
     fun `Set up`() {
-        videosViewModel.getErrors().observeForever(errorObserver)
+        videosViewModel.errors.observeForever(errorObserver)
         videosViewModel.videos.observeForever(videosObserver)
     }
 
     @After
     fun `Tear down`() {
         testCoroutineDispatcher.cleanupTestCoroutines()
-        videosViewModel.getErrors().removeObserver(errorObserver)
+        videosViewModel.errors.removeObserver(errorObserver)
         videosViewModel.videos.removeObserver(videosObserver)
     }
 

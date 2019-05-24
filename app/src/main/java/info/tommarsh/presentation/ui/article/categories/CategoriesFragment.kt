@@ -40,6 +40,10 @@ class CategoriesFragment : BaseFragment() {
         add_categories_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_choice))
         my_news_recycler_view.adapter = adapter
         my_news_recycler_view.layoutManager = setLayoutManager()
+        refresh_my_news.setOnRefreshListener {
+            refresh_my_news.isRefreshing = true
+            viewModel.refreshFeed()
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
@@ -49,17 +53,17 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onPause() {
         super.onPause()
-        viewModel.getSelectedCategories().removeObserver(selectedCategoriesObserver)
+        viewModel.selectedCategories.removeObserver(selectedCategoriesObserver)
     }
 
     override fun onResume() {
         super.onResume()
-        viewModel.getSelectedCategories().observe(viewLifecycleOwner, selectedCategoriesObserver)
+        viewModel.selectedCategories.observe(viewLifecycleOwner, selectedCategoriesObserver)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getFeed().observe(viewLifecycleOwner, Observer(::onArticleCategories))
+        viewModel.feed.observe(viewLifecycleOwner, Observer(::onArticleCategories))
     }
 
     private fun onSelectedCategories() = Observer<List<CategoryModel>> { categories ->
@@ -67,12 +71,7 @@ class CategoriesFragment : BaseFragment() {
             add_categories_root.makeVisible()
         } else {
             add_categories_root.makeGone()
-            refresh_my_news.setOnRefreshListener {
-                refresh_my_news.isRefreshing = true
-                viewModel.refreshFeed(categories)
-            }
-
-            viewModel.refreshFeed(categories)
+            refresh_my_news.isRefreshing = true
         }
     }
 

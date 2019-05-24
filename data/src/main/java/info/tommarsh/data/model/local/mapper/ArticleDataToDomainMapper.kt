@@ -8,17 +8,19 @@ import javax.inject.Inject
 class ArticleDataToDomainMapper
 @Inject constructor(
     private val sourceMapper: SourceDataToDomainMapper
-) : Mapper<Article, ArticleModel> {
+) : Mapper<List<Article>, List<ArticleModel>> {
 
-    override fun map(from: Article) = ArticleModel(
-        author = from.author,
-        content = from.content,
-        description = from.description,
-        publishedAt = from.publishedAt,
-        source = sourceMapper.map(from.source),
-        title = from.title,
-        url = from.url,
-        urlToImage = from.urlToImage,
-        category = from.category
-    )
+    override fun map(from: List<Article>) = from.map {
+        ArticleModel(
+            author = it.author,
+            content = it.content,
+            description = it.description,
+            publishedAt = it.publishedAt,
+            source = sourceMapper.map(it.source),
+            title = it.title,
+            url = it.url,
+            urlToImage = it.urlToImage,
+            category = it.category
+        )
+    }
 }

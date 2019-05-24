@@ -36,7 +36,7 @@ class SearchViewModelTest {
         on { errors }.thenReturn(errorsLiveData)
     }
     private val mapper = mock<ArticleViewModelMapper> {
-        on { map(articleModel) }.thenReturn(articleViewModel)
+        on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(articleViewModel, articleViewModel))
     }
     private val dispatcherProvider = mock<DispatcherProvider> {
         on { main() }.thenReturn(testCoroutineDispatcher)

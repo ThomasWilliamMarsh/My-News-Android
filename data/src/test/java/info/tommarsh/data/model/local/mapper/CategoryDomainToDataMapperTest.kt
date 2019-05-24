@@ -11,9 +11,9 @@ class CategoryDomainToDataMapperTest {
 
     @Test
     fun `Map to domain layer`() {
-        val expected = category
+        val expected = listOf(category)
 
-        val actual = mapper.map(categoryModel)
+        val actual = mapper.map(listOf(categoryModel))
 
         assertEquals(expected, actual)
     }

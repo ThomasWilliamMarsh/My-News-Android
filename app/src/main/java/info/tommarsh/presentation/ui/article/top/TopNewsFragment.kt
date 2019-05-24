@@ -39,8 +39,8 @@ class TopNewsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.getArticlesObservable().observe(viewLifecycleOwner, Observer(::onArticlesReceived))
-        viewModel.getErrors().observe(viewLifecycleOwner, Observer(::onError))
+        viewModel.articles.observe(viewLifecycleOwner, Observer(::onArticlesReceived))
+        viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
     }
 
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {

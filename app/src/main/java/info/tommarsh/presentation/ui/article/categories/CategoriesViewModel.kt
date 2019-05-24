@@ -1,15 +1,15 @@
 package info.tommarsh.presentation.ui.article.categories
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.liveData
+import androidx.lifecycle.map
+import androidx.lifecycle.switchMap
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.domain.source.CategoryRepository
-import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import info.tommarsh.presentation.ui.common.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -22,15 +22,20 @@ class CategoriesViewModel
     private val dispatcherProvider: DispatcherProvider
 ) : BaseViewModel(dispatcherProvider) {
 
-    fun getSelectedCategories(): LiveData<List<CategoryModel>> = categoryRepository.getSelectedCategories()
+    val selectedCategories: LiveData<List<CategoryModel>> = categoryRepository.getSelectedCategories()
 
-    fun getFeed(): LiveData<List<ArticleViewModel>> = Transformations.map(articlesRepository.getFeed()) { model ->
-        model.map { mapper.map(it) }
+    val feed = categoryRepository.getSelectedCategories().switchMap {
+        liveData(context = coroutineContext) {
+            val items = articlesRepository.getFeed().map(mapper::map)
+            emitSource(items)
+        }
     }
 
-    fun refreshFeed(categories: List<CategoryModel>) {
+    fun refreshFeed() {
         launch {
-            withContext(dispatcherProvider.work()) { articlesRepository.refreshFeed(categories) }
+            withContext(dispatcherProvider.work()) {
+                articlesRepository.refreshFeed(selectedCategories.value.orEmpty())
+            }
         }
     }
 }

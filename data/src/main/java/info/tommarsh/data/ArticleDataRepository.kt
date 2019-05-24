@@ -8,12 +8,9 @@ import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
 import info.tommarsh.domain.model.ArticleModel
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.domain.source.ArticleRepository
-import kotlinx.coroutines.channels.Channel
-import kotlinx.coroutines.channels.SendChannel
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 typealias TopicOutcome = Pair<String, Outcome<List<ArticleModel>>>
@@ -25,7 +22,7 @@ class ArticleDataRepository
     override val errors: ErrorLiveData
 ) : ArticleRepository {
 
-    override fun getBreakingNews(source: String): LiveData<List<ArticleModel>> = local.getBreakingNews()
+    override suspend fun getBreakingNews(source: String): LiveData<List<ArticleModel>> = local.getBreakingNews()
 
     override suspend fun refreshBreakingNews() {
         when (val networkItems = remote.getBreakingNews()) {
@@ -34,7 +31,7 @@ class ArticleDataRepository
         }
     }
 
-    override fun getFeed(): LiveData<List<ArticleModel>> = local.getFeed()
+    override suspend fun getFeed(): LiveData<List<ArticleModel>> = local.getFeed()
 
     override suspend fun searchArticles(query: String) = remote.searchArticles(query)
 
@@ -46,7 +43,7 @@ class ArticleDataRepository
         }.consumeEach { receiveArticles(it) }
     }
 
-    private suspend fun produceArticles(id: String) : TopicOutcome {
+    private suspend fun produceArticles(id: String): TopicOutcome {
         return TopicOutcome(id, remote.getArticleForCategory(id))
     }
 

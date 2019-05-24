@@ -11,9 +11,9 @@ class CategoryDomainToViewModelMapperTest {
 
     @Test
     fun `Map to presentation layer`() {
-        val expected = categoryViewModel
+        val expected = listOf(categoryViewModel)
 
-        val actual = mapper.map(categoryModel)
+        val actual = mapper.map(listOf(categoryModel))
 
         assertEquals(expected, actual)
     }

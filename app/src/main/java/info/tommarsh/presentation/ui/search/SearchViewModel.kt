@@ -8,7 +8,8 @@ import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import info.tommarsh.presentation.ui.common.BaseViewModel
-import kotlinx.coroutines.*
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 class SearchViewModel
@@ -25,7 +26,7 @@ class SearchViewModel
     fun searchArticles(query: String) {
         launch {
             when (val outcome = getOutcome(query)) {
-                is Outcome.Success -> _articles.postValue(outcome.data.map { mapper.map(it) })
+                is Outcome.Success -> _articles.postValue(mapper.map(outcome.data))
                 is Outcome.Error -> repository.errors.setError(outcome.error)
             }
         }

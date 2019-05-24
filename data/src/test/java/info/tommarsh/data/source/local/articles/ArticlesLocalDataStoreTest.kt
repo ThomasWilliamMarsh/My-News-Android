@@ -23,10 +23,10 @@ class ArticlesLocalDataStoreTest {
 
     private val dao = mock<ArticlesDao>()
     private val dataToDomainMapper = mock<ArticleDataToDomainMapper> {
-        on { map(article) }.thenReturn(articleModel)
+        on { map(listOf(article, article)) }.thenReturn(listOf(articleModel, articleModel))
     }
     private val domainToDataMapper = mock<ArticleDomainToDataMapper> {
-        on { map(articleModel) }.thenReturn(article)
+        on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(article, article))
     }
     private val localDataStore =
         ArticlesLocalDataStore(dao, dataToDomainMapper, domainToDataMapper)

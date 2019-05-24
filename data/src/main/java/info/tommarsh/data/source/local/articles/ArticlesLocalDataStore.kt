@@ -1,7 +1,7 @@
 package info.tommarsh.data.source.local.articles
 
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.lifecycle.map
 import info.tommarsh.data.model.local.mapper.ArticleDataToDomainMapper
 import info.tommarsh.data.model.local.mapper.ArticleDomainToDataMapper
 import info.tommarsh.domain.model.ArticleModel
@@ -15,24 +15,20 @@ class ArticlesLocalDataStore
 ) {
 
     fun getBreakingNews(): LiveData<List<ArticleModel>> {
-        val model = articlesDao.getBreakingArticles()
-        return Transformations.map(model) { domain -> domain.map { dataMapper.map(it) } }
+        return articlesDao.getBreakingArticles().map(dataMapper::map)
     }
 
     fun getFeed(): LiveData<List<ArticleModel>> {
-        val model = articlesDao.getFeed()
-        return Transformations.map(model) { domain -> domain.map { dataMapper.map(it) } }
+        return articlesDao.getFeed().map(dataMapper::map)
     }
 
     suspend fun saveBreakingNews(items: List<ArticleModel>) {
-        val model = items.map { domainMapper.map(it) }
+        val model = domainMapper.map(items)
         articlesDao.replaceBreakingArticles(model)
     }
 
     suspend fun saveCategory(category: String, items: List<ArticleModel>) {
-        val model = items.map {
-            domainMapper.map(it).also { article -> article.category = category }
-        }
+        val model = domainMapper.map(items).also { articles -> articles.forEach { it.category = category } }
         articlesDao.replaceCategories(category, model)
     }
 }

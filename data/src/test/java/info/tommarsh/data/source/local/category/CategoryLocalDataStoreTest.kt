@@ -8,21 +8,17 @@ import info.tommarsh.data.model.MockProvider.category
 import info.tommarsh.data.model.MockProvider.categoryModel
 import info.tommarsh.data.model.local.Category
 import info.tommarsh.data.model.local.mapper.CategoryDataToDomainMapper
-import info.tommarsh.data.model.local.mapper.CategoryDomainToDataMapper
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
 
 class CategoryLocalDataStoreTest {
     private val dao = mock<CategoryDao>()
     private val dataMapper = mock<CategoryDataToDomainMapper> {
-        on { map(category) }.thenReturn(categoryModel)
-    }
-    private val domainMapper = mock<CategoryDomainToDataMapper> {
-        on { map(categoryModel) }.thenReturn(category)
+        on { map(listOf(category)) }.thenReturn(listOf(categoryModel))
     }
     private val categoryLiveData = MutableLiveData<List<Category>>()
 
-    private val local = CategoryLocalDataStore(dao, dataMapper, domainMapper)
+    private val local = CategoryLocalDataStore(dao, dataMapper)
 
     @Test
     fun `Get categories from DB`() {
@@ -45,8 +41,8 @@ class CategoryLocalDataStoreTest {
     @Test
     fun `Update category`() = runBlocking {
 
-        local.updateCategory(categoryModel)
+        local.updateCategory("id", true)
 
-        verify(dao).updateCategory(category)
+        verify(dao).updateCategory("id", true)
     }
 }

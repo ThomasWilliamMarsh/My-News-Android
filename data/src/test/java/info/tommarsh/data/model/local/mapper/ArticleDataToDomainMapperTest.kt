@@ -17,9 +17,9 @@ class ArticleDataToDomainMapperTest {
 
     @Test
     fun `Map to domain layer`() {
-        val expected = articleModel
+        val expected = listOf(articleModel)
 
-        val actual = mapper.map(article)
+        val actual = mapper.map(listOf(article))
 
         assertEquals(expected, actual)
     }

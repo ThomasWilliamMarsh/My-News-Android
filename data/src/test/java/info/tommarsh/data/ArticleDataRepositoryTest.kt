@@ -14,6 +14,7 @@ import info.tommarsh.data.source.local.articles.ArticlesLocalDataStore
 import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
 import info.tommarsh.domain.model.ArticleModel
 import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
@@ -31,6 +32,7 @@ class ArticleDataRepositoryTest {
 
     private val feedLivedata = MutableLiveData<List<ArticleModel>>()
     private val errorObserver = mock<Observer<NetworkException>>()
+    private val feedObserver = mock<Observer<List<ArticleModel>>>()
 
     @Before
     fun `Set up`() {
@@ -38,10 +40,10 @@ class ArticleDataRepositoryTest {
     }
 
     @Test
-    fun `Get breaking news from db and network, and persist`() {
+    fun `Get breaking news from db and network, and persist`() = runBlocking<Unit> {
         whenever(localDataStore.getBreakingNews()).thenReturn(MutableLiveData())
 
-        repository.getBreakingNews("")
+        repository.getBreakingNews("").observeForever(feedObserver)
 
         verify(localDataStore).getBreakingNews()
     }
@@ -68,10 +70,10 @@ class ArticleDataRepositoryTest {
     }
 
     @Test
-    fun `Get feed`() = runBlocking<Unit> {
+    fun `Get feed`() = runBlockingTest {
         whenever(localDataStore.getFeed()).thenReturn(feedLivedata)
 
-        repository.getFeed()
+        repository.getFeed().observeForever(feedObserver)
 
         verify(localDataStore).getFeed()
     }

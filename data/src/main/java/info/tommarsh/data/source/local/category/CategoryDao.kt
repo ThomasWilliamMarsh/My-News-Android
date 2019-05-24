@@ -1,7 +1,10 @@
 package info.tommarsh.data.source.local.category
 
 import androidx.lifecycle.LiveData
-import androidx.room.*
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
 import info.tommarsh.data.model.local.Category
 
 @Dao
@@ -16,6 +19,6 @@ interface CategoryDao {
     @Query("SELECT * FROM CATEGORY_TABLE WHERE selected = :selected")
     fun getSelectedCategories(selected: Boolean = true): LiveData<List<Category>>
 
-    @Update
-    suspend fun updateCategory(category: Category)
+    @Query("UPDATE CATEGORY_TABLE SET selected = :selected where id = :id")
+    suspend fun updateCategory(id: String, selected: Boolean)
 }

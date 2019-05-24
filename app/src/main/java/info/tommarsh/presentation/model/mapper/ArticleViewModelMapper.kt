@@ -7,17 +7,17 @@ import info.tommarsh.presentation.model.ArticleViewModel
 import javax.inject.Inject
 
 class ArticleViewModelMapper
-@Inject constructor(private val timeHelper: TimeHelper) : Mapper<ArticleModel, ArticleViewModel> {
-    override fun map(from: ArticleModel): ArticleViewModel {
-        val published = timeHelper.timeBetween(isoString = from.publishedAt)
-        return ArticleViewModel(
-            author = from.author,
-            description = from.description,
+@Inject constructor(private val timeHelper: TimeHelper) : Mapper<List<ArticleModel>, List<ArticleViewModel>> {
+    override fun map(from: List<ArticleModel>): List<ArticleViewModel> = from.map {
+        val published = timeHelper.timeBetween(isoString = it.publishedAt)
+        ArticleViewModel(
+            author = it.author,
+            description = it.description,
             publishedAt = published,
-            title = from.title,
-            url = from.url,
-            urlToImage = from.urlToImage,
-            category = from.category
+            title = it.title,
+            url = it.url,
+            urlToImage = it.urlToImage,
+            category = it.category
         )
     }
 }

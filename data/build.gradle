@@ -21,6 +21,9 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    androidExtensions {
+        experimental = true
+    }
 }
 
 dependencies {
@@ -41,7 +44,8 @@ dependencies {
     kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
 
     //LiveData
-    implementation 'androidx.lifecycle:lifecycle-livedata:' + rootProject.lifecycleVersion
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:' + rootProject.lifecycleAlphaVersion
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:' + rootProject.lifecycleAlphaVersion
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
@@ -52,6 +56,7 @@ dependencies {
     testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
 
     implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 }

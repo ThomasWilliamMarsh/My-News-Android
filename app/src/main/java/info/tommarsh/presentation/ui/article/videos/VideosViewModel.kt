@@ -8,7 +8,6 @@ import info.tommarsh.domain.source.VideoRepository
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
 import info.tommarsh.presentation.ui.common.BaseViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -28,7 +27,7 @@ class VideosViewModel
 
     val videos: LiveData<List<PlaylistItemViewModel>> = _videos
 
-    fun getErrors() = repository.errors
+    val errors = repository.errors
 
     fun refreshVideos() {
         launch {

@@ -17,9 +17,9 @@ class ArticleViewModelMapperTest {
 
     @Test
     fun `Map to Presentation`() {
-        val expected = articleViewModel
+        val expected = listOf(articleViewModel)
 
-        val actual = mapper.map(articleModel)
+        val actual = mapper.map(listOf(articleModel))
 
         assertEquals(expected, actual)
     }

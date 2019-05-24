@@ -49,13 +49,15 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
 
     //Lifecycle
-    implementation 'androidx.lifecycle:lifecycle-extensions:' + rootProject.lifecycleVersion
+    implementation 'android.arch.lifecycle:extensions:' + rootProject.lifecycleAlphaVersion
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:' + rootProject.lifecycleAlphaVersion
+    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:' + rootProject.lifecycleAlphaVersion
     testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
 
     //Coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.2.1'
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion

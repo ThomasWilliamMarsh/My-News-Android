@@ -1,16 +1,22 @@
 package info.tommarsh.presentation.ui.categories
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.domain.source.CategoryRepository
+import info.tommarsh.presentation.model.CategoryViewModel
 import info.tommarsh.presentation.model.MockModelProvider.categoryModel
 import info.tommarsh.presentation.model.MockModelProvider.categoryViewModel
 import info.tommarsh.presentation.model.mapper.CategoryDomainToViewModelMapper
-import info.tommarsh.presentation.model.mapper.CategoryViewModelToDomainMapper
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
+import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
+import org.junit.After
+import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -20,12 +26,12 @@ class CategoryChoiceViewModelTest {
     @get:Rule
     var rule: TestRule = InstantTaskExecutorRule()
 
-    private val categoryRepository = mock<CategoryRepository>()
-    private val domainMapper = mock<CategoryViewModelToDomainMapper> {
-        on { map(categoryViewModel) }.thenReturn(categoryModel)
+    private val categoryRepository = mock<CategoryRepository> {
+        on { getSelectedCategories() }.thenReturn(mock())
+        on { getCategories() }.thenReturn(mock())
     }
     private val viewModelMapper = mock<CategoryDomainToViewModelMapper> {
-        on { map(categoryModel) }.thenReturn(categoryViewModel)
+        on { map(listOf(categoryModel)) }.thenReturn(listOf(categoryViewModel))
     }
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
     private val dispatcherProvider = mock<DispatcherProvider> {
@@ -33,22 +39,35 @@ class CategoryChoiceViewModelTest {
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
     private val categoryChoiceViewModel =
-        CategoryChoiceViewModel(categoryRepository, viewModelMapper, domainMapper, dispatcherProvider)
+        CategoryChoiceViewModel(categoryRepository, viewModelMapper, dispatcherProvider)
+    private val categoryObserver = mock<Observer<List<CategoryViewModel>>>()
+
+    @Before
+    fun `Set Up`() {
+        Dispatchers.setMain(testCoroutineDispatcher)
+    }
+
+    @After
+    fun `Tear Down`() {
+        Dispatchers.resetMain()
+        testCoroutineDispatcher.cleanupTestCoroutines()
+
+        categoryChoiceViewModel.categories.removeObserver(categoryObserver)
+    }
 
     @Test
-    fun `Get Categories`() {
+    fun `Get Categories`() = testCoroutineDispatcher.runBlockingTest {
 
-        categoryChoiceViewModel.getCategories()
+        categoryChoiceViewModel.categories.observeForever(categoryObserver)
 
         verify(categoryRepository).getCategories()
     }
 
     @Test
-    fun `Update Category`() = runBlocking {
+    fun `Update Category`() = testCoroutineDispatcher.runBlockingTest {
 
         categoryChoiceViewModel.updateCategory(categoryViewModel)
 
-        verify(domainMapper).map(categoryViewModel)
-        verify(categoryRepository).updateCategory(categoryModel)
+        verify(categoryRepository).updateCategory("id", false)
     }
 }
