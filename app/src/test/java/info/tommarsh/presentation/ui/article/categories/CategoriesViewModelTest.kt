@@ -14,7 +14,7 @@ import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Before
+import org.junit.After
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
@@ -44,7 +44,7 @@ class CategoriesViewModelTest {
 
     private val articleObserver = mock<Observer<List<ArticleViewModel>>>()
 
-    @Before
+    @After
     fun `Tear down`() {
         testCoroutineDispatcher.cleanupTestCoroutines()
     }
