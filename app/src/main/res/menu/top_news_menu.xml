@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_day_night"
+          android:icon="@drawable/ic_outline_night"
+          app:showAsAction="ifRoom|collapseActionView"
+          android:title="@string/toggle_day_night_mode"/>
+
+    <item
+            android:id="@+id/action_search"
+            android:icon="@drawable/ic_outline_search"
+            app:showAsAction="ifRoom|collapseActionView"
+            android:title="@string/search"/>
+</menu>

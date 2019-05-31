@@ -12,7 +12,7 @@
         android:background="?attr/selectableItemBackground"
         android:padding="@dimen/normal_padding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/category_choice_image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,13 +22,12 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/category_choice_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:layout_marginStart="@dimen/small_margin"
-            style="@style/CategoryChoiceText"
             tools:text="Brexit"
             app:layout_constraintStart_toEndOf="@id/category_choice_image"
             app:layout_constraintEnd_toEndOf="parent"

@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.annotation.LayoutRes
+import androidx.appcompat.widget.AppCompatImageView
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
@@ -41,7 +42,7 @@ fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View = LayoutInflater.from(con
 //endregion
 
 //region ImageView
-fun ImageView.loadUrl(url: String) = Glide.with(context)
+fun AppCompatImageView.loadUrl(url: String) = Glide.with(context)
     .load(url)
     .apply(RequestOptions.centerCropTransform())
     .into(this)

@@ -4,11 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.compileSdk
     defaultConfig {
         applicationId "info.tommarsh.cleanbase"
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.minSdk
+        targetSdkVersion rootProject.targetSdk
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -38,10 +38,10 @@ dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
 
     //Google
-    implementation 'com.google.android.material:material:' + rootProject.supportLibVersion
-    implementation 'androidx.appcompat:appcompat:' + rootProject.supportLibVersion
-    implementation 'androidx.cardview:cardview:' + rootProject.supportLibVersion
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.supportLibVersion
+    implementation 'com.google.android.material:material:' + rootProject.materialVersion
+    implementation 'androidx.appcompat:appcompat:' + rootProject.appCompatVersion
+    implementation 'androidx.cardview:cardview:' + rootProject.cardViewVersion
+    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
     implementation 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
 
     //Dagger
@@ -72,8 +72,8 @@ dependencies {
     implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
 
     //Navigation
-    implementation "android.arch.navigation:navigation-fragment:" + rootProject.navigationVersion // use -ktx for Kotlin
-    implementation "android.arch.navigation:navigation-ui:" + rootProject.navigationVersion  // use -ktx for Kotlin
+    implementation "android.arch.navigation:navigation-fragment-ktx:" + rootProject.navigationVersion
+    implementation "android.arch.navigation:navigation-ui-ktx:" + rootProject.navigationVersion
 
     //Room
     implementation 'androidx.room:room-runtime:' + rootProject.roomVersion

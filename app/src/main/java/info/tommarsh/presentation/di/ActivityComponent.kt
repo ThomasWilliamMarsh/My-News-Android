@@ -3,6 +3,7 @@ package info.tommarsh.presentation.di
 import androidx.appcompat.app.AppCompatActivity
 import dagger.BindsInstance
 import dagger.Subcomponent
+import info.tommarsh.presentation.ui.article.ArticlesActivity
 import info.tommarsh.presentation.ui.article.categories.CategoriesFragment
 import info.tommarsh.presentation.ui.article.top.TopNewsFragment
 import info.tommarsh.presentation.ui.article.videos.VideosFragment
@@ -26,4 +27,6 @@ interface ActivityComponent {
     fun inject(activity: SearchActivity)
 
     fun inject(activity: CategoryChoiceActivity)
+
+    fun inject(activity: ArticlesActivity)
 }

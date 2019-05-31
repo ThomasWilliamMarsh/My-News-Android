@@ -2,19 +2,24 @@ package info.tommarsh.presentation.ui.article.top
 
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.recyclerview.widget.DividerItemDecoration
-import androidx.recyclerview.widget.RecyclerView.VERTICAL
+import info.tommarsh.core.extensions.consume
 import info.tommarsh.core.extensions.snack
 import info.tommarsh.core.network.NetworkException
+import info.tommarsh.data.PreferencesRepository
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.article.top.adapter.TopNewsAdapter
 import info.tommarsh.presentation.ui.common.BaseFragment
 import kotlinx.android.synthetic.main.fragment_top_news.*
+import javax.inject.Inject
 
 class TopNewsFragment : BaseFragment() {
+
+    @Inject
+    lateinit var sharedPreferencesRepository: PreferencesRepository
 
     private val adapter = TopNewsAdapter()
 
@@ -33,7 +38,6 @@ class TopNewsFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         top_news_recycler_view.adapter = adapter
-        top_news_recycler_view.addItemDecoration(DividerItemDecoration(context, VERTICAL))
         refresh_top_news.setOnRefreshListener { viewModel.refreshBreakingNews() }
     }
 
@@ -43,9 +47,30 @@ class TopNewsFragment : BaseFragment() {
         viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        super.onPrepareOptionsMenu(menu)
+        val dayNightItem = menu.findItem(R.id.action_day_night)
+        dayNightItem?.setIcon(
+            when (sharedPreferencesRepository.nightMode) {
+                AppCompatDelegate.MODE_NIGHT_YES -> R.drawable.ic_outline_day
+                else -> R.drawable.ic_outline_night
+            }
+        )
+
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.top_news_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.default_toolbar_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.action_day_night -> consume {
+                sharedPreferencesRepository.toggleNightMode()
+            }
+            else -> true
+        }
     }
 
     private fun onArticlesReceived(articles: List<ArticleViewModel>?) {

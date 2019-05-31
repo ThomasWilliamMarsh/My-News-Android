@@ -16,4 +16,5 @@
     <string name="edit_my_news">Edit My News</string>
     <string name="chevron"><![CDATA[>]]></string>
     <string name="youtube_url">https://www.youtube.com/watch?v=%1$s</string>
+    <string name="toggle_day_night_mode">Toggle day / night mode</string>
 </resources>

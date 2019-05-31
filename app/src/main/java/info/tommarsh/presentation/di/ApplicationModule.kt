@@ -32,4 +32,9 @@ object ApplicationModule {
     @JvmStatic
     fun provideDispatcherProvider(coroutineDispatcherProvider: CoroutineDispatcherProvider): DispatcherProvider =
         coroutineDispatcherProvider
+
+    @Provides
+    @JvmStatic
+    fun provideSharedPreferences(context: Context) =
+        context.getSharedPreferences("default_preferences", Context.MODE_PRIVATE)
 }

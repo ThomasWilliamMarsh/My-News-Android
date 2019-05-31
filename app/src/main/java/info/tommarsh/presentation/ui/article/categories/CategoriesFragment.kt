@@ -46,9 +46,9 @@ class CategoriesFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.categories_toolbar_menu, menu)
+        inflater.inflate(R.menu.categories_toolbar_menu, menu)
     }
 
     override fun onPause() {

@@ -15,7 +15,6 @@ class MainArticleViewHolder(parent: ViewGroup) : RecyclerView.ViewHolder(parent.
         main_article_image.loadUrl(article.urlToImage)
         main_article_title.text = article.title
         main_article_updated.text = article.publishedAt
-        main_article_author.text = article.author
 
         setOnClickListener(ArticleClickListener(article.url))
     }

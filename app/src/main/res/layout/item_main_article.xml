@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/main_article_root"
@@ -7,14 +7,14 @@
         android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/normal_margin">
+        android:layout_margin="@dimen/normal_margin">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless">
 
-        <ImageView
+        <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/main_article_image"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/main_article_image_size"
@@ -27,11 +27,12 @@
                 app:layout_constraintVertical_chainStyle="packed"
                 app:layout_constraintBottom_toTopOf="@+id/main_article_title"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/main_article_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                style="@style/MainArticleText"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+                android:layout_marginStart="@dimen/small_margin"
                 tools:text="Flights suspended by drones at Gatwick"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -39,40 +40,18 @@
                 app:layout_constraintBottom_toTopOf="@+id/main_article_updated"
                 tools:layout_editor_absoluteX="0dp"/>
 
-        <TextView
+        <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/main_article_updated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                style="@style/UpdatedMainArticleText"
+                android:layout_marginStart="@dimen/small_margin"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 tools:text="16 mins ago"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_article_title"
                 app:layout_constraintBottom_toTopOf="@+id/main_article_title"/>
 
-        <TextView
-                android:id="@+id/main_article_divider"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:text="@string/divider_text"
-                android:gravity="center"
-                style="@style/DividerText"
-                app:layout_constraintEnd_toStartOf="@id/main_article_author"
-                app:layout_constraintStart_toEndOf="@id/main_article_updated"
-                app:layout_constraintTop_toTopOf="@id/main_article_updated"
-                app:layout_constraintBottom_toBottomOf="@id/main_article_updated"/>
-
-        <TextView
-                android:id="@+id/main_article_author"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:gravity="center|start"
-                style="@style/AuthorText"
-                tools:text="BBC News"
-                app:layout_constraintStart_toEndOf="@id/main_article_divider"
-                app:layout_constraintTop_toTopOf="@id/main_article_updated"
-                app:layout_constraintBottom_toBottomOf="@id/main_article_updated"
-                app:layout_constraintEnd_toEndOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

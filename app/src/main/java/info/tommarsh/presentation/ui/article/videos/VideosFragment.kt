@@ -47,9 +47,9 @@ class VideosFragment : BaseFragment() {
         viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.default_toolbar_menu, menu)
+        inflater.inflate(R.menu.videos_menu, menu)
     }
 
     private fun onVideos(videos: List<PlaylistItemViewModel>) {

@@ -8,7 +8,7 @@
         android:visibility="gone"
         android:padding="@dimen/huge_paddding">
 
-    <ImageView
+    <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/add_categories_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -18,23 +18,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/guideline"/>
 
-    <TextView
+    <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/add_categories_blurb"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/large_margin"
-            style="@style/CreateFeedText"
             android:text="@string/add_categories_blurb"
             app:layout_constraintStart_toEndOf="@id/add_categories_icon"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@id/add_categories_icon"/>
 
-    <Button
+    <com.google.android.material.button.MaterialButton
             android:id="@+id/add_categories_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/huge_paddding"
-            style="@style/ButtonStyle"
             android:text="@string/create_feed_button"
             app:layout_constraintTop_toBottomOf="@id/add_categories_blurb"
             app:layout_constraintEnd_toEndOf="parent"

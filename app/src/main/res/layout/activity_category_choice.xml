@@ -11,15 +11,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:fitsSystemWindows="true"
-            android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+            app:elevation="@dimen/none">
 
-        <androidx.appcompat.widget.Toolbar
+        <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/activity_choice_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:theme="@style/ToolbarStyle"
-                app:title="@string/edit_my_news"
-                style="ToolbarStyle"/>
+                app:title="@string/edit_my_news"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
