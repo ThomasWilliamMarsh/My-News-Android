@@ -4,21 +4,17 @@ import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.browser.customtabs.CustomTabsIntent
-import androidx.core.content.ContextCompat
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
-import info.tommarsh.core.R
 
 
 //region View
 fun View.ArticleClickListener(url: String) = View.OnClickListener {
     val intent = CustomTabsIntent.Builder()
-        .setToolbarColor(ContextCompat.getColor(context, R.color.colorPrimary))
         .enableUrlBarHiding()
         .build()
     intent.launchUrl(context, Uri.parse(url))

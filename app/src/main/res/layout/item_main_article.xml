@@ -33,6 +33,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_marginStart="@dimen/small_margin"
+                android:layout_marginBottom="@dimen/normal_margin"
                 tools:text="Flights suspended by drones at Gatwick"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
