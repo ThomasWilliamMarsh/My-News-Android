@@ -14,7 +14,6 @@ buildscript {
 
 allprojects {
     repositories {
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
         google()
         jcenter()
     }
@@ -49,7 +48,7 @@ ext {
     ktxVersion = "1.0.0-alpha3"
 
     //Network
-    retrofitVersion = "2.5.1-SNAPSHOT"
+    retrofitVersion = "2.6.0"
     gsonVersion = "2.8.5"
     jUnitVersion = "4.12"
     mockitoKotlinVersion = "2.1.0"

@@ -28,6 +28,7 @@ class CategoryChoiceActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         activityGraph.inject(this)
         setContentView(R.layout.activity_category_choice)
+        observeNightMode()
         setUpViewModel()
         setUpUi()
     }
@@ -46,8 +47,8 @@ class CategoryChoiceActivity : BaseActivity() {
         adapter.submitList(categories)
     }
 
-    private fun onCategorySelected(category: CategoryViewModel) {
-        category.selected = !category.selected
+    private fun onCategorySelected(category: CategoryViewModel, selected: Boolean) {
+        category.selected = selected
         viewModel.updateCategory(category)
     }
 }

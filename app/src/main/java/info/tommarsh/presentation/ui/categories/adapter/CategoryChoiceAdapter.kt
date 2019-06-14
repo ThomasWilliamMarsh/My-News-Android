@@ -6,7 +6,7 @@ import info.tommarsh.core.extensions.getDiffUtilItemCallback
 import info.tommarsh.presentation.model.CategoryViewModel
 import info.tommarsh.presentation.ui.categories.adapter.viewholder.CategoryChoiceViewholder
 
-class CategoryChoiceAdapter(private val onClick: (category: CategoryViewModel) -> Unit) :
+class CategoryChoiceAdapter(private val onClick: (category: CategoryViewModel, selected: Boolean) -> Unit) :
     ListAdapter<CategoryViewModel, CategoryChoiceViewholder>(callback) {
 
     companion object {

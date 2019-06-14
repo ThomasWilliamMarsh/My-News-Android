@@ -6,9 +6,8 @@
           app:showAsAction="ifRoom|collapseActionView"
           android:title="@string/toggle_day_night_mode"/>
 
-    <item
-            android:id="@+id/action_search"
-            android:icon="@drawable/ic_outline_search"
-            app:showAsAction="ifRoom|collapseActionView"
-            android:title="@string/search"/>
+    <item android:id="@+id/action_search"
+          android:icon="@drawable/ic_outline_search"
+          app:showAsAction="ifRoom|collapseActionView"
+          android:title="@string/search"/>
 </menu>

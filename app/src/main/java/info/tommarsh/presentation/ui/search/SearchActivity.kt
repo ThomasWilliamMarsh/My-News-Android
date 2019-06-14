@@ -23,7 +23,7 @@ class SearchActivity : BaseActivity() {
     private val adapter = SearchAdapter()
 
     @Inject
-    protected lateinit var factory: ViewModelFactory
+    lateinit var factory: ViewModelFactory
 
     private val viewModel: SearchViewModel by lazy {
         ViewModelProviders.of(this, factory).get(SearchViewModel::class.java)
@@ -33,6 +33,7 @@ class SearchActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         activityGraph.inject(this)
         setContentView(R.layout.activity_search)
+        observeNightMode()
         setSupportActionBar(search_toolbar)
         setUpViewModel()
         setUpRecyclerView()

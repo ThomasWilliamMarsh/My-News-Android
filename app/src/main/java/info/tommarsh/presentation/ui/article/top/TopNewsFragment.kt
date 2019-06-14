@@ -56,7 +56,6 @@ class TopNewsFragment : BaseFragment() {
                 else -> R.drawable.ic_outline_night
             }
         )
-
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -66,10 +65,8 @@ class TopNewsFragment : BaseFragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
-            R.id.action_day_night -> consume {
-                sharedPreferencesRepository.toggleNightMode()
-            }
-            else -> true
+            R.id.action_day_night -> consume { sharedPreferencesRepository.toggleNightMode() }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 
