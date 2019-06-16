@@ -8,9 +8,11 @@ import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
 import info.tommarsh.domain.model.ArticleModel
 import info.tommarsh.domain.model.CategoryModel
 import info.tommarsh.domain.source.ArticleRepository
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce
 import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 typealias TopicOutcome = Pair<String, Outcome<List<ArticleModel>>>
@@ -36,11 +38,16 @@ class ArticleDataRepository
     override suspend fun searchArticles(query: String) = remote.searchArticles(query)
 
     override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
-        produce {
-            categories.forEach {
-                send(produceArticles(it.id))
-            }
-        }.consumeEach { receiveArticles(it) }
+        launch { local.deleteUnselectedCategories() }
+        articleProducer(categories).consumeEach { receiveArticles(it) }
+    }
+
+    private fun CoroutineScope.articleProducer(
+        categories: List<CategoryModel>
+    ) = produce {
+        categories.forEach {
+            send(produceArticles(it.id))
+        }
     }
 
     private suspend fun produceArticles(id: String): TopicOutcome {

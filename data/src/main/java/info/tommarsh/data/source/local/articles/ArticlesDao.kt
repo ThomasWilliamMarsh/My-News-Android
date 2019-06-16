@@ -13,17 +13,20 @@ interface ArticlesDao {
         insertArticles(*articles.toTypedArray())
     }
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertArticles(vararg articles: Article)
-
-    @Query("SELECT * FROM ARTICLE_TABLE WHERE category == 'top-news'")
-    fun getBreakingArticles(): LiveData<List<Article>>
-
     @Transaction
     suspend fun replaceCategories(category: String, articles: List<Article>) {
         deleteCategory(category)
         insertArticles(*articles.toTypedArray())
     }
+
+    @Query("DELETE FROM ARTICLE_TABLE WHERE category IN (SELECT id FROM CATEGORY_TABLE WHERE selected = 0)")
+    suspend fun deleteUnselectedCategories()
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertArticles(vararg articles: Article)
+
+    @Query("SELECT * FROM ARTICLE_TABLE WHERE category == 'top-news'")
+    fun getBreakingArticles(): LiveData<List<Article>>
 
     @Query("SELECT * FROM ARTICLE_TABLE WHERE category != 'top-news'")
     fun getFeed(): LiveData<List<Article>>

@@ -51,19 +51,10 @@ class CategoriesFragment : BaseFragment() {
         inflater.inflate(R.menu.categories_toolbar_menu, menu)
     }
 
-    override fun onPause() {
-        super.onPause()
-        viewModel.selectedCategories.removeObserver(selectedCategoriesObserver)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.selectedCategories.observe(viewLifecycleOwner, selectedCategoriesObserver)
-    }
-
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.feed.observe(viewLifecycleOwner, Observer(::onArticleCategories))
+        viewModel.feed.observe(this, Observer(::onArticleCategories))
+        viewModel.selectedCategories.observe(this, selectedCategoriesObserver)
     }
 
     private fun onSelectedCategories() = Observer<List<CategoryModel>> { categories ->
@@ -73,6 +64,8 @@ class CategoriesFragment : BaseFragment() {
             add_categories_root.makeGone()
             refresh_my_news.isRefreshing = true
         }
+
+        viewModel.refreshFeed()
     }
 
     private fun onArticleCategories(articles: List<ArticleViewModel>) {

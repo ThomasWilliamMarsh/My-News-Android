@@ -17,5 +17,8 @@ class CategoryChoiceViewholder(
         category_choice_name.text = category.name
         category_choice_checkbox.isChecked = category.selected
         category_choice_checkbox.setOnCheckedChangeListener { _, selected -> onClick(category, selected) }
+        category_choice_root.setOnClickListener {
+            category_choice_checkbox.isChecked = !category_choice_checkbox.isChecked
+        }
     }
 }

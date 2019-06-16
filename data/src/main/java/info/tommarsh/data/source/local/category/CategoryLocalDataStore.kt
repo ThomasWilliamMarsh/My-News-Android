@@ -15,8 +15,11 @@ class CategoryLocalDataStore
     fun getCategories(): LiveData<List<CategoryModel>> =
         dao.getCategories().map(dataMapper::map)
 
-    fun getSelectedCategories(): LiveData<List<CategoryModel>> =
-        dao.getSelectedCategories().map(dataMapper::map)
+    fun getSelectedCategoriesStream(): LiveData<List<CategoryModel>> =
+        dao.getSelectedCategoriesStream().map(dataMapper::map)
+
+    suspend fun getSelectedCategories(): List<CategoryModel> =
+        dataMapper.map(dao.getSelectedCategories())
 
     suspend fun updateCategory(id: String, selected: Boolean) {
         dao.updateCategory(id, selected)

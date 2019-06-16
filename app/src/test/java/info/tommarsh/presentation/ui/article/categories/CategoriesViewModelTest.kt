@@ -28,7 +28,7 @@ class CategoriesViewModelTest {
         onBlocking { getFeed() }.thenReturn(mock())
     }
     private val categoryRepository = mock<CategoryRepository> {
-        onBlocking { getSelectedCategories() }.thenReturn(mock())
+        onBlocking { getSelectedCategoriesStream() }.thenReturn(mock())
     }
     private val mapper = mock<ArticleViewModelMapper> {
         on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(articleViewModel, articleViewModel))
@@ -55,7 +55,7 @@ class CategoriesViewModelTest {
 
         livedata.observeForever(articleObserver)
 
-        verify(categoryRepository, times(2)).getSelectedCategories()
+        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
         livedata.removeObserver(articleObserver)
     }
 
@@ -64,7 +64,7 @@ class CategoriesViewModelTest {
 
         categoryViewModel.selectedCategories
 
-        verify(categoryRepository, times(2)).getSelectedCategories()
+        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
     }
 
     @Test

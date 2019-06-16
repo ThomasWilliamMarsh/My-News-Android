@@ -46,11 +46,11 @@ class CategoryDataRepositoryTest {
 
     @Test
     fun `Get selected categories`() {
-        whenever(localDataStore.getSelectedCategories()).thenReturn(categoriesLiveData)
+        whenever(localDataStore.getSelectedCategoriesStream()).thenReturn(categoriesLiveData)
 
-        repository.getSelectedCategories()
+        repository.getSelectedCategoriesStream()
 
-        verify(localDataStore).getSelectedCategories()
+        verify(localDataStore).getSelectedCategoriesStream()
     }
 
     @Test

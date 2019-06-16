@@ -10,7 +10,9 @@ interface CategoryRepository {
 
     fun getCategories(): LiveData<List<CategoryModel>>
 
-    fun getSelectedCategories(): LiveData<List<CategoryModel>>
+    fun getSelectedCategoriesStream(): LiveData<List<CategoryModel>>
+
+    suspend fun getSelectedCategories(): List<CategoryModel>
 
     suspend fun updateCategory(id: String, selected: Boolean)
 }
