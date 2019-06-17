@@ -3,8 +3,8 @@ package info.tommarsh.presentation.ui.article.top
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import info.tommarsh.core.extensions.consume
 import info.tommarsh.core.extensions.snack
 import info.tommarsh.core.network.NetworkException
@@ -43,8 +43,8 @@ class TopNewsFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.articles.observe(viewLifecycleOwner, Observer(::onArticlesReceived))
-        viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
+        viewModel.articles.observe(viewLifecycleOwner, ::onArticlesReceived)
+        viewModel.errors.observe(viewLifecycleOwner, ::onError)
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {

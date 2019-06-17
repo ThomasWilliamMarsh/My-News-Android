@@ -1,8 +1,8 @@
 package info.tommarsh.presentation.ui.categories
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import info.tommarsh.presentation.R
@@ -40,7 +40,7 @@ class CategoryChoiceActivity : BaseActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.categories.observe(this, Observer(::onCategories))
+        viewModel.categories.observe(this, ::onCategories)
     }
 
     private fun onCategories(categories: List<CategoryViewModel>) {

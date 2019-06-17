@@ -3,8 +3,8 @@ package info.tommarsh.presentation.ui.search
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import info.tommarsh.core.extensions.makeGone
 import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.core.extensions.service
@@ -51,8 +51,8 @@ class SearchActivity : BaseActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.articles.observe(this, Observer(::onSearchResults))
-        viewModel.getErrors().observe(this, Observer(::onError))
+        viewModel.articles.observe(this, ::onSearchResults)
+        viewModel.errors.observe(this, ::onError)
     }
 
     private fun setUpSearchView() {

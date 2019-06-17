@@ -2,8 +2,8 @@ package info.tommarsh.presentation.ui.article.categories
 
 import android.os.Bundle
 import android.view.*
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import info.tommarsh.core.extensions.makeGone
@@ -20,8 +20,6 @@ import kotlinx.android.synthetic.main.layout_add_categories.*
 class CategoriesFragment : BaseFragment() {
 
     private val adapter = CategoriesAdapter()
-
-    private val selectedCategoriesObserver = onSelectedCategories()
 
     private val viewModel: CategoriesViewModel by lazy {
         ViewModelProviders.of(this, factory).get(CategoriesViewModel::class.java)
@@ -53,11 +51,11 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.feed.observe(this, Observer(::onArticleCategories))
-        viewModel.selectedCategories.observe(this, selectedCategoriesObserver)
+        viewModel.feed.observe(viewLifecycleOwner, ::onArticleCategories)
+        viewModel.selectedCategories.observe(viewLifecycleOwner, ::onSelectedCategories)
     }
 
-    private fun onSelectedCategories() = Observer<List<CategoryModel>> { categories ->
+    private fun onSelectedCategories(categories: List<CategoryModel>) {
         if (categories.isEmpty()) {
             add_categories_root.makeVisible()
         } else {
