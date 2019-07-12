@@ -2,8 +2,8 @@ package info.tommarsh.presentation.ui.article.categories
 
 import android.os.Bundle
 import android.view.*
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import info.tommarsh.core.extensions.makeGone
@@ -51,8 +51,13 @@ class CategoriesFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.feed.observe(viewLifecycleOwner, ::onArticleCategories)
-        viewModel.selectedCategories.observe(viewLifecycleOwner, ::onSelectedCategories)
+        viewModel.feed.observe(viewLifecycleOwner, Observer(::onArticleCategories))
+        viewModel.selectedCategories.observe(viewLifecycleOwner, Observer(::onSelectedCategories))
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshFeed()
     }
 
     private fun onSelectedCategories(categories: List<CategoryModel>) {
@@ -62,7 +67,6 @@ class CategoriesFragment : BaseFragment() {
             add_categories_root.makeGone()
             refresh_my_news.isRefreshing = true
         }
-
         viewModel.refreshFeed()
     }
 

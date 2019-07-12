@@ -2,6 +2,7 @@ package info.tommarsh.data
 
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
@@ -37,11 +38,13 @@ class PreferencesRepository
     }
 
     fun toggleNightMode() {
-        sharedPreferences.edit().putInt(
-            KEY_PREFERENCE_NIGHT_MODE, when (nightMode) {
-                AppCompatDelegate.MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_YES
-                else -> AppCompatDelegate.MODE_NIGHT_NO
-            }
-        ).apply()
+        sharedPreferences.edit {
+            putInt(
+                KEY_PREFERENCE_NIGHT_MODE, when (nightMode) {
+                    AppCompatDelegate.MODE_NIGHT_NO -> AppCompatDelegate.MODE_NIGHT_YES
+                    else -> AppCompatDelegate.MODE_NIGHT_NO
+                }
+            )
+        }
     }
 }
