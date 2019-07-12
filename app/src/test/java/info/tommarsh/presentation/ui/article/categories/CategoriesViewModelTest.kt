@@ -11,6 +11,7 @@ import info.tommarsh.presentation.CoroutinesInstantTaskExecutorRule
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
+import info.tommarsh.presentation.model.MockModelProvider.categoryModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.runBlockingTest
@@ -28,7 +29,8 @@ class CategoriesViewModelTest {
         onBlocking { getFeed() }.thenReturn(mock())
     }
     private val categoryRepository = mock<CategoryRepository> {
-        onBlocking { getSelectedCategories() }.thenReturn(mock())
+        onBlocking { getSelectedCategoriesStream() }.thenReturn(mock())
+        onBlocking { getSelectedCategories() }.thenReturn(listOf(categoryModel, categoryModel))
     }
     private val mapper = mock<ArticleViewModelMapper> {
         on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(articleViewModel, articleViewModel))
@@ -55,7 +57,7 @@ class CategoriesViewModelTest {
 
         livedata.observeForever(articleObserver)
 
-        verify(categoryRepository, times(2)).getSelectedCategories()
+        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
         livedata.removeObserver(articleObserver)
     }
 
@@ -64,7 +66,7 @@ class CategoriesViewModelTest {
 
         categoryViewModel.selectedCategories
 
-        verify(categoryRepository, times(2)).getSelectedCategories()
+        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
     }
 
     @Test
@@ -72,6 +74,6 @@ class CategoriesViewModelTest {
 
         categoryViewModel.refreshFeed()
 
-        verify(articlesRepository).refreshFeed(emptyList())
+        verify(articlesRepository).refreshFeed(listOf(categoryModel, categoryModel))
     }
 }

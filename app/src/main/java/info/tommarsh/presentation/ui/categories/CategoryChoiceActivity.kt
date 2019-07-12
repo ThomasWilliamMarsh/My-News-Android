@@ -1,8 +1,8 @@
 package info.tommarsh.presentation.ui.categories
 
 import android.os.Bundle
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import info.tommarsh.presentation.R
@@ -28,6 +28,7 @@ class CategoryChoiceActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         activityGraph.inject(this)
         setContentView(R.layout.activity_category_choice)
+        observeNightMode()
         setUpViewModel()
         setUpUi()
     }
@@ -39,15 +40,15 @@ class CategoryChoiceActivity : BaseActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.categories.observe(this, Observer(::onCategories))
+        viewModel.categories.observe(this, ::onCategories)
     }
 
     private fun onCategories(categories: List<CategoryViewModel>) {
         adapter.submitList(categories)
     }
 
-    private fun onCategorySelected(category: CategoryViewModel) {
-        category.selected = !category.selected
+    private fun onCategorySelected(category: CategoryViewModel, selected: Boolean) {
+        category.selected = selected
         viewModel.updateCategory(category)
     }
 }

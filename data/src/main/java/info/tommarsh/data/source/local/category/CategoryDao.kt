@@ -17,7 +17,10 @@ interface CategoryDao {
     fun getCategories(): LiveData<List<Category>>
 
     @Query("SELECT * FROM CATEGORY_TABLE WHERE selected = :selected")
-    fun getSelectedCategories(selected: Boolean = true): LiveData<List<Category>>
+    fun getSelectedCategoriesStream(selected: Boolean = true): LiveData<List<Category>>
+
+    @Query("SELECT * FROM CATEGORY_TABLE WHERE selected = :selected")
+    suspend fun getSelectedCategories(selected: Boolean = true): List<Category>
 
     @Query("UPDATE CATEGORY_TABLE SET selected = :selected where id = :id")
     suspend fun updateCategory(id: String, selected: Boolean)

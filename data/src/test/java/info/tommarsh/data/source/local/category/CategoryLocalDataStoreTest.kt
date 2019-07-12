@@ -31,11 +31,11 @@ class CategoryLocalDataStoreTest {
 
     @Test
     fun `Get selected categories from DB`() {
-        whenever(dao.getSelectedCategories()).thenReturn(categoryLiveData)
+        whenever(dao.getSelectedCategoriesStream()).thenReturn(categoryLiveData)
 
-        local.getSelectedCategories()
+        local.getSelectedCategoriesStream()
 
-        verify(dao).getSelectedCategories()
+        verify(dao).getSelectedCategoriesStream()
     }
 
     @Test

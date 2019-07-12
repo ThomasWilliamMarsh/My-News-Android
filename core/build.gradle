@@ -4,11 +4,11 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion rootProject.compileSdk
 
     defaultConfig {
-        minSdkVersion 21
-        targetSdkVersion 28
+        minSdkVersion rootProject.minSdk
+        targetSdkVersion rootProject.targetSdk
         versionCode 1
         versionName "1.0"
 
@@ -31,8 +31,8 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Support
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.supportLibVersion
-    implementation 'com.google.android.material:material:' + rootProject.supportLibVersion
+    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
+    implementation 'com.google.android.material:material:' + rootProject.materialVersion
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion

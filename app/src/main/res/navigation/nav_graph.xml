@@ -5,15 +5,15 @@
 
     <fragment android:id="@+id/navigation_top_news"
               android:name="info.tommarsh.presentation.ui.article.top.TopNewsFragment"
-              android:label="TopNewsFragment">
+              android:label="@string/top_news">
     </fragment>
     <fragment android:id="@+id/navigation_my_news"
               android:name="info.tommarsh.presentation.ui.article.categories.CategoriesFragment"
-              android:label="CategoriesFragment">
+              android:label="@string/my_news">
     </fragment>
     <fragment android:id="@+id/navigation_videos"
               android:name="info.tommarsh.presentation.ui.article.videos.VideosFragment"
-              android:label="VideosFragment"/>
+              android:label="@string/videos"/>
     <activity android:id="@+id/navigation_choice"
               android:name="info.tommarsh.presentation.ui.categories.CategoryChoiceActivity"
               android:label="CategoryChoiceActivity"/>

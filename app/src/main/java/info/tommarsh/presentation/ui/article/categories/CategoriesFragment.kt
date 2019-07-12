@@ -21,8 +21,6 @@ class CategoriesFragment : BaseFragment() {
 
     private val adapter = CategoriesAdapter()
 
-    private val selectedCategoriesObserver = onSelectedCategories()
-
     private val viewModel: CategoriesViewModel by lazy {
         ViewModelProviders.of(this, factory).get(CategoriesViewModel::class.java)
     }
@@ -46,33 +44,30 @@ class CategoriesFragment : BaseFragment() {
         }
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
-        inflater?.inflate(R.menu.categories_toolbar_menu, menu)
-    }
-
-    override fun onPause() {
-        super.onPause()
-        viewModel.selectedCategories.removeObserver(selectedCategoriesObserver)
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.selectedCategories.observe(viewLifecycleOwner, selectedCategoriesObserver)
+        inflater.inflate(R.menu.categories_toolbar_menu, menu)
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.feed.observe(viewLifecycleOwner, Observer(::onArticleCategories))
+        viewModel.selectedCategories.observe(viewLifecycleOwner, Observer(::onSelectedCategories))
     }
 
-    private fun onSelectedCategories() = Observer<List<CategoryModel>> { categories ->
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshFeed()
+    }
+
+    private fun onSelectedCategories(categories: List<CategoryModel>) {
         if (categories.isEmpty()) {
             add_categories_root.makeVisible()
         } else {
             add_categories_root.makeGone()
             refresh_my_news.isRefreshing = true
         }
+        viewModel.refreshFeed()
     }
 
     private fun onArticleCategories(articles: List<ArticleViewModel>) {

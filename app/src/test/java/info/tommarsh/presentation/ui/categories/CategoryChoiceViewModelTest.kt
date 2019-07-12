@@ -23,7 +23,7 @@ class CategoryChoiceViewModelTest {
     var rule: TestRule = CoroutinesInstantTaskExecutorRule()
 
     private val categoryRepository = mock<CategoryRepository> {
-        on { getSelectedCategories() }.thenReturn(mock())
+        on { getSelectedCategoriesStream() }.thenReturn(mock())
         on { getCategories() }.thenReturn(mock())
     }
     private val viewModelMapper = mock<CategoryDomainToViewModelMapper> {

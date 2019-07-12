@@ -2,7 +2,6 @@ package info.tommarsh.presentation.ui.search
 
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.core.coroutines.DispatcherProvider
@@ -49,23 +48,23 @@ class SearchViewModelTest {
 
     @Before
     fun `Set up`() {
-        searchViewModel.getErrors().observeForever(errorObserver)
+        searchViewModel.errors.observeForever(errorObserver)
         searchViewModel.articles.observeForever(articlesObserver)
     }
 
     @After
     fun `Tear down`() {
         testCoroutineDispatcher.cleanupTestCoroutines()
-        searchViewModel.getErrors().removeObserver(errorObserver)
+        searchViewModel.errors.removeObserver(errorObserver)
         searchViewModel.articles.removeObserver(articlesObserver)
     }
 
     @Test
     fun `Get errors`() {
 
-        searchViewModel.getErrors()
+        searchViewModel.errors
 
-        verify(articlesRepository, times(2)).errors
+        verify(articlesRepository).errors
     }
 
     @Test

@@ -22,9 +22,9 @@ class CategoriesViewModel
     private val dispatcherProvider: DispatcherProvider
 ) : BaseViewModel(dispatcherProvider) {
 
-    val selectedCategories: LiveData<List<CategoryModel>> = categoryRepository.getSelectedCategories()
+    val selectedCategories: LiveData<List<CategoryModel>> = categoryRepository.getSelectedCategoriesStream()
 
-    val feed = categoryRepository.getSelectedCategories().switchMap {
+    val feed = categoryRepository.getSelectedCategoriesStream().switchMap {
         liveData(context = coroutineContext) {
             val items = articlesRepository.getFeed().map(mapper::map)
             emitSource(items)
@@ -34,7 +34,8 @@ class CategoriesViewModel
     fun refreshFeed() {
         launch {
             withContext(dispatcherProvider.work()) {
-                articlesRepository.refreshFeed(selectedCategories.value.orEmpty())
+                val selectedCategories = categoryRepository.getSelectedCategories()
+                articlesRepository.refreshFeed(selectedCategories)
             }
         }
     }

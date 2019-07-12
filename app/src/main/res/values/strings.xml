@@ -11,9 +11,10 @@
     <string name="sources">Sources</string>
     <string name="videos">Videos</string>
     <string name="create_feed_button">Create your own feed.</string>
-    <string name="add_categories_blurb">Add categories to create your own news feed.</string>
+    <string name="add_categories_blurb">Looks like you have no categories.</string>
     <string name="add_choice">Add choice.</string>
     <string name="edit_my_news">Edit My News</string>
     <string name="chevron"><![CDATA[>]]></string>
     <string name="youtube_url">https://www.youtube.com/watch?v=%1$s</string>
+    <string name="toggle_day_night_mode">Toggle day / night mode</string>
 </resources>

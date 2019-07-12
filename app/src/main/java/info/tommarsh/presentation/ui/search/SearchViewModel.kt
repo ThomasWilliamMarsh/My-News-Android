@@ -23,6 +23,8 @@ class SearchViewModel
 
     val articles: LiveData<List<ArticleViewModel>> = _articles
 
+    val errors = repository.errors
+
     fun searchArticles(query: String) {
         launch {
             when (val outcome = getOutcome(query)) {
@@ -35,6 +37,4 @@ class SearchViewModel
     private suspend fun getOutcome(query: String) = withContext(dispatcherProvider.work()) {
         repository.searchArticles(query)
     }
-
-    fun getErrors() = repository.errors
 }

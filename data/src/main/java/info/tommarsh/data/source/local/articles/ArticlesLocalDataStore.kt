@@ -22,6 +22,10 @@ class ArticlesLocalDataStore
         return articlesDao.getFeed().map(dataMapper::map)
     }
 
+    suspend fun deleteUnselectedCategories() {
+        return articlesDao.deleteUnselectedCategories()
+    }
+
     suspend fun saveBreakingNews(items: List<ArticleModel>) {
         val model = domainMapper.map(items)
         articlesDao.replaceBreakingArticles(model)

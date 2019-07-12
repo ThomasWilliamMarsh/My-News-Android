@@ -19,4 +19,5 @@
     <dimen name="article_bottom_line_text_size">10sp</dimen>
     <dimen name="category_header_text_size">16sp</dimen>
     <dimen name="feed_article_min_height">92dp</dimen>
+    <dimen name="none">0dp</dimen>
 </resources>
