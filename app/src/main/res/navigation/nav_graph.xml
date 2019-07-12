@@ -17,4 +17,8 @@
     <activity android:id="@+id/navigation_choice"
               android:name="info.tommarsh.presentation.ui.categories.CategoryChoiceActivity"
               android:label="CategoryChoiceActivity"/>
+
+    <activity android:id="@+id/navigation_article"
+              android:name="marsh.tommarsh.article.ArticleActivity"
+              android:label="ArticleActivity"/>
 </navigation>

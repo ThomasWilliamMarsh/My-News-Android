@@ -7,6 +7,7 @@ data class ArticleViewModel(
     val description: String,
     val publishedAt: String,
     val title: String,
+    val content: String,
     val url: String,
     val urlToImage: String,
     val category: String

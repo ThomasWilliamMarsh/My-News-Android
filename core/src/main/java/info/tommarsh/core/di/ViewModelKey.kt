@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.di
+package info.tommarsh.core.di
 
 import androidx.lifecycle.ViewModel
 import dagger.MapKey

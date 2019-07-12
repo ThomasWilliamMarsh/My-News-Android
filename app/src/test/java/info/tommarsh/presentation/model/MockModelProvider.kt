@@ -25,7 +25,7 @@ object MockModelProvider {
         "url", "imageUrl", "top-news"
     )
     val articleViewModel =
-        ArticleViewModel("author", "description", "1 hour ago", "title", "url", "imageUrl", "top-news")
+        ArticleViewModel("author", "description", "1 hour ago", "title", "content", "url", "imageUrl", "top-news")
 
     /**
      * Errors

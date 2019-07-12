@@ -1,24 +1,13 @@
 package info.tommarsh.core.extensions
 
-import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.LayoutRes
 import androidx.appcompat.widget.AppCompatImageView
-import androidx.browser.customtabs.CustomTabsIntent
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
 import com.google.android.material.snackbar.Snackbar
-
-
-//region View
-fun View.ArticleClickListener(url: String) = View.OnClickListener {
-    val intent = CustomTabsIntent.Builder()
-        .enableUrlBarHiding()
-        .build()
-    intent.launchUrl(context, Uri.parse(url))
-}
 
 fun View.makeVisible() {
     visibility = View.VISIBLE
