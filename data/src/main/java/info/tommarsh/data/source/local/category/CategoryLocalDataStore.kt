@@ -6,7 +6,7 @@ import info.tommarsh.data.model.local.mapper.CategoryDataToDomainMapper
 import info.tommarsh.domain.model.CategoryModel
 import javax.inject.Inject
 
-class CategoryLocalDataStore
+internal class CategoryLocalDataStore
 @Inject constructor(
     private val dao: CategoryDao,
     private val dataMapper: CategoryDataToDomainMapper

@@ -18,7 +18,7 @@ import javax.inject.Inject
 typealias TopicOutcome = Pair<String, Outcome<List<ArticleModel>>>
 
 class ArticleDataRepository
-@Inject constructor(
+@Inject internal constructor(
     private val local: ArticlesLocalDataStore,
     private val remote: ArticlesRemoteDataStore,
     override val errors: ErrorLiveData

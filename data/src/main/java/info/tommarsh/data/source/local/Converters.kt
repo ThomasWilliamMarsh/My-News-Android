@@ -3,7 +3,7 @@ package info.tommarsh.data.source.local
 import androidx.room.TypeConverter
 import info.tommarsh.data.model.local.Source
 
-class Converters {
+internal class Converters {
 
     companion object {
         private const val NUM_FIELDS = 2

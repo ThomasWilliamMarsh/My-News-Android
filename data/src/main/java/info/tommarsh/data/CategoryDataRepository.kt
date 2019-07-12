@@ -8,7 +8,7 @@ import info.tommarsh.domain.source.CategoryRepository
 import javax.inject.Inject
 
 class CategoryDataRepository
-@Inject constructor(
+@Inject internal constructor(
     private val local: CategoryLocalDataStore,
     override val errors: ErrorLiveData
 ) : CategoryRepository {

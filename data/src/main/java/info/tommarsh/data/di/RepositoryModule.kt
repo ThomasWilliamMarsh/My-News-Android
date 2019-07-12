@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.di
+package info.tommarsh.data.di
 
 import dagger.Binds
 import dagger.Module

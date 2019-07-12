@@ -12,9 +12,6 @@ android {
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
-        buildConfigField 'String', 'BASE_URL', '"https://newsapi.org"'
-        buildConfigField 'String', 'YOUTUBE_BASE_URL', '"https://www.googleapis.com/youtube/v3/"'
     }
     buildTypes {
         release {
@@ -63,10 +60,6 @@ dependencies {
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
-
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
-    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
 
     //Gson
     implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion

@@ -11,7 +11,7 @@ import info.tommarsh.data.source.local.category.CategoryDao
 
 @Database(entities = [Article::class, Source::class, Category::class], version = 1, exportSchema = false)
 @TypeConverters(Converters::class)
-abstract class NewsDatabase : RoomDatabase() {
+internal abstract class NewsDatabase : RoomDatabase() {
     abstract fun articlesDao(): ArticlesDao
     abstract fun categoriesDao(): CategoryDao
 }

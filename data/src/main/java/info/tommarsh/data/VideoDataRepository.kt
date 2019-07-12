@@ -6,7 +6,7 @@ import info.tommarsh.domain.source.VideoRepository
 import javax.inject.Inject
 
 class VideoDataRepository
-@Inject constructor(
+@Inject internal constructor(
     private val remote: VideoRemoteDataStore,
     override val errors: ErrorLiveData
 ) : VideoRepository {

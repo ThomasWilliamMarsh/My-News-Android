@@ -7,7 +7,7 @@ import info.tommarsh.data.model.local.mapper.ArticleDomainToDataMapper
 import info.tommarsh.domain.model.ArticleModel
 import javax.inject.Inject
 
-class ArticlesLocalDataStore
+internal class ArticlesLocalDataStore
 @Inject constructor(
     private val articlesDao: ArticlesDao,
     private val dataMapper: ArticleDataToDomainMapper,

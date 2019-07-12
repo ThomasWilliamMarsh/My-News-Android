@@ -6,7 +6,7 @@ import info.tommarsh.data.model.remote.mapper.PlaylistResponseMapper
 import info.tommarsh.domain.model.PlaylistModel
 import javax.inject.Inject
 
-class VideoRemoteDataStore
+internal class VideoRemoteDataStore
 @Inject constructor(
     private val api: VideoApiService,
     private val networkHelper: NetworkHelper,
