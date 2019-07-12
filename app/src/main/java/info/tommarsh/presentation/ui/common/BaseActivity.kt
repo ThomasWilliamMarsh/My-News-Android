@@ -1,9 +1,9 @@
 package info.tommarsh.presentation.ui.common
 
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import info.tommarsh.data.PreferencesRepository
-import info.tommarsh.presentation.NewsApp.Companion.applicationGraph
+import info.tommarsh.presentation.NewsApp.Companion.homeGraph
 import javax.inject.Inject
 
 abstract class BaseActivity : AppCompatActivity() {
@@ -12,15 +12,13 @@ abstract class BaseActivity : AppCompatActivity() {
     protected lateinit var sharedPreferencesRepository: PreferencesRepository
 
     protected val activityGraph by lazy {
-        applicationGraph(this)
-            .activityComponent
-            .create(this)
+        homeGraph(this)
     }
 
     protected fun observeNightMode() {
-        sharedPreferencesRepository.observeNightModeChanges().observe(this) { nightMode ->
+        sharedPreferencesRepository.observeNightModeChanges().observe(this, Observer { nightMode ->
             delegate.localNightMode = nightMode
             invalidateOptionsMenu()
-        }
+        })
     }
 }
