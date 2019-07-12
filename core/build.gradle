@@ -54,6 +54,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
     implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
 
+    //Dagger
+    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
+    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+
     //Browser
     implementation "com.android.support:customtabs:" + rootProject.tabVersion
 

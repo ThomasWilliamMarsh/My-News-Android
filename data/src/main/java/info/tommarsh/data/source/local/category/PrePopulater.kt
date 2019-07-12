@@ -6,8 +6,7 @@ import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
 import info.tommarsh.data.model.local.Category
 
-
-class PrePopulater : RoomDatabase.Callback() {
+internal class PrePopulater : RoomDatabase.Callback() {
 
     companion object {
         val topNews = Category("top-news", "Top News", false)

@@ -10,7 +10,7 @@ import javax.inject.Singleton
 
 @Singleton
 class PreferencesRepository
-@Inject constructor(private val sharedPreferences: SharedPreferences) {
+@Inject internal constructor(private val sharedPreferences: SharedPreferences) {
 
     companion object {
         private const val KEY_PREFERENCE_NIGHT_MODE = "pref_night_mode"

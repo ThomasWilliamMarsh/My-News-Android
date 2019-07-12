@@ -6,7 +6,7 @@ import info.tommarsh.data.model.remote.mapper.ArticleResponseMapper
 import info.tommarsh.domain.model.ArticleModel
 import javax.inject.Inject
 
-class ArticlesRemoteDataStore
+internal class ArticlesRemoteDataStore
 @Inject constructor(
     private val mapper: ArticleResponseMapper,
     private val networkHelper: NetworkHelper,
