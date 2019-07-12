@@ -5,8 +5,8 @@ import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
+import info.tommarsh.core.NetworkException
 import info.tommarsh.core.errors.ErrorLiveData
-import info.tommarsh.core.network.NetworkException
 import info.tommarsh.data.source.local.category.CategoryLocalDataStore
 import info.tommarsh.domain.model.CategoryModel
 import junit.framework.Assert.assertEquals

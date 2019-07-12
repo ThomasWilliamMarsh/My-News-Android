@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
+import info.tommarsh.core.di.ViewModelKey
 import info.tommarsh.presentation.ui.article.categories.CategoriesViewModel
 import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
 import info.tommarsh.presentation.ui.article.videos.VideosViewModel

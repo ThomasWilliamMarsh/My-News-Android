@@ -6,9 +6,7 @@ import androidx.core.content.edit
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class PreferencesRepository
 @Inject internal constructor(private val sharedPreferences: SharedPreferences) {
 

@@ -1,8 +1,8 @@
 package info.tommarsh.data.source.remote.videos
 
-import info.tommarsh.core.network.NetworkHelper
-import info.tommarsh.core.network.Outcome
+import info.tommarsh.core.Outcome
 import info.tommarsh.data.model.remote.mapper.PlaylistResponseMapper
+import info.tommarsh.data.util.NetworkHelper
 import info.tommarsh.domain.model.PlaylistModel
 import javax.inject.Inject
 

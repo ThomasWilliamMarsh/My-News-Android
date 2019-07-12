@@ -3,11 +3,11 @@ package info.tommarsh.data.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
-import info.tommarsh.core.network.NewsApiInterceptor
-import info.tommarsh.core.network.YoutubeApiInterceptor
 import info.tommarsh.data.BuildConfig
 import info.tommarsh.data.source.remote.articles.ArticleApiService
 import info.tommarsh.data.source.remote.videos.VideoApiService
+import info.tommarsh.data.util.NewsApiInterceptor
+import info.tommarsh.data.util.YoutubeApiInterceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory

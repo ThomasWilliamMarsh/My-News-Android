@@ -16,6 +16,7 @@ class ArticleViewModelMapper
             publishedAt = published,
             title = it.title,
             url = it.url,
+            content = it.content,
             urlToImage = it.urlToImage,
             category = it.category
         )

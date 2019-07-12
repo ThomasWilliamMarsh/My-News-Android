@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur porttitor id eros non venenatis. Mauris purus
+        mauris, rutrum interdum consequat et, ultricies eget nisi. Fusce porta pulvinar arcu, et finibus magna rhoncus
+        non. Sed sit amet turpis iaculis, congue justo eu, euismod libero. Etiam ultrices purus eu quam faucibus, ac
+        aliquet mi mollis. Sed faucibus ex non vulputate efficitur. Aliquam id consectetur eros. Nullam nec nisi
+        pellentesque, tempor sapien ut, imperdiet ex. Vivamus tristique, odio eget mollis pulvinar, odio erat efficitur
+        odio, sit amet gravida urna ipsum ut odio.
+
+        Integer tempor sagittis fermentum. Nunc dui nisi, bibendum sed porttitor ut, consequat sit amet nisi. Donec ut
+        libero sed ipsum venenatis tincidunt. In nec finibus justo, eu placerat neque. Cras sodales finibus augue, sit
+        amet viverra velit porta a. Donec molestie odio semper nulla faucibus, nec dignissim est venenatis. In quis
+        cursus lectus. Ut ligula turpis, vehicula sit amet pulvinar et, fringilla in metus. Etiam nisl turpis, finibus
+        in enim vel, porttitor faucibus urna. Donec augue orci, blandit quis mattis vitae, mattis nec eros. Donec
+        euismod dui ac nibh blandit tristique. Nulla gravida consectetur metus et egestas.
+
+        Integer ut ultrices mauris. Ut pellentesque ipsum ut molestie fermentum. Morbi tellus purus, mollis in dapibus
+        sit amet, laoreet eu orci. Mauris at elit pretium, condimentum nulla at, tincidunt orci. Vestibulum eu justo
+        lobortis, aliquam felis id, venenatis ex. Class aptent taciti sociosqu ad litora torquent per conubia nostra,
+        per inceptos himenaeos. Duis a odio nec lorem condimentum interdum blandit sit amet dui. Etiam sollicitudin eros
+        sed aliquet sodales. Morbi tristique nunc nec augue tincidunt hendrerit. Maecenas dignissim sem non pellentesque
+        facilisis. Donec ut mauris enim. Quisque lobortis rhoncus neque, non mattis erat hendrerit quis. Donec dapibus
+        arcu quis tortor consectetur, vulputate blandit velit rhoncus.
+
+        Nam tristique, nisl ornare finibus aliquet, elit purus efficitur metus, a lacinia metus urna vitae metus. Nulla
+        ullamcorper nec nunc non dignissim. Maecenas porta ligula imperdiet nisi lobortis, ac consectetur elit
+        tincidunt. Aliquam ut venenatis augue. Cras ultrices, eros a ornare pulvinar, erat velit imperdiet leo, sit amet
+        vehicula nibh eros ac diam. Vivamus mi quam, pretium ac placerat in, efficitur vitae velit. Vivamus eget leo
+        sem. Praesent pellentesque vitae ipsum eget elementum. Sed tempor tellus quam, non pellentesque quam ornare at.
+        Sed a libero vitae risus placerat consectetur. Quisque id magna vel lorem imperdiet euismod. Aenean neque
+        tortor, condimentum pharetra turpis non, bibendum interdum neque. Donec sed porta odio. Duis tincidunt mauris at
+        ante laoreet tempor. Proin molestie justo ultrices ipsum sagittis, ut consectetur augue venenatis. Sed imperdiet
+        turpis quis diam tincidunt interdum at eget velit.
+
+        Nulla id nibh ex. Nullam sem metus, finibus et iaculis in, condimentum id risus. Vestibulum ante ipsum primis in
+        faucibus orci luctus et ultrices posuere cubilia Curae; Morbi fermentum, nisl vel finibus cursus, lectus neque
+        imperdiet ipsum, a varius velit metus vitae augue. Sed massa mauris, ullamcorper porta risus pretium, eleifend
+        sollicitudin risus. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos.
+        Nullam finibus viverra diam, molestie varius metus malesuada et. Fusce euismod lorem sit amet lacus eleifend
+        congue. Pellentesque sed placerat diam. Sed pellentesque libero neque, at porttitor erat vulputate nec. Sed
+        elementum mauris arcu, sit amet viverra erat lobortis sed. Mauris ut ornare augue. Praesent malesuada a enim vel
+        lacinia.
+    </string>
+</resources>

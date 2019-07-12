@@ -1,6 +1,6 @@
 package info.tommarsh.presentation.model
 
-import info.tommarsh.core.network.NetworkException
+import info.tommarsh.core.NetworkException
 import info.tommarsh.domain.model.*
 
 object MockModelProvider {
@@ -25,7 +25,7 @@ object MockModelProvider {
         "url", "imageUrl", "top-news"
     )
     val articleViewModel =
-        ArticleViewModel("author", "description", "1 hour ago", "title", "url", "imageUrl", "top-news")
+        ArticleViewModel("author", "description", "1 hour ago", "title", "content", "url", "imageUrl", "top-news")
 
     /**
      * Errors

@@ -1,10 +1,10 @@
-package info.tommarsh.core.network
+package info.tommarsh.data.util
 
 import android.content.Context
 import android.net.ConnectivityManager
 import javax.inject.Inject
 
-class ConnectionManager @Inject constructor(private val context: Context) {
+internal class ConnectionManager @Inject constructor(private val context: Context) {
 
     val isConnected: Boolean
         get() {

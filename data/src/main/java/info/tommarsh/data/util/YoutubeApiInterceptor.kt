@@ -1,11 +1,11 @@
-package info.tommarsh.core.network
+package info.tommarsh.data.util
 
 import info.tommarsh.core.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 
 
-class YoutubeApiInterceptor : Interceptor {
+internal class YoutubeApiInterceptor : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val url = chain.request().url()
             .newBuilder()

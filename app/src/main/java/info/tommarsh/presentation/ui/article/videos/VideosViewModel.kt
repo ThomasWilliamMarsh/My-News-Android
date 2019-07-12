@@ -2,8 +2,8 @@ package info.tommarsh.presentation.ui.article.videos
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.core.network.Outcome
 import info.tommarsh.domain.source.VideoRepository
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper

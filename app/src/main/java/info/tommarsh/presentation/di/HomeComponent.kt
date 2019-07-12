@@ -1,8 +1,9 @@
 package info.tommarsh.presentation.di
 
-import androidx.appcompat.app.AppCompatActivity
-import dagger.BindsInstance
-import dagger.Subcomponent
+import dagger.Component
+import info.tommarsh.core.di.CoreComponent
+import info.tommarsh.core.di.FeatureScope
+import info.tommarsh.data.di.DataComponent
 import info.tommarsh.presentation.ui.article.ArticlesActivity
 import info.tommarsh.presentation.ui.article.categories.CategoriesFragment
 import info.tommarsh.presentation.ui.article.top.TopNewsFragment
@@ -10,12 +11,19 @@ import info.tommarsh.presentation.ui.article.videos.VideosFragment
 import info.tommarsh.presentation.ui.categories.CategoryChoiceActivity
 import info.tommarsh.presentation.ui.search.SearchActivity
 
-@Subcomponent
-interface ActivityComponent {
+@FeatureScope
+@Component(
+    dependencies = [CoreComponent::class, DataComponent::class],
+    modules = [(HomeModule::class), (ViewModelModule::class)]
+)
+interface HomeComponent {
 
-    @Subcomponent.Factory
+    @Component.Factory
     interface Factory {
-        fun create(@BindsInstance activity: AppCompatActivity): ActivityComponent
+        fun create(
+            coreComponent: CoreComponent,
+            dataComponent: DataComponent
+        ): HomeComponent
     }
 
     fun inject(fragment: TopNewsFragment)

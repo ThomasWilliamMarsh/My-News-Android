@@ -1,4 +1,4 @@
-package info.tommarsh.core.network
+package info.tommarsh.core
 
 sealed class Outcome<T> {
     data class Success<T>(val data: T) : Outcome<T>()

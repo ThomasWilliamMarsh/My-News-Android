@@ -4,7 +4,7 @@ import androidx.annotation.MainThread
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
-import info.tommarsh.core.network.NetworkException
+import info.tommarsh.core.NetworkException
 import java.util.concurrent.atomic.AtomicBoolean
 import javax.inject.Inject
 

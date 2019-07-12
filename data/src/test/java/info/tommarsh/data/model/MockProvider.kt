@@ -1,6 +1,6 @@
 package info.tommarsh.data.model
 
-import info.tommarsh.core.network.NetworkException
+import info.tommarsh.core.NetworkException
 import info.tommarsh.data.model.local.Article
 import info.tommarsh.data.model.local.Category
 import info.tommarsh.data.model.local.Source

@@ -4,10 +4,10 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import info.tommarsh.core.network.NetworkHelper
-import info.tommarsh.core.network.Outcome
+import info.tommarsh.core.Outcome
 import info.tommarsh.data.model.MockProvider.playlistModel
 import info.tommarsh.data.model.remote.mapper.PlaylistResponseMapper
+import info.tommarsh.data.util.NetworkHelper
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
