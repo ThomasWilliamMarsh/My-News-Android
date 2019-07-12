@@ -2,11 +2,11 @@ package info.tommarsh.presentation.ui.article.videos
 
 import android.os.Bundle
 import android.view.*
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.GridLayoutManager
+import info.tommarsh.core.NetworkException
 import info.tommarsh.core.extensions.snack
-import info.tommarsh.core.network.NetworkException
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.ui.article.videos.adapter.VideosAdapter
@@ -43,8 +43,8 @@ class VideosFragment : BaseFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.videos.observe(viewLifecycleOwner, ::onVideos)
-        viewModel.errors.observe(viewLifecycleOwner, ::onError)
+        viewModel.videos.observe(viewLifecycleOwner, Observer(::onVideos))
+        viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

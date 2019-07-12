@@ -1,8 +1,8 @@
 package info.tommarsh.data
 
 import androidx.lifecycle.LiveData
+import info.tommarsh.core.Outcome
 import info.tommarsh.core.errors.ErrorLiveData
-import info.tommarsh.core.network.Outcome
 import info.tommarsh.data.source.local.articles.ArticlesLocalDataStore
 import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
 import info.tommarsh.domain.model.ArticleModel

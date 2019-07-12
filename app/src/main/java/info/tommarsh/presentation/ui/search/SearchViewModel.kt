@@ -2,8 +2,8 @@ package info.tommarsh.presentation.ui.search
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.core.network.Outcome
 import info.tommarsh.domain.source.ArticleRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper

@@ -1,6 +1,6 @@
 package info.tommarsh.presentation.model
 
-import info.tommarsh.core.network.NetworkException
+import info.tommarsh.core.NetworkException
 import info.tommarsh.domain.model.*
 
 object MockModelProvider {

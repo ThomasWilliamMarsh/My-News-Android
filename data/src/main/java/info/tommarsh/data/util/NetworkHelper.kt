@@ -1,11 +1,12 @@
-package info.tommarsh.core.network
+package info.tommarsh.data.util
 
 import info.tommarsh.core.Mapper
-import info.tommarsh.core.network.NetworkException.*
+import info.tommarsh.core.NetworkException.*
+import info.tommarsh.core.Outcome
 import retrofit2.Response
 import javax.inject.Inject
 
-class NetworkHelper @Inject constructor(private val connectionManager: ConnectionManager) {
+internal class NetworkHelper @Inject constructor(private val connectionManager: ConnectionManager) {
 
     fun <Data, Domain> callApi(
         response: Response<Data>,

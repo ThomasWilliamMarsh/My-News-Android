@@ -1,4 +1,4 @@
-package info.tommarsh.core.network
+package info.tommarsh.core
 
 sealed class NetworkException(message: String) : Exception(message) {
     class NoResponseException : NetworkException("No Response from sever. Please try again")

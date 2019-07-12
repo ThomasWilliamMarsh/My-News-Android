@@ -4,9 +4,9 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.*
+import info.tommarsh.core.NetworkException
+import info.tommarsh.core.Outcome
 import info.tommarsh.core.errors.ErrorLiveData
-import info.tommarsh.core.network.NetworkException
-import info.tommarsh.core.network.Outcome
 import info.tommarsh.data.model.MockProvider.articleModel
 import info.tommarsh.data.model.MockProvider.categoryModel
 import info.tommarsh.data.model.MockProvider.noInternet
