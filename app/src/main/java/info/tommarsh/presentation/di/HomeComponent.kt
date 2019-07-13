@@ -3,7 +3,7 @@ package info.tommarsh.presentation.di
 import dagger.Component
 import info.tommarsh.core.di.CoreComponent
 import info.tommarsh.core.di.FeatureScope
-import info.tommarsh.data.di.DataComponent
+import info.tommarsh.data.di.RepositoryComponent
 import info.tommarsh.presentation.ui.article.ArticlesActivity
 import info.tommarsh.presentation.ui.article.categories.CategoriesFragment
 import info.tommarsh.presentation.ui.article.top.TopNewsFragment
@@ -13,7 +13,7 @@ import info.tommarsh.presentation.ui.search.SearchActivity
 
 @FeatureScope
 @Component(
-    dependencies = [CoreComponent::class, DataComponent::class],
+    dependencies = [CoreComponent::class, RepositoryComponent::class],
     modules = [(HomeModule::class), (ViewModelModule::class)]
 )
 interface HomeComponent {
@@ -22,7 +22,7 @@ interface HomeComponent {
     interface Factory {
         fun create(
             coreComponent: CoreComponent,
-            dataComponent: DataComponent
+            repositoryComponent: RepositoryComponent
         ): HomeComponent
     }
 

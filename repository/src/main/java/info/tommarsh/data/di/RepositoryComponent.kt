@@ -9,11 +9,11 @@ import info.tommarsh.domain.source.CategoryRepository
 import info.tommarsh.domain.source.VideoRepository
 
 @Component(modules = [NetworkModule::class, LocalModule::class, RepositoryModule::class])
-interface DataComponent {
+interface RepositoryComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(@BindsInstance context: Context): DataComponent
+        fun create(@BindsInstance context: Context): RepositoryComponent
     }
 
     fun articleRepository(): ArticleRepository

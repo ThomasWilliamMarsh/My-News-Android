@@ -27,7 +27,7 @@ android {
 }
 
 dependencies {
-    implementation project(':data')
+    implementation project(':repository')
     implementation project(':core')
 
     // Kotlin
