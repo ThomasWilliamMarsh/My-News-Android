@@ -28,7 +28,6 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     //Support
     implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
