@@ -1,5 +1,6 @@
 package info.tommarsh.presentation.ui.article.videos
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
@@ -10,24 +11,27 @@ import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.domain.source.VideoRepository
-import info.tommarsh.presentation.CoroutinesInstantTaskExecutorRule
 import info.tommarsh.presentation.model.MockModelProvider.noInternet
 import info.tommarsh.presentation.model.MockModelProvider.playlistItemModel
 import info.tommarsh.presentation.model.MockModelProvider.playlistItemViewModel
 import info.tommarsh.presentation.model.MockModelProvider.playlistModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 
 class VideosViewModelTest {
     @get:Rule
-    var rule: TestRule = CoroutinesInstantTaskExecutorRule()
+    val rule = InstantTaskExecutorRule()
+
+    private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
     private val errorLiveData = ErrorLiveData()
     private val videosRepository = mock<VideoRepository> {
@@ -36,7 +40,6 @@ class VideosViewModelTest {
     private val mapper = mock<PlaylistItemViewModelMapper> {
         on { map(playlistItemModel) }.thenReturn(playlistItemViewModel)
     }
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
     private val dispatcherProvider = mock<DispatcherProvider> {
         on { main() }.thenReturn(testCoroutineDispatcher)
         on { work() }.thenReturn(testCoroutineDispatcher)
@@ -47,12 +50,14 @@ class VideosViewModelTest {
 
     @Before
     fun `Set up`() {
+        Dispatchers.setMain(testCoroutineDispatcher)
         videosViewModel.errors.observeForever(errorObserver)
         videosViewModel.videos.observeForever(videosObserver)
     }
 
     @After
     fun `Tear down`() {
+        Dispatchers.resetMain()
         testCoroutineDispatcher.cleanupTestCoroutines()
         videosViewModel.errors.removeObserver(errorObserver)
         videosViewModel.videos.removeObserver(videosObserver)

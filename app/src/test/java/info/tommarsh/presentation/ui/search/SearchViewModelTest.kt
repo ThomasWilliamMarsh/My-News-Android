@@ -1,5 +1,6 @@
 package info.tommarsh.presentation.ui.search
 
+import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
@@ -9,26 +10,27 @@ import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.domain.source.ArticleRepository
-import info.tommarsh.presentation.CoroutinesInstantTaskExecutorRule
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.noInternet
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
+import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
+import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 
 class SearchViewModelTest {
-
     @get:Rule
-    var rule: TestRule = CoroutinesInstantTaskExecutorRule()
+    val rule = InstantTaskExecutorRule()
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
+
     private val errorsLiveData = ErrorLiveData()
     private val articlesRepository = mock<ArticleRepository> {
         onBlocking { searchArticles("1234") }.thenReturn(Outcome.Error(noInternet))
@@ -48,12 +50,14 @@ class SearchViewModelTest {
 
     @Before
     fun `Set up`() {
+        Dispatchers.setMain(testCoroutineDispatcher)
         searchViewModel.errors.observeForever(errorObserver)
         searchViewModel.articles.observeForever(articlesObserver)
     }
 
     @After
     fun `Tear down`() {
+        Dispatchers.resetMain()
         testCoroutineDispatcher.cleanupTestCoroutines()
         searchViewModel.errors.removeObserver(errorObserver)
         searchViewModel.articles.removeObserver(articlesObserver)
