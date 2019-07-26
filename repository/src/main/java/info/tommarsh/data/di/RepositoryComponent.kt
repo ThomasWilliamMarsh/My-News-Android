@@ -4,9 +4,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import dagger.BindsInstance
 import dagger.Component
-import info.tommarsh.domain.source.ArticleRepository
-import info.tommarsh.domain.source.CategoryRepository
-import info.tommarsh.domain.source.VideoRepository
+import info.tommarsh.core.repository.ArticleRepository
+import info.tommarsh.core.repository.CategoryRepository
+import info.tommarsh.core.repository.PreferencesRepository
+import info.tommarsh.core.repository.VideoRepository
 
 @Component(modules = [NetworkModule::class, LocalModule::class, RepositoryModule::class])
 interface RepositoryComponent {
@@ -22,5 +23,5 @@ interface RepositoryComponent {
 
     fun videoRepository(): VideoRepository
 
-    fun sharedPreferences(): SharedPreferences
+    fun sharedPreferences(): PreferencesRepository
 }

@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import info.tommarsh.core.NetworkException
 import info.tommarsh.core.extensions.consume
 import info.tommarsh.core.extensions.snack
-import info.tommarsh.data.PreferencesRepository
+import info.tommarsh.core.repository.PreferencesRepository
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.article.top.adapter.TopNewsAdapter
@@ -51,7 +51,7 @@ class TopNewsFragment : BaseFragment() {
         super.onPrepareOptionsMenu(menu)
         val dayNightItem = menu.findItem(R.id.action_day_night)
         dayNightItem?.setIcon(
-            when (sharedPreferencesRepository.nightMode) {
+            when (sharedPreferencesRepository.getNightMode()) {
                 AppCompatDelegate.MODE_NIGHT_YES -> R.drawable.ic_outline_day
                 else -> R.drawable.ic_outline_night
             }

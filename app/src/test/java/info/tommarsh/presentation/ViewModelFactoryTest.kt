@@ -2,11 +2,12 @@ package info.tommarsh.presentation
 
 import androidx.lifecycle.ViewModel
 import com.nhaarman.mockitokotlin2.mock
+import info.tommarsh.core.ViewModelFactory
 import info.tommarsh.presentation.ui.article.categories.CategoriesViewModel
 import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
 import info.tommarsh.presentation.ui.article.videos.VideosViewModel
-import info.tommarsh.presentation.ui.categories.CategoryChoiceViewModel
 import info.tommarsh.presentation.ui.search.SearchViewModel
+import marsh.tommarsh.categories.ui.CategoryChoiceViewModel
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat

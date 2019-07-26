@@ -8,7 +8,6 @@ import info.tommarsh.core.di.ViewModelKey
 import info.tommarsh.presentation.ui.article.categories.CategoriesViewModel
 import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
 import info.tommarsh.presentation.ui.article.videos.VideosViewModel
-import info.tommarsh.presentation.ui.categories.CategoryChoiceViewModel
 import info.tommarsh.presentation.ui.search.SearchViewModel
 
 @Module
@@ -33,9 +32,4 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(VideosViewModel::class)
     abstract fun bindVideosViewModel(viewModel: VideosViewModel): ViewModel
-
-    @Binds
-    @IntoMap
-    @ViewModelKey(CategoryChoiceViewModel::class)
-    abstract fun bindCategoryChoiceViewModel(viewModel: CategoryChoiceViewModel): ViewModel
 }

@@ -3,14 +3,13 @@ package info.tommarsh.presentation.ui.article.videos
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.core.NetworkException
 import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.errors.ErrorLiveData
-import info.tommarsh.domain.source.VideoRepository
+import info.tommarsh.core.repository.VideoRepository
 import info.tommarsh.presentation.model.MockModelProvider.noInternet
 import info.tommarsh.presentation.model.MockModelProvider.playlistItemModel
 import info.tommarsh.presentation.model.MockModelProvider.playlistItemViewModel

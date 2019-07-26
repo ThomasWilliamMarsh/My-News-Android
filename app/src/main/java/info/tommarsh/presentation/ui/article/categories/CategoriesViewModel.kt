@@ -2,9 +2,9 @@ package info.tommarsh.presentation.ui.article.categories
 
 import androidx.lifecycle.*
 import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.domain.model.CategoryModel
-import info.tommarsh.domain.source.ArticleRepository
-import info.tommarsh.domain.source.CategoryRepository
+import info.tommarsh.core.model.CategoryModel
+import info.tommarsh.core.repository.ArticleRepository
+import info.tommarsh.core.repository.CategoryRepository
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

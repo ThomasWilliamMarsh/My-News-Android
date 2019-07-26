@@ -28,6 +28,6 @@ object LocalModule {
 
     @Provides
     @JvmStatic
-    fun provideSharedPreferences(context: Context): SharedPreferences =
+    internal fun provideSharedPreferences(context: Context): SharedPreferences =
         context.getSharedPreferences("default_preferences", Context.MODE_PRIVATE)
 }

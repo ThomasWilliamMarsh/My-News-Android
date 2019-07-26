@@ -9,7 +9,7 @@ import info.tommarsh.core.NetworkException
 import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.errors.ErrorLiveData
-import info.tommarsh.domain.source.ArticleRepository
+import info.tommarsh.core.repository.ArticleRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel

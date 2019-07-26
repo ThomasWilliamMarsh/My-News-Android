@@ -5,7 +5,7 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.map
 import androidx.lifecycle.viewModelScope
 import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.domain.source.ArticleRepository
+import info.tommarsh.core.repository.ArticleRepository
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

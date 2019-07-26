@@ -3,7 +3,7 @@ package info.tommarsh.data.source.remote.videos
 import info.tommarsh.core.Outcome
 import info.tommarsh.data.model.remote.mapper.PlaylistResponseMapper
 import info.tommarsh.data.util.NetworkHelper
-import info.tommarsh.domain.model.PlaylistModel
+import info.tommarsh.core.model.PlaylistModel
 import javax.inject.Inject
 
 internal class VideoRemoteDataStore

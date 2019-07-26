@@ -2,7 +2,7 @@ package info.tommarsh.presentation.ui.common
 
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import info.tommarsh.data.PreferencesRepository
+import info.tommarsh.core.repository.PreferencesRepository
 import info.tommarsh.presentation.NewsApp.Companion.homeGraph
 import javax.inject.Inject
 

@@ -11,7 +11,7 @@ import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.core.extensions.service
 import info.tommarsh.core.extensions.snack
 import info.tommarsh.presentation.R
-import info.tommarsh.presentation.ViewModelFactory
+import info.tommarsh.core.ViewModelFactory
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.common.BaseActivity
 import info.tommarsh.presentation.ui.search.adapter.SearchAdapter

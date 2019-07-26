@@ -2,7 +2,7 @@ package info.tommarsh.data.model.remote.mapper
 
 import info.tommarsh.core.Mapper
 import info.tommarsh.data.model.remote.ArticlesResponse
-import info.tommarsh.domain.model.ArticleModel
+import info.tommarsh.core.model.ArticleModel
 import javax.inject.Inject
 
 class ArticleResponseMapper

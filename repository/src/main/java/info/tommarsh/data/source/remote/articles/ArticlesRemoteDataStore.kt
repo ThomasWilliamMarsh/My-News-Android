@@ -3,7 +3,7 @@ package info.tommarsh.data.source.remote.articles
 import info.tommarsh.core.Outcome
 import info.tommarsh.data.model.remote.mapper.ArticleResponseMapper
 import info.tommarsh.data.util.NetworkHelper
-import info.tommarsh.domain.model.ArticleModel
+import info.tommarsh.core.model.ArticleModel
 import javax.inject.Inject
 
 internal class ArticlesRemoteDataStore

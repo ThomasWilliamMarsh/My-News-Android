@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.domain.source.ArticleRepository
+import info.tommarsh.core.repository.ArticleRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.launch

@@ -3,20 +3,13 @@
     <string name="top_news">Top News</string>
     <string name="my_news">My News</string>
     <string name="search">Search</string>
-    <string name="divider_text">\u0020|\u0020</string>
     <string name="content_description_image_article">Article Image</string>
-    <string name="top_stories">Top Stories</string>
-    <string name="browser">Browser</string>
     <string name="search_hint">Search articles</string>
-    <string name="sources">Sources</string>
     <string name="videos">Videos</string>
     <string name="create_feed_button">Create your own feed.</string>
     <string name="add_categories_blurb">Looks like you have no categories.</string>
     <string name="add_choice">Add choice.</string>
     <string name="edit_my_news">Edit My News</string>
-    <string name="chevron"><![CDATA[>]]></string>
     <string name="youtube_url">https://www.youtube.com/watch?v=%1$s</string>
     <string name="toggle_day_night_mode">Toggle day / night mode</string>
-    <string name="title_article">Article</string>
-    <string name="title_activity_article">ArticleActivity</string>
 </resources>

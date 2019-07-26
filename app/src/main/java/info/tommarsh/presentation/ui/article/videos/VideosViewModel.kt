@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.domain.source.VideoRepository
+import info.tommarsh.core.repository.VideoRepository
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
 import kotlinx.coroutines.launch

@@ -8,7 +8,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.core.NetworkException
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.data.source.local.category.CategoryLocalDataStore
-import info.tommarsh.domain.model.CategoryModel
+import info.tommarsh.core.model.CategoryModel
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.After

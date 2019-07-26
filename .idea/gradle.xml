@@ -12,7 +12,6 @@
             <option value="$PROJECT_DIR$/article" />
             <option value="$PROJECT_DIR$/categories" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/repository" />
           </set>
         </option>

@@ -5,7 +5,7 @@ import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.domain.source.ArticleRepository
+import info.tommarsh.core.repository.ArticleRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel

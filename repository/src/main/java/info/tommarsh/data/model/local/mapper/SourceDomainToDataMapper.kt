@@ -2,7 +2,7 @@ package info.tommarsh.data.model.local.mapper
 
 import info.tommarsh.core.Mapper
 import info.tommarsh.data.model.local.Source
-import info.tommarsh.domain.model.SourceModel
+import info.tommarsh.core.model.SourceModel
 import javax.inject.Inject
 
 class SourceDomainToDataMapper

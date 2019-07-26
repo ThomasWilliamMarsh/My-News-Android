@@ -28,7 +28,6 @@ android {
 
 dependencies {
 
-    api project(':domain')
     implementation project(':core')
 
     //Gson
