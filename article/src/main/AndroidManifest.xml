@@ -6,16 +6,14 @@
     <dist:module
             dist:instant="false"
             dist:onDemand="false"
-            dist:title="@string/title_article">
+            dist:title="@string/title_activity_article">
         <dist:fusing dist:include="true"/>
     </dist:module>
 
     <application>
         <activity
                 android:name=".ArticleActivity"
-                android:label="@string/title_activity_article"
-                android:theme="@style/MyTheme.DayNight.NoActionBar">
-        </activity>
+                android:theme="@style/MyTheme.DayNight"/>
     </application>
 
 </manifest>

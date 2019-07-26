@@ -45,6 +45,8 @@ class VideosFragment : BaseFragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel.videos.observe(viewLifecycleOwner, Observer(::onVideos))
         viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
+
+        viewModel.refreshVideos()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

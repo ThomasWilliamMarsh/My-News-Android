@@ -5,9 +5,11 @@ import dagger.Module
 import info.tommarsh.data.ArticleDataRepository
 import info.tommarsh.data.CategoryDataRepository
 import info.tommarsh.data.VideoDataRepository
-import info.tommarsh.domain.source.ArticleRepository
-import info.tommarsh.domain.source.CategoryRepository
-import info.tommarsh.domain.source.VideoRepository
+import info.tommarsh.core.repository.ArticleRepository
+import info.tommarsh.core.repository.CategoryRepository
+import info.tommarsh.core.repository.PreferencesRepository
+import info.tommarsh.core.repository.VideoRepository
+import info.tommarsh.data.SharedPreferencesRepository
 
 @Module
 abstract class RepositoryModule {
@@ -19,4 +21,7 @@ abstract class RepositoryModule {
 
     @Binds
     abstract fun provideVideoRepository(repository: VideoDataRepository): VideoRepository
+
+    @Binds
+    abstract fun providePreferencesRepository(repository: SharedPreferencesRepository) : PreferencesRepository
 }

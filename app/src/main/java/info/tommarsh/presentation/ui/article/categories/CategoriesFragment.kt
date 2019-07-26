@@ -8,7 +8,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import info.tommarsh.core.extensions.makeGone
 import info.tommarsh.core.extensions.makeVisible
-import info.tommarsh.domain.model.CategoryModel
+import info.tommarsh.core.model.CategoryModel
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.ui.article.categories.adapter.CategoriesAdapter

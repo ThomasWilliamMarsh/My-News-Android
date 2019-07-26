@@ -2,7 +2,7 @@ package info.tommarsh.data.model.remote.mapper
 
 import info.tommarsh.core.Mapper
 import info.tommarsh.data.model.remote.PlaylistResponse
-import info.tommarsh.domain.model.PlaylistModel
+import info.tommarsh.core.model.PlaylistModel
 import javax.inject.Inject
 
 class PlaylistResponseMapper

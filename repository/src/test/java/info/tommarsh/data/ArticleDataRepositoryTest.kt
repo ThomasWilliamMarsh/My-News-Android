@@ -12,7 +12,7 @@ import info.tommarsh.data.model.MockProvider.categoryModel
 import info.tommarsh.data.model.MockProvider.noInternet
 import info.tommarsh.data.source.local.articles.ArticlesLocalDataStore
 import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
-import info.tommarsh.domain.model.ArticleModel
+import info.tommarsh.core.model.ArticleModel
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before

@@ -3,7 +3,7 @@ package info.tommarsh.data.source.local.category
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import info.tommarsh.data.model.local.mapper.CategoryDataToDomainMapper
-import info.tommarsh.domain.model.CategoryModel
+import info.tommarsh.core.model.CategoryModel
 import javax.inject.Inject
 
 internal class CategoryLocalDataStore

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/nav_graph" app:startDestination="@id/navigation_top_news">
+            app:startDestination="@id/navigation_top_news">
 
     <fragment android:id="@+id/navigation_top_news"
               android:name="info.tommarsh.presentation.ui.article.top.TopNewsFragment"
@@ -15,7 +15,7 @@
               android:name="info.tommarsh.presentation.ui.article.videos.VideosFragment"
               android:label="@string/videos"/>
     <activity android:id="@+id/navigation_choice"
-              android:name="info.tommarsh.presentation.ui.categories.CategoryChoiceActivity"
+              android:name="marsh.tommarsh.categories.ui.CategoryChoiceActivity"
               android:label="CategoryChoiceActivity"/>
 
     <activity android:id="@+id/navigation_article"

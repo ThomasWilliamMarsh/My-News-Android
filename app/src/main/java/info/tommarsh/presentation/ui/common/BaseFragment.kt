@@ -1,14 +1,14 @@
 package info.tommarsh.presentation.ui.common
 
-import android.content.Intent
+import  android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import info.tommarsh.presentation.NewsApp.Companion.homeGraph
 import info.tommarsh.presentation.R
-import info.tommarsh.presentation.ViewModelFactory
-import info.tommarsh.presentation.ui.categories.CategoryChoiceActivity
+import info.tommarsh.core.ViewModelFactory
 import info.tommarsh.presentation.ui.search.SearchActivity
+import marsh.tommarsh.categories.ui.CategoryChoiceActivity
 import javax.inject.Inject
 
 open class BaseFragment : Fragment() {

@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.map
 import info.tommarsh.data.model.local.mapper.ArticleDataToDomainMapper
 import info.tommarsh.data.model.local.mapper.ArticleDomainToDataMapper
-import info.tommarsh.domain.model.ArticleModel
+import info.tommarsh.core.model.ArticleModel
 import javax.inject.Inject
 
 internal class ArticlesLocalDataStore

@@ -3,8 +3,8 @@ package info.tommarsh.data
 import androidx.lifecycle.LiveData
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.data.source.local.category.CategoryLocalDataStore
-import info.tommarsh.domain.model.CategoryModel
-import info.tommarsh.domain.source.CategoryRepository
+import info.tommarsh.core.model.CategoryModel
+import info.tommarsh.core.repository.CategoryRepository
 import javax.inject.Inject
 
 class CategoryDataRepository

@@ -4,31 +4,20 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion rootProject.compileSdk
+
     defaultConfig {
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
-        versionCode 1
-        versionName "1.0"
     }
 }
 
 dependencies {
+
     implementation project(':app')
     implementation project(':core')
     implementation project(':repository')
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
-
-    //Google
-    implementation 'com.google.android.material:material:' + rootProject.materialVersion
-    implementation 'androidx.appcompat:appcompat:' + rootProject.appCompatVersion
-    implementation 'androidx.cardview:cardview:' + rootProject.cardViewVersion
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
-    implementation 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
-
     //Dagger
-    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
 }

@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
-        versionCode 1
-        versionName "1.0"
 
         buildConfigField 'String', 'BASE_URL', '"https://newsapi.org"'
         buildConfigField 'String', 'YOUTUBE_BASE_URL', '"https://www.googleapis.com/youtube/v3/"'
@@ -29,43 +27,23 @@ android {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
 
-    api project(':domain')
     implementation project(':core')
 
-    //Google
-    implementation 'androidx.appcompat:appcompat:' + rootProject.appCompatVersion
-    
-    //KTX
-    implementation 'androidx.core:core-ktx:' + rootProject.coreKtxVersion
-
     //Gson
-    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
-
-    //Dagger
-    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
-    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+    api 'com.google.code.gson:gson:' + rootProject.gsonVersion
 
     //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
-    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
-
-    //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+    api 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+    api 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
 
     //Room
-    implementation  'androidx.room:room-runtime:' + rootProject.roomVersion
-    implementation 'androidx.room:room-ktx:' + rootProject.roomVersion
+    api  'androidx.room:room-runtime:' + rootProject.roomVersion
+    api 'androidx.room:room-ktx:' + rootProject.roomVersion
     kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
 
-    //LiveData
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:' + rootProject.lifecycleAlphaVersion
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:' + rootProject.lifecycleAlphaVersion
-
-    //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
+    //Dagger
+    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
@@ -73,6 +51,4 @@ dependencies {
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
-
-    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 }

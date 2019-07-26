@@ -47,12 +47,6 @@
     <style name="Widget.MyTheme.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.Surface">
         <item name="android:elevation">@dimen/none</item>
     </style>
-    <style name="MyTheme.DayNight.NoActionBar">
-        <item name="windowActionBar">false</item>
-        <item name="windowNoTitle">true</item>
-    </style>
-    <style name="MyTheme.DayNight.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
-    <style name="MyTheme.DayNight.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
 
 
 </resources>

@@ -2,7 +2,7 @@ package info.tommarsh.presentation.model.mapper
 
 import info.tommarsh.core.Mapper
 import info.tommarsh.core.TimeHelper
-import info.tommarsh.domain.model.ArticleModel
+import info.tommarsh.core.model.ArticleModel
 import info.tommarsh.presentation.model.ArticleViewModel
 import javax.inject.Inject
 

@@ -1,7 +1,8 @@
 package info.tommarsh.presentation.model
 
 import info.tommarsh.core.NetworkException
-import info.tommarsh.domain.model.*
+import info.tommarsh.core.model.*
+import marsh.tommarsh.categories.model.CategoryViewModel
 
 object MockModelProvider {
 
@@ -14,7 +15,8 @@ object MockModelProvider {
 
     //region playlist
     val playlistItemModel = PlaylistItemModel("id", "title", fakeIsoTime, "url")
-    val playlistModel = PlaylistModel("next", "previous", listOf(playlistItemModel, playlistItemModel))
+    val playlistModel =
+        PlaylistModel("next", "previous", listOf(playlistItemModel, playlistItemModel))
     val playlistItemViewModel = PlaylistItemViewModel("id", "title", "1 hour ago", "url")
     //endregion
 

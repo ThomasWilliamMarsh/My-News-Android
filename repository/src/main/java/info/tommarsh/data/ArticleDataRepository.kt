@@ -5,9 +5,9 @@ import info.tommarsh.core.Outcome
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.data.source.local.articles.ArticlesLocalDataStore
 import info.tommarsh.data.source.remote.articles.ArticlesRemoteDataStore
-import info.tommarsh.domain.model.ArticleModel
-import info.tommarsh.domain.model.CategoryModel
-import info.tommarsh.domain.source.ArticleRepository
+import info.tommarsh.core.model.ArticleModel
+import info.tommarsh.core.model.CategoryModel
+import info.tommarsh.core.repository.ArticleRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.produce

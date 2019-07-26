@@ -1,11 +1,11 @@
 package info.tommarsh.data.model
 
 import info.tommarsh.core.NetworkException
+import info.tommarsh.core.model.*
 import info.tommarsh.data.model.local.Article
 import info.tommarsh.data.model.local.Category
 import info.tommarsh.data.model.local.Source
 import info.tommarsh.data.model.remote.*
-import info.tommarsh.domain.model.*
 
 object MockProvider {
 
@@ -42,7 +42,8 @@ object MockProvider {
     )
     val video = PlaylistItemResponse("id", snippet, contentDetails)
     val playlist = PlaylistResponse("token", "token", listOf(video, video))
-    val videoModel = PlaylistItemModel("videoId1", "title1", "2018-12-17T14:02:30Z", "http://url1.com")
+    val videoModel =
+        PlaylistItemModel("videoId1", "title1", "2018-12-17T14:02:30Z", "http://url1.com")
     val playlistModel = PlaylistModel("token", "token", listOf(videoModel, videoModel))
     /**
      * DB

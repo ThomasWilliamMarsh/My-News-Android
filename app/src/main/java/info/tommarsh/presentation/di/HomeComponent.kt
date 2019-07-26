@@ -8,7 +8,6 @@ import info.tommarsh.presentation.ui.article.ArticlesActivity
 import info.tommarsh.presentation.ui.article.categories.CategoriesFragment
 import info.tommarsh.presentation.ui.article.top.TopNewsFragment
 import info.tommarsh.presentation.ui.article.videos.VideosFragment
-import info.tommarsh.presentation.ui.categories.CategoryChoiceActivity
 import info.tommarsh.presentation.ui.search.SearchActivity
 
 @FeatureScope
@@ -33,8 +32,6 @@ interface HomeComponent {
     fun inject(fragment: VideosFragment)
 
     fun inject(activity: SearchActivity)
-
-    fun inject(activity: CategoryChoiceActivity)
 
     fun inject(activity: ArticlesActivity)
 }
