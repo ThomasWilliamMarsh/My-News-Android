@@ -27,52 +27,19 @@ android {
 }
 
 dependencies {
+
     implementation project(':repository')
     implementation project(':core')
 
-    // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
-
-    //Ktx
-    implementation 'androidx.core:core-ktx:' + rootProject.coreKtxVersion
-
-    //Google
-    implementation 'com.google.android.material:material:' + rootProject.materialVersion
-    implementation 'androidx.appcompat:appcompat:' + rootProject.appCompatVersion
-    implementation 'androidx.cardview:cardview:' + rootProject.cardViewVersion
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
-    implementation 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
-
     //Dagger
-    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
-
-    //Lifecycle
-    implementation 'android.arch.lifecycle:extensions:' + rootProject.lifecycleAlphaVersion
-    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:' + rootProject.lifecycleAlphaVersion
-    implementation 'androidx.lifecycle:lifecycle-livedata-ktx:' + rootProject.lifecycleAlphaVersion
-    testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
-
-    //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
-
-    //Gson
-    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
-
-    //Navigation
-    implementation "android.arch.navigation:navigation-fragment-ktx:" + rootProject.navigationVersion
-    implementation "android.arch.navigation:navigation-ui-ktx:" + rootProject.navigationVersion
-
-    //Room
-    implementation 'androidx.room:room-runtime:' + rootProject.roomVersion
-    kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
+    testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
 
     //Espresso
     androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.espressoVersion

@@ -29,41 +29,41 @@ android {
 
 dependencies {
 
-    //Support
-    implementation 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
-    implementation 'com.google.android.material:material:' + rootProject.materialVersion
+    // Kotlin
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
 
-    //Retrofit
-    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+    //Ktx
+    api 'androidx.core:core-ktx:' + rootProject.coreKtxVersion
 
-    //Gson
-    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
+    //Google
+    api 'com.google.android.material:material:' + rootProject.materialVersion
+    api 'androidx.appcompat:appcompat:' + rootProject.appCompatVersion
+    api 'androidx.cardview:cardview:' + rootProject.cardViewVersion
+    api 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
+    api 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
 
-    //Room
-    implementation  'androidx.room:room-runtime:' + rootProject.roomVersion
-    kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
+    //Navigation
+    api "android.arch.navigation:navigation-fragment-ktx:" + rootProject.navigationVersion
+    api "android.arch.navigation:navigation-ui-ktx:" + rootProject.navigationVersion
 
-    //Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
-
-    //LiveData
-    implementation 'androidx.lifecycle:lifecycle-livedata:' + rootProject.lifecycleVersion
+    //Lifecycle
+    api 'android.arch.lifecycle:extensions:' + rootProject.lifecycleAlphaVersion
+    api 'androidx.lifecycle:lifecycle-viewmodel-ktx:' + rootProject.lifecycleAlphaVersion
+    api 'androidx.lifecycle:lifecycle-livedata-ktx:' + rootProject.lifecycleAlphaVersion
 
     //Coroutines
-    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
-    implementation 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
+    api 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
 
     //Dagger
-    implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion
+    api 'com.google.dagger:dagger:' + rootProject.daggerVersion
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
 
     //Browser
-    implementation "com.android.support:customtabs:" + rootProject.tabVersion
+    api "com.android.support:customtabs:" + rootProject.tabVersion
 
     //Time parsing
     api 'joda-time:joda-time:' + rootProject.jodaTimeVersion
-
-    implementation "android.arch.navigation:navigation-ui-ktx:" + rootProject.navigationVersion
 
     //Glide
     api 'com.github.bumptech.glide:glide:' + rootProject.glideVersion
@@ -73,6 +73,4 @@ dependencies {
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
-
-    implementation group: 'javax.inject', name: 'javax.inject', version: '1'
 }
