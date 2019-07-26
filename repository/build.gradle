@@ -9,8 +9,6 @@ android {
     defaultConfig {
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
-        versionCode 1
-        versionName "1.0"
 
         buildConfigField 'String', 'BASE_URL', '"https://newsapi.org"'
         buildConfigField 'String', 'YOUTUBE_BASE_URL', '"https://www.googleapis.com/youtube/v3/"'
