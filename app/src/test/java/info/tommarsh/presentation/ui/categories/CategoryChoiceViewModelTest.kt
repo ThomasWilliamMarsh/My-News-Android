@@ -33,12 +33,9 @@ class CategoryChoiceViewModelTest {
     private val viewModelMapper = mock<CategoryDomainToViewModelMapper> {
         on { map(listOf(categoryModel)) }.thenReturn(listOf(categoryViewModel))
     }
-    private val dispatcherProvider = mock<DispatcherProvider> {
-        on { main() }.thenReturn(testCoroutineDispatcher)
-        on { work() }.thenReturn(testCoroutineDispatcher)
-    }
+
     private val categoryChoiceViewModel =
-        CategoryChoiceViewModel(categoryRepository, viewModelMapper, dispatcherProvider)
+        CategoryChoiceViewModel(categoryRepository, viewModelMapper)
     private val categoryObserver = mock<Observer<List<CategoryViewModel>>>()
 
     @Before
@@ -67,5 +64,6 @@ class CategoryChoiceViewModelTest {
         categoryChoiceViewModel.updateCategory(categoryViewModel)
 
         verify(categoryRepository).updateCategory("id", false)
+
     }
 }

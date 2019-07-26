@@ -70,7 +70,7 @@ class VideosViewModelTest {
         videosViewModel.refreshVideos()
 
         verify(videosObserver).onChanged(listOf(playlistItemViewModel, playlistItemViewModel))
-        verify(videosRepository, times(2)).getPlaylist()
+        verify(videosRepository).getPlaylist()
     }
 
     @Test

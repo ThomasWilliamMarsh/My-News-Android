@@ -2,12 +2,13 @@ package info.tommarsh.presentation.ui.article.videos
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.domain.source.VideoRepository
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
-import info.tommarsh.presentation.ui.common.BaseViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -17,11 +18,7 @@ class VideosViewModel
     private val repository: VideoRepository,
     private val mapper: PlaylistItemViewModelMapper,
     private val dispatcherProvider: DispatcherProvider
-) : BaseViewModel(dispatcherProvider) {
-
-    init {
-        refreshVideos()
-    }
+) : ViewModel() {
 
     private val _videos = MutableLiveData<List<PlaylistItemViewModel>>()
 
@@ -30,7 +27,7 @@ class VideosViewModel
     val errors = repository.errors
 
     fun refreshVideos() {
-        launch {
+        viewModelScope.launch {
             when (val outcome = getPlaylist()) {
                 is Outcome.Success -> _videos.postValue(outcome.data.items.map { mapper.map(it) })
                 is Outcome.Error -> repository.errors.setError(outcome.error)

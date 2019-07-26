@@ -8,7 +8,6 @@ android {
         targetSdkVersion rootProject.targetSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
     }
 
     buildTypes {
