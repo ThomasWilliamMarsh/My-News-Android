@@ -31,6 +31,7 @@ fun AppCompatImageView.loadUrl(url: String) = Glide.with(context)
     .load(url)
     .apply(RequestOptions.centerCropTransform())
     .into(this)
+
 //endregion
 
 //region snackbar
