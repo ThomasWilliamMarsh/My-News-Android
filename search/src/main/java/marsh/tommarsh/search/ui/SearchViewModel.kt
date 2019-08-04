@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.search
+package marsh.tommarsh.search.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,22 +7,22 @@ import androidx.lifecycle.viewModelScope
 import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.repository.ArticleRepository
-import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import marsh.tommarsh.search.model.SearchItemViewModel
+import marsh.tommarsh.search.model.mapper.SearchItemViewModelMapper
 import javax.inject.Inject
 
 class SearchViewModel
 @Inject constructor(
     private val repository: ArticleRepository,
-    private val mapper: ArticleViewModelMapper,
+    private val mapper: SearchItemViewModelMapper,
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
-    private val _articles = MutableLiveData<List<ArticleViewModel>>()
+    private val _articles = MutableLiveData<List<SearchItemViewModel>>()
 
-    val articles: LiveData<List<ArticleViewModel>> = _articles
+    val articles: LiveData<List<SearchItemViewModel>> = _articles
 
     val errors = repository.errors
 

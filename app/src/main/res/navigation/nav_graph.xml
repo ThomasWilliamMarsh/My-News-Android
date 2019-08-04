@@ -26,6 +26,6 @@
               android:label="ArticleActivity"/>
 
     <activity android:id="@+id/navigation_search"
-              android:name="info.tommarsh.presentation.ui.search.SearchActivity"
+              android:name="marsh.tommarsh.search.ui.SearchActivity"
               android:label="SearchActivity"/>
 </navigation>
