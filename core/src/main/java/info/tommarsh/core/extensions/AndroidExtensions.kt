@@ -1,7 +1,9 @@
 package info.tommarsh.core.extensions
 
 import android.view.Menu
+import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
@@ -28,6 +30,13 @@ fun AppCompatActivity.observeNightMode(preferencesRepository: PreferencesReposit
         delegate.localNightMode = nightMode
         invalidateOptionsMenu()
     })
+}
+
+fun AppCompatActivity.contentBehindStatusBar() = with(window){
+    addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
+    clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
+
+    statusBarColor = ContextCompat.getColor(window.context, android.R.color.transparent)
 }
 //endregion
 

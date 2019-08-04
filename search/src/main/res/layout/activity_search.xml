@@ -5,7 +5,7 @@
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/search_root"
         android:layout_width="match_parent" android:layout_height="match_parent"
-        tools:context="info.tommarsh.presentation.ui.search.SearchActivity">
+        tools:context="marsh.tommarsh.search.ui.SearchActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"

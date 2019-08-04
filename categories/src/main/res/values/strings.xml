@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">categories</string>
+    <string name="create_feed_button">Create your own feed.</string>
+    <string name="add_categories_blurb">Looks like you have no categories.</string>
+    <string name="add_choice">Add choice.</string>
+    <string name="edit_my_news">Edit My News</string>
 </resources>

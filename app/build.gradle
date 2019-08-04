@@ -31,6 +31,7 @@ dependencies {
     implementation project(':repository')
     implementation project(':core')
     implementation project(':categories')
+    implementation project(':search')
 
     //Dagger
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion

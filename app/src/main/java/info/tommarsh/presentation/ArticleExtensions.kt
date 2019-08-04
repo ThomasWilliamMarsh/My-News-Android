@@ -7,7 +7,13 @@ import info.tommarsh.presentation.model.ArticleViewModel
 
 fun ArticleViewModel.setClickListenerFor(view: View) {
     view.setOnClickListener {
-        it.findNavController()
-            .navigate(R.id.navigation_article, bundleOf("text" to content, "url" to urlToImage))
+        val bundle = bundleOf(
+            "title" to title,
+            "text" to content,
+            "url" to urlToImage
+        )
+        it.findNavController().navigate(R.id.navigation_article, bundle)
     }
 }
+
+

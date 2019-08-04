@@ -7,13 +7,16 @@
               android:name="info.tommarsh.presentation.ui.article.top.TopNewsFragment"
               android:label="@string/top_news">
     </fragment>
+
     <fragment android:id="@+id/navigation_my_news"
               android:name="info.tommarsh.presentation.ui.article.categories.CategoriesFragment"
               android:label="@string/my_news">
     </fragment>
+
     <fragment android:id="@+id/navigation_videos"
               android:name="info.tommarsh.presentation.ui.article.videos.VideosFragment"
               android:label="@string/videos"/>
+
     <activity android:id="@+id/navigation_choice"
               android:name="marsh.tommarsh.categories.ui.CategoryChoiceActivity"
               android:label="CategoryChoiceActivity"/>
@@ -21,4 +24,8 @@
     <activity android:id="@+id/navigation_article"
               android:name="marsh.tommarsh.article.ArticleActivity"
               android:label="ArticleActivity"/>
+
+    <activity android:id="@+id/navigation_search"
+              android:name="marsh.tommarsh.search.ui.SearchActivity"
+              android:label="SearchActivity"/>
 </navigation>

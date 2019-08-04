@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.search
+package marsh.tommarsh.search.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -10,16 +10,16 @@ import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.core.repository.ArticleRepository
-import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.model.MockModelProvider.articleModel
-import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
-import info.tommarsh.presentation.model.MockModelProvider.noInternet
-import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
+import marsh.tommarsh.search.model.MockModelProvider.articleModel
+import marsh.tommarsh.search.model.MockModelProvider.articleViewModel
+import marsh.tommarsh.search.model.MockModelProvider.noInternet
+import marsh.tommarsh.search.model.SearchItemViewModel
+import marsh.tommarsh.search.model.mapper.SearchItemViewModelMapper
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule
@@ -36,7 +36,7 @@ class SearchViewModelTest {
         onBlocking { searchArticles("1234") }.thenReturn(Outcome.Error(noInternet))
         on { errors }.thenReturn(errorsLiveData)
     }
-    private val mapper = mock<ArticleViewModelMapper> {
+    private val mapper = mock<SearchItemViewModelMapper> {
         on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(articleViewModel, articleViewModel))
     }
     private val dispatcherProvider = mock<DispatcherProvider> {
@@ -44,7 +44,7 @@ class SearchViewModelTest {
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
     private val searchViewModel = SearchViewModel(articlesRepository, mapper, dispatcherProvider)
-    private val articlesObserver = mock<Observer<List<ArticleViewModel>>>()
+    private val articlesObserver = mock<Observer<List<SearchItemViewModel>>>()
     private val errorObserver = mock<Observer<NetworkException>>()
 
 

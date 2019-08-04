@@ -6,8 +6,8 @@ import info.tommarsh.core.ViewModelFactory
 import info.tommarsh.presentation.ui.article.categories.CategoriesViewModel
 import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
 import info.tommarsh.presentation.ui.article.videos.VideosViewModel
-import info.tommarsh.presentation.ui.search.SearchViewModel
 import marsh.tommarsh.categories.ui.CategoryChoiceViewModel
+import marsh.tommarsh.search.ui.SearchViewModel
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat
