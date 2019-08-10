@@ -7,7 +7,7 @@ import info.tommarsh.core.ViewModel
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.HeaderViewModel
 import info.tommarsh.presentation.ui.viewholders.CategoryArticleViewholder
-import info.tommarsh.presentation.ui.HeaderListItemCallback
+import info.tommarsh.presentation.util.HeaderListItemCallback
 import info.tommarsh.presentation.ui.viewholders.HeaderViewholder
 
 class CategoriesAdapter :

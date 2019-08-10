@@ -7,7 +7,7 @@ import info.tommarsh.core.ViewModel
 import info.tommarsh.presentation.model.HeaderViewModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.ui.viewholders.PlaylistItemViewholder
-import info.tommarsh.presentation.ui.HeaderListItemCallback
+import info.tommarsh.presentation.util.HeaderListItemCallback
 import info.tommarsh.presentation.ui.viewholders.HeaderViewholder
 
 class VideosAdapter

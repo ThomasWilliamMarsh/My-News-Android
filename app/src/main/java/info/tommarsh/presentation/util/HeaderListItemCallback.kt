@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui
+package info.tommarsh.presentation.util
 
 import androidx.recyclerview.widget.DiffUtil
 import info.tommarsh.core.ViewModel
