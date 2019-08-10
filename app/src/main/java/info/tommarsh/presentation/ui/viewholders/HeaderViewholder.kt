@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.common
+package info.tommarsh.presentation.ui.viewholders
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView

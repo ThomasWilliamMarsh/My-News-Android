@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.videos
+package info.tommarsh.presentation.ui.videos
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -16,6 +16,7 @@ import info.tommarsh.presentation.model.MockModelProvider.playlistItemViewModel
 import info.tommarsh.presentation.model.MockModelProvider.playlistModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
 import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
+import info.tommarsh.presentation.ui.videos.VideosViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -43,7 +44,8 @@ class VideosViewModelTest {
         on { main() }.thenReturn(testCoroutineDispatcher)
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
-    private val videosViewModel = VideosViewModel(videosRepository, mapper, dispatcherProvider)
+    private val videosViewModel =
+        VideosViewModel(videosRepository, mapper, dispatcherProvider)
     private val videosObserver = mock<Observer<List<PlaylistItemViewModel>>>()
     private val errorObserver = mock<Observer<NetworkException>>()
 

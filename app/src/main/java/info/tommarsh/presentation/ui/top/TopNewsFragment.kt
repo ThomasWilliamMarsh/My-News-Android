@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.top
+package info.tommarsh.presentation.ui.top
 
 import android.os.Bundle
 import android.view.*
@@ -11,12 +11,11 @@ import info.tommarsh.core.extensions.snack
 import info.tommarsh.core.repository.PreferencesRepository
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.ui.article.top.adapter.TopNewsAdapter
-import info.tommarsh.presentation.ui.common.BaseFragment
+import info.tommarsh.presentation.ui.ArticleFragment
 import kotlinx.android.synthetic.main.fragment_top_news.*
 import javax.inject.Inject
 
-class TopNewsFragment : BaseFragment() {
+class TopNewsFragment : ArticleFragment() {
 
     @Inject
     lateinit var sharedPreferencesRepository: PreferencesRepository

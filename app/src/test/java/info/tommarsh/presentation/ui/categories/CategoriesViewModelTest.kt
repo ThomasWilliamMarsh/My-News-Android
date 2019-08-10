@@ -1,15 +1,19 @@
-package info.tommarsh.presentation.ui.article.top
+package info.tommarsh.presentation.ui.categories
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.repository.ArticleRepository
+import info.tommarsh.core.repository.CategoryRepository
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
+import info.tommarsh.presentation.model.MockModelProvider.categoryModel
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
+import info.tommarsh.presentation.ui.categories.CategoriesViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -20,30 +24,43 @@ import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
 
-class TopNewsViewModelTest {
+class CategoriesViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
     private val articlesRepository = mock<ArticleRepository> {
-        onBlocking { getBreakingNews("") }.thenReturn(mock())
+        onBlocking { getFeed() }.thenReturn(mock())
+    }
+    private val categoryRepository = mock<CategoryRepository> {
+        onBlocking { getSelectedCategoriesStream() }.thenReturn(mock())
+        onBlocking { getSelectedCategories() }.thenReturn(listOf(categoryModel, categoryModel))
     }
     private val mapper = mock<ArticleViewModelMapper> {
-        on { map(listOf(articleModel)) }.thenReturn(listOf(articleViewModel))
+        on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(articleViewModel, articleViewModel))
     }
 
     private val dispatcherProvider = mock<DispatcherProvider> {
         on { main() }.thenReturn(testCoroutineDispatcher)
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
-    private val observer = mock<Observer<List<ArticleViewModel>>>()
-    private val topNewsViewModel = TopNewsViewModel(articlesRepository, mapper, dispatcherProvider)
+
+    private val categoryViewModel =
+        CategoriesViewModel(
+            articlesRepository,
+            categoryRepository,
+            mapper,
+            dispatcherProvider
+        )
+
+    private val articleObserver = mock<Observer<List<ArticleViewModel>>>()
 
     @Before
     fun `Set up`() {
         Dispatchers.setMain(testCoroutineDispatcher)
     }
+
 
     @After
     fun `Tear down`() {
@@ -52,28 +69,28 @@ class TopNewsViewModelTest {
     }
 
     @Test
-    fun `Get breaking news`() = runBlockingTest {
-        val livedata = topNewsViewModel.articles
+    fun `Get selected categories`() = runBlockingTest {
+        val livedata = categoryViewModel.feed
 
-        livedata.observeForever(observer)
+        livedata.observeForever(articleObserver)
 
-        verify(articlesRepository).getBreakingNews("")
-        livedata.removeObserver(observer)
+        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
+        livedata.removeObserver(articleObserver)
     }
 
     @Test
-    fun `Get errors`() {
+    fun `Get categories Feed`() = runBlockingTest {
 
-        topNewsViewModel.errors
+        categoryViewModel.selectedCategories
 
-        verify(articlesRepository).errors
+        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
     }
 
     @Test
-    fun `Refresh breaking news`() = runBlockingTest {
+    fun `Refresh feed`() = runBlockingTest {
 
-        topNewsViewModel.refreshBreakingNews()
+        categoryViewModel.refreshFeed()
 
-        verify(articlesRepository).refreshBreakingNews()
+        verify(articlesRepository).refreshFeed(listOf(categoryModel, categoryModel))
     }
 }

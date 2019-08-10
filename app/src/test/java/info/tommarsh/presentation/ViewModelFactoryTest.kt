@@ -3,9 +3,9 @@ package info.tommarsh.presentation
 import androidx.lifecycle.ViewModel
 import com.nhaarman.mockitokotlin2.mock
 import info.tommarsh.core.ViewModelFactory
-import info.tommarsh.presentation.ui.article.categories.CategoriesViewModel
-import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
-import info.tommarsh.presentation.ui.article.videos.VideosViewModel
+import info.tommarsh.presentation.ui.categories.CategoriesViewModel
+import info.tommarsh.presentation.ui.top.TopNewsViewModel
+import info.tommarsh.presentation.ui.videos.VideosViewModel
 import info.tommarsh.categories.ui.CategoryChoiceViewModel
 import marsh.tommarsh.search.ui.SearchViewModel
 import org.hamcrest.CoreMatchers.`is`

@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.common
+package info.tommarsh.presentation.ui
 
 import android.os.Bundle
 import android.view.MenuItem
@@ -9,7 +9,7 @@ import info.tommarsh.presentation.NewsApp.Companion.homeGraph
 import info.tommarsh.presentation.R
 import javax.inject.Inject
 
-open class BaseFragment : Fragment() {
+open class ArticleFragment : Fragment() {
 
     @Inject
     protected lateinit var factory: ViewModelFactory

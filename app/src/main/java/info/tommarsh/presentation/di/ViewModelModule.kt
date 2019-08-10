@@ -5,9 +5,9 @@ import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap
 import info.tommarsh.core.di.ViewModelKey
-import info.tommarsh.presentation.ui.article.categories.CategoriesViewModel
-import info.tommarsh.presentation.ui.article.top.TopNewsViewModel
-import info.tommarsh.presentation.ui.article.videos.VideosViewModel
+import info.tommarsh.presentation.ui.categories.CategoriesViewModel
+import info.tommarsh.presentation.ui.top.TopNewsViewModel
+import info.tommarsh.presentation.ui.videos.VideosViewModel
 
 @Module
 abstract class ViewModelModule {

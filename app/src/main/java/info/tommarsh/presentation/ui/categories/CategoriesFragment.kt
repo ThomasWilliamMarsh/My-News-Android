@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.categories
+package info.tommarsh.presentation.ui.categories
 
 import android.os.Bundle
 import android.view.*
@@ -11,13 +11,12 @@ import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.core.model.CategoryModel
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.ui.article.categories.adapter.CategoriesAdapter
-import info.tommarsh.presentation.ui.article.categories.adapter.CategoriesAdapter.Companion.TYPE_HEADER
-import info.tommarsh.presentation.ui.common.BaseFragment
+import info.tommarsh.presentation.ui.categories.CategoriesAdapter.Companion.TYPE_HEADER
+import info.tommarsh.presentation.ui.ArticleFragment
 import kotlinx.android.synthetic.main.fragment_categories.*
 import kotlinx.android.synthetic.main.layout_add_categories.*
 
-class CategoriesFragment : BaseFragment() {
+class CategoriesFragment : ArticleFragment() {
 
     private val adapter = CategoriesAdapter()
 

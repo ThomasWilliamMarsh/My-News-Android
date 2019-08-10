@@ -1,12 +1,12 @@
-package info.tommarsh.presentation.ui.article.top.adapter
+package info.tommarsh.presentation.ui.top
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.core.extensions.getDiffUtilItemCallback
 import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.ui.article.top.adapter.viewholder.ArticleViewHolder
-import info.tommarsh.presentation.ui.article.top.adapter.viewholder.MainArticleViewHolder
+import info.tommarsh.presentation.ui.viewholders.ArticleViewHolder
+import info.tommarsh.presentation.ui.viewholders.MainArticleViewHolder
 
 class TopNewsAdapter : ListAdapter<ArticleViewModel, RecyclerView.ViewHolder>(
     callback
@@ -18,7 +18,9 @@ class TopNewsAdapter : ListAdapter<ArticleViewModel, RecyclerView.ViewHolder>(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = when (viewType) {
-        TYPE_MAIN_ARTICLE -> MainArticleViewHolder(parent)
+        TYPE_MAIN_ARTICLE -> MainArticleViewHolder(
+            parent
+        )
         else -> ArticleViewHolder(parent)
     }
 

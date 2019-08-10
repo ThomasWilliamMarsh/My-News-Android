@@ -4,10 +4,10 @@ import dagger.Component
 import info.tommarsh.core.di.CoreComponent
 import info.tommarsh.core.di.FeatureScope
 import info.tommarsh.data.di.RepositoryComponent
-import info.tommarsh.presentation.ui.article.ArticlesActivity
-import info.tommarsh.presentation.ui.article.categories.CategoriesFragment
-import info.tommarsh.presentation.ui.article.top.TopNewsFragment
-import info.tommarsh.presentation.ui.article.videos.VideosFragment
+import info.tommarsh.presentation.ui.ArticlesActivity
+import info.tommarsh.presentation.ui.categories.CategoriesFragment
+import info.tommarsh.presentation.ui.top.TopNewsFragment
+import info.tommarsh.presentation.ui.videos.VideosFragment
 
 @FeatureScope
 @Component(

@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.categories
+package info.tommarsh.presentation.ui.categories
 
 import androidx.lifecycle.*
 import info.tommarsh.core.coroutines.DispatcherProvider

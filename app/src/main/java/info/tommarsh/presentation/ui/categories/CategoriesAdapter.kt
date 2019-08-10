@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.categories.adapter
+package info.tommarsh.presentation.ui.categories
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.core.ViewModel
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.HeaderViewModel
-import info.tommarsh.presentation.ui.article.categories.adapter.viewholder.CategoryArticleViewholder
-import info.tommarsh.presentation.ui.common.HeaderListItemCallback
-import info.tommarsh.presentation.ui.common.HeaderViewholder
+import info.tommarsh.presentation.ui.viewholders.CategoryArticleViewholder
+import info.tommarsh.presentation.ui.HeaderListItemCallback
+import info.tommarsh.presentation.ui.viewholders.HeaderViewholder
 
 class CategoriesAdapter :
     ListAdapter<ViewModel, RecyclerView.ViewHolder>(HeaderListItemCallback()) {

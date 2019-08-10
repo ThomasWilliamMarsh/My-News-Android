@@ -4,17 +4,17 @@
             app:startDestination="@id/navigation_top_news">
 
     <fragment android:id="@+id/navigation_top_news"
-              android:name="info.tommarsh.presentation.ui.article.top.TopNewsFragment"
+              android:name="info.tommarsh.presentation.ui.top.TopNewsFragment"
               android:label="@string/top_news">
     </fragment>
 
     <fragment android:id="@+id/navigation_my_news"
-              android:name="info.tommarsh.presentation.ui.article.categories.CategoriesFragment"
+              android:name="info.tommarsh.presentation.ui.categories.CategoriesFragment"
               android:label="@string/my_news">
     </fragment>
 
     <fragment android:id="@+id/navigation_videos"
-              android:name="info.tommarsh.presentation.ui.article.videos.VideosFragment"
+              android:name="info.tommarsh.presentation.ui.videos.VideosFragment"
               android:label="@string/videos"/>
 
     <activity android:id="@+id/navigation_choice"

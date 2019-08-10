@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.top
+package info.tommarsh.presentation.ui.top
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData

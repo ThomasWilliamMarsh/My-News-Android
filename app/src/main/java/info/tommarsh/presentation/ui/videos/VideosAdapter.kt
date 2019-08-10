@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.videos.adapter
+package info.tommarsh.presentation.ui.videos
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
@@ -6,9 +6,9 @@ import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.core.ViewModel
 import info.tommarsh.presentation.model.HeaderViewModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
-import info.tommarsh.presentation.ui.article.videos.adapter.viewholder.PlaylistItemViewholder
-import info.tommarsh.presentation.ui.common.HeaderListItemCallback
-import info.tommarsh.presentation.ui.common.HeaderViewholder
+import info.tommarsh.presentation.ui.viewholders.PlaylistItemViewholder
+import info.tommarsh.presentation.ui.HeaderListItemCallback
+import info.tommarsh.presentation.ui.viewholders.HeaderViewholder
 
 class VideosAdapter
     : ListAdapter<ViewModel, RecyclerView.ViewHolder>(HeaderListItemCallback()) {

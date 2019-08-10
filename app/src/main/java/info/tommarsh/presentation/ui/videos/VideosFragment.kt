@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.videos
+package info.tommarsh.presentation.ui.videos
 
 import android.os.Bundle
 import android.view.*
@@ -9,12 +9,11 @@ import info.tommarsh.core.NetworkException
 import info.tommarsh.core.extensions.snack
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.PlaylistItemViewModel
-import info.tommarsh.presentation.ui.article.videos.adapter.VideosAdapter
-import info.tommarsh.presentation.ui.article.videos.adapter.VideosAdapter.Companion.TYPE_HEADER
-import info.tommarsh.presentation.ui.common.BaseFragment
+import info.tommarsh.presentation.ui.videos.VideosAdapter.Companion.TYPE_HEADER
+import info.tommarsh.presentation.ui.ArticleFragment
 import kotlinx.android.synthetic.main.fragment_videos.*
 
-class VideosFragment : BaseFragment() {
+class VideosFragment : ArticleFragment() {
 
     private val adapter = VideosAdapter()
 

@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.videos.adapter.viewholder
+package info.tommarsh.presentation.ui.viewholders
 
 import android.content.Intent
 import android.net.Uri

@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.article.videos
+package info.tommarsh.presentation.ui.videos
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
