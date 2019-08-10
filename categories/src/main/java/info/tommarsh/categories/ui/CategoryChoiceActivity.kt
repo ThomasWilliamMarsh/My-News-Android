@@ -1,4 +1,4 @@
-package marsh.tommarsh.categories.ui
+package info.tommarsh.categories.ui
 
 
 import android.os.Bundle
@@ -10,11 +10,11 @@ import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import info.tommarsh.core.ViewModelFactory
 import info.tommarsh.core.extensions.observeNightMode
 import info.tommarsh.core.repository.PreferencesRepository
-import marsh.tommarsh.categories.ui.adapter.CategoryChoiceAdapter
+import info.tommarsh.categories.ui.adapter.CategoryChoiceAdapter
 import kotlinx.android.synthetic.main.activity_category_choice.*
 import marsh.tommarsh.categories.R
-import marsh.tommarsh.categories.di.Injector.inject
-import marsh.tommarsh.categories.model.CategoryViewModel
+import info.tommarsh.categories.di.Injector.inject
+import info.tommarsh.categories.model.CategoryViewModel
 import javax.inject.Inject
 
 class CategoryChoiceActivity : AppCompatActivity() {

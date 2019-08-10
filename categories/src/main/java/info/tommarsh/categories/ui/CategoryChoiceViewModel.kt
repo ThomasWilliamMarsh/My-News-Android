@@ -1,10 +1,10 @@
-package marsh.tommarsh.categories.ui
+package info.tommarsh.categories.ui
 
 import androidx.lifecycle.*
 import info.tommarsh.core.repository.CategoryRepository
 import kotlinx.coroutines.launch
-import marsh.tommarsh.categories.model.CategoryViewModel
-import marsh.tommarsh.categories.model.mapper.CategoryDomainToViewModelMapper
+import info.tommarsh.categories.model.CategoryViewModel
+import info.tommarsh.categories.model.mapper.CategoryDomainToViewModelMapper
 import javax.inject.Inject
 
 class CategoryChoiceViewModel

@@ -2,7 +2,7 @@ package info.tommarsh.presentation.model
 
 import info.tommarsh.core.NetworkException
 import info.tommarsh.core.model.*
-import marsh.tommarsh.categories.model.CategoryViewModel
+import info.tommarsh.categories.model.CategoryViewModel
 
 object MockModelProvider {
 

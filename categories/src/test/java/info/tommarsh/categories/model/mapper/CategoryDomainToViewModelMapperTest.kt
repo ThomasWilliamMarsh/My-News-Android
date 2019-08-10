@@ -1,7 +1,8 @@
-package marsh.tommarsh.categories.model.mapper
+package info.tommarsh.categories.model.mapper
 
-import marsh.tommarsh.categories.model.MockModelProvider.categoryModel
-import marsh.tommarsh.categories.model.MockModelProvider.categoryViewModel
+import info.tommarsh.categories.model.mapper.CategoryDomainToViewModelMapper
+import info.tommarsh.categories.model.MockModelProvider.categoryModel
+import info.tommarsh.categories.model.MockModelProvider.categoryViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

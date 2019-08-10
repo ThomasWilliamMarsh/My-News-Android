@@ -18,7 +18,7 @@
               android:label="@string/videos"/>
 
     <activity android:id="@+id/navigation_choice"
-              android:name="marsh.tommarsh.categories.ui.CategoryChoiceActivity"
+              android:name="info.tommarsh.categories.ui.CategoryChoiceActivity"
               android:label="CategoryChoiceActivity"/>
 
     <activity android:id="@+id/navigation_article"

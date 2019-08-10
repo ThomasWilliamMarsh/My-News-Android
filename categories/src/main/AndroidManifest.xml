@@ -2,7 +2,7 @@
           package="marsh.tommarsh.categories">
 
     <application>
-        <activity android:name="marsh.tommarsh.categories.ui.CategoryChoiceActivity"/>
+        <activity android:name="marsh.tommarsh.categories.info.tommarsh.categories.ui.CategoryChoiceActivity"/>
     </application>
 
 </manifest>

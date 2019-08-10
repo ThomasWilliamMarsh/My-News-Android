@@ -1,8 +1,8 @@
-package marsh.tommarsh.categories.di
+package info.tommarsh.categories.di
 
 import info.tommarsh.core.di.CoreCreator
 import info.tommarsh.data.di.RepositoryCreator
-import marsh.tommarsh.categories.ui.CategoryChoiceActivity
+import info.tommarsh.categories.ui.CategoryChoiceActivity
 
 object Injector {
 

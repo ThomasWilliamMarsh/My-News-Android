@@ -1,11 +1,11 @@
-package marsh.tommarsh.categories.ui.adapter.viewholder
+package info.tommarsh.categories.ui.adapter.viewholder
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.core.extensions.inflate
 import kotlinx.android.synthetic.main.item_category_choice.view.*
 import marsh.tommarsh.categories.R
-import marsh.tommarsh.categories.model.CategoryViewModel
+import info.tommarsh.categories.model.CategoryViewModel
 
 class CategoryChoiceViewholder(
     parent: ViewGroup,

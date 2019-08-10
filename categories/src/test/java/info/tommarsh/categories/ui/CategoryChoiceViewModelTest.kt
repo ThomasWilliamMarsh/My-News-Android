@@ -1,4 +1,4 @@
-package marsh.tommarsh.categories.ui
+package info.tommarsh.categories.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -10,10 +10,11 @@ import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
 import kotlinx.coroutines.test.setMain
-import marsh.tommarsh.categories.model.CategoryViewModel
-import marsh.tommarsh.categories.model.MockModelProvider.categoryModel
-import marsh.tommarsh.categories.model.MockModelProvider.categoryViewModel
-import marsh.tommarsh.categories.model.mapper.CategoryDomainToViewModelMapper
+import info.tommarsh.categories.model.CategoryViewModel
+import info.tommarsh.categories.model.MockModelProvider.categoryModel
+import info.tommarsh.categories.model.MockModelProvider.categoryViewModel
+import info.tommarsh.categories.model.mapper.CategoryDomainToViewModelMapper
+import info.tommarsh.categories.ui.CategoryChoiceViewModel
 import org.junit.After
 import org.junit.Before
 import org.junit.Rule

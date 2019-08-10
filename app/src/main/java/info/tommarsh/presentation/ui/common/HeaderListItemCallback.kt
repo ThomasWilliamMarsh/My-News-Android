@@ -5,7 +5,7 @@ import info.tommarsh.core.ViewModel
 import info.tommarsh.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.model.HeaderViewModel
 import info.tommarsh.presentation.model.PlaylistItemViewModel
-import marsh.tommarsh.categories.model.CategoryViewModel
+import info.tommarsh.categories.model.CategoryViewModel
 
 class HeaderListItemCallback : DiffUtil.ItemCallback<ViewModel>() {
     override fun areItemsTheSame(old: ViewModel, new: ViewModel) = when {

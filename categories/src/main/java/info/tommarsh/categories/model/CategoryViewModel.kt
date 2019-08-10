@@ -1,4 +1,4 @@
-package marsh.tommarsh.categories.model
+package info.tommarsh.categories.model
 
 import info.tommarsh.core.ViewModel
 

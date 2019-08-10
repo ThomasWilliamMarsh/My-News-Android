@@ -1,10 +1,10 @@
-package marsh.tommarsh.categories.di
+package info.tommarsh.categories.di
 
 import dagger.Component
 import info.tommarsh.core.di.CoreComponent
 import info.tommarsh.core.di.FeatureScope
 import info.tommarsh.data.di.RepositoryComponent
-import marsh.tommarsh.categories.ui.CategoryChoiceActivity
+import info.tommarsh.categories.ui.CategoryChoiceActivity
 
 @FeatureScope
 @Component(
