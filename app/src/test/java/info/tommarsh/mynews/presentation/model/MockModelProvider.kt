@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.model
+package info.tommarsh.mynews.presentation.model
 
 import info.tommarsh.core.NetworkException
 import info.tommarsh.core.model.*
@@ -14,16 +14,22 @@ object MockModelProvider {
     //endregion
 
     //region playlist
-    val playlistItemModel = PlaylistItemModel("id", "title", fakeIsoTime, "url")
+    val playlistItemModel = PlaylistItemModel("id", "title",
+        fakeIsoTime, "url")
     val playlistModel =
-        PlaylistModel("next", "previous", listOf(playlistItemModel, playlistItemModel))
+        PlaylistModel("next", "previous", listOf(
+            playlistItemModel,
+            playlistItemModel
+        ))
     val playlistItemViewModel = PlaylistItemViewModel("id", "title", "1 hour ago", "url")
     //endregion
 
     //region article
     val sourceModel = SourceModel("id", "name")
     val articleModel = ArticleModel(
-        "author", "content", "description", fakeIsoTime, sourceModel, "title",
+        "author", "content", "description",
+        fakeIsoTime,
+        sourceModel, "title",
         "url", "imageUrl", "top-news"
     )
     val articleViewModel =

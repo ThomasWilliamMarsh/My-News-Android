@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.videos
+package info.tommarsh.mynews.presentation.ui.videos
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -10,13 +10,12 @@ import info.tommarsh.core.Outcome
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.errors.ErrorLiveData
 import info.tommarsh.core.repository.VideoRepository
-import info.tommarsh.presentation.model.MockModelProvider.noInternet
-import info.tommarsh.presentation.model.MockModelProvider.playlistItemModel
-import info.tommarsh.presentation.model.MockModelProvider.playlistItemViewModel
-import info.tommarsh.presentation.model.MockModelProvider.playlistModel
-import info.tommarsh.presentation.model.PlaylistItemViewModel
-import info.tommarsh.presentation.model.mapper.PlaylistItemViewModelMapper
-import info.tommarsh.presentation.ui.videos.VideosViewModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.noInternet
+import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemViewModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistModel
+import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
+import info.tommarsh.mynews.presentation.model.mapper.PlaylistItemViewModelMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain

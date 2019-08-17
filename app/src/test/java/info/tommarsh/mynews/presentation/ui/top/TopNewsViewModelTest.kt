@@ -1,4 +1,4 @@
-package info.tommarsh.presentation.ui.top
+package info.tommarsh.mynews.presentation.ui.top
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
@@ -6,11 +6,10 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.repository.ArticleRepository
-import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.model.MockModelProvider.articleModel
-import info.tommarsh.presentation.model.MockModelProvider.articleViewModel
-import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
-import info.tommarsh.presentation.ui.top.TopNewsViewModel
+import info.tommarsh.mynews.presentation.model.ArticleViewModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.articleModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.articleViewModel
+import info.tommarsh.mynews.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain

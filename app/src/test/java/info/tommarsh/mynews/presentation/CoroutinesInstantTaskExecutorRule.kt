@@ -1,4 +1,4 @@
-package info.tommarsh.presentation
+package info.tommarsh.mynews.presentation
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import kotlinx.coroutines.Dispatchers

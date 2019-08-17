@@ -1,10 +1,10 @@
-package info.tommarsh.presentation.model.mapper
+package info.tommarsh.mynews.presentation.model.mapper
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import info.tommarsh.core.TimeHelper
-import info.tommarsh.presentation.model.MockModelProvider.playlistItemModel
-import info.tommarsh.presentation.model.MockModelProvider.playlistItemViewModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

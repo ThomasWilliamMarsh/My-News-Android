@@ -1,12 +1,12 @@
-package info.tommarsh.presentation
+package info.tommarsh.mynews.presentation
 
 import androidx.lifecycle.ViewModel
 import com.nhaarman.mockitokotlin2.mock
 import info.tommarsh.core.ViewModelFactory
-import info.tommarsh.presentation.ui.categories.CategoriesViewModel
-import info.tommarsh.presentation.ui.top.TopNewsViewModel
-import info.tommarsh.presentation.ui.videos.VideosViewModel
 import info.tommarsh.categories.ui.CategoryChoiceViewModel
+import info.tommarsh.mynews.presentation.ui.categories.CategoriesViewModel
+import info.tommarsh.mynews.presentation.ui.top.TopNewsViewModel
+import info.tommarsh.mynews.presentation.ui.videos.VideosViewModel
 import marsh.tommarsh.search.ui.SearchViewModel
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
@@ -26,11 +26,11 @@ class ViewModelFactoryTest {
     private val searchViewModel = mock<SearchViewModel>()
 
     private var map: MutableMap<Class<out ViewModel>, @JvmSuppressWildcards Provider<ViewModel>> = mutableMapOf(
-        CategoriesViewModel::class.java to Provider { categoriesViewModel as ViewModel },
-        TopNewsViewModel::class.java to Provider { topNewViewModel as ViewModel },
-        VideosViewModel::class.java to Provider { videosViewModel as ViewModel },
-        CategoryChoiceViewModel::class.java to Provider { categoryChoiceViewModel as ViewModel },
-        SearchViewModel::class.java to Provider { searchViewModel as ViewModel }
+        CategoriesViewModel::class.java to Provider { categoriesViewModel },
+        TopNewsViewModel::class.java to Provider { topNewViewModel },
+        VideosViewModel::class.java to Provider { videosViewModel },
+        CategoryChoiceViewModel::class.java to Provider { categoryChoiceViewModel },
+        SearchViewModel::class.java to Provider { searchViewModel }
     )
 
     @Before
