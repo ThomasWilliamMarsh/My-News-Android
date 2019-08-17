@@ -32,6 +32,9 @@ ext {
     constraintLayoutVersion = "2.0.0-alpha3"
     navigationVersion = "1.0.0"
 
+    //Adapter delegates
+    adapterDelegatesVersion = "4.1.1"
+
     //Espresso
     espressoVersion = "3.1.0"
     espressoRunnerVersion = "1.1.0"

@@ -1,46 +1,17 @@
 package info.tommarsh.presentation.ui.videos
 
-import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
-import androidx.recyclerview.widget.RecyclerView
+import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
 import info.tommarsh.core.ViewModel
-import info.tommarsh.presentation.model.HeaderViewModel
-import info.tommarsh.presentation.model.PlaylistItemViewModel
-import info.tommarsh.presentation.ui.viewholders.PlaylistItemViewholder
-import info.tommarsh.presentation.util.HeaderListItemCallback
-import info.tommarsh.presentation.ui.viewholders.HeaderViewholder
+import info.tommarsh.presentation.ui.videoDelegate
+import info.tommarsh.presentation.util.DelegateDiffCallback
 
-class VideosAdapter
-    : ListAdapter<ViewModel, RecyclerView.ViewHolder>(HeaderListItemCallback()) {
+class VideosAdapter : AsyncListDifferDelegationAdapter<ViewModel>(DelegateDiffCallback()) {
 
     companion object {
-        const val TYPE_HEADER = 0
-        const val TYPE_VIDEO = 1
+        const val TYPE_VIDEO = 0
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        return when (viewType) {
-            TYPE_HEADER -> HeaderViewholder(parent)
-            else -> PlaylistItemViewholder(parent)
-        }
-    }
-
-    override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
-        when (holder) {
-            is HeaderViewholder -> holder.bind((getItem(position) as HeaderViewModel))
-            is PlaylistItemViewholder -> holder.bind((getItem(position) as PlaylistItemViewModel))
-        }
-    }
-
-    override fun getItemViewType(position: Int): Int {
-        return when (getItem(position)) {
-            is HeaderViewModel -> TYPE_HEADER
-            else -> TYPE_VIDEO
-        }
-    }
-
-    fun submitListWithHeader(header: String, list: MutableList<ViewModel>?) {
-        list?.add(0, HeaderViewModel(header))
-        submitList(list)
+    init {
+        delegatesManager.addDelegate(TYPE_VIDEO, videoDelegate())
     }
 }

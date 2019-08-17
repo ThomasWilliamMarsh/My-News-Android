@@ -6,7 +6,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion rootProject.compileSdk
     defaultConfig {
-        applicationId "info.tommarsh.cleanbase"
+        applicationId "info.tommarsh.mynews"
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
         versionCode 1
@@ -35,6 +35,9 @@ dependencies {
 
     //Dagger
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+
+    //Adapter delegates
+    implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:' + rootProject.adapterDelegatesVersion
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion

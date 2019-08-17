@@ -9,7 +9,6 @@ import info.tommarsh.core.NetworkException
 import info.tommarsh.core.extensions.snack
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.model.PlaylistItemViewModel
-import info.tommarsh.presentation.ui.videos.VideosAdapter.Companion.TYPE_HEADER
 import info.tommarsh.presentation.ui.ArticleFragment
 import kotlinx.android.synthetic.main.fragment_videos.*
 
@@ -55,7 +54,7 @@ class VideosFragment : ArticleFragment() {
 
     private fun onVideos(videos: List<PlaylistItemViewModel>) {
         refresh_video.isRefreshing = false
-        adapter.submitListWithHeader(getString(R.string.videos), videos.toMutableList())
+        adapter.items = videos
     }
 
     private fun onError(error: NetworkException) {
@@ -63,12 +62,5 @@ class VideosFragment : ArticleFragment() {
         refresh_video.snack(error.localizedMessage)
     }
 
-    private fun setLayoutManager() = GridLayoutManager(context, 2).apply {
-        spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int) = when (adapter.getItemViewType(position)) {
-                TYPE_HEADER -> 2
-                else -> 1
-            }
-        }
-    }
+    private fun setLayoutManager() = GridLayoutManager(context, 2)
 }

@@ -5,4 +5,4 @@ data class PlaylistItemModel(
     val title: String,
     val publishedAt: String,
     val thumbnail: String
-)
+) : DomainModel

@@ -70,7 +70,7 @@ class TopNewsFragment : ArticleFragment() {
     }
 
     private fun onArticlesReceived(articles: List<ArticleViewModel>?) {
-        adapter.submitList(articles)
+        adapter.items = articles
         refresh_top_news.isRefreshing = false
     }
 

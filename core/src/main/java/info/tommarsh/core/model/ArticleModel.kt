@@ -11,4 +11,4 @@ data class ArticleModel(
     val url: String,
     val urlToImage: String,
     var category: String = "top-news"
-)
+) : DomainModel

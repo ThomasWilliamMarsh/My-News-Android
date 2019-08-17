@@ -5,6 +5,7 @@ import info.tommarsh.core.coroutines.DispatcherProvider
 import info.tommarsh.core.model.CategoryModel
 import info.tommarsh.core.repository.ArticleRepository
 import info.tommarsh.core.repository.CategoryRepository
+import info.tommarsh.presentation.addHeaders
 import info.tommarsh.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -22,7 +23,9 @@ class CategoriesViewModel
 
     val feed = categoryRepository.getSelectedCategoriesStream().switchMap {
         liveData {
-            val items = articlesRepository.getFeed().map(mapper::map)
+            val items = articlesRepository.getFeed()
+                .map(mapper::map)
+                .map { it.addHeaders() }
             emitSource(items)
         }
     }

@@ -6,13 +6,13 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import info.tommarsh.core.ViewModel
 import info.tommarsh.core.extensions.makeGone
 import info.tommarsh.core.extensions.makeVisible
 import info.tommarsh.core.model.CategoryModel
 import info.tommarsh.presentation.R
-import info.tommarsh.presentation.model.ArticleViewModel
-import info.tommarsh.presentation.ui.categories.CategoriesAdapter.Companion.TYPE_HEADER
 import info.tommarsh.presentation.ui.ArticleFragment
+import info.tommarsh.presentation.ui.top.TopNewsAdapter.Companion.TYPE_HEADER
 import kotlinx.android.synthetic.main.fragment_categories.*
 import kotlinx.android.synthetic.main.layout_add_categories.*
 
@@ -69,9 +69,9 @@ class CategoriesFragment : ArticleFragment() {
         viewModel.refreshFeed()
     }
 
-    private fun onArticleCategories(articles: List<ArticleViewModel>) {
+    private fun onArticleCategories(articles: List<ViewModel>) {
         refresh_my_news.isRefreshing = false
-        adapter.submitWithHeaders(articles)
+        adapter.items = articles
     }
 
     private fun setLayoutManager() = GridLayoutManager(context, 2).apply {
