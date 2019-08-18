@@ -1,13 +1,13 @@
 package info.tommarsh.mynews.presentation.di
 
 import dagger.Component
-import info.tommarsh.core.di.CoreComponent
-import info.tommarsh.core.di.FeatureScope
-import info.tommarsh.data.di.RepositoryComponent
+import info.tommarsh.mynews.core.di.CoreComponent
+import info.tommarsh.mynews.core.di.FeatureScope
 import info.tommarsh.mynews.presentation.ui.ArticlesActivity
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesFragment
 import info.tommarsh.mynews.presentation.ui.top.TopNewsFragment
 import info.tommarsh.mynews.presentation.ui.videos.VideosFragment
+import info.tommarsh.mynews.repository.di.RepositoryComponent
 
 
 @FeatureScope

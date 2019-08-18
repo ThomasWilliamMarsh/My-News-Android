@@ -1,8 +1,8 @@
 package info.tommarsh.mynews.presentation.util
 
 import androidx.recyclerview.widget.DiffUtil
-import info.tommarsh.core.ViewModel
-import info.tommarsh.categories.model.CategoryViewModel
+import info.tommarsh.mynews.categories.model.CategoryViewModel
+import info.tommarsh.mynews.core.ViewModel
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.model.HeaderViewModel
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel

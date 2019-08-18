@@ -1,10 +1,10 @@
 package info.tommarsh.mynews.presentation.ui.categories
 
 import androidx.lifecycle.*
-import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.core.model.CategoryModel
-import info.tommarsh.core.repository.ArticleRepository
-import info.tommarsh.core.repository.CategoryRepository
+import info.tommarsh.mynews.core.coroutines.DispatcherProvider
+import info.tommarsh.mynews.core.model.CategoryModel
+import info.tommarsh.mynews.core.repository.ArticleRepository
+import info.tommarsh.mynews.core.repository.CategoryRepository
 import info.tommarsh.mynews.presentation.addHeaders
 import info.tommarsh.mynews.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.launch

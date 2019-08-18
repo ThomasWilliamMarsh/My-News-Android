@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import info.tommarsh.core.Outcome
-import info.tommarsh.core.coroutines.DispatcherProvider
-import info.tommarsh.core.repository.VideoRepository
+import info.tommarsh.mynews.core.Outcome
+import info.tommarsh.mynews.core.coroutines.DispatcherProvider
+import info.tommarsh.mynews.core.repository.VideoRepository
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 import info.tommarsh.mynews.presentation.model.mapper.PlaylistItemViewModelMapper
 import kotlinx.coroutines.launch

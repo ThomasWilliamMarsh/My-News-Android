@@ -2,12 +2,12 @@ package info.tommarsh.mynews.presentation
 
 import androidx.lifecycle.ViewModel
 import com.nhaarman.mockitokotlin2.mock
-import info.tommarsh.core.ViewModelFactory
-import info.tommarsh.categories.ui.CategoryChoiceViewModel
+import info.tommarsh.mynews.categories.ui.CategoryChoiceViewModel
+import info.tommarsh.mynews.core.ViewModelFactory
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesViewModel
 import info.tommarsh.mynews.presentation.ui.top.TopNewsViewModel
 import info.tommarsh.mynews.presentation.ui.videos.VideosViewModel
-import marsh.tommarsh.search.ui.SearchViewModel
+import info.tommarsh.mynews.search.ui.SearchViewModel
 import org.hamcrest.CoreMatchers.`is`
 import org.hamcrest.CoreMatchers.instanceOf
 import org.hamcrest.MatcherAssert.assertThat

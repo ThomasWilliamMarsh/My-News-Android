@@ -1,0 +1,33 @@
+package info.tommarsh.mynews.repository.source.remote.articles
+
+import com.nhaarman.mockitokotlin2.mock
+import com.nhaarman.mockitokotlin2.times
+import com.nhaarman.mockitokotlin2.verify
+import com.nhaarman.mockitokotlin2.whenever
+import info.tommarsh.mynews.core.Outcome
+import info.tommarsh.mynews.repository.model.MockProvider.articleModel
+import info.tommarsh.mynews.repository.model.remote.mapper.ArticleResponseMapper
+import info.tommarsh.mynews.repository.util.NetworkHelper
+import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.runBlocking
+import org.junit.Test
+
+class ArticlesRemoteDataStoreTest {
+
+    private val mapper = mock<ArticleResponseMapper>()
+    private val network = mock<NetworkHelper>()
+    private val api = mock<ArticleApiService>()
+    private val remoteDataStore =
+        ArticlesRemoteDataStore(mapper, network, api)
+
+    @Test
+    fun `Get breaking news from network`() = runBlocking {
+        whenever(network.callApi(api.getBreakingNews(), mapper))
+            .thenReturn(Outcome.Success(listOf(articleModel, articleModel)))
+
+        val actual = remoteDataStore.getBreakingNews()
+
+        verify(api, times(2)).getBreakingNews()
+        assertEquals(Outcome.Success(listOf(articleModel, articleModel)), actual)
+    }
+}

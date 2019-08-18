@@ -1,13 +1,14 @@
 package info.tommarsh.mynews.presentation.model.mapper
 
-import info.tommarsh.core.Mapper
-import info.tommarsh.core.TimeHelper
-import info.tommarsh.core.model.ArticleModel
+import info.tommarsh.mynews.core.Mapper
+import info.tommarsh.mynews.core.TimeHelper
+import info.tommarsh.mynews.core.model.ArticleModel
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import javax.inject.Inject
 
 class ArticleViewModelMapper
-@Inject constructor(private val timeHelper: TimeHelper) : Mapper<List<ArticleModel>, List<ArticleViewModel>> {
+@Inject constructor(private val timeHelper: TimeHelper) :
+    Mapper<List<ArticleModel>, List<ArticleViewModel>> {
     override fun map(from: List<ArticleModel>): List<ArticleViewModel> = from.map {
         val published = timeHelper.timeBetween(isoString = it.publishedAt)
         ArticleViewModel(

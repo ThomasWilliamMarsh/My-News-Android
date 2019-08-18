@@ -2,10 +2,10 @@ package info.tommarsh.mynews.presentation
 
 import android.app.Application
 import android.content.Context
-import info.tommarsh.core.di.CoreCreator
-import info.tommarsh.data.di.RepositoryCreator
-import info.tommarsh.mynews.presentation.di.HomeComponent
+import info.tommarsh.mynews.core.di.CoreCreator
 import info.tommarsh.mynews.presentation.di.DaggerHomeComponent
+import info.tommarsh.mynews.presentation.di.HomeComponent
+import info.tommarsh.mynews.repository.di.RepositoryCreator
 
 class NewsApp : Application() {
 
