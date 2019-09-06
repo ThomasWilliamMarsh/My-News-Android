@@ -8,15 +8,16 @@ import javax.inject.Inject
 
 internal class NetworkHelper @Inject constructor(private val connectionManager: ConnectionManager) {
 
-    fun <Data, Domain> callApi(
-        response: Response<Data>,
-        mapper: Mapper<Data, Domain>
+    suspend fun <Data, Domain> callApi(
+        mapper: Mapper<Data, Domain>,
+        block: suspend () -> Response<Data>
     ): Outcome<Domain> {
+        if (!connectionManager.isConnected) return Outcome.Error(NoInternetException())
         return try {
+            val response = block()
             when {
                 response.body() == null -> Outcome.Error(NoResponseException())
                 !response.isSuccessful -> Outcome.Error(ServerException())
-                !connectionManager.isConnected -> Outcome.Error(NoInternetException())
                 else -> Outcome.Success(mapper.map(response.body()!!))
             }
         } catch (exception: Exception) {

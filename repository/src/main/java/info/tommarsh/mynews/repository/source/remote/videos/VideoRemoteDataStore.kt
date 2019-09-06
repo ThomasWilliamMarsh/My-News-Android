@@ -14,6 +14,6 @@ internal class VideoRemoteDataStore
 ) {
 
     suspend fun getPlaylist(): Outcome<PlaylistModel> {
-        return networkHelper.callApi(api.getPlaylistItems(), mapper)
+        return networkHelper.callApi(mapper, api::getPlaylistItems)
     }
 }

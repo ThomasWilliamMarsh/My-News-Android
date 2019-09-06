@@ -14,14 +14,20 @@ internal class ArticlesRemoteDataStore
 ) {
 
     suspend fun getBreakingNews(): Outcome<List<ArticleModel>> {
-        return networkHelper.callApi(api.getBreakingNews(), mapper)
+        return networkHelper.callApi(mapper) {
+            api.getBreakingNews()
+        }
     }
 
     suspend fun searchArticles(query: String): Outcome<List<ArticleModel>> {
-        return networkHelper.callApi(api.searchArticles(query), mapper)
+        return networkHelper.callApi(mapper) {
+            api.searchArticles(query)
+        }
     }
 
     suspend fun getArticleForCategory(category: String): Outcome<List<ArticleModel>> {
-        return networkHelper.callApi(api.getArticlesForCategory(category), mapper)
+        return networkHelper.callApi(mapper) {
+            api.getArticlesForCategory(category)
+        }
     }
 }
