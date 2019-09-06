@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlinVersion = '1.3.31'
+    ext.kotlinVersion = '1.3.50'
     repositories {
         google()
         jcenter()
@@ -17,6 +17,12 @@ allprojects {
         google()
         jcenter()
     }
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+        kotlinOptions {
+            jvmTarget = "1.8"
+        }
+    }
 }
 
 task clean(type: Delete) {
@@ -25,7 +31,7 @@ task clean(type: Delete) {
 
 ext {
     //AndroidX
-    appCompatVersion = "1.1.0-rc01"
+    appCompatVersion = "1.1.0"
     cardViewVersion = "1.0.0"
     materialVersion = "1.1.0-alpha06"
     recyclerViewVersion = "1.0.0"
@@ -45,9 +51,8 @@ ext {
     //ArchComponents
     liveDataVersion = "2.2.0-alpha01"
     lifecycleVersion = "2.1.0-beta01"
-    lifecycleAlphaVersion = "2.2.0-alpha01"
-    roomVersion = "2.1.0-beta01"
-    pagingVersion = "2.0.0-alpha1"
+    lifecycleAlphaVersion = "2.2.0-alpha04"
+    roomVersion = "2.2.0-rc01"
 
     //Network
     retrofitVersion = "2.6.0"
@@ -62,7 +67,7 @@ ext {
     RxAndroidVersion = "2.0.0"
 
     //Kotlin
-    coroutinesVersion = "1.0.1"
+    coroutinesVersion = "1.3.1"
     coroutinesTestVersion = "1.2.1"
     coroutinesAdapter = "0.9.2"
 
