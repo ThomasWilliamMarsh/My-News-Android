@@ -6,7 +6,6 @@ import androidx.room.Room
 import dagger.Module
 import dagger.Provides
 import info.tommarsh.mynews.repository.source.local.NewsDatabase
-import info.tommarsh.mynews.repository.source.local.category.PrePopulater
 
 @Module
 object LocalModule {
@@ -15,7 +14,7 @@ object LocalModule {
     @JvmStatic
     internal fun provideDb(app: Context) =
         Room.databaseBuilder(app, NewsDatabase::class.java, "articles-db")
-            .addCallback(PrePopulater())
+            .createFromAsset("database/default-db")
             .build()
 
     @Provides

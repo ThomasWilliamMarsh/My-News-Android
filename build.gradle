@@ -52,7 +52,7 @@ ext {
     liveDataVersion = "2.2.0-alpha01"
     lifecycleVersion = "2.1.0-beta01"
     lifecycleAlphaVersion = "2.2.0-alpha04"
-    roomVersion = "2.2.0-rc01"
+    roomVersion = "2.2.0"
 
     //Network
     retrofitVersion = "2.6.0"
