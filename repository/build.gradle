@@ -47,7 +47,7 @@ dependencies {
 
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
-    testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleVersion
+    testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
