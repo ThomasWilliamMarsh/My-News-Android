@@ -1,16 +1,14 @@
 package info.tommarsh.mynews.repository.source.local.articles
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.repository.model.MockProvider.article
 import info.tommarsh.mynews.repository.model.MockProvider.articleModel
-import info.tommarsh.mynews.repository.model.local.Article
 import info.tommarsh.mynews.repository.model.local.mapper.ArticleDataToDomainMapper
 import info.tommarsh.mynews.repository.model.local.mapper.ArticleDomainToDataMapper
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
@@ -34,11 +32,10 @@ class ArticlesLocalDataStoreTest {
             dataToDomainMapper,
             domainToDataMapper
         )
-    private val articleLiveData = MutableLiveData<List<Article>>()
 
     @Test
     fun `get breaking news from DB`() {
-        whenever(dao.getBreakingArticles()).thenReturn(articleLiveData as LiveData<List<Article>>)
+        whenever(dao.getBreakingArticles()).thenReturn(flowOf())
 
         localDataStore.getBreakingNews()
 

@@ -1,12 +1,16 @@
 package info.tommarsh.mynews.presentation.ui.categories
 
-import androidx.lifecycle.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.model.CategoryModel
 import info.tommarsh.mynews.core.repository.ArticleRepository
 import info.tommarsh.mynews.core.repository.CategoryRepository
 import info.tommarsh.mynews.presentation.addHeaders
 import info.tommarsh.mynews.presentation.model.mapper.ArticleViewModelMapper
+import kotlinx.coroutines.flow.flatMapLatest
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -19,16 +23,14 @@ class CategoriesViewModel
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
-    val selectedCategories: LiveData<List<CategoryModel>> = categoryRepository.getSelectedCategoriesStream()
+    val selectedCategories = categoryRepository.getSelectedCategoriesStream().asLiveData()
 
-    val feed = categoryRepository.getSelectedCategoriesStream().switchMap {
-        liveData {
-            val items = articlesRepository.getFeed()
-                .map(mapper::map)
-                .map { it.addHeaders() }
-            emitSource(items)
-        }
-    }
+    val feed = categoryRepository.getSelectedCategoriesStream().flatMapLatest {
+        articlesRepository.getFeed()
+            .onStart { refreshFeed() }
+            .map { mapper.map(it) }
+            .map { it.addHeaders() }
+    }.asLiveData(dispatcherProvider.main())
 
     fun refreshFeed() {
         viewModelScope.launch {

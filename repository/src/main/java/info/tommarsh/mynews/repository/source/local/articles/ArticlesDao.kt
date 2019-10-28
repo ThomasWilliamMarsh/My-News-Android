@@ -1,8 +1,8 @@
 package info.tommarsh.mynews.repository.source.local.articles
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import info.tommarsh.mynews.repository.model.local.Article
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ArticlesDao {
@@ -26,10 +26,10 @@ interface ArticlesDao {
     suspend fun insertArticles(vararg articles: Article)
 
     @Query("SELECT * FROM ARTICLE_TABLE WHERE category == 'top-news'")
-    fun getBreakingArticles(): LiveData<List<Article>>
+    fun getBreakingArticles(): Flow<List<Article>>
 
     @Query("SELECT * FROM ARTICLE_TABLE WHERE category != 'top-news'")
-    fun getFeed(): LiveData<List<Article>>
+    fun getFeed(): Flow<List<Article>>
 
     @Query("DELETE FROM ARTICLE_TABLE WHERE category == :category")
     suspend fun deleteCategory(category: String)

@@ -1,9 +1,9 @@
 package info.tommarsh.mynews.repository.source.local.category
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.map
 import info.tommarsh.mynews.core.model.CategoryModel
 import info.tommarsh.mynews.repository.model.local.mapper.CategoryDataToDomainMapper
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 internal class CategoryLocalDataStore
@@ -12,11 +12,11 @@ internal class CategoryLocalDataStore
     private val dataMapper: CategoryDataToDomainMapper
 ) {
 
-    fun getCategories(): LiveData<List<CategoryModel>> =
-        dao.getCategories().map(dataMapper::map)
+    fun getCategories(): Flow<List<CategoryModel>> =
+        dao.getCategories().map { dataMapper.map(it) }
 
-    fun getSelectedCategoriesStream(): LiveData<List<CategoryModel>> =
-        dao.getSelectedCategoriesStream().map(dataMapper::map)
+    fun getSelectedCategoriesStream(): Flow<List<CategoryModel>> =
+        dao.getSelectedCategoriesStream().map { dataMapper.map(it) }
 
     suspend fun getSelectedCategories(): List<CategoryModel> =
         dataMapper.map(dao.getSelectedCategories())

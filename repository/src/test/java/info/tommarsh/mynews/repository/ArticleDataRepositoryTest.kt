@@ -1,18 +1,17 @@
 package info.tommarsh.mynews.repository
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.*
 import info.tommarsh.mynews.core.NetworkException
 import info.tommarsh.mynews.core.Outcome
 import info.tommarsh.mynews.core.errors.ErrorLiveData
-import info.tommarsh.mynews.core.model.ArticleModel
 import info.tommarsh.mynews.repository.model.MockProvider.articleModel
 import info.tommarsh.mynews.repository.model.MockProvider.categoryModel
 import info.tommarsh.mynews.repository.model.MockProvider.noInternet
 import info.tommarsh.mynews.repository.source.local.articles.ArticlesLocalDataStore
 import info.tommarsh.mynews.repository.source.remote.articles.ArticlesRemoteDataStore
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
@@ -31,9 +30,7 @@ class ArticleDataRepositoryTest {
     private val repository =
         ArticleDataRepository(localDataStore, remoteDataStore, errors)
 
-    private val feedLivedata = MutableLiveData<List<ArticleModel>>()
     private val errorObserver = mock<Observer<NetworkException>>()
-    private val feedObserver = mock<Observer<List<ArticleModel>>>()
 
     @Before
     fun `Set up`() {
@@ -42,9 +39,9 @@ class ArticleDataRepositoryTest {
 
     @Test
     fun `Get breaking news from db and network, and persist`() = runBlocking<Unit> {
-        whenever(localDataStore.getBreakingNews()).thenReturn(MutableLiveData())
+        whenever(localDataStore.getBreakingNews()).thenReturn(flowOf(listOf(articleModel)))
 
-        repository.getBreakingNews("").observeForever(feedObserver)
+        repository.getBreakingNews("")
 
         verify(localDataStore).getBreakingNews()
     }
@@ -72,9 +69,9 @@ class ArticleDataRepositoryTest {
 
     @Test
     fun `Get feed`() = runBlockingTest {
-        whenever(localDataStore.getFeed()).thenReturn(feedLivedata)
+        whenever(localDataStore.getFeed()).thenReturn(flowOf(listOf(articleModel)))
 
-        repository.getFeed().observeForever(feedObserver)
+        repository.getFeed()
 
         verify(localDataStore).getFeed()
     }

@@ -8,6 +8,7 @@ import info.tommarsh.mynews.categories.MockModelProvider.categoryModel
 import info.tommarsh.mynews.categories.MockModelProvider.categoryViewModel
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.model.mapper.CategoryDomainToViewModelMapper
+import info.tommarsh.mynews.core.coroutines.DispatcherProvider
 import info.tommarsh.mynews.core.repository.CategoryRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
@@ -25,6 +26,10 @@ class CategoryChoiceViewModelTest {
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
+    private val dispatcherProvider = mock<DispatcherProvider> {
+        on { main() }.thenReturn(testCoroutineDispatcher)
+        on { work() }.thenReturn(testCoroutineDispatcher)
+    }
     private val categoryRepository = mock<CategoryRepository> {
         on { getSelectedCategoriesStream() }.thenReturn(mock())
         on { getCategories() }.thenReturn(mock())
@@ -34,7 +39,7 @@ class CategoryChoiceViewModelTest {
     }
 
     private val categoryChoiceViewModel =
-        CategoryChoiceViewModel(categoryRepository, viewModelMapper)
+        CategoryChoiceViewModel(categoryRepository, viewModelMapper, dispatcherProvider)
     private val categoryObserver = mock<Observer<List<CategoryViewModel>>>()
 
     @Before

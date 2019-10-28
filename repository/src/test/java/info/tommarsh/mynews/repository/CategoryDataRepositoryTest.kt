@@ -1,15 +1,13 @@
 package info.tommarsh.mynews.repository
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.NetworkException
 import info.tommarsh.mynews.core.errors.ErrorLiveData
-import info.tommarsh.mynews.core.model.CategoryModel
 import info.tommarsh.mynews.repository.source.local.category.CategoryLocalDataStore
-import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Before
@@ -22,7 +20,6 @@ class CategoryDataRepositoryTest {
     private val repository = CategoryDataRepository(localDataStore, errors)
 
     private val errorObserver = mock<Observer<NetworkException>>()
-    private val categoriesLiveData = MutableLiveData<List<CategoryModel>>()
 
     @Before
     fun `Set up`() {
@@ -36,17 +33,16 @@ class CategoryDataRepositoryTest {
 
     @Test
     fun `Get Categories`() {
-        whenever(localDataStore.getCategories()).thenReturn(categoriesLiveData)
+        whenever(localDataStore.getCategories()).thenReturn(flowOf())
 
-        val actual = repository.getCategories()
+        repository.getCategories()
 
         verify(localDataStore).getCategories()
-        assertEquals(categoriesLiveData, actual)
     }
 
     @Test
     fun `Get selected categories`() {
-        whenever(localDataStore.getSelectedCategoriesStream()).thenReturn(categoriesLiveData)
+        whenever(localDataStore.getSelectedCategoriesStream()).thenReturn(flowOf())
 
         repository.getSelectedCategoriesStream()
 

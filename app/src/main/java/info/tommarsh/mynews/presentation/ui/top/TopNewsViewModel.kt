@@ -1,12 +1,13 @@
 package info.tommarsh.mynews.presentation.ui.top
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.liveData
-import androidx.lifecycle.map
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import info.tommarsh.mynews.core.coroutines.DispatcherProvider
 import info.tommarsh.mynews.core.repository.ArticleRepository
 import info.tommarsh.mynews.presentation.model.mapper.ArticleViewModelMapper
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
@@ -18,11 +19,10 @@ class TopNewsViewModel
     private val dispatcherProvider: DispatcherProvider
 ) : ViewModel() {
 
-    val articles = liveData {
-        val items = repository.getBreakingNews("").map(mapper::map)
-        refreshBreakingNews()
-        emitSource(items)
-    }
+    val articles = repository.getBreakingNews("")
+        .onStart { refreshBreakingNews() }
+        .map { mapper.map(it) }
+        .asLiveData(dispatcherProvider.main())
 
     val errors = repository.errors
 
