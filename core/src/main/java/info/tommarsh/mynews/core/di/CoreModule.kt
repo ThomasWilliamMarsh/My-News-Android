@@ -10,7 +10,6 @@ import info.tommarsh.mynews.core.coroutines.DispatcherProvider
 object CoreModule {
 
     @Provides
-    @JvmStatic
     fun provideDispatcherProvider(coroutineDispatcherProvider: CoroutineDispatcherProvider): DispatcherProvider =
         coroutineDispatcherProvider
 }
