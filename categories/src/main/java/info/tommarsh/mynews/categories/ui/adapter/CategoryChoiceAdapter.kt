@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.viewholder.CategoryChoiceViewholder
-import info.tommarsh.mynews.core.extensions.getDiffUtilItemCallback
+import info.tommarsh.mynews.core.util.getDiffUtilItemCallback
 
 class CategoryChoiceAdapter(private val onClick: (category: CategoryViewModel, selected: Boolean) -> Unit) :
     ListAdapter<CategoryViewModel, CategoryChoiceViewholder>(

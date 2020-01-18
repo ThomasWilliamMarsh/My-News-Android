@@ -22,7 +22,6 @@ android {
 }
 
 dependencies {
-    implementation project(':repository')
     implementation project(':core')
 
     //Dagger

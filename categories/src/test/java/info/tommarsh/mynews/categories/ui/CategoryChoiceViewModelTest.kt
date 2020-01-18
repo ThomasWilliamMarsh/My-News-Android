@@ -8,8 +8,8 @@ import info.tommarsh.mynews.categories.MockModelProvider.categoryModel
 import info.tommarsh.mynews.categories.MockModelProvider.categoryViewModel
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.model.mapper.CategoryDomainToViewModelMapper
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.repository.CategoryRepository
+import info.tommarsh.mynews.core.category.data.CategoryRepository
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain

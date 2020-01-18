@@ -28,7 +28,6 @@ android {
 
 dependencies {
 
-    implementation project(':repository')
     implementation project(':core')
     implementation project(':categories')
     implementation project(':search')

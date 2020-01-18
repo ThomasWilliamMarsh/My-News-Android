@@ -5,11 +5,11 @@ import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import info.tommarsh.mynews.core.NetworkException
-import info.tommarsh.mynews.core.Outcome
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.errors.ErrorLiveData
-import info.tommarsh.mynews.core.repository.VideoRepository
+import info.tommarsh.mynews.core.model.NetworkException
+import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.util.ErrorLiveData
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
+import info.tommarsh.mynews.core.video.data.VideoRepository
 import info.tommarsh.mynews.presentation.model.MockModelProvider.noInternet
 import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemViewModel

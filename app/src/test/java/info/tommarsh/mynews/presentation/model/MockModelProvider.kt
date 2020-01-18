@@ -1,8 +1,12 @@
 package info.tommarsh.mynews.presentation.model
 
 import info.tommarsh.mynews.categories.model.CategoryViewModel
-import info.tommarsh.mynews.core.NetworkException
-import info.tommarsh.mynews.core.model.*
+import info.tommarsh.mynews.core.article.domain.model.ArticleModel
+import info.tommarsh.mynews.core.article.domain.model.SourceModel
+import info.tommarsh.mynews.core.category.domain.CategoryModel
+import info.tommarsh.mynews.core.model.NetworkException
+import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel
+import info.tommarsh.mynews.core.video.domain.model.PlaylistModel
 
 object MockModelProvider {
 

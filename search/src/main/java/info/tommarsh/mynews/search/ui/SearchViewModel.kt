@@ -4,9 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import info.tommarsh.mynews.core.Outcome
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.repository.ArticleRepository
+import info.tommarsh.mynews.core.article.data.ArticleRepository
+import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.model.mapper.SearchItemViewModelMapper
 import kotlinx.coroutines.launch

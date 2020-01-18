@@ -1,6 +1,6 @@
 package info.tommarsh.mynews.search.model
 
-import info.tommarsh.mynews.core.ViewModel
+import info.tommarsh.mynews.core.model.ViewModel
 
 data class SearchItemViewModel(
     val author: String,

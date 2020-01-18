@@ -5,10 +5,10 @@ import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
-import info.tommarsh.mynews.core.ViewModel
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.repository.ArticleRepository
-import info.tommarsh.mynews.core.repository.CategoryRepository
+import info.tommarsh.mynews.core.article.data.ArticleRepository
+import info.tommarsh.mynews.core.category.data.CategoryRepository
+import info.tommarsh.mynews.core.model.ViewModel
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.articleViewModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.categoryModel

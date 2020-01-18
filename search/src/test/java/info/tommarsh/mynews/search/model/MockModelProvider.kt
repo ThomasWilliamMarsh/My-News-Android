@@ -1,8 +1,8 @@
 package info.tommarsh.mynews.search.model
 
-import info.tommarsh.mynews.core.NetworkException
-import info.tommarsh.mynews.core.model.ArticleModel
-import info.tommarsh.mynews.core.model.SourceModel
+import info.tommarsh.mynews.core.article.domain.model.ArticleModel
+import info.tommarsh.mynews.core.article.domain.model.SourceModel
+import info.tommarsh.mynews.core.model.NetworkException
 
 object MockModelProvider {
 

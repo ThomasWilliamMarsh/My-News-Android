@@ -1,8 +1,8 @@
 package info.tommarsh.mynews.categories.model.mapper
 
 import info.tommarsh.mynews.categories.model.CategoryViewModel
-import info.tommarsh.mynews.core.Mapper
-import info.tommarsh.mynews.core.model.CategoryModel
+import info.tommarsh.mynews.core.category.domain.CategoryModel
+import info.tommarsh.mynews.core.model.Mapper
 import javax.inject.Inject
 
 class CategoryDomainToViewModelMapper

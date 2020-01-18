@@ -51,11 +51,11 @@ ext {
     //ArchComponents
     lifecycleVersion = "2.2.0-rc01"
     lifecycleTestingVersion = "2.1.0"
-    roomVersion = "2.2.0"
+    roomVersion = "2.2.3"
 
     //Network
     retrofitVersion = "2.6.0"
-    gsonVersion = "2.8.5"
+    gsonVersion = "2.8.6"
     jUnitVersion = "4.12"
     mockitoKotlinVersion = "2.1.0"
     mockitoInlineVersion = "2.7.21"

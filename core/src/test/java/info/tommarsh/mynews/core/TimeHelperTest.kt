@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.core
 
+import info.tommarsh.mynews.core.util.TimeHelper
 import junit.framework.Assert.assertEquals
 import org.joda.time.DateTime
 import org.junit.Test

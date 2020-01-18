@@ -4,7 +4,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.categories.R
 import info.tommarsh.mynews.categories.model.CategoryViewModel
-import info.tommarsh.mynews.core.extensions.inflate
+import info.tommarsh.mynews.core.util.inflate
 import kotlinx.android.synthetic.main.item_category_choice.view.*
 
 class CategoryChoiceViewholder(

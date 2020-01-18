@@ -12,6 +12,9 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
+        buildConfigField 'String', 'BASE_URL', '"https://newsapi.org"'
+        buildConfigField 'String', 'YOUTUBE_BASE_URL', '"https://www.googleapis.com/youtube/v3/"'
+
         buildConfigField 'String', 'API_KEY', '"d5ee3082f9e947d7868482d8f1199266"'
         buildConfigField 'String', 'YOUTUBE_API_KEY', '"AIzaSyBKHdX73GIAGcXCIdgz78o0ON_qZLboI64"'
         buildConfigField 'String', 'YOUTUBE_PLAYLIST', '"PLS3XGZxi7cBVNadbxDqZCUgISvabEpu-g"'
@@ -39,6 +42,13 @@ dependencies {
     api 'androidx.cardview:cardview:' + rootProject.cardViewVersion
     api 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
     api 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
+    api 'androidx.room:room-runtime:' + rootProject.roomVersion
+    api 'androidx.room:room-ktx:' + rootProject.roomVersion
+    kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
+
+    //Retrofit
+    implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
+    implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion
 
     //Navigation
     api "android.arch.navigation:navigation-fragment-ktx:" + rootProject.navigationVersion
@@ -57,6 +67,9 @@ dependencies {
     api 'com.google.dagger:dagger:' + rootProject.daggerVersion
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
 
+    //Gson
+    implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
+
     //Browser
     api "com.android.support:customtabs:" + rootProject.tabVersion
 
@@ -68,7 +81,9 @@ dependencies {
     kapt 'com.github.bumptech.glide:compiler:' + rootProject.glideVersion
 
     //Testing
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:'+ rootProject.coroutinesTestVersion
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
+    testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
 }

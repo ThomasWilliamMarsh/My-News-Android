@@ -5,10 +5,10 @@ import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import info.tommarsh.mynews.core.NetworkException
-import info.tommarsh.mynews.core.extensions.consume
-import info.tommarsh.mynews.core.extensions.snack
-import info.tommarsh.mynews.core.repository.PreferencesRepository
+import info.tommarsh.mynews.core.model.NetworkException
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
+import info.tommarsh.mynews.core.util.consume
+import info.tommarsh.mynews.core.util.snack
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R

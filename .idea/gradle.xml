@@ -12,11 +12,11 @@
             <option value="$PROJECT_DIR$/article" />
             <option value="$PROJECT_DIR$/categories" />
             <option value="$PROJECT_DIR$/core" />
-            <option value="$PROJECT_DIR$/repository" />
             <option value="$PROJECT_DIR$/search" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
+        <option name="testRunner" value="PLATFORM" />
       </GradleProjectSettings>
     </option>
   </component>

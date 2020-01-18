@@ -1,7 +1,7 @@
 package info.tommarsh.mynews.categories
 
 import info.tommarsh.mynews.categories.model.CategoryViewModel
-import info.tommarsh.mynews.core.model.CategoryModel
+import info.tommarsh.mynews.core.category.domain.CategoryModel
 
 object MockModelProvider {
 

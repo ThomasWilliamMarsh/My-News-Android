@@ -1,8 +1,8 @@
 package info.tommarsh.mynews.search.model.mapper
 
-import info.tommarsh.mynews.core.Mapper
-import info.tommarsh.mynews.core.TimeHelper
-import info.tommarsh.mynews.core.model.ArticleModel
+import info.tommarsh.mynews.core.article.domain.model.ArticleModel
+import info.tommarsh.mynews.core.model.Mapper
+import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import javax.inject.Inject
 

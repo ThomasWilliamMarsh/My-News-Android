@@ -3,8 +3,8 @@ package info.tommarsh.mynews.presentation.ui
 import android.content.Intent
 import android.net.Uri
 import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
-import info.tommarsh.mynews.core.ViewModel
-import info.tommarsh.mynews.core.extensions.loadUrl
+import info.tommarsh.mynews.core.model.ViewModel
+import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.model.HeaderViewModel
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel

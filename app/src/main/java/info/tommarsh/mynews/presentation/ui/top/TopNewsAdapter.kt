@@ -1,7 +1,7 @@
 package info.tommarsh.mynews.presentation.ui.top
 
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import info.tommarsh.mynews.core.ViewModel
+import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.presentation.ui.headerDelegate
 import info.tommarsh.mynews.presentation.ui.primaryArticleDelegate
 import info.tommarsh.mynews.presentation.ui.secondaryArticleDelegate

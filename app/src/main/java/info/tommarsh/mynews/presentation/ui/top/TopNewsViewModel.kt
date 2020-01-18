@@ -3,8 +3,8 @@ package info.tommarsh.mynews.presentation.ui.top
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.repository.ArticleRepository
+import info.tommarsh.mynews.core.article.data.ArticleRepository
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart

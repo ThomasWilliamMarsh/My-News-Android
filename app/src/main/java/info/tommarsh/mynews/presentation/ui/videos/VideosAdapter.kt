@@ -1,7 +1,7 @@
 package info.tommarsh.mynews.presentation.ui.videos
 
 import com.hannesdorfmann.adapterdelegates4.AsyncListDifferDelegationAdapter
-import info.tommarsh.mynews.core.ViewModel
+import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.presentation.ui.videoDelegate
 import info.tommarsh.mynews.presentation.util.DelegateDiffCallback
 

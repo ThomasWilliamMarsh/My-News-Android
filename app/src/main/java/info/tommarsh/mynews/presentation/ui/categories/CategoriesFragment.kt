@@ -6,10 +6,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
-import info.tommarsh.mynews.core.ViewModel
-import info.tommarsh.mynews.core.extensions.makeGone
-import info.tommarsh.mynews.core.extensions.makeVisible
-import info.tommarsh.mynews.core.model.CategoryModel
+import info.tommarsh.mynews.core.category.domain.CategoryModel
+import info.tommarsh.mynews.core.model.ViewModel
+import info.tommarsh.mynews.core.util.makeGone
+import info.tommarsh.mynews.core.util.makeVisible
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesAdapter.Companion.TYPE_HEADER
 import info.tommarsh.presentation.R

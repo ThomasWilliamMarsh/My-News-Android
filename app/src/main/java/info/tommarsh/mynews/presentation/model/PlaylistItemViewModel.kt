@@ -1,6 +1,6 @@
 package info.tommarsh.mynews.presentation.model
 
-import info.tommarsh.mynews.core.ViewModel
+import info.tommarsh.mynews.core.model.ViewModel
 
 data class PlaylistItemViewModel(
     val videoId: String,

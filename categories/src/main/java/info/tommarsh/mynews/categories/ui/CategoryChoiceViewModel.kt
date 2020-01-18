@@ -5,8 +5,8 @@ import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.model.mapper.CategoryDomainToViewModelMapper
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.repository.CategoryRepository
+import info.tommarsh.mynews.core.category.data.CategoryRepository
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import javax.inject.Inject

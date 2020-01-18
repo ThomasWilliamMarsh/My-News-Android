@@ -11,9 +11,9 @@ import info.tommarsh.categories.R
 import info.tommarsh.mynews.categories.di.Injector.inject
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
-import info.tommarsh.mynews.core.ViewModelFactory
-import info.tommarsh.mynews.core.extensions.observeNightMode
-import info.tommarsh.mynews.core.repository.PreferencesRepository
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
+import info.tommarsh.mynews.core.util.ViewModelFactory
+import info.tommarsh.mynews.core.util.observeNightMode
 import kotlinx.android.synthetic.main.activity_category_choice.*
 import javax.inject.Inject
 

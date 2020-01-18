@@ -2,7 +2,7 @@ package info.tommarsh.mynews.presentation.model.mapper
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
-import info.tommarsh.mynews.core.TimeHelper
+import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.articleViewModel
 import org.junit.Assert.assertEquals

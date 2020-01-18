@@ -5,8 +5,8 @@ import android.view.*
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import info.tommarsh.mynews.core.NetworkException
-import info.tommarsh.mynews.core.extensions.snack
+import info.tommarsh.mynews.core.model.NetworkException
+import info.tommarsh.mynews.core.util.snack
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R

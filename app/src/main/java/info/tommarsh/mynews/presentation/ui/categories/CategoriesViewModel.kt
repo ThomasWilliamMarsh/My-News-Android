@@ -3,9 +3,9 @@ package info.tommarsh.mynews.presentation.ui.categories
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
-import info.tommarsh.mynews.core.repository.ArticleRepository
-import info.tommarsh.mynews.core.repository.CategoryRepository
+import info.tommarsh.mynews.core.article.data.ArticleRepository
+import info.tommarsh.mynews.core.category.data.CategoryRepository
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.presentation.addHeaders
 import info.tommarsh.mynews.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.flow.flatMapLatest

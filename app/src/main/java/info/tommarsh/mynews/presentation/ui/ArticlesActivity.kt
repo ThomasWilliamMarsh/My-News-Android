@@ -6,8 +6,8 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import info.tommarsh.mynews.core.extensions.observeNightMode
-import info.tommarsh.mynews.core.repository.PreferencesRepository
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
+import info.tommarsh.mynews.core.util.observeNightMode
 import info.tommarsh.mynews.presentation.NewsApp
 import info.tommarsh.presentation.R
 import kotlinx.android.synthetic.main.activity_articles.*

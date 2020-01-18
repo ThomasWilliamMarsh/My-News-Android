@@ -6,10 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
-import info.tommarsh.mynews.core.NetworkException
-import info.tommarsh.mynews.core.ViewModelFactory
-import info.tommarsh.mynews.core.extensions.*
-import info.tommarsh.mynews.core.repository.PreferencesRepository
+import info.tommarsh.mynews.core.model.NetworkException
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
+import info.tommarsh.mynews.core.util.*
 import info.tommarsh.mynews.search.di.Injector.inject
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter

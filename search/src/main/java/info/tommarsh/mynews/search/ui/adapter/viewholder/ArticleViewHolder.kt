@@ -2,8 +2,8 @@ package info.tommarsh.mynews.search.ui.adapter.viewholder
 
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import info.tommarsh.mynews.core.extensions.inflate
-import info.tommarsh.mynews.core.extensions.loadUrl
+import info.tommarsh.mynews.core.util.inflate
+import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.setClickListenerFor
 import info.tommarsh.search.R

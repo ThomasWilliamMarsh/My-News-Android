@@ -16,7 +16,6 @@ dependencies {
 
     implementation project(':app')
     implementation project(':core')
-    implementation project(':repository')
 
     //Dagger
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion

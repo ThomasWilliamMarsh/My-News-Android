@@ -3,10 +3,10 @@ package info.tommarsh.mynews.article.ui
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import info.tommarsh.mynews.article.di.ArticleInjector.inject
-import info.tommarsh.mynews.core.extensions.contentBehindStatusBar
-import info.tommarsh.mynews.core.extensions.loadUrl
-import info.tommarsh.mynews.core.extensions.observeNightMode
-import info.tommarsh.mynews.core.repository.PreferencesRepository
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
+import info.tommarsh.mynews.core.util.contentBehindStatusBar
+import info.tommarsh.mynews.core.util.loadUrl
+import info.tommarsh.mynews.core.util.observeNightMode
 import kotlinx.android.synthetic.main.activity_article.*
 import marsh.tommarsh.article.R
 import javax.inject.Inject

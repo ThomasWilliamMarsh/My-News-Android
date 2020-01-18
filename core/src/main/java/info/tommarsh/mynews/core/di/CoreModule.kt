@@ -2,8 +2,8 @@ package info.tommarsh.mynews.core.di
 
 import dagger.Module
 import dagger.Provides
-import info.tommarsh.mynews.core.coroutines.CoroutineDispatcherProvider
-import info.tommarsh.mynews.core.coroutines.DispatcherProvider
+import info.tommarsh.mynews.core.util.coroutines.CoroutineDispatcherProvider
+import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 
 
 @Module
