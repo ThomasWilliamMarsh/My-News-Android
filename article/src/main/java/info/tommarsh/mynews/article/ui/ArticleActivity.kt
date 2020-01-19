@@ -6,7 +6,6 @@ import info.tommarsh.mynews.article.di.ArticleInjector.inject
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.contentBehindStatusBar
 import info.tommarsh.mynews.core.util.loadUrl
-import info.tommarsh.mynews.core.util.observeNightMode
 import kotlinx.android.synthetic.main.activity_article.*
 import marsh.tommarsh.article.R
 import javax.inject.Inject
@@ -21,8 +20,6 @@ class ArticleActivity : AppCompatActivity() {
         inject()
         contentBehindStatusBar()
         setContentView(R.layout.activity_article)
-
-        observeNightMode(sharedPreferencesRepository)
 
         article_text.text = getString(R.string.lorem_ipsum)
         article_title.text = intent.getStringExtra("title")

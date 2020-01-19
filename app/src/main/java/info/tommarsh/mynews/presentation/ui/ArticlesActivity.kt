@@ -8,7 +8,6 @@ import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import info.tommarsh.mynews.core.di.provideCoreComponent
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
-import info.tommarsh.mynews.core.util.observeNightMode
 import info.tommarsh.mynews.presentation.di.DaggerHomeComponent
 import info.tommarsh.mynews.presentation.di.HomeComponent
 import info.tommarsh.mynews.presentation.di.HomeComponentProvider
@@ -26,7 +25,6 @@ class ArticlesActivity : AppCompatActivity(), HomeComponentProvider,
         super.onCreate(savedInstanceState)
         homeComponent().inject(this)
         setContentView(R.layout.activity_articles)
-        observeNightMode(sharedPreferencesRepository)
         setUpToolbar()
         setUpNavigation()
     }

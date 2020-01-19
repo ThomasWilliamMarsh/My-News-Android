@@ -13,7 +13,6 @@ import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.ViewModelFactory
-import info.tommarsh.mynews.core.util.observeNightMode
 import kotlinx.android.synthetic.main.activity_category_choice.*
 import javax.inject.Inject
 
@@ -35,7 +34,6 @@ class CategoryChoiceActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         inject()
         setContentView(R.layout.activity_category_choice)
-        observeNightMode(sharedPreferencesRepository)
         setUpViewModel()
         setUpUi()
     }

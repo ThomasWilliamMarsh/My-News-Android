@@ -5,9 +5,7 @@ import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DiffUtil
-import info.tommarsh.mynews.core.preferences.PreferencesRepository
 
 //region listadapter
 fun <T> getDiffUtilItemCallback(compare: (T, T) -> Boolean) =
@@ -24,13 +22,6 @@ inline fun <reified T> Menu.getActionItem(item: Int): T = findItem(item).actionV
 
 //region Activity
 inline fun <reified T> AppCompatActivity.service(type: String) = getSystemService(type) as T
-
-fun AppCompatActivity.observeNightMode(preferencesRepository: PreferencesRepository) {
-    preferencesRepository.observeNightModeChanges().observe(this, Observer { nightMode ->
-        delegate.localNightMode = nightMode
-        invalidateOptionsMenu()
-    })
-}
 
 fun AppCompatActivity.contentBehindStatusBar() = with(window){
     addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)

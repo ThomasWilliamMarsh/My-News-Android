@@ -34,7 +34,6 @@ class SearchActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         inject()
         setContentView(R.layout.activity_search)
-        observeNightMode(preferencesRepository)
         setSupportActionBar(search_toolbar)
         setUpViewModel()
         setUpRecyclerView()
