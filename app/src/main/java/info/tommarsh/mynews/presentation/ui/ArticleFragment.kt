@@ -5,7 +5,6 @@ import android.view.MenuItem
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import info.tommarsh.mynews.core.util.ViewModelFactory
-import info.tommarsh.mynews.presentation.NewsApp.Companion.homeGraph
 import info.tommarsh.presentation.R
 import javax.inject.Inject
 
@@ -13,10 +12,6 @@ open class ArticleFragment : Fragment() {
 
     @Inject
     protected lateinit var factory: ViewModelFactory
-
-    val fragmentGraph by lazy {
-        homeGraph(context!!)
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

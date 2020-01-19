@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.presentation.di
 
+import dagger.BindsInstance
 import dagger.Component
 import info.tommarsh.mynews.core.di.CoreComponent
 import info.tommarsh.mynews.core.di.FeatureScope
@@ -18,6 +19,7 @@ interface HomeComponent {
     @Component.Factory
     interface Factory {
         fun create(
+            @BindsInstance articlesActivity: ArticlesActivity,
             coreComponent: CoreComponent
         ): HomeComponent
     }

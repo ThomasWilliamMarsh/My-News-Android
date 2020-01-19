@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.presentation.ui.videos
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.Observer
@@ -7,6 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.util.snack
+import info.tommarsh.mynews.presentation.di.HomeComponentProvider
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
@@ -20,9 +22,11 @@ class VideosFragment : ArticleFragment() {
         ViewModelProviders.of(this, factory).get(VideosViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fragmentGraph.inject(this)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as HomeComponentProvider)
+            .homeComponent()
+            .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

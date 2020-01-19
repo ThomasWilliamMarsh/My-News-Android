@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.presentation.ui.categories
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.lifecycle.Observer
@@ -10,6 +11,7 @@ import info.tommarsh.mynews.core.category.domain.CategoryModel
 import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.core.util.makeGone
 import info.tommarsh.mynews.core.util.makeVisible
+import info.tommarsh.mynews.presentation.di.HomeComponentProvider
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesAdapter.Companion.TYPE_HEADER
 import info.tommarsh.presentation.R
@@ -24,9 +26,11 @@ class CategoriesFragment : ArticleFragment() {
         ViewModelProviders.of(this, factory).get(CategoriesViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fragmentGraph.inject(this)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as HomeComponentProvider)
+            .homeComponent()
+            .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =

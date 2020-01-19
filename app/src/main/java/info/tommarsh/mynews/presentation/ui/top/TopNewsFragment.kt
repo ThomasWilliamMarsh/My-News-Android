@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.presentation.ui.top
 
+import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
@@ -9,6 +10,7 @@ import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.consume
 import info.tommarsh.mynews.core.util.snack
+import info.tommarsh.mynews.presentation.di.HomeComponentProvider
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
@@ -26,9 +28,11 @@ class TopNewsFragment : ArticleFragment() {
         ViewModelProviders.of(this, factory).get(TopNewsViewModel::class.java)
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        fragmentGraph.inject(this)
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        (context as HomeComponentProvider)
+            .homeComponent()
+            .inject(this)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
