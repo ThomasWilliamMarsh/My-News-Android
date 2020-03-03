@@ -15,10 +15,11 @@ import info.tommarsh.mynews.presentation.di.HomeComponentProvider
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesAdapter.Companion.TYPE_HEADER
 import info.tommarsh.presentation.R
-import kotlinx.android.synthetic.main.fragment_categories.*
-import kotlinx.android.synthetic.main.layout_add_categories.*
+import info.tommarsh.presentation.databinding.FragmentCategoriesBinding
 
 class CategoriesFragment : ArticleFragment() {
+
+    lateinit var binding: FragmentCategoriesBinding
 
     private val adapter = CategoriesAdapter()
 
@@ -33,16 +34,26 @@ class CategoriesFragment : ArticleFragment() {
             .inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_categories, container, false)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentCategoriesBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        add_categories_button.setOnClickListener(Navigation.createNavigateOnClickListener(R.id.navigation_choice))
-        my_news_recycler_view.adapter = adapter
-        my_news_recycler_view.layoutManager = setLayoutManager()
-        refresh_my_news.setOnRefreshListener {
-            refresh_my_news.isRefreshing = true
+        binding.addCategories.addCategoriesButton.setOnClickListener(
+            Navigation.createNavigateOnClickListener(
+                R.id.navigation_choice
+            )
+        )
+        binding.myNewsRecyclerView.adapter = adapter
+        binding.myNewsRecyclerView.layoutManager = setLayoutManager()
+        binding.refreshMyNews.setOnRefreshListener {
+            binding.refreshMyNews.isRefreshing = true
             viewModel.refreshFeed()
         }
     }
@@ -65,16 +76,16 @@ class CategoriesFragment : ArticleFragment() {
 
     private fun onSelectedCategories(categories: List<CategoryModel>) {
         if (categories.isEmpty()) {
-            add_categories_root.makeVisible()
+            binding.addCategories.root.makeVisible()
         } else {
-            add_categories_root.makeGone()
-            refresh_my_news.isRefreshing = true
+            binding.addCategories.root.makeGone()
+            binding.refreshMyNews.isRefreshing = true
         }
         viewModel.refreshFeed()
     }
 
     private fun onArticleCategories(articles: List<ViewModel>) {
-        refresh_my_news.isRefreshing = false
+        binding.refreshMyNews.isRefreshing = false
         adapter.items = articles
     }
 

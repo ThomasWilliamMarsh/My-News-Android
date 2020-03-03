@@ -21,9 +21,6 @@ class CategoryChoiceActivity : AppCompatActivity() {
     @Inject
     lateinit var factory: ViewModelFactory
 
-    @Inject
-    lateinit var sharedPreferencesRepository: PreferencesRepository
-
     private val viewModel: CategoryChoiceViewModel by lazy {
         ViewModelProviders.of(this, factory).get(CategoryChoiceViewModel::class.java)
     }

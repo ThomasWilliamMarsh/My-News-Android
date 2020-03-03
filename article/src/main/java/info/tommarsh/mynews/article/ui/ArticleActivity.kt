@@ -12,9 +12,6 @@ import javax.inject.Inject
 
 class ArticleActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var sharedPreferencesRepository: PreferencesRepository
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()

@@ -7,37 +7,34 @@ import androidx.navigation.NavDestination
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import info.tommarsh.mynews.core.di.provideCoreComponent
-import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.presentation.di.DaggerHomeComponent
 import info.tommarsh.mynews.presentation.di.HomeComponent
 import info.tommarsh.mynews.presentation.di.HomeComponentProvider
 import info.tommarsh.presentation.R
-import kotlinx.android.synthetic.main.activity_articles.*
-import javax.inject.Inject
+import info.tommarsh.presentation.databinding.ActivityArticlesBinding
 
 class ArticlesActivity : AppCompatActivity(), HomeComponentProvider,
     NavController.OnDestinationChangedListener {
 
-    @Inject
-    lateinit var sharedPreferencesRepository: PreferencesRepository
+    private val binding by lazy { ActivityArticlesBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         homeComponent().inject(this)
-        setContentView(R.layout.activity_articles)
+        setContentView(binding.root)
         setUpToolbar()
         setUpNavigation()
     }
 
     private fun setUpToolbar() {
-        setSupportActionBar(articles_toolbar)
+        setSupportActionBar(binding.articlesToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
     }
 
     private fun setUpNavigation() {
         val controller = findNavController(this, R.id.nav_host_fragment)
         controller.addOnDestinationChangedListener(this)
-        setupWithNavController(bottom_navigation, controller)
+        setupWithNavController(binding.bottomNavigation, controller)
     }
 
     override fun onDestinationChanged(
@@ -45,7 +42,7 @@ class ArticlesActivity : AppCompatActivity(), HomeComponentProvider,
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        articles_toolbar_text.text = destination.label
+        binding.articlesToolbarText.text = destination.label
     }
 
     override fun homeComponent(): HomeComponent {

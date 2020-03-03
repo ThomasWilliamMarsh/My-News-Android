@@ -22,13 +22,16 @@ android {
     androidExtensions {
         experimental = true
     }
+    viewBinding {
+        enabled = true
+    }
 
     dynamicFeatures = [":article"]
 }
 
 dependencies {
 
-    implementation project(':core')
+    api project(':core')
     implementation project(':categories')
     implementation project(':search')
 

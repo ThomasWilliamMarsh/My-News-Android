@@ -14,10 +14,12 @@ import info.tommarsh.mynews.presentation.di.HomeComponentProvider
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
-import kotlinx.android.synthetic.main.fragment_top_news.*
+import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
 import javax.inject.Inject
 
 class TopNewsFragment : ArticleFragment() {
+
+    private lateinit var binding: FragmentTopNewsBinding
 
     @Inject
     lateinit var sharedPreferencesRepository: PreferencesRepository
@@ -35,13 +37,15 @@ class TopNewsFragment : ArticleFragment() {
             .inject(this)
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? =
-        inflater.inflate(R.layout.fragment_top_news, container, false)
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        binding = FragmentTopNewsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        top_news_recycler_view.adapter = adapter
-        refresh_top_news.setOnRefreshListener { viewModel.refreshBreakingNews() }
+        binding.topNewsRecyclerView.adapter = adapter
+        binding.refreshTopNews.setOnRefreshListener { viewModel.refreshBreakingNews() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -75,11 +79,11 @@ class TopNewsFragment : ArticleFragment() {
 
     private fun onArticlesReceived(articles: List<ArticleViewModel>?) {
         adapter.items = articles
-        refresh_top_news.isRefreshing = false
+        binding.refreshTopNews.isRefreshing = false
     }
 
     private fun onError(error: NetworkException) {
-        refresh_top_news.isRefreshing = false
-        refresh_top_news.snack(error.localizedMessage)
+        binding.refreshTopNews.isRefreshing = false
+        binding.refreshTopNews.snack(error.localizedMessage)
     }
 }

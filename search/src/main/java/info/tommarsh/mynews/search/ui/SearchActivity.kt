@@ -23,9 +23,6 @@ class SearchActivity : AppCompatActivity() {
     @Inject
     lateinit var factory: ViewModelFactory
 
-    @Inject
-    lateinit var preferencesRepository: PreferencesRepository
-
     private val viewModel: SearchViewModel by lazy {
         ViewModelProviders.of(this, factory).get(SearchViewModel::class.java)
     }

@@ -61,6 +61,7 @@ dependencies {
 
     //Coroutines
     api 'org.jetbrains.kotlinx:kotlinx-coroutines-android:' + rootProject.coroutinesVersion
+    api 'org.jetbrains.kotlinx:kotlinx-coroutines-core:' + rootProject.coroutinesVersion
     api 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
 
     //Dagger
