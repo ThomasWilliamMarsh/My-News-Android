@@ -7,11 +7,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
-import info.tommarsh.categories.R
+import info.tommarsh.categories.databinding.ActivityCategoryChoiceBinding
 import info.tommarsh.mynews.categories.di.Injector.inject
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
-import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.ViewModelFactory
 import kotlinx.android.synthetic.main.activity_category_choice.*
 import javax.inject.Inject
@@ -20,6 +19,8 @@ class CategoryChoiceActivity : AppCompatActivity() {
 
     @Inject
     lateinit var factory: ViewModelFactory
+
+    private val binding by lazy { ActivityCategoryChoiceBinding.inflate(layoutInflater) }
 
     private val viewModel: CategoryChoiceViewModel by lazy {
         ViewModelProviders.of(this, factory).get(CategoryChoiceViewModel::class.java)
@@ -30,15 +31,15 @@ class CategoryChoiceActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         inject()
-        setContentView(R.layout.activity_category_choice)
+        setContentView(binding.root)
         setUpViewModel()
         setUpUi()
     }
 
     private fun setUpUi() {
         setSupportActionBar(activity_choice_toolbar)
-        activity_choice_recycler_view.adapter = adapter
-        activity_choice_recycler_view.addItemDecoration(DividerItemDecoration(this, VERTICAL))
+        binding.activityChoiceRecyclerView.adapter = adapter
+        binding.activityChoiceRecyclerView.addItemDecoration(DividerItemDecoration(this, VERTICAL))
     }
 
     private fun setUpViewModel() {

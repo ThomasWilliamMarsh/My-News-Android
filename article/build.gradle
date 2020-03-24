@@ -10,11 +10,15 @@ android {
         minSdkVersion rootProject.minSdk
         targetSdkVersion rootProject.targetSdk
     }
+
+    viewBinding {
+        enabled = true
+    }
 }
 
 dependencies {
 
-    implementation project(':core')
+    implementation project(':app')
 
     //Dagger
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
