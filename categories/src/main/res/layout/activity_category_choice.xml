@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:layout_width="match_parent" android:layout_height="match_parent">
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        tools:context="info.tommarsh.mynews.categories.ui.CategoryChoiceActivity">
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
@@ -13,8 +15,21 @@
         <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/activity_choice_toolbar"
                 android:layout_width="match_parent"
+                android:layout_gravity="start"
+                android:gravity="start"
                 android:layout_height="?attr/actionBarSize"
-                app:title="@string/edit_my_news"/>
+                app:layout_scrollFlags="scroll|enterAlways">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/activity_choice_toolbar_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="start"
+                    android:textAlignment="textStart"
+                    android:textAppearance="?textAppearanceHeadline5"
+                    android:text="@string/edit_my_news"/>
+
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

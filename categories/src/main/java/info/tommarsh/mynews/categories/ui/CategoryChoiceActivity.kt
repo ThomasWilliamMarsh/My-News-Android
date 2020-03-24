@@ -38,6 +38,7 @@ class CategoryChoiceActivity : AppCompatActivity() {
 
     private fun setUpUi() {
         setSupportActionBar(activity_choice_toolbar)
+        supportActionBar?.setDisplayShowTitleEnabled(false)
         binding.activityChoiceRecyclerView.adapter = adapter
         binding.activityChoiceRecyclerView.addItemDecoration(DividerItemDecoration(this, VERTICAL))
     }

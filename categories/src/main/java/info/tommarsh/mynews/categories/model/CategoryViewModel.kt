@@ -9,6 +9,6 @@ data class CategoryViewModel(
 ) : ViewModel {
 
     override fun contentsTheSame(other: ViewModel): Boolean {
-        return id == (other as CategoryViewModel).id
+        return this == other
     }
 }
