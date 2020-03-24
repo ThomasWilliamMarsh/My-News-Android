@@ -13,7 +13,7 @@
     <application>
         <activity
                 android:name="info.tommarsh.mynews.article.ui.ArticleActivity"
-                android:theme="@style/MyTheme.DayNight"/>
+                android:theme="@style/MyNews.DayNight"/>
     </application>
 
 </manifest>

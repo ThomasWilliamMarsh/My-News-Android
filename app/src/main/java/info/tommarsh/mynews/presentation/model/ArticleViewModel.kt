@@ -11,4 +11,10 @@ data class ArticleViewModel(
     val url: String,
     val urlToImage: String,
     val category: String
-) : ViewModel
+) : ViewModel {
+
+    override fun contentsTheSame(other: ViewModel): Boolean {
+        val otherArticle = other as ArticleViewModel
+        return url == otherArticle.url && category == otherArticle.category
+    }
+}

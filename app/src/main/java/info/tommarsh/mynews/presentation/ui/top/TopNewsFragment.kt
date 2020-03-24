@@ -10,7 +10,7 @@ import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.consume
 import info.tommarsh.mynews.core.util.snack
-import info.tommarsh.mynews.presentation.di.HomeComponentProvider
+import info.tommarsh.mynews.presentation.di.inject
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
@@ -32,9 +32,7 @@ class TopNewsFragment : ArticleFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (context as HomeComponentProvider)
-            .homeComponent()
-            .inject(this)
+        inject()
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {

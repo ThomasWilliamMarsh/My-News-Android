@@ -11,4 +11,10 @@ data class SearchItemViewModel(
     val url: String,
     val urlToImage: String,
     val category: String
-) : ViewModel
+) : ViewModel {
+
+    override fun contentsTheSame(other: ViewModel): Boolean {
+        val otherSearchItem = other as SearchItemViewModel
+        return url == otherSearchItem.url && category == otherSearchItem.category
+    }
+}

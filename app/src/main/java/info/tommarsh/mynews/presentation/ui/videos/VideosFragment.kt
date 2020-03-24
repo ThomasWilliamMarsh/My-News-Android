@@ -8,7 +8,7 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.util.snack
-import info.tommarsh.mynews.presentation.di.HomeComponentProvider
+import info.tommarsh.mynews.presentation.di.inject
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
@@ -26,9 +26,7 @@ class VideosFragment : ArticleFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (context as HomeComponentProvider)
-            .homeComponent()
-            .inject(this)
+        inject()
     }
 
     override fun onCreateView(

@@ -9,5 +9,5 @@ import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 
 class DelegateDiffCallback : DiffUtil.ItemCallback<ViewModel>() {
     override fun areItemsTheSame(old: ViewModel, new: ViewModel) = old::class.java == new::class.java
-    override fun areContentsTheSame(old: ViewModel, new: ViewModel) = old == new
+    override fun areContentsTheSame(old: ViewModel, new: ViewModel) = old.contentsTheSame(new)
 }

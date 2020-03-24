@@ -12,6 +12,7 @@ import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.core.util.makeGone
 import info.tommarsh.mynews.core.util.makeVisible
 import info.tommarsh.mynews.presentation.di.HomeComponentProvider
+import info.tommarsh.mynews.presentation.di.inject
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesAdapter.Companion.TYPE_HEADER
 import info.tommarsh.presentation.R
@@ -29,9 +30,7 @@ class CategoriesFragment : ArticleFragment() {
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (context as HomeComponentProvider)
-            .homeComponent()
-            .inject(this)
+        inject()
     }
 
     override fun onCreateView(

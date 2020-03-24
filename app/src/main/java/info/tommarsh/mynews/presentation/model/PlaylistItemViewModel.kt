@@ -7,4 +7,9 @@ data class PlaylistItemViewModel(
     val title: String,
     val publishedAt: String,
     val thumbnail: String
-) : ViewModel
+) : ViewModel {
+
+    override fun contentsTheSame(other: ViewModel): Boolean {
+        return videoId == (other as PlaylistItemViewModel).videoId
+    }
+}

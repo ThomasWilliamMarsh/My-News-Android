@@ -2,7 +2,7 @@ package info.tommarsh.mynews.article.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import info.tommarsh.mynews.article.di.ArticleInjector.inject
+import info.tommarsh.mynews.article.di.inject
 import info.tommarsh.mynews.core.util.contentBehindStatusBar
 import info.tommarsh.mynews.core.util.loadUrl
 import marsh.tommarsh.article.R
