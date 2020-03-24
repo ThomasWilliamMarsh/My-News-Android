@@ -7,10 +7,8 @@ import info.tommarsh.mynews.core.category.domain.CategoryModel
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.util.ErrorLiveData
 import kotlinx.coroutines.coroutineScope
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.Flow
 import javax.inject.Inject
-
-typealias TopicOutcome = Pair<String, Outcome<List<ArticleModel>>>
 
 class ArticleDataRepository
 @Inject internal constructor(
@@ -24,29 +22,26 @@ class ArticleDataRepository
     override fun getFeed(): Flow<List<ArticleModel>> = local.getFeed()
 
     override suspend fun refreshBreakingNews() {
-        val items = remote.getBreakingNews()
-        when (items) {
-            is Outcome.Success -> local.saveBreakingNews(items.data)
+        when (val items = remote.getBreakingNews()) {
+            is Outcome.Success -> local.saveArticles(items.data)
             is Outcome.Error -> errors.setError(items.error)
         }
     }
 
     override suspend fun refreshFeed(categories: List<CategoryModel>) = coroutineScope {
         local.deleteUnselectedCategories()
-        categories.asFlow()
-            .map {
-                TopicOutcome(
-                    it.id,
-                    remote.getArticleForCategory(it.id)
-                )
-            }
-            .buffer()
-            .collect {
-                when (val outcome = it.second) {
-                    is Outcome.Success -> local.saveCategory(it.first, outcome.data)
-                    is Outcome.Error -> errors.setError(outcome.error)
+        local.saveArticles(categories.fold(mutableListOf()) { result, category ->
+            when (val outcome = remote.getArticleForCategory(category.id)) {
+                is Outcome.Success -> result.apply {
+                    outcome.data.forEach { it.category = category.id}
+                    addAll(outcome.data)
+                }
+                is Outcome.Error -> {
+                    errors.setError(outcome.error)
+                    result
                 }
             }
+        })
     }
 
     override suspend fun searchArticles(query: String) = remote.searchArticles(query)

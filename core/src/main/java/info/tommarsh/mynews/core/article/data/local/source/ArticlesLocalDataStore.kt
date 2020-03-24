@@ -26,14 +26,8 @@ internal class ArticlesLocalDataStore
         return articlesDao.deleteUnselectedCategories()
     }
 
-    suspend fun saveBreakingNews(items: List<ArticleModel>) {
+    suspend fun saveArticles(items: List<ArticleModel>) {
         val model = domainMapper.map(items)
         articlesDao.replaceBreakingArticles(model)
-    }
-
-    suspend fun saveCategory(category: String, items: List<ArticleModel>) {
-        val model =
-            domainMapper.map(items).also { articles -> articles.forEach { it.category = category } }
-        articlesDao.replaceCategories(category, model)
     }
 }

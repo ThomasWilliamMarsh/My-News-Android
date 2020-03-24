@@ -100,8 +100,8 @@ object MockProvider {
         "top-news"
     )
     val category = Category(
-        "id",
-        "name",
+        "top-news",
+        "Top News",
         true
     )
 
@@ -117,11 +117,12 @@ object MockProvider {
         sourceModel,
         "title",
         "https://www.test.com",
-        "https://test.com/image.jpg"
+        "https://test.com/image.jpg",
+        "top-news"
     )
     val categoryModel = CategoryModel(
-        "id",
-        "name",
+        "top-news",
+        "Top News",
         true
     )
 
