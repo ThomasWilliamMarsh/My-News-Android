@@ -1,6 +1,7 @@
 package info.tommarsh.mynews.core.di
 
 import android.content.Context
+import androidx.work.Configuration
 import dagger.BindsInstance
 import dagger.Component
 import info.tommarsh.mynews.core.article.data.ArticleRepository
@@ -34,4 +35,6 @@ interface CoreComponent {
     fun videoRepository(): VideoRepository
 
     fun sharedPreferences(): PreferencesRepository
+
+    fun workManagerConfiguration(): Configuration
 }

@@ -46,6 +46,11 @@ dependencies {
     api 'androidx.room:room-ktx:' + rootProject.roomVersion
     kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
 
+    //Work Manager
+    api 'androidx.work:work-runtime-ktx:' + rootProject.workmanagerVersion
+    implementation 'androidx.work:work-gcm:' + rootProject.workmanagerVersion
+
+
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion
     implementation 'com.squareup.retrofit2:converter-gson:' + rootProject.retrofitVersion

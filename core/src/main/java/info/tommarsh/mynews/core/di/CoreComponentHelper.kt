@@ -6,7 +6,7 @@ import android.content.Context
 object CoreComponentHelper {
 
     fun coreComponent(context: Context): CoreComponent {
-        return (context.applicationContext as? CoreComponentProvider)?.coreComponent()
+        return (context.applicationContext as? CoreComponentProvider)?.coreComponent
             ?: throw IllegalStateException("Application context must have a CoreComponentProvider")
     }
 }

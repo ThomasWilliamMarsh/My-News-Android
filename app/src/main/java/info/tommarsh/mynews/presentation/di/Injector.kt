@@ -1,6 +1,7 @@
 package info.tommarsh.mynews.presentation.di
 
 import androidx.fragment.app.Fragment
+import info.tommarsh.mynews.presentation.NewsApp
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesFragment
 import info.tommarsh.mynews.presentation.ui.top.TopNewsFragment
 import info.tommarsh.mynews.presentation.ui.videos.VideosFragment

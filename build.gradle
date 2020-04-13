@@ -39,6 +39,7 @@ ext {
     recyclerViewVersion = "1.0.0"
     constraintLayoutVersion = "2.0.0-beta3"
     navigationVersion = "1.0.0"
+    workmanagerVersion = "2.3.4"
 
     //Adapter delegates
     adapterDelegatesVersion = "4.1.1"
