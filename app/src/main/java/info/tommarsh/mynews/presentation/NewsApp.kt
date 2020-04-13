@@ -6,7 +6,7 @@ import androidx.work.Configuration
 import androidx.work.WorkManager
 import info.tommarsh.mynews.core.di.CoreComponentProvider
 import info.tommarsh.mynews.core.di.DaggerCoreComponent
-import info.tommarsh.mynews.presentation.offline.OfflineSyncScheduler
+import info.tommarsh.mynews.core.offline.OfflineSyncScheduler
 
 class NewsApp : Application(), CoreComponentProvider, Configuration.Provider {
 

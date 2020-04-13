@@ -1,4 +1,4 @@
-package info.tommarsh.mynews.presentation.offline
+package info.tommarsh.mynews.core.offline
 
 import androidx.work.*
 import java.util.concurrent.TimeUnit

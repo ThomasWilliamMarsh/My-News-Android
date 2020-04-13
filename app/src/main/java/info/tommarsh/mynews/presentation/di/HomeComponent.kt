@@ -13,7 +13,7 @@ import info.tommarsh.mynews.presentation.ui.videos.VideosFragment
 @FeatureScope
 @Component(
     dependencies = [CoreComponent::class],
-    modules = [(HomeModule::class), (ViewModelModule::class), (OfflineModule::class)]
+    modules = [(HomeModule::class), (ViewModelModule::class)]
 )
 interface HomeComponent {
 
@@ -32,6 +32,4 @@ interface HomeComponent {
     fun inject(fragment: VideosFragment)
 
     fun inject(activity: ArticlesActivity)
-
-    fun inject(app: NewsApp)
 }

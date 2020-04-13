@@ -1,4 +1,4 @@
-package info.tommarsh.mynews.presentation.offline
+package info.tommarsh.mynews.core.offline
 
 import android.content.Context
 import androidx.work.ListenableWorker

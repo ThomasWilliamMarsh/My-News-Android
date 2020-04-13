@@ -17,6 +17,7 @@ import javax.inject.Singleton
         CoreModule::class,
         LocalModule::class,
         NetworkModule::class,
+        OfflineModule::class,
         RepositoryModule::class]
 )
 interface CoreComponent {
