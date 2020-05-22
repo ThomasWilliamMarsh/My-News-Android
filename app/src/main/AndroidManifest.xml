@@ -20,6 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
+        <!-- Using our own WorkManagerFactory for constructor injection-->
+        <provider
+                android:name="androidx.work.impl.WorkManagerInitializer"
+                android:authorities="${applicationId}.workmanager-init"
+                android:exported="false"
+                tools:node="remove" />
     </application>
 
 </manifest>
