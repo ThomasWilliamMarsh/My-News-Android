@@ -50,6 +50,8 @@ dependencies {
     api 'androidx.work:work-runtime-ktx:' + rootProject.workmanagerVersion
     implementation 'androidx.work:work-gcm:' + rootProject.workmanagerVersion
 
+    //OkHttp
+    implementation 'com.squareup.okhttp3:okhttp:' + rootProject.okHttpVersion
 
     //Retrofit
     implementation 'com.squareup.retrofit2:retrofit:' + rootProject.retrofitVersion

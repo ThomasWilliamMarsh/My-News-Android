@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/onboarding_nav_graph"
+        app:startDestination="@id/sourcesFragment">
+
+    <fragment
+            android:id="@+id/languagesFragment"
+            android:name="info.tommarsh.mynews.onboarding.OnboardingFragment"
+            android:label="Languages Fragment" />
+    <fragment
+            android:id="@+id/sourcesFragment"
+            android:name="info.tommarsh.mynews.onboarding.OnboardingFragment"
+            android:label="Sources Fragment">
+        <action
+                android:id="@+id/action_sourcesFragment_to_languagesFragment"
+                app:destination="@id/languagesFragment" />
+    </fragment>
+    <include app:graph="@navigation/nav_graph" />
+</navigation>

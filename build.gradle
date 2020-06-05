@@ -1,6 +1,9 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
+    ext {
+        kotlin_version = '1.3.72'
+    }
     ext.kotlinVersion = '1.3.61'
     repositories {
         mavenCentral()
@@ -38,7 +41,7 @@ ext {
     materialVersion = "1.1.0-beta01"
     recyclerViewVersion = "1.0.0"
     constraintLayoutVersion = "2.0.0-beta3"
-    navigationVersion = "1.0.0"
+    navigationVersion = "2.2.2"
     workmanagerVersion = "2.3.4"
 
     //Adapter delegates
@@ -56,8 +59,12 @@ ext {
     lifecycleTestingVersion = "2.1.0"
     roomVersion = "2.2.3"
 
+    //AirBnB
+    lottieVersion = "3.4.0"
+
     //Network
-    retrofitVersion = "2.6.0"
+    okHttpVersion = "4.7.2"
+    retrofitVersion = "2.9.0"
     gsonVersion = "2.8.6"
     jUnitVersion = "4.12"
     mockitoKotlinVersion = "2.1.0"

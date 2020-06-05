@@ -1,0 +1,28 @@
+apply plugin: "com.android.dynamic-feature"
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
+
+
+android {
+    compileSdkVersion rootProject.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdk
+        targetSdkVersion rootProject.targetSdk
+    }
+
+    viewBinding {
+        enabled = true
+    }
+}
+
+dependencies {
+    implementation project(":app")
+
+    //Dagger
+    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+
+    //Lottie
+    implementation 'com.airbnb.android:lottie:' + rootProject.lottieVersion
+}
