@@ -1,4 +1,5 @@
 <manifest xmlns:dist="http://schemas.android.com/apk/distribution"
+        xmlns:android="http://schemas.android.com/apk/res/android"
         package="info.tommarsh.mynews.onboarding">
 
     <dist:module
@@ -9,4 +10,9 @@
         </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
+
+
+    <application>
+        <activity android:name=".ui.OnBoardingActivity"/>
+    </application>
 </manifest>

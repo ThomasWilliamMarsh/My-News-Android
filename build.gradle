@@ -34,12 +34,12 @@ task clean(type: Delete) {
 
 ext {
     //AndroidX
-    appCompatVersion = "1.1.0"
+    appCompatVersion = "1.2.0-rc01"
     cardViewVersion = "1.0.0"
     materialVersion = "1.1.0-beta01"
     recyclerViewVersion = "1.0.0"
     constraintLayoutVersion = "2.0.0-beta3"
-    navigationVersion = "2.2.2"
+    navigationVersion = "2.3.0-beta01"
     workmanagerVersion = "2.3.4"
 
     //Firebase

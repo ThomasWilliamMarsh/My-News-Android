@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import info.tommarsh.mynews.core.util.ViewModelFactory
 import info.tommarsh.mynews.core.util.makeGone
@@ -22,7 +23,7 @@ import kotlinx.coroutines.flow.collect
 @ExperimentalCoroutinesApi
 internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory) : Fragment() {
 
-    private val viewModel by navGraphViewModels<OnBoardingViewModel>(R.navigation.onboarding_nav_graph) { viewModelFactory }
+    private val viewModel by navGraphViewModels<OnBoardingViewModel>(R.id.onboarding_nav_graph) { viewModelFactory }
 
     private val adapter = OnBoardingAdapter()
 
@@ -35,26 +36,23 @@ internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory
     ): View? {
         binding = FragmentOnboardingBinding.inflate(inflater, container, false)
         setUpRecyclerView()
+        setUpNextButton()
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val key = arguments?.getString(EXTRA_KEY) ?: return
+        val key = arguments?.getString(EXTRA_KEY) ?: "onboarding_sources"
 
         lifecycleScope.launchWhenResumed {
             viewModel.events.collect { event ->
                 binding.onboardingProgress.makeGone()
                 when (event) {
                     is Event.Loading -> binding.onboardingProgress.makeVisible()
-                    is Event.Error -> Toast.makeText(
-                        requireContext(),
-                        "Error OnBoarding.",
-                        Toast.LENGTH_SHORT
-                    ).show()
+                    is Event.Error -> showErrorToast()
                     is Event.Fetched -> {
-                        playAnimation(event.model.animationFile)
+                        playAnimation(event.model.animation)
                         adapter.submitList(event.model.choices)
                     }
                 }
@@ -69,11 +67,20 @@ internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory
         binding.onboardingAnimation.playAnimation()
     }
 
+    private fun setUpNextButton() {
+        binding.onboardingNextButton.setOnClickListener {
+        }
+    }
+
     private fun setUpRecyclerView() {
         binding.onboardingRecyclerView.adapter = adapter
     }
 
+    private fun showErrorToast() {
+        Toast.makeText(requireContext(), "Error OnBoarding.", Toast.LENGTH_SHORT).show()
+    }
+
     companion object {
-        private const val EXTRA_KEY = "key"
+        private const val EXTRA_KEY = "extra_key"
     }
 }

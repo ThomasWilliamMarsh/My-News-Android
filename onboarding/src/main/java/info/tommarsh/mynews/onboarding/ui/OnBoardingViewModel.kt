@@ -33,7 +33,7 @@ internal class OnBoardingViewModel
     private fun fetchOnBoardingModel(key: String) {
         viewModelScope.launch(dispatcherProvider.work()) {
             _events.value = Event.Loading
-            try {
+            _events.value =  try {
                 Event.Fetched(dataSource.getOnBoardingModel(key))
             } catch (throwable: Throwable) {
                 Event.Error(throwable)

@@ -5,6 +5,7 @@ import dagger.Component
 import info.tommarsh.mynews.core.di.CoreComponent
 import info.tommarsh.mynews.core.di.FeatureScope
 import info.tommarsh.mynews.presentation.NewsApp
+import info.tommarsh.mynews.presentation.SplashActivity
 import info.tommarsh.mynews.presentation.ui.ArticlesActivity
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesFragment
 import info.tommarsh.mynews.presentation.ui.top.TopNewsFragment
@@ -24,6 +25,8 @@ interface HomeComponent {
             coreComponent: CoreComponent
         ): HomeComponent
     }
+
+    fun inject(splashActivity: SplashActivity)
 
     fun inject(fragment: TopNewsFragment)
 

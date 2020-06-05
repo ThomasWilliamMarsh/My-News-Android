@@ -29,10 +29,7 @@ dependencies {
     kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
 
     //Moshi
-    implementation 'com.squareup.moshi:moshi:' + rootProject.moshiVersion
-
-    //Firebase
-    implementation 'com.google.firebase:firebase-config:' + rootProject.remoteConfigVersion
+    implementation 'com.squareup.moshi:moshi-kotlin:' + rootProject.moshiVersion
 
     //Lottie
     implementation 'com.airbnb.android:lottie:' + rootProject.lottieVersion

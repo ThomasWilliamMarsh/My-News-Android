@@ -1,11 +1,20 @@
 package info.tommarsh.mynews.core.util
 
+import android.content.Context
+import android.content.Intent
 import android.view.Menu
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.DiffUtil
+
+//region context
+fun Context.navigateToClass(className: String) {
+    val intent = Intent(Intent.ACTION_VIEW).setClassName(packageName, className)
+    startActivity(intent)
+}
+//endregion
 
 //region listadapter
 fun <T> getDiffUtilItemCallback(compare: (T, T) -> Boolean) =

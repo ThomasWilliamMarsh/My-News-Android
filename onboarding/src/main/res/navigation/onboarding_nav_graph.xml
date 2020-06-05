@@ -12,6 +12,10 @@
         <action
                 android:id="@+id/languages_fragment_to_main_nav_graph"
                 app:destination="@id/main_nav_graph" />
+        <argument
+                android:name="extra_key"
+                app:argType="string"
+                android:defaultValue="onboarding_languages" />
     </fragment>
     <fragment
             android:id="@+id/sourcesFragment"
@@ -20,6 +24,10 @@
         <action
                 android:id="@+id/action_sourcesFragment_to_languagesFragment"
                 app:destination="@id/languagesFragment" />
+        <argument
+                android:name="extra_key"
+                app:argType="string"
+                android:defaultValue="onboarding_sources" />
     </fragment>
     <include app:graph="@navigation/nav_graph" />
 </navigation>

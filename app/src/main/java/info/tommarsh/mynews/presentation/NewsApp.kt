@@ -4,9 +4,11 @@ import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
 import androidx.work.Configuration
 import androidx.work.WorkManager
+import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import info.tommarsh.mynews.core.di.CoreComponentProvider
 import info.tommarsh.mynews.core.di.DaggerCoreComponent
 import info.tommarsh.mynews.core.offline.OfflineSyncScheduler
+import info.tommarsh.presentation.R
 
 class NewsApp : Application(), CoreComponentProvider, Configuration.Provider {
 
@@ -19,6 +21,7 @@ class NewsApp : Application(), CoreComponentProvider, Configuration.Provider {
         super.onCreate()
         setNightMode()
         scheduleOfflineSync()
+        getRemoteConfigValues()
     }
 
     private fun setNightMode() {
@@ -27,6 +30,12 @@ class NewsApp : Application(), CoreComponentProvider, Configuration.Provider {
 
     private fun scheduleOfflineSync() {
         OfflineSyncScheduler(WorkManager.getInstance(this)).schedule()
+    }
+
+    private fun getRemoteConfigValues() {
+        val remoteConfig = FirebaseRemoteConfig.getInstance()
+        remoteConfig.setDefaultsAsync(R.xml.remote_config_default_values)
+        remoteConfig.fetchAndActivate()
     }
 
     override fun getWorkManagerConfiguration() = coreComponent.workManagerConfiguration()
