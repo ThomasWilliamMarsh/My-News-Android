@@ -12,9 +12,8 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_animation_guideline"
-            app:lottie_autoPlay="true"
             app:lottie_fileName="hello_world.json"
-            app:lottie_loop="true" />
+            app:lottie_loop="false" />
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/onboarding_recycler_view"
@@ -25,6 +24,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/onboarding_animation" />
+
+    <ProgressBar
+            android:id="@+id/onboarding_progress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.constraintlayout.widget.Guideline
             android:id="@+id/onboarding_animation_guideline"
