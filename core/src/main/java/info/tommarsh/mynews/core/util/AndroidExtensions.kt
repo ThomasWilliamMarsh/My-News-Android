@@ -14,6 +14,16 @@ fun Context.navigateToClass(className: String) {
     val intent = Intent(Intent.ACTION_VIEW).setClassName(packageName, className)
     startActivity(intent)
 }
+
+
+inline fun <reified T : AppCompatActivity> Context.newTaskIntent(): Intent {
+    return Intent(this, T::class.java).apply {
+        flags =
+            Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP
+
+    }
+}
+
 //endregion
 
 //region listadapter
@@ -32,7 +42,7 @@ inline fun <reified T> Menu.getActionItem(item: Int): T = findItem(item).actionV
 //region Activity
 inline fun <reified T> AppCompatActivity.service(type: String) = getSystemService(type) as T
 
-fun AppCompatActivity.contentBehindStatusBar() = with(window){
+fun AppCompatActivity.contentBehindStatusBar() = with(window) {
     addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS)
     clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS)
 
@@ -41,7 +51,7 @@ fun AppCompatActivity.contentBehindStatusBar() = with(window){
 //endregion
 
 //region Fragment
-fun Fragment.consume(block: () -> Unit) : Boolean {
+fun Fragment.consume(block: () -> Unit): Boolean {
     block()
     return false
 }

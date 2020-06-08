@@ -13,6 +13,8 @@
 
 
     <application>
-        <activity android:name=".ui.OnBoardingActivity"/>
+        <activity android:name=".ui.OnBoardingActivity">
+            <nav-graph android:value="@navigation/nav_graph" />
+        </activity>
     </application>
 </manifest>

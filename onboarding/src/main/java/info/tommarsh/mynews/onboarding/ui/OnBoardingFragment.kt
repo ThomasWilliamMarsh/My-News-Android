@@ -5,18 +5,22 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.NavDeepLinkRequest
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import info.tommarsh.mynews.core.util.ViewModelFactory
 import info.tommarsh.mynews.core.util.makeGone
 import info.tommarsh.mynews.core.util.makeVisible
+import info.tommarsh.mynews.core.util.newTaskIntent
 import info.tommarsh.mynews.onboarding.R
 import info.tommarsh.mynews.onboarding.databinding.FragmentOnboardingBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.adapter.OnBoardingAdapter
+import info.tommarsh.mynews.presentation.ui.ArticlesActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
@@ -43,7 +47,7 @@ internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val key = arguments?.getString(EXTRA_KEY) ?: "onboarding_sources"
+        val key = arguments?.getString(EXTRA_KEY)!!
 
         lifecycleScope.launchWhenResumed {
             viewModel.events.collect { event ->
@@ -55,11 +59,25 @@ internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory
                         playAnimation(event.model.animation)
                         adapter.submitList(event.model.choices)
                     }
+                    is Event.NextScreen -> nextScreen(event.deepLink)
+                    is Event.Finished -> finishedOnBoarding()
                 }
             }
         }
 
         viewModel.postAction(Action.FetchOnBoardingModel(key))
+    }
+
+    private fun nextScreen(deeplink: String) {
+        val link = NavDeepLinkRequest.Builder
+            .fromUri(deeplink.toUri())
+            .build()
+
+        findNavController().navigate(link)
+    }
+
+    private fun finishedOnBoarding() {
+        startActivity(requireContext().newTaskIntent<ArticlesActivity>())
     }
 
     private fun playAnimation(fileName: String) {
@@ -69,6 +87,7 @@ internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory
 
     private fun setUpNextButton() {
         binding.onboardingNextButton.setOnClickListener {
+            viewModel.postAction(Action.SelectedChoice("", ""))
         }
     }
 
