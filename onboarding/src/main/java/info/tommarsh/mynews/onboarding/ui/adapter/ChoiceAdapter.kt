@@ -22,16 +22,16 @@ internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
         holder.bind(getItem(position))
     }
 
-    companion object {
-        val CALLBACK =
-            getDiffUtilItemCallback<Choice> { old, new -> old.id == new.id }
-    }
-
     private fun onCheckedChanged(id: String, isChecked: Boolean) {
         if (isChecked) {
             _checkedChoices.add(id)
         } else {
             _checkedChoices.remove(id)
         }
+    }
+
+    companion object {
+        val CALLBACK =
+            getDiffUtilItemCallback<Choice> { old, new -> old.id == new.id }
     }
 }

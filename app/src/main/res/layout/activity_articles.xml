@@ -40,7 +40,7 @@
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintBottom_toTopOf="@id/bottom_navigation"
-            app:navGraph="@navigation/nav_graph"/>
+            app:navGraph="@navigation/main_graph"/>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"

@@ -14,7 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/MyNews.DayNight"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="info.tommarsh.mynews.presentation.SplashActivity">
+        <activity android:name="info.tommarsh.mynews.presentation.ui.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

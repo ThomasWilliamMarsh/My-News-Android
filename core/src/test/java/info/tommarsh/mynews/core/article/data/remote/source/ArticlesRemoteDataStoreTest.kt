@@ -6,6 +6,7 @@ import info.tommarsh.mynews.core.MockProvider.articlesResponse
 import info.tommarsh.mynews.core.article.data.remote.model.mapper.ArticleResponseMapper
 import info.tommarsh.mynews.core.article.data.remote.model.mapper.SourceResponseMapper
 import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.ConnectionManager
 import info.tommarsh.mynews.core.util.NetworkHelper
 import junit.framework.Assert.assertEquals
@@ -19,11 +20,14 @@ class ArticlesRemoteDataStoreTest {
     private val mapper =
         ArticleResponseMapper(SourceResponseMapper())
     private val api = mock<ArticleApiService> {
-        onBlocking { getBreakingNews() }.thenReturn(goodResponse)
+        onBlocking { getBreakingNews("bbc,independent") }.thenReturn(goodResponse)
 
         onBlocking { getArticlesForCategory("category") }.thenReturn(goodResponse)
 
         onBlocking { searchArticles("query") }.thenReturn(goodResponse)
+    }
+    private val preferences = mock<PreferencesRepository> {
+        on { getSources() }.thenReturn("bbc,independent")
     }
     private val connectionManager = mock<ConnectionManager> {
         on { isConnected }.thenReturn(true)
@@ -33,6 +37,7 @@ class ArticlesRemoteDataStoreTest {
         ArticlesRemoteDataStore(
             mapper,
             network,
+            preferences,
             api
         )
 

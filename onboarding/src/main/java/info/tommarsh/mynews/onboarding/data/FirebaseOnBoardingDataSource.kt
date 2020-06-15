@@ -8,10 +8,10 @@ import javax.inject.Inject
 internal class FirebaseOnBoardingDataSource
 @Inject constructor(
     private val remoteConfig: FirebaseRemoteConfig,
-    private val deserialiser: JsonAdapter<Choices>
+    private val adapter: JsonAdapter<Choices>
 ) : OnBoardingDataSource {
 
     override fun getOnBoardingChoices(key: String): Choices {
-        return deserialiser.fromJson(remoteConfig.getString(key))!!
+        return adapter.fromJson(remoteConfig.getString(key))!!
     }
 }
