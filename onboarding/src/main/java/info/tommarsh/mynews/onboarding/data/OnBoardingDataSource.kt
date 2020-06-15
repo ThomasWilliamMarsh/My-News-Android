@@ -1,8 +1,8 @@
 package info.tommarsh.mynews.onboarding.data
 
-import info.tommarsh.mynews.onboarding.model.OnBoardingModel
+import info.tommarsh.mynews.onboarding.model.Choices
 
 internal interface OnBoardingDataSource {
 
-    fun getOnBoardingModel(key: String): OnBoardingModel
+    fun getOnBoardingChoices(key: String): Choices
 }

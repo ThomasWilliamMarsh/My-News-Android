@@ -5,13 +5,17 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import info.tommarsh.mynews.core.util.getDiffUtilItemCallback
 import info.tommarsh.mynews.onboarding.databinding.ItemChoiceBinding
-import info.tommarsh.mynews.onboarding.model.ChoiceModel
+import info.tommarsh.mynews.onboarding.model.Choice
 
-internal class OnBoardingAdapter : ListAdapter<ChoiceModel, ChoiceViewholder>(CALLBACK) {
+internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
+
+    private val _checkedChoices = mutableListOf<String>()
+
+    val checkedChoices: List<String> = _checkedChoices
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChoiceViewholder {
         val binding = ItemChoiceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ChoiceViewholder(binding)
+        return ChoiceViewholder(binding, ::onCheckedChanged)
     }
 
     override fun onBindViewHolder(holder: ChoiceViewholder, position: Int) {
@@ -20,6 +24,14 @@ internal class OnBoardingAdapter : ListAdapter<ChoiceModel, ChoiceViewholder>(CA
 
     companion object {
         val CALLBACK =
-            getDiffUtilItemCallback<ChoiceModel> { old, new -> old.id == new.id }
+            getDiffUtilItemCallback<Choice> { old, new -> old.id == new.id }
+    }
+
+    private fun onCheckedChanged(id: String, isChecked: Boolean) {
+        if (isChecked) {
+            _checkedChoices.add(id)
+        } else {
+            _checkedChoices.remove(id)
+        }
     }
 }

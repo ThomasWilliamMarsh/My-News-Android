@@ -10,6 +10,7 @@ class SharedPreferencesRepository
 
     companion object {
         private const val KEY_PREFERENCE_NIGHT_MODE = "pref_night_mode"
+        private const val KEY_PREFERENCE_SOURCES = "sources"
         private const val KEY_PREFERENCE_ONBOARDING = "pref_on_boarding"
     }
 
@@ -28,7 +29,17 @@ class SharedPreferencesRepository
         return sharedPreferences.getBoolean(KEY_PREFERENCE_ONBOARDING, true)
     }
 
-    override fun flagOnBoardingShown() {
+    override fun flagOnBoardingComplete() {
         sharedPreferences.edit().putBoolean(KEY_PREFERENCE_ONBOARDING, false).apply()
+    }
+
+    override fun saveSources(sources: List<String>) {
+        sharedPreferences.edit().putStringSet(KEY_PREFERENCE_SOURCES, sources.toSet()).apply()
+    }
+
+    override fun getSources(): String {
+        val sources =
+            sharedPreferences.getStringSet(KEY_PREFERENCE_SOURCES, mutableSetOf("bbc-news"))!!
+        return sources.joinToString()
     }
 }

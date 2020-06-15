@@ -1,11 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <defaultsMap>
     <entry>
-        <key>onboarding_languages</key>
-        <value>{"animation":"language.json","choices":[{"id":"gb","name":"Great Britain"},{"id":"us","name":"United States of America"},{"id":"de","name":"Germany"},{"id":"fr","name":"France"},{"id":"au","name":"Austrailia"}]}</value>
-    </entry>
-    <entry>
         <key>onboarding_sources</key>
-        <value>{"animation":"newspaper.json","choices":[{"id":"bbc-news","name":"BBC"},{"id":"independent","name":"Independent"},{"id":"reddit-r-all","name":"Reddit (/r/all)"},{"id":"the-huffington-post","name":"The Huffington Post"},{"id":"bloomberg","name":"Bloomberg"}], "deeplink":"mynews://onboarding/languages"}</value>
+        <value>{"choices":[{"id":"bbc-news","name":"BBC"},{"id":"independent","name":"Independent"},{"id":"reddit-r-all","name":"Reddit (/r/all)"},{"id":"the-huffington-post","name":"The Huffington Post"},{"id":"bloomberg","name":"Bloomberg"}]}</value>
     </entry>
 </defaultsMap>

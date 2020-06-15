@@ -10,16 +10,13 @@ import javax.inject.Inject
 
 class SplashActivity : AppCompatActivity() {
 
-
     @Inject
     lateinit var sharedPreferencesRepository: PreferencesRepository
 
     override fun onCreate(savedInstanceState: Bundle?) {
-
-
         super.onCreate(savedInstanceState)
 
-        if(true) {
+        if(sharedPreferencesRepository.shouldShowOnBoarding()) {
             navigateToClass(ONBOARDING_ACTIVITY_CLASS)
         } else {
             startActivity(Intent(this, ArticlesActivity::class.java))

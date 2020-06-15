@@ -37,8 +37,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-244" />
-                            <option name="y" value="-169" />
+                            <option name="x" value="-251" />
+                            <option name="y" value="-182" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -90,23 +90,23 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="languagesFragment">
+                  <entry key="introductionFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-3" />
+                            <option name="x" value="-202" />
                             <option name="y" value="54" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="deepLink">
+                            <entry key="action_introductionFragment_to_main_nav_graph">
                               <value>
                                 <LayoutPositions />
                               </value>
                             </entry>
-                            <entry key="languages_fragment_to_main_nav_graph">
+                            <entry key="action_introductionFragment_to_sourcesFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
@@ -121,8 +121,8 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="214" />
-                            <option name="y" value="159" />
+                            <option name="x" value="225" />
+                            <option name="y" value="10" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -133,13 +133,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-202" />
-                            <option name="y" value="54" />
+                            <option name="x" value="62" />
+                            <option name="y" value="242" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_sourcesFragment_to_languagesFragment">
+                            <entry key="action_sourcesFragment_to_main_nav_graph">
                               <value>
                                 <LayoutPositions />
                               </value>

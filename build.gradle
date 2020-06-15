@@ -41,6 +41,7 @@ ext {
     constraintLayoutVersion = "2.0.0-beta3"
     navigationVersion = "2.3.0-beta01"
     workmanagerVersion = "2.3.4"
+    playCoreVersion = "1.7.0"
 
     //Firebase
     remoteConfigVersion = "19.1.4"

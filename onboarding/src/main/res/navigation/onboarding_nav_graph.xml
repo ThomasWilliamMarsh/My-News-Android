@@ -2,35 +2,30 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         android:id="@+id/onboarding_nav_graph"
-        app:startDestination="@id/sourcesFragment">
+        app:startDestination="@id/introductionFragment">
 
-    <fragment
-            android:id="@+id/languagesFragment"
-            android:name="info.tommarsh.mynews.onboarding.ui.OnBoardingFragment"
-            android:label="Languages Fragment">
-
-        <action
-                android:id="@+id/languages_fragment_to_main_nav_graph"
-                app:destination="@id/main_nav_graph" />
-        <argument
-                android:name="extra_key"
-                android:defaultValue="onboarding_languages"
-                app:argType="string" />
-        <deepLink
-                android:id="@+id/deepLink"
-                app:uri="mynews://onboarding/languages" />
-    </fragment>
     <fragment
             android:id="@+id/sourcesFragment"
-            android:name="info.tommarsh.mynews.onboarding.ui.OnBoardingFragment"
+            android:name="info.tommarsh.mynews.onboarding.ui.screens.SourcesFragment"
             android:label="Sources Fragment">
-        <action
-                android:id="@+id/action_sourcesFragment_to_languagesFragment"
-                app:destination="@id/languagesFragment" />
         <argument
                 android:name="extra_key"
-                app:argType="string"
-                android:defaultValue="onboarding_sources" />
+                android:defaultValue="onboarding_sources"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_sourcesFragment_to_main_nav_graph"
+                app:destination="@id/main_nav_graph" />
+    </fragment>
+    <fragment
+            android:id="@+id/introductionFragment"
+            android:name="info.tommarsh.mynews.onboarding.ui.screens.IntroductionFragment"
+            android:label="Introduction Fragment">
+        <action
+                android:id="@+id/action_introductionFragment_to_sourcesFragment"
+                app:destination="@id/sourcesFragment" />
+        <action
+                android:id="@+id/action_introductionFragment_to_main_nav_graph"
+                app:destination="@id/main_nav_graph" />
     </fragment>
     <include app:graph="@navigation/nav_graph" />
 </navigation>

@@ -3,7 +3,8 @@ package info.tommarsh.mynews.onboarding.ui.util
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentFactory
 import info.tommarsh.mynews.core.util.ViewModelFactory
-import info.tommarsh.mynews.onboarding.ui.OnBoardingFragment
+import info.tommarsh.mynews.onboarding.ui.screens.IntroductionFragment
+import info.tommarsh.mynews.onboarding.ui.screens.SourcesFragment
 import javax.inject.Inject
 
 class OnBoardingFragmentFactory
@@ -11,7 +12,12 @@ class OnBoardingFragmentFactory
 
     override fun instantiate(classLoader: ClassLoader, className: String): Fragment {
         return when (className) {
-            OnBoardingFragment::class.java.name -> OnBoardingFragment(viewModelFactory)
+            IntroductionFragment::class.java.name -> IntroductionFragment(
+                viewModelFactory
+            )
+            SourcesFragment::class.java.name -> SourcesFragment(
+                viewModelFactory
+            )
             else -> super.instantiate(classLoader, className)
         }
     }

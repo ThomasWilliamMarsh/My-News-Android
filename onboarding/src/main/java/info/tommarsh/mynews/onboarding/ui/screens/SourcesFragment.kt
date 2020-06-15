@@ -1,44 +1,42 @@
-package info.tommarsh.mynews.onboarding.ui
+package info.tommarsh.mynews.onboarding.ui.screens
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.core.net.toUri
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavDeepLinkRequest
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.navGraphViewModels
 import info.tommarsh.mynews.core.util.ViewModelFactory
 import info.tommarsh.mynews.core.util.makeGone
 import info.tommarsh.mynews.core.util.makeVisible
 import info.tommarsh.mynews.core.util.newTaskIntent
 import info.tommarsh.mynews.onboarding.R
-import info.tommarsh.mynews.onboarding.databinding.FragmentOnboardingBinding
+import info.tommarsh.mynews.onboarding.databinding.FragmentSourcesBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
-import info.tommarsh.mynews.onboarding.ui.adapter.OnBoardingAdapter
+import info.tommarsh.mynews.onboarding.ui.OnBoardingViewModel
+import info.tommarsh.mynews.onboarding.ui.adapter.ChoiceAdapter
 import info.tommarsh.mynews.presentation.ui.ArticlesActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
-internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory) : Fragment() {
+internal class SourcesFragment(private val viewModelFactory: ViewModelFactory) : Fragment() {
 
     private val viewModel by navGraphViewModels<OnBoardingViewModel>(R.id.onboarding_nav_graph) { viewModelFactory }
 
-    private val adapter = OnBoardingAdapter()
+    private val adapter = ChoiceAdapter()
 
-    private lateinit var binding: FragmentOnboardingBinding
+    private lateinit var binding: FragmentSourcesBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = FragmentOnboardingBinding.inflate(inflater, container, false)
+        binding = FragmentSourcesBinding.inflate(inflater, container, false)
         setUpRecyclerView()
         setUpNextButton()
         return binding.root
@@ -56,38 +54,29 @@ internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory
                     is Event.Loading -> binding.onboardingProgress.makeVisible()
                     is Event.Error -> showErrorToast()
                     is Event.Fetched -> {
-                        playAnimation(event.model.animation)
-                        adapter.submitList(event.model.choices)
+                        playAnimation()
+                        adapter.submitList(event.choices)
                     }
-                    is Event.NextScreen -> nextScreen(event.deepLink)
                     is Event.Finished -> finishedOnBoarding()
                 }
             }
         }
 
-        viewModel.postAction(Action.FetchOnBoardingModel(key))
-    }
-
-    private fun nextScreen(deeplink: String) {
-        val link = NavDeepLinkRequest.Builder
-            .fromUri(deeplink.toUri())
-            .build()
-
-        findNavController().navigate(link)
+        viewModel.postAction(Action.FetchChoices(key))
     }
 
     private fun finishedOnBoarding() {
         startActivity(requireContext().newTaskIntent<ArticlesActivity>())
     }
 
-    private fun playAnimation(fileName: String) {
-        binding.onboardingAnimation.setAnimation(fileName)
+    private fun playAnimation() {
+        binding.onboardingAnimation.setAnimation(ANIMATION_FILE)
         binding.onboardingAnimation.playAnimation()
     }
 
     private fun setUpNextButton() {
         binding.onboardingNextButton.setOnClickListener {
-            viewModel.postAction(Action.SelectedChoice("", ""))
+            viewModel.postAction(Action.SelectedSources(adapter.checkedChoices))
         }
     }
 
@@ -97,9 +86,11 @@ internal class OnBoardingFragment(private val viewModelFactory: ViewModelFactory
 
     private fun showErrorToast() {
         Toast.makeText(requireContext(), "Error OnBoarding.", Toast.LENGTH_SHORT).show()
+        finishedOnBoarding()
     }
 
     companion object {
         private const val EXTRA_KEY = "extra_key"
+        private const val ANIMATION_FILE = "newspaper.json"
     }
 }

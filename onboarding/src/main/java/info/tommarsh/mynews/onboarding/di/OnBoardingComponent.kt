@@ -7,12 +7,15 @@ import info.tommarsh.mynews.onboarding.di.modules.OnBoardingModule
 import info.tommarsh.mynews.onboarding.ui.OnBoardingActivity
 
 @FeatureScope
-@Component(modules = [OnBoardingModule::class])
+@Component(
+    dependencies = [CoreComponent::class],
+    modules = [OnBoardingModule::class]
+)
 internal interface OnBoardingComponent {
 
     @Component.Factory
     interface Factory {
-        fun create(): OnBoardingComponent
+        fun create(coreComponent: CoreComponent): OnBoardingComponent
     }
 
     fun inject(searchActivity: OnBoardingActivity)

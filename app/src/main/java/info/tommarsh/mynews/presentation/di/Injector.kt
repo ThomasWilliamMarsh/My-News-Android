@@ -8,6 +8,11 @@ import info.tommarsh.mynews.presentation.ui.categories.CategoriesFragment
 import info.tommarsh.mynews.presentation.ui.top.TopNewsFragment
 import info.tommarsh.mynews.presentation.ui.videos.VideosFragment
 
+internal fun SplashActivity.inject() {
+    provideCoreComponent()
+        .inject(this)
+}
+
 internal fun TopNewsFragment.inject() {
     homeComponent()
         .inject(this)

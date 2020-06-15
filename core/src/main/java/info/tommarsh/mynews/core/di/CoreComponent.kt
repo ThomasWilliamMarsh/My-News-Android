@@ -27,6 +27,8 @@ interface CoreComponent {
         fun create(@BindsInstance context: Context): CoreComponent
     }
 
+    fun applicationContext(): Context
+
     fun dispatcherProvider(): DispatcherProvider
 
     fun articleRepository(): ArticleRepository

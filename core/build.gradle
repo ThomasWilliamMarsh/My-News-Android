@@ -51,6 +51,7 @@ dependencies {
     api 'androidx.room:room-runtime:' + rootProject.roomVersion
     api 'androidx.room:room-ktx:' + rootProject.roomVersion
     api 'com.google.firebase:firebase-config:' + rootProject.remoteConfigVersion
+    implementation 'com.google.android.play:core-ktx:' + rootProject.playCoreVersion
     kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
 
     //Work Manager
