@@ -4,7 +4,8 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.nhaarman.mockitokotlin2.mock
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import info.tommarsh.mynews.onboarding.model.Choice
+import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.onboarding.MockProvider.choices
 import info.tommarsh.mynews.onboarding.model.Choices
 import org.junit.Assert.*
 import org.junit.Test
@@ -16,11 +17,6 @@ class FirebaseOnBoardingDataSourceTest {
         .build()
         .adapter(Choices::class.java)
 
-    private val choices = Choices(listOf(
-        Choice("id1", "choice1"),
-        Choice("id2", "choice2")
-    ))
-
     private val remoteConfig = mock<FirebaseRemoteConfig> {
         on { getString("key") }.thenReturn(adapter.toJson(choices))
     }
@@ -30,7 +26,7 @@ class FirebaseOnBoardingDataSourceTest {
 
     @Test
     fun `Get onboarding choices from firebase`() {
-        val expected = choices
+        val expected = Outcome.Success(choices)
 
         val actual = datasource.getOnBoardingChoices("key")
 
