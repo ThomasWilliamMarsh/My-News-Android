@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "244430785398",
+    "firebase_url": "https://my-news-android-4c417.firebaseio.com",
+    "project_id": "my-news-android-4c417",
+    "storage_bucket": "my-news-android-4c417.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:244430785398:android:bccaa27ae7e84d4071c857",
+        "android_client_info": {
+          "package_name": "info.tommarsh.mynews"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "244430785398-hbnvmvsdirgq3c3gj1p51gg85oh43h8e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCED0qaR6q1P_tK4BdrBtV49qRoMeQeRlg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "244430785398-hbnvmvsdirgq3c3gj1p51gg85oh43h8e.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

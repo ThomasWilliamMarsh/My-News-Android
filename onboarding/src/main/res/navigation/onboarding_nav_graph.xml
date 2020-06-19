@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/onboarding_nav_graph"
+        app:startDestination="@id/introductionFragment">
+
+    <fragment
+            android:id="@+id/sourcesFragment"
+            android:name="info.tommarsh.mynews.onboarding.ui.screens.SourcesFragment"
+            android:label="Sources Fragment">
+        <argument
+                android:name="extra_key"
+                android:defaultValue="onboarding_sources"
+                app:argType="string" />
+        <action
+                android:id="@+id/action_sourcesFragment_to_main_nav_graph"
+                app:destination="@id/main_nav_graph" />
+    </fragment>
+    <fragment
+            android:id="@+id/introductionFragment"
+            android:name="info.tommarsh.mynews.onboarding.ui.screens.IntroductionFragment"
+            android:label="Introduction Fragment">
+        <action
+                android:id="@+id/action_introductionFragment_to_sourcesFragment"
+                app:destination="@id/sourcesFragment" />
+        <action
+                android:id="@+id/action_introductionFragment_to_main_nav_graph"
+                app:destination="@id/main_nav_graph" />
+    </fragment>
+    <include app:graph="@navigation/main_graph" />
+</navigation>

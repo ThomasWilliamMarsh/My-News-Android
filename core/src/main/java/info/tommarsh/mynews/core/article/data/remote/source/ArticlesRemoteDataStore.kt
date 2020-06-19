@@ -3,6 +3,7 @@ package info.tommarsh.mynews.core.article.data.remote.source
 import info.tommarsh.mynews.core.article.data.remote.model.mapper.ArticleResponseMapper
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
 import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.NetworkHelper
 import javax.inject.Inject
 
@@ -10,12 +11,13 @@ internal class ArticlesRemoteDataStore
 @Inject constructor(
     private val mapper: ArticleResponseMapper,
     private val networkHelper: NetworkHelper,
+    private val preferences: PreferencesRepository,
     private val api: ArticleApiService
 ) {
 
     suspend fun getBreakingNews(): Outcome<List<ArticleModel>> {
         return networkHelper.callApi(mapper) {
-            api.getBreakingNews()
+            api.getBreakingNews(preferences.getSources())
         }
     }
 

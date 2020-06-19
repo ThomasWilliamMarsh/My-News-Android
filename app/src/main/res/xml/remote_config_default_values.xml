@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<defaultsMap>
+    <entry>
+        <key>onboarding_sources</key>
+        <value>{"choices":[{"id":"bbc-news","name":"BBC"},{"id":"independent","name":"Independent"},{"id":"reddit-r-all","name":"Reddit (/r/all)"},{"id":"the-huffington-post","name":"The Huffington Post"},{"id":"bloomberg","name":"Bloomberg"}]}</value>
+    </entry>
+</defaultsMap>

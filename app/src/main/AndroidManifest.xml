@@ -1,24 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools" package="info.tommarsh.presentation">
+        xmlns:tools="http://schemas.android.com/tools"
+        package="info.tommarsh.presentation">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:allowBackup="true"
             android:name="info.tommarsh.mynews.presentation.NewsApp"
+            android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
             android:roundIcon="@mipmap/ic_launcher_round"
             android:supportsRtl="true"
             android:theme="@style/MyNews.DayNight"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="info.tommarsh.mynews.presentation.ui.ArticlesActivity">
+        <activity android:name="info.tommarsh.mynews.presentation.ui.SplashActivity">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity android:name="info.tommarsh.mynews.presentation.ui.ArticlesActivity">
         </activity>
 
         <!-- Using our own WorkManagerFactory for constructor injection-->
