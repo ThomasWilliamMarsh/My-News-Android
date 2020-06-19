@@ -3,34 +3,28 @@ package info.tommarsh.mynews.search.ui
 import android.app.SearchManager
 import android.content.Intent
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.util.*
-import info.tommarsh.mynews.search.di.inject
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import info.tommarsh.search.databinding.ActivitySearchBinding
 import kotlinx.android.synthetic.main.activity_search.*
-import javax.inject.Inject
 
+@AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
-
-    @Inject
-    lateinit var factory: ViewModelFactory
 
     private val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
 
     private val adapter = SearchAdapter()
 
-    private val viewModel: SearchViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(SearchViewModel::class.java)
-    }
+    private val viewModel by viewModels<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        inject()
         setContentView(binding.root)
         setSupportActionBar(search_toolbar)
         setUpViewModel()

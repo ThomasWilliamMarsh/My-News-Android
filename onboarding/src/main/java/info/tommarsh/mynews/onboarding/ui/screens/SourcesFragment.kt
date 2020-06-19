@@ -8,7 +8,7 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.navGraphViewModels
-import info.tommarsh.mynews.core.util.ViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.util.makeGone
 import info.tommarsh.mynews.core.util.makeVisible
 import info.tommarsh.mynews.core.util.newTaskIntent
@@ -23,9 +23,10 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
-internal class SourcesFragment(private val viewModelFactory: ViewModelFactory) : Fragment() {
+@AndroidEntryPoint
+internal class SourcesFragment : Fragment() {
 
-    private val viewModel by navGraphViewModels<OnBoardingViewModel>(R.id.onboarding_nav_graph) { viewModelFactory }
+    private val viewModel by navGraphViewModels<OnBoardingViewModel>(R.id.onboarding_nav_graph)
 
     private val adapter = ChoiceAdapter()
 

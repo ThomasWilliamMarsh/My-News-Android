@@ -2,6 +2,7 @@ apply plugin: 'com.android.dynamic-feature'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion rootProject.compileSdk
@@ -26,5 +27,7 @@ dependencies {
     implementation project(':app')
 
     //Dagger
-    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+    implementation "com.google.dagger:hilt-android:" + rootProject.hiltVersion
+    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.hiltVersion
+    kapt 'androidx.hilt:hilt-compiler:' + rootProject.jetpackHiltVersion
 }

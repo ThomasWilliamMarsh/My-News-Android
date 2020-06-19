@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.categories.ui
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
@@ -9,10 +10,9 @@ import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 class CategoryChoiceViewModel
-@Inject constructor(
+@ViewModelInject constructor(
     private val categoryRepository: CategoryRepository,
     private val domainToViewModelmapper: CategoryDomainToViewModelMapper,
     private val dispatcherProvider: DispatcherProvider

@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.search.ui
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,14 +12,12 @@ import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.model.mapper.SearchItemViewModelMapper
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class SearchViewModel
-@Inject constructor(
+@ViewModelInject constructor(
     private val repository: ArticleRepository,
     private val mapper: SearchItemViewModelMapper,
-    private val dispatcherProvider: DispatcherProvider
-) : ViewModel() {
+    private val dispatcherProvider: DispatcherProvider) : ViewModel() {
 
     private val _articles = MutableLiveData<List<SearchItemViewModel>>()
 

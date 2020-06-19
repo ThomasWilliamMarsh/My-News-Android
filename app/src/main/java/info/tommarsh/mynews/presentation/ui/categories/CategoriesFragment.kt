@@ -1,37 +1,29 @@
 package info.tommarsh.mynews.presentation.ui.categories
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.category.domain.CategoryModel
 import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.core.util.makeGone
 import info.tommarsh.mynews.core.util.makeVisible
-import info.tommarsh.mynews.presentation.di.HomeComponentProvider
-import info.tommarsh.mynews.presentation.di.inject
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.mynews.presentation.ui.categories.CategoriesAdapter.Companion.TYPE_HEADER
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentCategoriesBinding
 
+@AndroidEntryPoint
 class CategoriesFragment : ArticleFragment() {
 
     lateinit var binding: FragmentCategoriesBinding
 
     private val adapter = CategoriesAdapter()
 
-    private val viewModel: CategoriesViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(CategoriesViewModel::class.java)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        inject()
-    }
+    private val viewModel by viewModels<CategoriesViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,

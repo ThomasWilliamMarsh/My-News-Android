@@ -6,21 +6,18 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.Navigation.findNavController
 import androidx.navigation.ui.NavigationUI.setupWithNavController
-import info.tommarsh.mynews.core.di.provideCoreComponent
-import info.tommarsh.mynews.presentation.di.DaggerHomeComponent
-import info.tommarsh.mynews.presentation.di.HomeComponent
-import info.tommarsh.mynews.presentation.di.HomeComponentProvider
+import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.ActivityArticlesBinding
 
-class ArticlesActivity : AppCompatActivity(), HomeComponentProvider,
+@AndroidEntryPoint
+class ArticlesActivity : AppCompatActivity(),
     NavController.OnDestinationChangedListener {
 
     private val binding by lazy { ActivityArticlesBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        homeComponent().inject(this)
         setContentView(binding.root)
         setUpToolbar()
         setUpNavigation()
@@ -43,10 +40,5 @@ class ArticlesActivity : AppCompatActivity(), HomeComponentProvider,
         arguments: Bundle?
     ) {
         binding.articlesToolbarText.text = destination.label
-    }
-
-    override fun homeComponent(): HomeComponent {
-        return DaggerHomeComponent.factory()
-            .create(this, provideCoreComponent())
     }
 }

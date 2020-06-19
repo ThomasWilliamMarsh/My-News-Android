@@ -2,20 +2,24 @@ package info.tommarsh.mynews.presentation
 
 import android.app.Application
 import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
+import androidx.hilt.work.HiltWorkerFactory
 import androidx.work.Configuration
 import androidx.work.WorkManager
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import info.tommarsh.mynews.core.di.CoreComponentProvider
-import info.tommarsh.mynews.core.di.DaggerCoreComponent
+import dagger.hilt.android.HiltAndroidApp
 import info.tommarsh.mynews.core.offline.OfflineSyncScheduler
+import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.presentation.R
+import javax.inject.Inject
 
-class NewsApp : Application(), CoreComponentProvider, Configuration.Provider {
+@HiltAndroidApp
+class NewsApp : Application(), Configuration.Provider {
 
-    override val coreComponent by lazy {
-        DaggerCoreComponent.factory()
-            .create(this)
-    }
+    @Inject
+    lateinit var preferences: PreferencesRepository
+
+    @Inject
+    lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
@@ -25,7 +29,7 @@ class NewsApp : Application(), CoreComponentProvider, Configuration.Provider {
     }
 
     private fun setNightMode() {
-        setDefaultNightMode(coreComponent.sharedPreferences().getNightMode())
+        setDefaultNightMode(preferences.getNightMode())
     }
 
     private fun scheduleOfflineSync() {
@@ -38,5 +42,7 @@ class NewsApp : Application(), CoreComponentProvider, Configuration.Provider {
         remoteConfig.fetchAndActivate()
     }
 
-    override fun getWorkManagerConfiguration() = coreComponent.workManagerConfiguration()
+    override fun getWorkManagerConfiguration() = Configuration.Builder()
+        .setWorkerFactory(workerFactory)
+        .build()
 }

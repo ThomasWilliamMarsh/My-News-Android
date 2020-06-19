@@ -1,33 +1,26 @@
 package info.tommarsh.mynews.presentation.ui.videos
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
+import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.util.snack
-import info.tommarsh.mynews.presentation.di.inject
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentVideosBinding
 
+@AndroidEntryPoint
 class VideosFragment : ArticleFragment() {
 
     private lateinit var binding: FragmentVideosBinding
 
     private val adapter = VideosAdapter()
 
-    private val viewModel: VideosViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(VideosViewModel::class.java)
-    }
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        inject()
-    }
+    private val viewModel by viewModels<VideosViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater,
