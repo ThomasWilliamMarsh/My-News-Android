@@ -9,14 +9,15 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
-import info.tommarsh.mynews.core.di.FeatureScope
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
+import info.tommarsh.mynews.onboarding.di.OnBoardingComponent
 import info.tommarsh.mynews.onboarding.model.Choices
 
-@Module(includes = [DataSourceModule::class, ViewModelModule::class])
+@Module
 internal object OnBoardingModule {
 
     @Provides
-    @FeatureScope
     fun provideOnboardingDeserialiser(): JsonAdapter<Choices> {
         return Moshi.Builder()
             .add(KotlinJsonAdapterFactory())

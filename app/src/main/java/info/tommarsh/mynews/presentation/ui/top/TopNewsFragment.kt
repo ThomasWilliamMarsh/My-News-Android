@@ -1,22 +1,22 @@
 package info.tommarsh.mynews.presentation.ui.top
 
-import android.content.Context
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.consume
 import info.tommarsh.mynews.core.util.snack
-import info.tommarsh.mynews.presentation.di.inject
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
 import javax.inject.Inject
 
+@AndroidEntryPoint
 class TopNewsFragment : ArticleFragment() {
 
     private lateinit var binding: FragmentTopNewsBinding
@@ -26,16 +26,13 @@ class TopNewsFragment : ArticleFragment() {
 
     private val adapter = TopNewsAdapter()
 
-    private val viewModel: TopNewsViewModel by lazy {
-        ViewModelProviders.of(this, factory).get(TopNewsViewModel::class.java)
-    }
+    private val viewModel by viewModels<TopNewsViewModel>()
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        inject()
-    }
-
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         binding = FragmentTopNewsBinding.inflate(inflater, container, false)
         return binding.root
     }

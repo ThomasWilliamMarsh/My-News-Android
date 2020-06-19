@@ -7,20 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navGraphViewModels
-import info.tommarsh.mynews.core.util.ViewModelFactory
 import info.tommarsh.mynews.onboarding.R
 import info.tommarsh.mynews.onboarding.databinding.FragmentIntroductionBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
-import info.tommarsh.mynews.onboarding.ui.OnBoardingViewModel
+import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
-internal class IntroductionFragment(private val viewModelFactory: ViewModelFactory) : Fragment() {
+internal class IntroductionFragment : Fragment() {
 
-    private val viewModel by navGraphViewModels<OnBoardingViewModel>(R.id.onboarding_nav_graph) { viewModelFactory }
+    private val viewModel by onBoardingViewModel(R.id.onboarding_nav_graph)
 
     private lateinit var binding: FragmentIntroductionBinding
 

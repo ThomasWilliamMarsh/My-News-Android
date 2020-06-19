@@ -2,6 +2,7 @@ apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
     compileSdkVersion rootProject.compileSdk
@@ -53,6 +54,8 @@ dependencies {
     api 'com.google.firebase:firebase-config:' + rootProject.remoteConfigVersion
     implementation 'com.google.android.play:core-ktx:' + rootProject.playCoreVersion
     kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
+    api 'androidx.hilt:hilt-lifecycle-viewmodel:' + rootProject.jetpackHiltVersion
+    api 'androidx.hilt:hilt-work:' + rootProject.jetpackHiltVersion
 
     //Work Manager
     api 'androidx.work:work-runtime-ktx:' + rootProject.workmanagerVersion
@@ -81,8 +84,10 @@ dependencies {
     api 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
 
     //Dagger
-    api 'com.google.dagger:dagger:' + rootProject.daggerVersion
-    kapt 'com.google.dagger:dagger-compiler:' + rootProject.daggerVersion
+    implementation "com.google.dagger:hilt-android:" + rootProject.hiltVersion
+    api "com.google.dagger:hilt-android:" + rootProject.hiltVersion
+    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.hiltVersion
+    kapt 'androidx.hilt:hilt-compiler:' + rootProject.jetpackHiltVersion
 
     //Gson
     implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion

@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.presentation.ui.videos
 
+import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -11,10 +12,9 @@ import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 import info.tommarsh.mynews.presentation.model.mapper.PlaylistItemViewModelMapper
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import javax.inject.Inject
 
 class VideosViewModel
-@Inject constructor(
+@ViewModelInject constructor(
     private val repository: VideoRepository,
     private val mapper: PlaylistItemViewModelMapper,
     private val dispatcherProvider: DispatcherProvider

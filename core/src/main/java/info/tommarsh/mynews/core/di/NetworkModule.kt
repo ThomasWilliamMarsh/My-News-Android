@@ -3,6 +3,8 @@ package info.tommarsh.mynews.core.di
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ApplicationComponent
 import info.tommarsh.core.BuildConfig
 import info.tommarsh.mynews.core.article.data.remote.source.ArticleApiService
 import info.tommarsh.mynews.core.util.NewsApiInterceptor
@@ -22,6 +24,7 @@ annotation class NewsClient
 annotation class YoutubeClient
 
 @Module
+@InstallIn(ApplicationComponent::class)
 object NetworkModule {
 
     @NewsClient

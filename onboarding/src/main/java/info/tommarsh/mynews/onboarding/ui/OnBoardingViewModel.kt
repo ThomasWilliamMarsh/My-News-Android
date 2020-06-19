@@ -13,7 +13,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import java.lang.Exception
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -50,7 +49,7 @@ internal class OnBoardingViewModel
     private fun fetchOnBoardingModel(key: String) {
         viewModelScope.launch(dispatcherProvider.work()) {
             _events.value = Event.Loading
-            _events.value = when(val outcome = dataSource.getOnBoardingChoices(key)) {
+            _events.value = when (val outcome = dataSource.getOnBoardingChoices(key)) {
                 is Outcome.Success -> Event.Fetched(outcome.data.choices)
                 is Outcome.Error -> Event.Error(outcome.error)
             }
