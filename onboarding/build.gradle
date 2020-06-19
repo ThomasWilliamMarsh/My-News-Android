@@ -31,9 +31,6 @@ dependencies {
     //Moshi
     implementation 'com.squareup.moshi:moshi-kotlin:' + rootProject.moshiVersion
 
-    //Lottie
-    implementation 'com.airbnb.android:lottie:' + rootProject.lottieVersion
-
     //Testing
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
