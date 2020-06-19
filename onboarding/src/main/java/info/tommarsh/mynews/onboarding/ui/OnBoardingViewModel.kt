@@ -1,6 +1,5 @@
 package info.tommarsh.mynews.onboarding.ui
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.play.core.splitinstall.SplitInstallManager
@@ -14,10 +13,11 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 internal class OnBoardingViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     private val dataSource: OnBoardingDataSource,
     private val dispatcherProvider: DispatcherProvider,
     private val preferences: PreferencesRepository,
