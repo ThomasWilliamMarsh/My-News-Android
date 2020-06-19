@@ -87,6 +87,7 @@ dependencies {
     implementation "com.google.dagger:hilt-android:" + rootProject.hiltVersion
     api "com.google.dagger:hilt-android:" + rootProject.hiltVersion
     kapt "com.google.dagger:hilt-android-compiler:" + rootProject.hiltVersion
+    kapt 'androidx.hilt:hilt-compiler:' + rootProject.jetpackHiltVersion
 
     //Gson
     implementation 'com.google.code.gson:gson:' + rootProject.gsonVersion
