@@ -4,10 +4,8 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
-import info.tommarsh.mynews.categories.MockModelProvider.categoryModel
 import info.tommarsh.mynews.categories.MockModelProvider.categoryViewModel
 import info.tommarsh.mynews.categories.model.CategoryViewModel
-import info.tommarsh.mynews.categories.model.mapper.CategoryDomainToViewModelMapper
 import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import kotlinx.coroutines.Dispatchers
@@ -34,12 +32,9 @@ class CategoryChoiceViewModelTest {
         on { getSelectedCategoriesStream() }.thenReturn(mock())
         on { getCategories() }.thenReturn(mock())
     }
-    private val viewModelMapper = mock<CategoryDomainToViewModelMapper> {
-        on { map(listOf(categoryModel)) }.thenReturn(listOf(categoryViewModel))
-    }
 
     private val categoryChoiceViewModel =
-        CategoryChoiceViewModel(categoryRepository, viewModelMapper, dispatcherProvider)
+        CategoryChoiceViewModel(categoryRepository, dispatcherProvider)
     private val categoryObserver = mock<Observer<List<CategoryViewModel>>>()
 
     @Before
@@ -68,6 +63,5 @@ class CategoryChoiceViewModelTest {
         categoryChoiceViewModel.updateCategory(categoryViewModel)
 
         verify(categoryRepository).updateCategory("id", false)
-
     }
 }

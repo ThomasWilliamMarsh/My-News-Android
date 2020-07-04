@@ -1,4 +1,4 @@
-package info.tommarsh.mynews.search.model.mapper
+package info.tommarsh.mynews.search.model
 
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
@@ -8,18 +8,16 @@ import info.tommarsh.mynews.search.model.MockModelProvider.articleViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class SearchItemViewModelMapperTest {
+class MappersTest {
     private val timeHelper = mock<TimeHelper> {
         on { timeBetween(now = any(), isoString = any()) }.thenReturn("1 hour ago")
     }
 
-    private val mapper = SearchItemViewModelMapper(timeHelper)
-
     @Test
     fun `Map to Presentation`() {
-        val expected = listOf(articleViewModel)
+        val expected = articleViewModel
 
-        val actual = mapper.map(listOf(articleModel))
+        val actual = articleModel.toSearchViewModel(timeHelper)
 
         assertEquals(expected, actual)
     }

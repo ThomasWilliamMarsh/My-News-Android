@@ -6,18 +6,19 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.core.video.data.VideoRepository
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
-import info.tommarsh.mynews.presentation.model.mapper.PlaylistItemViewModelMapper
+import info.tommarsh.mynews.presentation.model.toViewModel
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class VideosViewModel
 @ViewModelInject constructor(
     private val repository: VideoRepository,
-    private val mapper: PlaylistItemViewModelMapper,
-    private val dispatcherProvider: DispatcherProvider
+    private val dispatcherProvider: DispatcherProvider,
+    private val timeHelper: TimeHelper
 ) : ViewModel() {
 
     private val _videos = MutableLiveData<List<PlaylistItemViewModel>>()
@@ -29,7 +30,9 @@ class VideosViewModel
     fun refreshVideos() {
         viewModelScope.launch {
             when (val outcome = getPlaylist()) {
-                is Outcome.Success -> _videos.postValue(outcome.data.items.map { mapper.map(it) })
+                is Outcome.Success -> _videos.postValue(outcome.data.items.map { playlist ->
+                    playlist.toViewModel(timeHelper)
+                })
                 is Outcome.Error -> repository.errors.setError(outcome.error)
             }
         }

@@ -10,7 +10,7 @@ interface ArticleRepository {
 
     val errors: ErrorLiveData
 
-    fun getBreakingNews(source: String): Flow<List<ArticleModel>>
+    fun getBreakingNews(): Flow<List<ArticleModel>>
 
     fun getFeed(): Flow<List<ArticleModel>>
 

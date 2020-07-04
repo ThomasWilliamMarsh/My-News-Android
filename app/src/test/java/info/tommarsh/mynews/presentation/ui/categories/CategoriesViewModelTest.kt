@@ -2,17 +2,16 @@ package info.tommarsh.mynews.presentation.ui.categories
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.model.ViewModel
+import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
-import info.tommarsh.mynews.presentation.model.MockModelProvider.articleModel
-import info.tommarsh.mynews.presentation.model.MockModelProvider.articleViewModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.categoryModel
-import info.tommarsh.mynews.presentation.model.mapper.ArticleViewModelMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -36,8 +35,9 @@ class CategoriesViewModelTest {
         onBlocking { getSelectedCategoriesStream() }.thenReturn(mock())
         onBlocking { getSelectedCategories() }.thenReturn(listOf(categoryModel, categoryModel))
     }
-    private val mapper = mock<ArticleViewModelMapper> {
-        on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(articleViewModel, articleViewModel))
+
+    private val timeHelper = mock<TimeHelper> {
+        on { timeBetween(now = any(), isoString = any()) }.thenReturn("1 hour ago")
     }
 
     private val dispatcherProvider = mock<DispatcherProvider> {
@@ -49,8 +49,8 @@ class CategoriesViewModelTest {
         CategoriesViewModel(
             articlesRepository,
             categoryRepository,
-            mapper,
-            dispatcherProvider
+            dispatcherProvider,
+            timeHelper
         )
 
     private val articleObserver = mock<Observer<List<ViewModel>>>()

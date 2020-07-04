@@ -45,7 +45,7 @@ class ArticleDataRepositoryTest {
     fun `Get breaking news from db and network, and persist`() = runBlocking<Unit> {
         whenever(localDataStore.getBreakingNews()).thenReturn(flowOf(listOf(articleModel)))
 
-        repository.getBreakingNews("")
+        repository.getBreakingNews()
 
         verify(localDataStore).getBreakingNews()
     }

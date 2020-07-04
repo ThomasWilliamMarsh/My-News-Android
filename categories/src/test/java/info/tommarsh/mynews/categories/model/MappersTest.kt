@@ -1,19 +1,17 @@
-package info.tommarsh.mynews.categories.model.mapper
+package info.tommarsh.mynews.categories.model
 
 import info.tommarsh.mynews.categories.MockModelProvider.categoryModel
 import info.tommarsh.mynews.categories.MockModelProvider.categoryViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
-class CategoryDomainToViewModelMapperTest {
-
-    private val mapper = CategoryDomainToViewModelMapper()
+class MappersTest {
 
     @Test
     fun `Map to presentation layer`() {
-        val expected = listOf(categoryViewModel)
+        val expected = categoryViewModel
 
-        val actual = mapper.map(listOf(categoryModel))
+        val actual = categoryModel.toViewModel()
 
         assertEquals(expected, actual)
     }

@@ -2,12 +2,14 @@ package info.tommarsh.mynews.presentation.ui.videos
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.util.ErrorLiveData
+import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.core.video.data.VideoRepository
 import info.tommarsh.mynews.presentation.model.MockModelProvider.noInternet
@@ -15,7 +17,6 @@ import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemMod
 import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistItemViewModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.playlistModel
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
-import info.tommarsh.mynews.presentation.model.mapper.PlaylistItemViewModelMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -36,15 +37,15 @@ class VideosViewModelTest {
     private val videosRepository = mock<VideoRepository> {
         on { errors }.thenReturn(errorLiveData)
     }
-    private val mapper = mock<PlaylistItemViewModelMapper> {
-        on { map(playlistItemModel) }.thenReturn(playlistItemViewModel)
+    private val timeHelper = mock<TimeHelper> {
+        on { timeBetween(now = any(), isoString = any()) }.thenReturn("1 hour ago")
     }
     private val dispatcherProvider = mock<DispatcherProvider> {
         on { main() }.thenReturn(testCoroutineDispatcher)
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
     private val videosViewModel =
-        VideosViewModel(videosRepository, mapper, dispatcherProvider)
+        VideosViewModel(videosRepository, dispatcherProvider, timeHelper)
     private val videosObserver = mock<Observer<List<PlaylistItemViewModel>>>()
     private val errorObserver = mock<Observer<NetworkException>>()
 

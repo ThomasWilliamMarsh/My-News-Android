@@ -2,6 +2,7 @@ package info.tommarsh.mynews.search.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
+import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
@@ -9,12 +10,12 @@ import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.util.ErrorLiveData
+import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.search.model.MockModelProvider.articleModel
 import info.tommarsh.mynews.search.model.MockModelProvider.articleViewModel
 import info.tommarsh.mynews.search.model.MockModelProvider.noInternet
 import info.tommarsh.mynews.search.model.SearchItemViewModel
-import info.tommarsh.mynews.search.model.mapper.SearchItemViewModelMapper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -36,15 +37,18 @@ class SearchViewModelTest {
         onBlocking { searchArticles("1234") }.thenReturn(Outcome.Error(noInternet))
         on { errors }.thenReturn(errorsLiveData)
     }
-    private val mapper = mock<SearchItemViewModelMapper> {
-        on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(articleViewModel, articleViewModel))
-    }
+
     private val dispatcherProvider = mock<DispatcherProvider> {
         on { main() }.thenReturn(testCoroutineDispatcher)
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
+
+    private val timeHelper = mock<TimeHelper> {
+        on { timeBetween(now = any(), isoString = any()) }.thenReturn("1 hour ago")
+    }
+
     private val searchViewModel =
-        SearchViewModel(articlesRepository, mapper, dispatcherProvider)
+        SearchViewModel(articlesRepository, dispatcherProvider, timeHelper)
     private val articlesObserver = mock<Observer<List<SearchItemViewModel>>>()
     private val errorObserver = mock<Observer<NetworkException>>()
 

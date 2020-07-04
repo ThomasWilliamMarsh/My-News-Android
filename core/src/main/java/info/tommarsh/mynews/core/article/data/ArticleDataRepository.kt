@@ -17,7 +17,7 @@ class ArticleDataRepository
     override val errors: ErrorLiveData
 ) : ArticleRepository {
 
-    override fun getBreakingNews(source: String): Flow<List<ArticleModel>> = local.getBreakingNews()
+    override fun getBreakingNews(): Flow<List<ArticleModel>> = local.getBreakingNews()
 
     override fun getFeed(): Flow<List<ArticleModel>> = local.getFeed()
 

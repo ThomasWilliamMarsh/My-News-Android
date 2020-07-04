@@ -3,8 +3,6 @@ package info.tommarsh.mynews.core.article.data.remote.source
 import com.nhaarman.mockitokotlin2.mock
 import info.tommarsh.mynews.core.MockProvider.articleModel
 import info.tommarsh.mynews.core.MockProvider.articlesResponse
-import info.tommarsh.mynews.core.article.data.remote.model.mapper.ArticleResponseMapper
-import info.tommarsh.mynews.core.article.data.remote.model.mapper.SourceResponseMapper
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.ConnectionManager
@@ -17,8 +15,7 @@ import retrofit2.Response
 class ArticlesRemoteDataStoreTest {
 
     private val goodResponse = Response.success(articlesResponse)
-    private val mapper =
-        ArticleResponseMapper(SourceResponseMapper())
+
     private val api = mock<ArticleApiService> {
         onBlocking { getBreakingNews("bbc,independent") }.thenReturn(goodResponse)
 
@@ -35,7 +32,6 @@ class ArticlesRemoteDataStoreTest {
     private val network = NetworkHelper(connectionManager)
     private val remoteDataStore =
         ArticlesRemoteDataStore(
-            mapper,
             network,
             preferences,
             api

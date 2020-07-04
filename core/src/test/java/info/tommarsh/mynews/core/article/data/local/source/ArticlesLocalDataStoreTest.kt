@@ -6,8 +6,6 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.article
 import info.tommarsh.mynews.core.MockProvider.articleModel
-import info.tommarsh.mynews.core.article.data.local.model.mapper.ArticleDataToDomainMapper
-import info.tommarsh.mynews.core.article.data.local.model.mapper.ArticleDomainToDataMapper
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
@@ -20,18 +18,7 @@ class ArticlesLocalDataStoreTest {
     var rule: TestRule = InstantTaskExecutorRule()
 
     private val dao = mock<ArticlesDao>()
-    private val dataToDomainMapper = mock<ArticleDataToDomainMapper> {
-        on { map(listOf(article, article)) }.thenReturn(listOf(articleModel, articleModel))
-    }
-    private val domainToDataMapper = mock<ArticleDomainToDataMapper> {
-        on { map(listOf(articleModel, articleModel)) }.thenReturn(listOf(article, article))
-    }
-    private val localDataStore =
-        ArticlesLocalDataStore(
-            dao,
-            dataToDomainMapper,
-            domainToDataMapper
-        )
+    private val localDataStore = ArticlesLocalDataStore(dao)
 
     @Test
     fun `get breaking news from DB`() {
