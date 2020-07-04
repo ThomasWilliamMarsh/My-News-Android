@@ -6,8 +6,6 @@ import info.tommarsh.mynews.core.MockProvider.playlistModel
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.util.ConnectionManager
 import info.tommarsh.mynews.core.util.NetworkHelper
-import info.tommarsh.mynews.core.video.data.remote.model.mapper.PlaylistItemMapper
-import info.tommarsh.mynews.core.video.data.remote.model.mapper.PlaylistResponseMapper
 import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -19,8 +17,6 @@ class VideoRemoteDataStoreTest {
     private val connectionManager = mock<ConnectionManager> {
         on { isConnected }.thenReturn(true)
     }
-    private val mapper =
-        PlaylistResponseMapper(PlaylistItemMapper())
     private val network = NetworkHelper(connectionManager)
     private val api = mock<VideoApiService> {
         onBlocking { getPlaylistItems() }.thenReturn(goodResponse)
@@ -28,9 +24,7 @@ class VideoRemoteDataStoreTest {
 
     private val remote = VideoRemoteDataStore(
         api,
-        network,
-        mapper
-    )
+        network)
 
     @Test
     fun `Get Videos from network`() = runBlockingTest {

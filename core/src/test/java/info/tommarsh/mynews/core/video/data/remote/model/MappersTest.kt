@@ -1,6 +1,5 @@
-package info.tommarsh.mynews.core.video.data.remote.model.mapper
+package info.tommarsh.mynews.core.video.data.remote.model
 
-import com.nhaarman.mockitokotlin2.mock
 import info.tommarsh.mynews.core.MockProvider.playlist
 import info.tommarsh.mynews.core.MockProvider.playlistModel
 import info.tommarsh.mynews.core.MockProvider.video
@@ -8,19 +7,21 @@ import info.tommarsh.mynews.core.MockProvider.videoModel
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
-class PlaylistResponseMapperTest {
+class MappersTest {
+    @Test
+    fun `Map video to domain layer`() {
+        val expected = videoModel
 
-    private val videoMapper = mock<PlaylistItemMapper> {
-        on { map(video) }.thenReturn(videoModel)
+        val actual = video.toDomainModel()
+
+        assertEquals(expected, actual)
     }
-    private val mapper =
-        PlaylistResponseMapper(videoMapper)
 
     @Test
-    fun `Map to domain layer`() {
+    fun `Map playlist to domain layer`() {
         val expected = playlistModel
 
-        val actual = mapper.map(playlist)
+        val actual = playlist.toDomainModel()
 
         assertEquals(expected, actual)
     }

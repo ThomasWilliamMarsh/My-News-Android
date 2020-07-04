@@ -28,7 +28,7 @@ class MappersTest {
 
     @Test
     fun `Map article data model to domain model`() {
-        val expected = article
+        val expected = articleModel
 
         val actual = article.toDomainModel()
 
