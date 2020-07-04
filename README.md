@@ -20,5 +20,6 @@ A News app with personalised categories. Using [NewsAPI](https://newsapi.org/)
 - Workmanager
 - Room
 - Retrofit
+- Hilt dependency injection
 
 
