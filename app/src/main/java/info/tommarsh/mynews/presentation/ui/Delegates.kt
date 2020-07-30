@@ -6,12 +6,25 @@ import com.hannesdorfmann.adapterdelegates4.dsl.adapterDelegateLayoutContainer
 import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
+import info.tommarsh.mynews.presentation.model.CarouselViewModel
 import info.tommarsh.mynews.presentation.model.HeaderViewModel
 import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
 import info.tommarsh.mynews.presentation.setClickListenerFor
+import info.tommarsh.mynews.presentation.ui.categories.CarouselAdapter
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.*
 
+fun carouselDelegate() = adapterDelegateLayoutContainer<CarouselViewModel, ViewModel>(
+    layout = R.layout.item_carousel
+) {
+    bind {
+        val binding = ItemCarouselBinding.bind(itemView)
+        val adapter = CarouselAdapter()
+        binding.carouselName.text = item.name
+        binding.carouselItems.adapter = adapter
+        adapter.submitList(item.articles)
+    }
+}
 
 fun headerDelegate() = adapterDelegateLayoutContainer<HeaderViewModel, ViewModel>(
     layout = R.layout.item_header
@@ -46,21 +59,6 @@ fun secondaryArticleDelegate() =
             binding.articleImage.loadUrl(item.urlToImage)
             binding.articleTitle.text = item.title
             binding.articleUpdated.text = item.publishedAt
-
-            item.setClickListenerFor(itemView)
-        }
-    }
-
-fun categoryArticleDelegate() =
-    adapterDelegateLayoutContainer<ArticleViewModel, ViewModel>(R.layout.item_category_article) {
-
-        bind {
-            val binding = ItemCategoryArticleBinding.bind(itemView)
-            binding.categoryArticleName.text = item.title
-            binding.categoryArticleUpdated.text = item.publishedAt
-            if (item.urlToImage.isNotEmpty()) {
-                binding.categoryArticleImage.loadUrl(item.urlToImage)
-            }
 
             item.setClickListenerFor(itemView)
         }
