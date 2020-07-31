@@ -9,7 +9,6 @@ import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.presentation.model.toCarousels
-import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
@@ -23,11 +22,12 @@ class CategoriesViewModel
     private val timeHelper: TimeHelper
 ) : ViewModel() {
 
-    val feed = categoryRepository.getSelectedCategoriesStream().flatMapLatest { categories ->
-        articlesRepository.getFeed()
-            .onStart { refreshFeed() }
-            .map { articles -> articles.toCarousels(categories, timeHelper) }
-    }.asLiveData(dispatcherProvider.main())
+    val feed = articlesRepository.getFeed()
+        .map { articles ->
+            val selectedCategories = categoryRepository.getSelectedCategories()
+            articles.toCarousels(selectedCategories, timeHelper)
+        }
+        .asLiveData(dispatcherProvider.work())
 
     fun refreshFeed() {
         viewModelScope.launch {

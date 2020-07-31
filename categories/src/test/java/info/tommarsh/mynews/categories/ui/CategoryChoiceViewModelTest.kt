@@ -29,7 +29,6 @@ class CategoryChoiceViewModelTest {
         on { work() }.thenReturn(testCoroutineDispatcher)
     }
     private val categoryRepository = mock<CategoryRepository> {
-        on { getSelectedCategoriesStream() }.thenReturn(mock())
         on { getCategories() }.thenReturn(mock())
     }
 

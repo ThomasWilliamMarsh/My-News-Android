@@ -42,15 +42,6 @@ class CategoryDataRepositoryTest {
     }
 
     @Test
-    fun `Get selected categories`() {
-        whenever(localDataStore.getSelectedCategoriesStream()).thenReturn(flowOf())
-
-        repository.getSelectedCategoriesStream()
-
-        verify(localDataStore).getSelectedCategoriesStream()
-    }
-
-    @Test
     fun `Update categories`() = runBlocking {
 
         repository.updateCategory("id", true)

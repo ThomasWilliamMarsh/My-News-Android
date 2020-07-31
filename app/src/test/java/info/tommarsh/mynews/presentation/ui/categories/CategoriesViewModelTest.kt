@@ -4,15 +4,20 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
 import com.nhaarman.mockitokotlin2.any
 import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.times
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.category.data.CategoryRepository
-import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
-import info.tommarsh.mynews.presentation.model.MockModelProvider.categoryModel
+import info.tommarsh.mynews.presentation.model.CarouselViewModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.entertainmentArticleModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.entertainmentCarousel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.entertainmentCategoryModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.footballArticleModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.footballCarousel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.footballCategoryModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -29,16 +34,29 @@ class CategoriesViewModelTest {
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
     private val articlesRepository = mock<ArticleRepository> {
-        onBlocking { getFeed() }.thenReturn(mock())
+        onBlocking { getFeed() }.thenReturn(
+            flowOf(
+                listOf(
+                    footballArticleModel,
+                    entertainmentArticleModel
+                )
+            )
+        )
     }
     private val categoryRepository = mock<CategoryRepository> {
-        onBlocking { getSelectedCategoriesStream() }.thenReturn(mock())
-        onBlocking { getSelectedCategories() }.thenReturn(listOf(categoryModel, categoryModel))
+        onBlocking { getSelectedCategories() }.thenReturn(
+            listOf(
+                footballCategoryModel,
+                entertainmentCategoryModel
+            )
+        )
     }
 
     private val timeHelper = mock<TimeHelper> {
         on { timeBetween(now = any(), isoString = any()) }.thenReturn("1 hour ago")
     }
+
+    private val observer = mock<Observer<List<CarouselViewModel>>>()
 
     private val dispatcherProvider = mock<DispatcherProvider> {
         on { main() }.thenReturn(testCoroutineDispatcher)
@@ -53,8 +71,6 @@ class CategoriesViewModelTest {
             timeHelper
         )
 
-    private val articleObserver = mock<Observer<List<ViewModel>>>()
-
     @Before
     fun `Set up`() {
         Dispatchers.setMain(testCoroutineDispatcher)
@@ -68,28 +84,32 @@ class CategoriesViewModelTest {
     }
 
     @Test
-    fun `Get selected categories`() = runBlockingTest {
-        val livedata = categoryViewModel.feed
+    fun `Gets selected categories and articles and maps to carousels when feed changes`() =
+        runBlockingTest {
+            val livedata = categoryViewModel.feed
 
-        livedata.observeForever(articleObserver)
+            livedata.observeForever(observer)
 
-        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
-        livedata.removeObserver(articleObserver)
-    }
+            verify(categoryRepository).getSelectedCategories()
+            verify(observer).onChanged(
+                listOf(
+                    footballCarousel,
+                    entertainmentCarousel
+                )
+            )
+            livedata.removeObserver(observer)
+        }
 
     @Test
-    fun `Get categories Feed`() = runBlockingTest {
-
-        categoryViewModel.selectedCategories
-
-        verify(categoryRepository, times(2)).getSelectedCategoriesStream()
-    }
-
-    @Test
-    fun `Refresh feed`() = runBlockingTest {
+    fun `Refreshes feed`() = runBlockingTest {
 
         categoryViewModel.refreshFeed()
 
-        verify(articlesRepository).refreshFeed(listOf(categoryModel, categoryModel))
+        verify(articlesRepository).refreshFeed(
+            listOf(
+                footballCategoryModel,
+                entertainmentCategoryModel
+            )
+        )
     }
 }

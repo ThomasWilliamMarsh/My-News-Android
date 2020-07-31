@@ -44,6 +44,13 @@ class CategoriesFragment : ArticleFragment() {
             binding.refreshMyNews.isRefreshing = true
             viewModel.refreshFeed()
         }
+
+        viewModel.refreshFeed()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        viewModel.refreshFeed()
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -54,11 +61,6 @@ class CategoriesFragment : ArticleFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.feed.observe(viewLifecycleOwner, Observer(::onArticleCategories))
-    }
-
-    override fun onResume() {
-        super.onResume()
-        viewModel.refreshFeed()
     }
 
     private fun onArticleCategories(articles: List<ViewModel>) {

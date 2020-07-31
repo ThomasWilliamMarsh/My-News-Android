@@ -9,7 +9,6 @@ class CategoryDataRepository
     private val local: CategoryLocalDataStore,
     override val errors: ErrorLiveData
 ) : CategoryRepository {
-    override fun getSelectedCategoriesStream() = local.getSelectedCategoriesStream()
 
     override suspend fun getSelectedCategories() = local.getSelectedCategories()
 

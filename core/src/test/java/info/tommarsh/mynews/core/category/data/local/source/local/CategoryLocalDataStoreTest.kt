@@ -27,15 +27,6 @@ class CategoryLocalDataStoreTest {
     }
 
     @Test
-    fun `Get selected categories from DB`() {
-        whenever(dao.getSelectedCategoriesStream()).thenReturn(flowOf())
-
-        local.getSelectedCategoriesStream()
-
-        verify(dao).getSelectedCategoriesStream()
-    }
-
-    @Test
     fun `Update category`() = runBlocking {
 
         local.updateCategory("id", true)
