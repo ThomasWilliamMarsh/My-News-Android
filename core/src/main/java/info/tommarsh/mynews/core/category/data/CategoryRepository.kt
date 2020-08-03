@@ -10,8 +10,6 @@ interface CategoryRepository {
 
     fun getCategories(): Flow<List<CategoryModel>>
 
-    fun getSelectedCategoriesStream(): Flow<List<CategoryModel>>
-
     suspend fun getSelectedCategories(): List<CategoryModel>
 
     suspend fun updateCategory(id: String, selected: Boolean)

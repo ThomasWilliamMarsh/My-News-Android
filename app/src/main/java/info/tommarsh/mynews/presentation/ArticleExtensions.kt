@@ -19,15 +19,4 @@ fun ArticleViewModel.setClickListenerFor(view: View) {
     }
 }
 
-fun List<ArticleViewModel>.addHeaders(): List<ViewModel> {
-    val result = mutableListOf<ViewModel>(*this.toTypedArray())
-    val split = groupBy { it.category }
-    split.forEach { pair ->
-        val vm = HeaderViewModel(pair.key)
-        val index = result.indexOfFirst { it is ArticleViewModel && it.category == pair.key }
-        result.add(index, vm)
-    }
-    return result
-}
-
 

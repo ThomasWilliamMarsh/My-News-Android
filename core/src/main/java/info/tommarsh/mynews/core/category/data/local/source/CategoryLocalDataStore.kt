@@ -12,9 +12,6 @@ internal class CategoryLocalDataStore
     fun getCategories(): Flow<List<CategoryModel>> =
         dao.getCategories().map { databaseModels -> databaseModels.map { model -> model.toDomainModel() } }
 
-    fun getSelectedCategoriesStream(): Flow<List<CategoryModel>> =
-        dao.getSelectedCategoriesStream().map { databaseModels -> databaseModels.map { model -> model.toDomainModel() } }
-
     suspend fun getSelectedCategories(): List<CategoryModel> =
         dao.getSelectedCategories().map { databaseModel -> databaseModel.toDomainModel() }
 

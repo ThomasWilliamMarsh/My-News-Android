@@ -13,8 +13,8 @@ object MockModelProvider {
     val fakeIsoTime = "2019-01-01T11:00:00+0000"
 
     //region category
-    val categoryModel = CategoryModel("id", "name", false)
-    val categoryViewModel = CategoryViewModel("id", "name", false)
+    val footballCategoryModel = CategoryModel("id-football", "Football", false)
+    val entertainmentCategoryModel = CategoryModel("id-entertainment", "Entertainment", false)
     //endregion
 
     //region playlist
@@ -32,16 +32,78 @@ object MockModelProvider {
     val playlistItemViewModel = PlaylistItemViewModel("id", "title", "1 hour ago", "url")
     //endregion
 
-    //region article
+
+    //region source
     val sourceModel = SourceModel("id", "name")
+    //end region
+
+    //region article
     val articleModel = ArticleModel(
         "author", "content", "description",
         fakeIsoTime,
         sourceModel, "title",
         "url", "imageUrl", "top-news"
     )
+    val footballArticleModel = ArticleModel(
+        "author", "content", "description",
+        fakeIsoTime,
+        sourceModel, "Football Title",
+        "url", "imageUrl", "id-football"
+    )
+
+    val entertainmentArticleModel = ArticleModel(
+        "author", "content", "description",
+        fakeIsoTime,
+        sourceModel, "Entertainment Title",
+        "url", "imageUrl", "id-entertainment"
+    )
+
+
     val articleViewModel =
-        ArticleViewModel("author", "description", "1 hour ago", "title", "content", "url", "imageUrl", "top-news")
+        ArticleViewModel(
+            "author",
+            "description",
+            "1 hour ago",
+            "title",
+            "content",
+            "url",
+            "imageUrl",
+            "top-news"
+        )
+    val footballArticleViewModel =
+        ArticleViewModel(
+            "author",
+            "description",
+            "1 hour ago",
+            "Football Title",
+            "content",
+            "url",
+            "imageUrl",
+            "id-football"
+        )
+    val entertainmentArticleViewModel =
+        ArticleViewModel(
+            "author",
+            "description",
+            "1 hour ago",
+            "Entertainment Title",
+            "content",
+            "url",
+            "imageUrl",
+            "id-entertainment"
+        )
+
+    //region carousel
+    val footballCarousel = CarouselViewModel(
+        name = footballCategoryModel.name,
+        articles = listOf(footballArticleViewModel)
+    )
+    val entertainmentCarousel = CarouselViewModel(
+        name = entertainmentCategoryModel.name, articles = listOf(
+            entertainmentArticleViewModel
+        )
+    )
+    //endregion
 
     /**
      * Errors

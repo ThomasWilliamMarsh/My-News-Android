@@ -56,3 +56,15 @@ fun Fragment.consume(block: () -> Unit): Boolean {
     return false
 }
 //endregion
+
+inline fun <reified T : Any> createDiffItemCallback(crossinline contentsTheSame: (old: T, new: T) -> Boolean) =
+    object : DiffUtil.ItemCallback<T>() {
+
+        override fun areItemsTheSame(oldItem: T, newItem: T): Boolean {
+            return oldItem::class.java == newItem::class.java
+        }
+
+        override fun areContentsTheSame(oldItem: T, newItem: T): Boolean {
+            return contentsTheSame(oldItem, newItem)
+        }
+    }
