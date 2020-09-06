@@ -5,11 +5,12 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.Observer
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.util.*
-import info.tommarsh.mynews.search.model.SearchItemViewModel
+import info.tommarsh.mynews.search.model.Action
+import info.tommarsh.mynews.search.model.Event
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import info.tommarsh.search.databinding.ActivitySearchBinding
 import kotlinx.android.synthetic.main.activity_search.*
@@ -43,8 +44,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setUpViewModel() {
-        viewModel.articles.observe(this, Observer(::onSearchResults))
-        viewModel.errors.observe(this, Observer(::onError))
+        viewModel.searchState.observe(this, Observer(::onUIState))
     }
 
     private fun setUpSearchView() {
@@ -58,19 +58,16 @@ class SearchActivity : AppCompatActivity() {
 
     private fun onIntent(intent: Intent) {
         if (Intent.ACTION_SEARCH == intent.action) {
-            binding.searchProgress.makeVisible()
             val query = intent.getStringExtra(SearchManager.QUERY)
-            viewModel.searchArticles(query)
+            viewModel.postAction(Action.Search(query))
         }
     }
 
-    private fun onSearchResults(results: List<SearchItemViewModel>) {
-        binding.searchProgress.makeGone()
-        adapter.submitList(results)
-    }
-
-    private fun onError(exception: NetworkException) {
-        binding.searchProgress.makeGone()
-        binding.root.snack(exception.localizedMessage)
+    private fun onUIState(state: Event) {
+        binding.searchProgress.isVisible = state is Event.Loading
+        when(state) {
+            is Event.FetchedResults -> adapter.submitList(state.items)
+            is Event.Error -> binding.root.snack(state.throwable.localizedMessage)
+        }
     }
 }

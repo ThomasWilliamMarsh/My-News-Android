@@ -15,9 +15,9 @@ class MappersTest {
 
     @Test
     fun `Map to Presentation`() {
-        val expected = articleViewModel
+        val expected = listOf(articleViewModel)
 
-        val actual = articleModel.toSearchViewModel(timeHelper)
+        val actual = listOf(articleModel).toSearchViewModel(timeHelper)
 
         assertEquals(expected, actual)
     }

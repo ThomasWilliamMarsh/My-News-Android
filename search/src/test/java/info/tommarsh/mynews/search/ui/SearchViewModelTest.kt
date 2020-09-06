@@ -7,15 +7,15 @@ import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.article.data.ArticleRepository
-import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.util.ErrorLiveData
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
+import info.tommarsh.mynews.search.model.Action
 import info.tommarsh.mynews.search.model.MockModelProvider.articleModel
 import info.tommarsh.mynews.search.model.MockModelProvider.articleViewModel
 import info.tommarsh.mynews.search.model.MockModelProvider.noInternet
-import info.tommarsh.mynews.search.model.SearchItemViewModel
+import info.tommarsh.mynews.search.model.Event
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
@@ -49,31 +49,20 @@ class SearchViewModelTest {
 
     private val searchViewModel =
         SearchViewModel(articlesRepository, dispatcherProvider, timeHelper)
-    private val articlesObserver = mock<Observer<List<SearchItemViewModel>>>()
-    private val errorObserver = mock<Observer<NetworkException>>()
+    private val uiStateObserver = mock<Observer<Event>>()
 
 
     @Before
     fun `Set up`() {
         Dispatchers.setMain(testCoroutineDispatcher)
-        searchViewModel.errors.observeForever(errorObserver)
-        searchViewModel.articles.observeForever(articlesObserver)
+        searchViewModel.searchState.observeForever(uiStateObserver)
     }
 
     @After
     fun `Tear down`() {
         Dispatchers.resetMain()
         testCoroutineDispatcher.cleanupTestCoroutines()
-        searchViewModel.errors.removeObserver(errorObserver)
-        searchViewModel.articles.removeObserver(articlesObserver)
-    }
-
-    @Test
-    fun `Get errors`() {
-
-        searchViewModel.errors
-
-        verify(articlesRepository).errors
+        searchViewModel.searchState.removeObserver(uiStateObserver)
     }
 
     @Test
@@ -87,17 +76,18 @@ class SearchViewModelTest {
             )
         )
 
-        searchViewModel.searchArticles("1234")
+        searchViewModel.postAction(Action.Search("1234"))
 
         verify(articlesRepository).searchArticles("1234")
-        verify(articlesObserver).onChanged(listOf(articleViewModel, articleViewModel))
+        verify(uiStateObserver).onChanged(Event.Loading)
+        verify(uiStateObserver).onChanged(Event.FetchedResults(listOf(articleViewModel, articleViewModel)))
     }
 
     @Test
     fun `show error when failing to get search results`() = runBlockingTest {
 
-        searchViewModel.searchArticles("1234")
+        searchViewModel.postAction(Action.Search("1234"))
 
-        verify(errorObserver).onChanged(noInternet)
+        verify(uiStateObserver).onChanged(Event.Error(noInternet))
     }
 }
