@@ -14,6 +14,6 @@ data class SearchItemViewModel(
 ) : ViewModel {
 
     override fun contentsTheSame(other: ViewModel): Boolean {
-        return this == other
+        return url == (other as? SearchItemViewModel)?.url
     }
 }

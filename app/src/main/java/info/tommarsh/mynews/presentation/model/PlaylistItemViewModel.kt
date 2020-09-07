@@ -10,6 +10,6 @@ data class PlaylistItemViewModel(
 ) : ViewModel {
 
     override fun contentsTheSame(other: ViewModel): Boolean {
-        return this == other
+        return videoId == (other as? PlaylistItemViewModel)?.videoId
     }
 }

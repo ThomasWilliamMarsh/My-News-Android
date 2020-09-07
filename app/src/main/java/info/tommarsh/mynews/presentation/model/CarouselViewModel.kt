@@ -7,6 +7,6 @@ data class CarouselViewModel(
     val articles: List<ArticleViewModel>
 ) : ViewModel {
     override fun contentsTheSame(other: ViewModel): Boolean {
-        return this == other
+        return name ==  (other as? CarouselViewModel)?.name
     }
 }
