@@ -45,7 +45,6 @@ class CategoryChoiceActivity : AppCompatActivity() {
     }
 
     private fun onCategorySelected(category: CategoryViewModel, selected: Boolean) {
-        category.selected = selected
-        viewModel.updateCategory(category)
+        viewModel.updateCategory(category.copy(selected = selected))
     }
 }

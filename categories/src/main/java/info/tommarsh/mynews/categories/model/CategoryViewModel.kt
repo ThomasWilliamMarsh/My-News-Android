@@ -5,7 +5,7 @@ import info.tommarsh.mynews.core.model.ViewModel
 data class CategoryViewModel(
     val id: String,
     val name: String,
-    var selected: Boolean
+    val selected: Boolean
 ) : ViewModel {
 
     override fun contentsTheSame(other: ViewModel): Boolean {
