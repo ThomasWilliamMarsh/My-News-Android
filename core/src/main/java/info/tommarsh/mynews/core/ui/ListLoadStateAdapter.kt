@@ -1,4 +1,4 @@
-package info.tommarsh.mynews.presentation.ui.shared
+package info.tommarsh.mynews.core.ui
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -6,9 +6,9 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import info.tommarsh.presentation.databinding.ItemLoadStateBinding
+import info.tommarsh.core.databinding.ItemLoadStateBinding
 
-internal class ArticlesLoadStateAdapter(private val onRetry: () -> Unit) : LoadStateAdapter<LoadStateViewHolder>() {
+class ListLoadStateAdapter(private val onRetry: () -> Unit) : LoadStateAdapter<LoadStateViewHolder>() {
 
     override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
         holder.bind(loadState)
@@ -20,7 +20,7 @@ internal class ArticlesLoadStateAdapter(private val onRetry: () -> Unit) : LoadS
     }
 }
 
-internal class LoadStateViewHolder(
+class LoadStateViewHolder(
     private val binding: ItemLoadStateBinding,
     onRetry: () -> Unit
 ) : RecyclerView.ViewHolder(binding.root) {

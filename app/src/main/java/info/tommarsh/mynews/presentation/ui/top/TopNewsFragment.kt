@@ -12,10 +12,10 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
+import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.consume
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
-import info.tommarsh.mynews.presentation.ui.shared.ArticlesLoadStateAdapter
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
 import javax.inject.Inject
@@ -78,7 +78,7 @@ class TopNewsFragment : ArticleFragment() {
 
     private fun setUpAdapter(): ConcatAdapter {
         return adapter.withLoadStateFooter(
-            footer = ArticlesLoadStateAdapter { adapter.retry() }
+            footer = ListLoadStateAdapter { adapter.retry() }
         ).also {
             adapter.addLoadStateListener { loadState ->
                 binding.topNewsRecyclerView.isVisible =

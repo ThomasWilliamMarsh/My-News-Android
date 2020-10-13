@@ -1,4 +1,4 @@
-package info.tommarsh.mynews.core.article.data
+package info.tommarsh.mynews.core.article.data.paging
 
 import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
@@ -9,11 +9,9 @@ import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStor
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
 import info.tommarsh.mynews.core.di.NetworkModule.NETWORK_PAGE_SIZE
 import info.tommarsh.mynews.core.model.Outcome
-import javax.inject.Inject
 
 @OptIn(ExperimentalPagingApi::class)
-internal class BreakingNewsRemoteMediator
-@Inject constructor(
+internal class BreakingNewsRemoteMediator constructor(
     private val remoteArticleSource: ArticlesRemoteDataStore,
     private val localArticleSource: ArticlesLocalDataStore
 ) : RemoteMediator<Int, Article>() {
@@ -25,7 +23,7 @@ internal class BreakingNewsRemoteMediator
 
         var page = localArticleSource.getBreakingNewsPage() + 1
         if (loadType == LoadType.REFRESH) {
-            localArticleSource.clearBreakingNewsArticles().also { page = 1}
+            localArticleSource.clearBreakingNewsArticles().also { page = 1 }
         }
 
         return when (val outcome = remoteArticleSource.getBreakingNews(page = page)) {

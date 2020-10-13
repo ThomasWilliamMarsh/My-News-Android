@@ -9,12 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
 
-    val errors: ErrorLiveData
-
     fun getBreakingNews(): Flow<PagingData<ArticleModel>>
 
     fun getFeed(): Flow<List<ArticleModel>>
 
-    suspend fun searchArticles(query: String): Outcome<List<ArticleModel>>
-
+    fun searchArticles(query: String): Flow<PagingData<ArticleModel>>
 }

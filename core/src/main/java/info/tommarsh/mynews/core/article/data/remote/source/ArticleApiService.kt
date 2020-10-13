@@ -21,6 +21,7 @@ internal interface ArticleApiService {
     suspend fun searchArticles(
         @Query("q") query: String,
         @Query("sources") sources: String = "bbc-news",
-        @Query("sortBy") sortBy: String = "publishedAt"
+        @Query("sortBy") sortBy: String = "publishedAt",
+        @Query("page") page: Int = 0
     ): Response<ArticlesResponse>
 }
