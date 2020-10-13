@@ -88,7 +88,7 @@ class ArticleDataRepositoryTest {
         repository.refreshFeed(listOf(categoryModel, categoryModel))
 
         verify(remoteDataStore, times(2)).getArticleForCategory(categoryModel.id)
-        verify(localDataStore).saveArticles(listOf(articleModel, articleModel, articleModel, articleModel))
+        verify(localDataStore).replaceBreakingNews(listOf(articleModel, articleModel, articleModel, articleModel))
     }
 
     @Test

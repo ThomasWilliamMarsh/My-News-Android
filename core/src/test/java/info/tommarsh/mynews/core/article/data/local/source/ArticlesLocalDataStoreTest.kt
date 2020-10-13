@@ -32,7 +32,7 @@ class ArticlesLocalDataStoreTest {
     @Test
     fun `Save breaking news to DB`() = runBlocking {
 
-        localDataStore.saveArticles(listOf(articleModel, articleModel))
+        localDataStore.replaceBreakingNews(listOf(articleModel, articleModel))
 
         verify(dao).replaceBreakingArticles(listOf(article, article))
     }

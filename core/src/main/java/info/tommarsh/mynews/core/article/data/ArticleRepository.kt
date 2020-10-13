@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.core.article.data
 
+import androidx.paging.PagingData
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
 import info.tommarsh.mynews.core.category.domain.CategoryModel
 import info.tommarsh.mynews.core.model.Outcome
@@ -10,13 +11,9 @@ interface ArticleRepository {
 
     val errors: ErrorLiveData
 
-    fun getBreakingNews(): Flow<List<ArticleModel>>
+    fun getBreakingNews(): Flow<PagingData<ArticleModel>>
 
     fun getFeed(): Flow<List<ArticleModel>>
-
-    suspend fun refreshBreakingNews()
-
-    suspend fun refreshFeed(categories: List<CategoryModel>)
 
     suspend fun searchArticles(query: String): Outcome<List<ArticleModel>>
 

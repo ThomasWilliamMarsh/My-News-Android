@@ -1,17 +1,21 @@
+
 package info.tommarsh.mynews.presentation.ui.top
 
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.paging.LoadState
+import androidx.paging.PagingData
+import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.consume
-import info.tommarsh.mynews.core.util.snack
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
+import info.tommarsh.mynews.presentation.ui.shared.ArticlesLoadStateAdapter
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
 import javax.inject.Inject
@@ -39,14 +43,14 @@ class TopNewsFragment : ArticleFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.topNewsRecyclerView.adapter = adapter
-        binding.refreshTopNews.setOnRefreshListener { viewModel.refreshBreakingNews() }
+        binding.topNewsRecyclerView.adapter = setUpAdapter()
+        binding.topNewsRefresher.setOnRefreshListener { adapter.refresh() }
+        binding.topNewsRetryButton.setOnClickListener { adapter.retry() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         viewModel.articles.observe(viewLifecycleOwner, Observer(::onArticlesReceived))
-        viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -72,13 +76,22 @@ class TopNewsFragment : ArticleFragment() {
         }
     }
 
-    private fun onArticlesReceived(articles: List<ArticleViewModel>?) {
-        adapter.items = articles
-        binding.refreshTopNews.isRefreshing = false
+    private fun setUpAdapter(): ConcatAdapter {
+        return adapter.withLoadStateFooter(
+            footer = ArticlesLoadStateAdapter { adapter.retry() }
+        ).also {
+            adapter.addLoadStateListener { loadState ->
+                binding.topNewsRecyclerView.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading
+                binding.topNewsRefresher.isRefreshing =
+                    loadState.source.refresh is LoadState.Loading
+                binding.topNewsRetryButton.isVisible = loadState.source.refresh is LoadState.Error
+            }
+        }
     }
 
-    private fun onError(error: NetworkException) {
-        binding.refreshTopNews.isRefreshing = false
-        binding.refreshTopNews.snack(error.localizedMessage)
+    private fun onArticlesReceived(articles: PagingData<ArticleViewModel>) {
+
+        adapter.submitData(lifecycle, articles)
     }
 }

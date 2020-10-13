@@ -15,9 +15,14 @@ internal class ArticlesRemoteDataStore
     private val api: ArticleApiService
 ) {
 
-    suspend fun getBreakingNews(): Outcome<List<ArticleModel>> {
+    suspend fun getBreakingNews(page: Int = 0): Outcome<List<ArticleModel>> {
         return try {
-            val response = networkHelper.callApi { api.getBreakingNews(preferences.getSources()) }
+            val response = networkHelper.callApi {
+                api.getBreakingNews(
+                    sources = preferences.getSources(),
+                    page = page
+                )
+            }
             Outcome.Success(response.toDomainList())
         } catch (throwable: NetworkException) {
             Outcome.Error(throwable)

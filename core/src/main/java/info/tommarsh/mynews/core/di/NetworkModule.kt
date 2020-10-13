@@ -1,5 +1,6 @@
 package info.tommarsh.mynews.core.di
 
+import androidx.paging.PagingConfig
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
@@ -59,4 +60,13 @@ object NetworkModule {
             .client(client)
             .build()
             .create(VideoApiService::class.java)
+
+    @Provides
+    internal fun providePagingConfig() = PagingConfig(
+        pageSize = NETWORK_PAGE_SIZE,
+        prefetchDistance = NETWORK_PAGE_SIZE * 3,
+        enablePlaceholders = false
+    )
+
+    const val NETWORK_PAGE_SIZE = 20
 }

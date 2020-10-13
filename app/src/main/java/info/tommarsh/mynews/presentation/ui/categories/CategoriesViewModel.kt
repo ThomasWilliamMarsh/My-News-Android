@@ -33,7 +33,7 @@ class CategoriesViewModel
         viewModelScope.launch {
             withContext(dispatcherProvider.work()) {
                 val selectedCategories = categoryRepository.getSelectedCategories()
-                articlesRepository.refreshFeed(selectedCategories)
+                //articlesRepository.refreshFeed(selectedCategories)
             }
         }
     }
