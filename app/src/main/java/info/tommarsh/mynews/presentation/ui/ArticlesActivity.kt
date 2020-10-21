@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import androidx.navigation.Navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.presentation.R
@@ -29,7 +29,9 @@ class ArticlesActivity : AppCompatActivity(),
     }
 
     private fun setUpNavigation() {
-        val controller = findNavController(this, R.id.nav_host_fragment)
+        val navHost =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val controller = navHost.navController
         controller.addOnDestinationChangedListener(this)
         setupWithNavController(binding.bottomNavigation, controller)
     }
@@ -39,6 +41,6 @@ class ArticlesActivity : AppCompatActivity(),
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        binding.articlesToolbarText.text = destination.label
+        binding.articlesToolbar.title = destination.label
     }
 }

@@ -69,14 +69,15 @@
         <!--Component styles-->
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.MaterialComponents.Dialog.Alert
         </item>
-        <item name="bottomSheetDialogTheme">@style/ThemeOverlay.MyTheme.BottomSheetDialog</item>
-        <item name="navigationViewStyle">@style/Widget.MyTheme.NavigationView</item>
-        <item name="toolbarStyle">@style/Widget.MyTheme.Toolbar</item>
-        <item name="appBarLayoutStyle">@style/Widget.MyTheme.AppBarLayout</item>
+        <item name="navigationViewStyle">@style/Widget.MyNews.NavigationView</item>
+        <item name="toolbarStyle">@style/Widget.MyNews.Toolbar</item>
+        <item name="appBarLayoutStyle">@style/Widget.MyNews.AppBarLayout</item>
+        <item name="searchViewStyle">@style/Widget.MyNews.SearchView</item>
+        <item name="autoCompleteTextViewStyle">@style/Widget.MyNews.SearchView.AutoComplete</item>
 
         <!-- System styles -->
-        <item name="android:statusBarColor">?colorSurface</item>
-        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:statusBarColor">?colorPrimarySurface</item>
+        <item name="android:windowLightStatusBar">false</item>
         <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">

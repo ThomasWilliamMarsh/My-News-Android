@@ -18,6 +18,6 @@
 <resources>
 
     <!--Toolbar-->
-    <style name="Widget.MyTheme.Toolbar" parent="Widget.MaterialComponents.Toolbar.Surface"/>
+    <style name="Widget.MyNews.Toolbar" parent="Widget.MaterialComponents.Toolbar.Surface"/>
 
 </resources>

@@ -61,12 +61,6 @@ object NetworkModule {
             .build()
             .create(VideoApiService::class.java)
 
-    @Provides
-    internal fun providePagingConfig() = PagingConfig(
-        pageSize = NETWORK_PAGE_SIZE,
-        prefetchDistance = NETWORK_PAGE_SIZE * 3,
-        enablePlaceholders = false
-    )
 
-    const val NETWORK_PAGE_SIZE = 20
+    const val STANDARD_PAGE_SIZE = 20
 }

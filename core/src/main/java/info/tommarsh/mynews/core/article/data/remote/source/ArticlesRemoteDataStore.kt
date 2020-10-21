@@ -11,19 +11,8 @@ import javax.inject.Inject
 internal class ArticlesRemoteDataStore
 @Inject constructor(
     private val networkHelper: NetworkHelper,
-    private val preferences: PreferencesRepository,
     private val api: ArticleApiService
 ) {
-
-    suspend fun getBreakingNews(page: Int = 1): Outcome<List<ArticleModel>> {
-        return try {
-            val response =
-                networkHelper.callApi { api.getBreakingNews(preferences.getSources(), page) }
-            Outcome.Success(response.toDomainList())
-        } catch (throwable: NetworkException) {
-            Outcome.Error(throwable)
-        }
-    }
 
     suspend fun searchArticles(page: Int = 1, query: String): Outcome<List<ArticleModel>> {
         return try {
@@ -34,9 +23,9 @@ internal class ArticlesRemoteDataStore
         }
     }
 
-    suspend fun getArticleForCategory(category: String): Outcome<List<ArticleModel>> {
+    suspend fun getArticleForCategory(page: Int = 1, pageSize: Int, category: String): Outcome<List<ArticleModel>> {
         return try {
-            val response = networkHelper.callApi { api.getArticlesForCategory(category) }
+            val response = networkHelper.callApi { api.getArticlesForCategory(page = page, pageSize = pageSize,  category = category) }
             Outcome.Success(response.toDomainList())
         } catch (throwable: NetworkException) {
             Outcome.Error(throwable)

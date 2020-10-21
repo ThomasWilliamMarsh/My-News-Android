@@ -2,44 +2,69 @@ package info.tommarsh.mynews.presentation.ui.categories
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.DiffUtil
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.coroutineScope
+import androidx.paging.PagingData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import info.tommarsh.mynews.categories.model.CategoryViewModel
+import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.createDiffItemCallback
-import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
-import info.tommarsh.mynews.presentation.setClickListenerFor
-import info.tommarsh.mynews.presentation.util.DelegateDiffCallback
-import info.tommarsh.presentation.databinding.ItemCategoryArticleBinding
+import info.tommarsh.presentation.databinding.ItemCarouselBinding
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collect
 
-class CarouselAdapter : ListAdapter<ArticleViewModel, CarouselViewholder>(DIFFER) {
+internal class CarouselAdapter(
+    private val lifecycle: Lifecycle,
+    private val pagingFactory: (category: String) -> Flow<PagingData<ArticleViewModel>>
+) : ListAdapter<CategoryViewModel, CarouselViewHolder>(DIFFER) {
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
+        val binding =
+            ItemCarouselBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return CarouselViewHolder(binding, lifecycle, pagingFactory)
+    }
+
+    override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
+        holder.bind(getItem(position))
+    }
+
+    override fun onViewRecycled(holder: CarouselViewHolder) {
+        super.onViewRecycled(holder)
+        holder.unbind()
+    }
 
     companion object {
-        val DIFFER = createDiffItemCallback<ArticleViewModel>{ old, new ->
-            old.url == new.url
+        private val DIFFER = createDiffItemCallback<CategoryViewModel> { old, new ->
+            old.name == new.name
         }
-    }
-
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewholder {
-        val binding =
-            ItemCategoryArticleBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CarouselViewholder(binding)
-    }
-
-    override fun onBindViewHolder(holder: CarouselViewholder, position: Int) {
-        holder.bind(getItem(position))
     }
 }
 
-class CarouselViewholder(private val binding: ItemCategoryArticleBinding) :
+internal class CarouselViewHolder(
+    private val binding: ItemCarouselBinding,
+    private val lifecycle: Lifecycle,
+    private val pagingFactory: (category: String) -> Flow<PagingData<ArticleViewModel>>
+) :
     RecyclerView.ViewHolder(binding.root) {
 
-    fun bind(article: ArticleViewModel) {
-        binding.categoryArticleName.text = article.title
-        binding.categoryArticleUpdated.text = article.publishedAt
-        if (article.urlToImage.isNotEmpty()) {
-            binding.categoryArticleImage.loadUrl(article.urlToImage)
+    private var job: Job? = null
+
+    fun bind(carousel: CategoryViewModel) {
+        val adapter = CarouselItemAdapter()
+        binding.carouselName.text = carousel.name
+        binding.carouselItems.adapter =
+            adapter.withLoadStateFooter(footer = ListLoadStateAdapter { adapter.retry() })
+        job = lifecycle.coroutineScope.launchWhenCreated {
+            pagingFactory(carousel.id).collect { pagingData ->
+                adapter.submitData(pagingData)
+            }
         }
-        article.setClickListenerFor(itemView)
+    }
+
+    fun unbind() {
+        job?.cancel()
     }
 }

@@ -13,11 +13,9 @@ import kotlinx.coroutines.flow.map
 class TopNewsViewModel
 @ViewModelInject constructor(
     repository: ArticleRepository,
-    dispatcherProvider: DispatcherProvider,
     private val timeHelper: TimeHelper
     ) : ViewModel() {
 
-    val articles = repository.getBreakingNews()
+    val articles = repository.getArticlesForCategory("general")
         .map { page -> page.map { model -> model.toViewModel(timeHelper) } }
-        .asLiveData(dispatcherProvider.work())
 }

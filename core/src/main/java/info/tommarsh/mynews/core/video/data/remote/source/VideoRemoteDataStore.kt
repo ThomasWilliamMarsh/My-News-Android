@@ -12,9 +12,9 @@ internal class VideoRemoteDataStore
     private val api: VideoApiService,
     private val networkHelper: NetworkHelper) {
 
-    suspend fun getPlaylist(): Outcome<PlaylistModel> {
+    suspend fun getPlaylist(page: String?): Outcome<PlaylistModel> {
         return try {
-            val response = networkHelper.callApi { api.getPlaylistItems() }
+            val response = networkHelper.callApi { api.getPlaylistItems(page) }
             Outcome.Success(response.toDomainModel())
         } catch (throwable: NetworkException) {
             Outcome.Error(throwable)

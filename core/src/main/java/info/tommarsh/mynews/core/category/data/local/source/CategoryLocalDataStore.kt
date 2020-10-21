@@ -10,10 +10,12 @@ internal class CategoryLocalDataStore
 @Inject constructor(private val dao: CategoryDao) {
 
     fun getCategories(): Flow<List<CategoryModel>> =
-        dao.getCategories().map { databaseModels -> databaseModels.map { model -> model.toDomainModel() } }
+        dao.getCategories()
+            .map { databaseModels -> databaseModels.map { model -> model.toDomainModel() } }
 
-    suspend fun getSelectedCategories(): List<CategoryModel> =
-        dao.getSelectedCategories().map { databaseModel -> databaseModel.toDomainModel() }
+    fun getSelectedCategories(): Flow<List<CategoryModel>> =
+        dao.getSelectedCategories()
+            .map { databaseModels -> databaseModels.map { model -> model.toDomainModel() } }
 
     suspend fun updateCategory(id: String, selected: Boolean) {
         dao.updateCategory(id, selected)

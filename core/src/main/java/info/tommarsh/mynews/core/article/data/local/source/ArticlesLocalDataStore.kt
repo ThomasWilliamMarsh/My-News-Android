@@ -1,43 +1,38 @@
 package info.tommarsh.mynews.core.article.data.local.source
 
+import android.util.Log
 import androidx.paging.PagingSource
 import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.model.toDataModel
-import info.tommarsh.mynews.core.article.data.local.model.toDomainModel
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
-import info.tommarsh.mynews.core.di.NetworkModule.NETWORK_PAGE_SIZE
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.map
+import info.tommarsh.mynews.core.di.NetworkModule.STANDARD_PAGE_SIZE
+import java.lang.Exception
 import javax.inject.Inject
-import kotlin.math.roundToInt
 
 internal class ArticlesLocalDataStore
 @Inject constructor(private val articlesDao: ArticlesDao) {
 
-
-    suspend fun getBreakingNewsPage() : Int {
-        val numArticles = articlesDao.getBreakingArticlesOffset()
-        return if(numArticles < NETWORK_PAGE_SIZE)  0
-        else numArticles / NETWORK_PAGE_SIZE
+    suspend fun getPageForCategory(category: String, pageSize: Int) : Int {
+        val numArticles = articlesDao.getOffsetForCategory(category)
+        return if(numArticles < pageSize) 1
+        else numArticles / pageSize
     }
 
-    fun getBreakingNews(): PagingSource<Int, Article> {
-        return articlesDao.getBreakingArticles()
+    fun getArticlesForCategory(category: String): PagingSource<Int, Article> {
+        return articlesDao.getArticlesForCategory(category)
+    }
+
+    suspend fun clearCategory(category: String){
+        articlesDao.deleteCategory(category)
     }
 
     suspend fun insertArticles(items: List<ArticleModel>) {
-        val model = items.map { domainModel -> domainModel.toDataModel() }
-        articlesDao.insertArticles(*model.toTypedArray())
-    }
 
-
-    suspend fun clearBreakingNewsArticles() {
-        articlesDao.deleteBreakingArticles()
-    }
-
-    fun getFeed(): Flow<List<ArticleModel>> {
-        return articlesDao.getFeed().map { databaseModels ->
-            databaseModels.map { model -> model.toDomainModel() }
+        try {
+            val model = items.map { domainModel -> domainModel.toDataModel() }
+            articlesDao.insertArticles(*model.toTypedArray())
+        }catch (exception: Exception) {
+            Log.e("oh no", "cwash")
         }
     }
 }

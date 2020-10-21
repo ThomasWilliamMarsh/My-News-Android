@@ -10,30 +10,18 @@
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
-            app:elevation="@dimen/none">
+            android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/articles_toolbar"
                 android:layout_width="match_parent"
                 android:layout_gravity="start"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/articles_toolbar_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:textAlignment="textStart"
-                    android:textAppearance="?textAppearanceHeadline5"
-                    android:text="@string/top_news"/>
-
-        </com.google.android.material.appbar.MaterialToolbar>
+                app:layout_scrollFlags="scroll|enterAlways"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
             android:id="@+id/nav_host_fragment"
             android:name="androidx.navigation.fragment.NavHostFragment"
             android:layout_width="match_parent"

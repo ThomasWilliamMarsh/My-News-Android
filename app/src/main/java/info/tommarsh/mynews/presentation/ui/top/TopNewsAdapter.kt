@@ -3,12 +3,11 @@ package info.tommarsh.mynews.presentation.ui.top
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
+import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.setClickListenerFor
-import info.tommarsh.mynews.presentation.util.DelegateDiffCallback
 import info.tommarsh.presentation.databinding.ItemArticleBinding
 import info.tommarsh.presentation.databinding.ItemMainArticleBinding
 
@@ -18,9 +17,7 @@ class TopNewsAdapter :
     companion object {
         const val TYPE_PRIMARY_ARTICLE = 1
         const val TYPE_SECONDARY_ARTICLE = 2
-        val DIFFER = createDiffItemCallback<ArticleViewModel> { old, new ->
-            old.url == new.url
-        }
+        val DIFFER = createDiffItemCallback2()
     }
 
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
@@ -82,3 +79,15 @@ private class SecondaryViewHolder(private val binding: ItemArticleBinding) :
         article.setClickListenerFor(itemView)
     }
 }
+
+fun createDiffItemCallback2() =
+    object : DiffUtil.ItemCallback<ArticleViewModel>() {
+
+        override fun areItemsTheSame(oldItem: ArticleViewModel, newItem: ArticleViewModel): Boolean {
+            return oldItem.url == newItem.url
+        }
+
+        override fun areContentsTheSame(oldItem: ArticleViewModel, newItem: ArticleViewModel): Boolean {
+            return oldItem.url == newItem.url
+        }
+    }

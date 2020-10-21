@@ -45,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/small_margin"
+                android:paddingBottom="@dimen/small_margin"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
                 tools:text="16 mins ago"
                 app:layout_constraintStart_toStartOf="parent"

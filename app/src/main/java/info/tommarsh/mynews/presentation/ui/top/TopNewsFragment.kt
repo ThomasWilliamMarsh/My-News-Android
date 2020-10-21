@@ -1,4 +1,3 @@
-
 package info.tommarsh.mynews.presentation.ui.top
 
 import android.os.Bundle
@@ -6,18 +5,18 @@ import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
-import androidx.paging.PagingData
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.consume
-import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -31,6 +30,8 @@ class TopNewsFragment : ArticleFragment() {
     private val adapter = TopNewsAdapter()
 
     private val viewModel by viewModels<TopNewsViewModel>()
+
+    private var prev: LoadState? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -50,7 +51,11 @@ class TopNewsFragment : ArticleFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.articles.observe(viewLifecycleOwner, Observer(::onArticlesReceived))
+        lifecycleScope.launchWhenCreated {
+            viewModel.articles.collectLatest { data ->
+                adapter.submitData(data)
+            }
+        }
     }
 
     override fun onPrepareOptionsMenu(menu: Menu) {
@@ -76,22 +81,20 @@ class TopNewsFragment : ArticleFragment() {
         }
     }
 
+    @OptIn(InternalCoroutinesApi::class)
     private fun setUpAdapter(): ConcatAdapter {
         return adapter.withLoadStateFooter(
             footer = ListLoadStateAdapter { adapter.retry() }
         ).also {
             adapter.addLoadStateListener { loadState ->
-                binding.topNewsRecyclerView.isVisible =
-                    loadState.source.refresh is LoadState.NotLoading
-                binding.topNewsRefresher.isRefreshing =
-                    loadState.source.refresh is LoadState.Loading
-                binding.topNewsRetryButton.isVisible = loadState.source.refresh is LoadState.Error
+                if (loadState.refresh != prev) {
+                    prev = loadState.refresh
+                    binding.topNewsRetryButton.isVisible =
+                        loadState.source.refresh is LoadState.Error
+                    binding.topNewsRefresher.isRefreshing =
+                        loadState.source.refresh is LoadState.Loading
+                }
             }
         }
-    }
-
-    private fun onArticlesReceived(articles: PagingData<ArticleViewModel>) {
-
-        adapter.submitData(lifecycle, articles)
     }
 }

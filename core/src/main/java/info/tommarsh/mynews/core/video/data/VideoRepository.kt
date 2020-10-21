@@ -1,11 +1,12 @@
 package info.tommarsh.mynews.core.video.data
 
-import info.tommarsh.mynews.core.model.Outcome
-import info.tommarsh.mynews.core.util.ErrorLiveData
-import info.tommarsh.mynews.core.video.domain.model.PlaylistModel
+import androidx.paging.PagingData
+import info.tommarsh.mynews.core.di.NetworkModule
+import info.tommarsh.mynews.core.di.NetworkModule.STANDARD_PAGE_SIZE
+import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel
+import kotlinx.coroutines.flow.Flow
 
 interface VideoRepository {
-    val errors: ErrorLiveData
 
-    suspend fun getPlaylist(): Outcome<PlaylistModel>
+    fun getPlaylist(pageSize: Int = STANDARD_PAGE_SIZE): Flow<PagingData<PlaylistItemModel>>
 }
