@@ -3,7 +3,6 @@ package info.tommarsh.mynews.presentation.ui.top
 import android.os.Bundle
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -31,8 +30,6 @@ class TopNewsFragment : ArticleFragment() {
 
     private val viewModel by viewModels<TopNewsViewModel>()
 
-    private var prev: LoadState? = null
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -46,7 +43,6 @@ class TopNewsFragment : ArticleFragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.topNewsRecyclerView.adapter = setUpAdapter()
         binding.topNewsRefresher.setOnRefreshListener { adapter.refresh() }
-        binding.topNewsRetryButton.setOnClickListener { adapter.retry() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
@@ -87,13 +83,8 @@ class TopNewsFragment : ArticleFragment() {
             footer = ListLoadStateAdapter { adapter.retry() }
         ).also {
             adapter.addLoadStateListener { loadState ->
-                if (loadState.refresh != prev) {
-                    prev = loadState.refresh
-                    binding.topNewsRetryButton.isVisible =
-                        loadState.source.refresh is LoadState.Error
-                    binding.topNewsRefresher.isRefreshing =
-                        loadState.source.refresh is LoadState.Loading
-                }
+                binding.topNewsRefresher.isRefreshing =
+                    loadState.source.refresh is LoadState.Loading
             }
         }
     }

@@ -1,15 +1,15 @@
 package info.tommarsh.mynews.presentation.ui.top
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.any
+import androidx.paging.PagingData
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.util.TimeHelper
-import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
-import info.tommarsh.mynews.presentation.model.ArticleViewModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.articleModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -23,23 +23,19 @@ class TopNewsViewModelTest {
     @get:Rule
     val rule = InstantTaskExecutorRule()
 
+    private val timeHelper = mock<TimeHelper>()
+
+    private val repository = mock<ArticleRepository> {
+        onBlocking { getArticlesForCategory("general") }.thenReturn(
+            flow {
+                emit(PagingData.from(listOf(articleModel)))
+            }
+        )
+    }
+
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
-    private val articlesRepository = mock<ArticleRepository> {
-        onBlocking { getBreakingNews() }.thenReturn(mock())
-    }
-
-    private val timeHelper = mock<TimeHelper> {
-        on { timeBetween(now = any(), isoString = any()) }.thenReturn("1 hour ago")
-    }
-
-    private val dispatcherProvider = mock<DispatcherProvider> {
-        on { main() }.thenReturn(testCoroutineDispatcher)
-        on { work() }.thenReturn(testCoroutineDispatcher)
-    }
-    private val observer = mock<Observer<List<ArticleViewModel>>>()
-    private val topNewsViewModel =
-        TopNewsViewModel(articlesRepository, dispatcherProvider, timeHelper)
+    private val viewModel = TopNewsViewModel(repository, timeHelper)
 
     @Before
     fun `Set up`() {
@@ -53,28 +49,10 @@ class TopNewsViewModelTest {
     }
 
     @Test
-    fun `Get breaking news`() = runBlockingTest {
-        val livedata = topNewsViewModel.articles
+    fun `Get flow of top stories`() = testCoroutineDispatcher.runBlockingTest {
 
-        livedata.observeForever(observer)
+        viewModel.articles.collect()
 
-        verify(articlesRepository).getBreakingNews()
-        livedata.removeObserver(observer)
-    }
-
-    @Test
-    fun `Get errors`() {
-
-        topNewsViewModel.errors
-
-        verify(articlesRepository).errors
-    }
-
-    @Test
-    fun `Refresh breaking news`() = runBlockingTest {
-
-        topNewsViewModel.refreshBreakingNews()
-
-        verify(articlesRepository).refreshBreakingNews()
+        verify(repository).getArticlesForCategory("general")
     }
 }

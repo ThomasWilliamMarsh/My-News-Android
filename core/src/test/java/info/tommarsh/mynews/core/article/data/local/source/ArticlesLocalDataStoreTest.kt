@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.article
 import info.tommarsh.mynews.core.MockProvider.articleModel
-import kotlinx.coroutines.flow.flowOf
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
@@ -21,19 +21,46 @@ class ArticlesLocalDataStoreTest {
     private val localDataStore = ArticlesLocalDataStore(dao)
 
     @Test
-    fun `get breaking news from DB`() {
-        whenever(dao.getBreakingArticles()).thenReturn(flowOf())
+    fun `get page number for top news article`() = runBlocking {
+        whenever(dao.getOffsetForCategory("business")).thenReturn(40)
+        val expected = 2
 
-        localDataStore.getBreakingNews()
+        val actual = localDataStore.getPageForCategory("business", 20)
 
-        verify(dao).getBreakingArticles()
+        assertEquals(expected, actual)
     }
 
     @Test
-    fun `Save breaking news to DB`() = runBlocking {
+    fun `get page 1 if no articles in database`() = runBlocking {
+        whenever(dao.getOffsetForCategory("business")).thenReturn(0)
+        val expected = 1
 
-        localDataStore.replaceBreakingNews(listOf(articleModel, articleModel))
+        val actual = localDataStore.getPageForCategory("business", 20)
 
-        verify(dao).replaceBreakingArticles(listOf(article, article))
+        assertEquals(expected, actual)
+    }
+
+    @Test
+    fun `get articles for category`() = runBlocking<Unit> {
+
+        localDataStore.getArticlesForCategory("business")
+
+        verify(dao).getArticlesForCategory("business")
+    }
+
+    @Test
+    fun `clear categories from db`() = runBlocking {
+
+        localDataStore.clearCategory("business")
+
+        verify(dao).deleteCategory("business")
+    }
+
+    @Test
+    fun `insert articles to db`() = runBlocking {
+
+        localDataStore.insertArticles(listOf(articleModel, articleModel))
+
+        verify(dao).insertArticles(article, article)
     }
 }

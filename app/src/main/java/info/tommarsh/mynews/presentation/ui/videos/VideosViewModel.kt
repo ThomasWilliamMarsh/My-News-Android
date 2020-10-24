@@ -13,7 +13,6 @@ import kotlinx.coroutines.flow.map
 class VideosViewModel
 @ViewModelInject constructor(
     repository: VideoRepository,
-    dispatcherProvider: DispatcherProvider,
     private val timeHelper: TimeHelper
 ) : ViewModel() {
 
