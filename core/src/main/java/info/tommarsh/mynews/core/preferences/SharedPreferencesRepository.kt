@@ -9,9 +9,9 @@ class SharedPreferencesRepository
     PreferencesRepository {
 
     companion object {
-        private const val KEY_PREFERENCE_NIGHT_MODE = "pref_night_mode"
-        private const val KEY_PREFERENCE_COUNTRY = "country"
-        private const val KEY_PREFERENCE_SHOW_ONBOARDING = "pref_on_boarding"
+        internal const val KEY_PREFERENCE_NIGHT_MODE = "pref_night_mode"
+        internal const val KEY_PREFERENCE_COUNTRY = "country"
+        internal const val KEY_PREFERENCE_SHOW_ONBOARDING = "pref_on_boarding"
     }
 
     override fun getNightMode(): Int {

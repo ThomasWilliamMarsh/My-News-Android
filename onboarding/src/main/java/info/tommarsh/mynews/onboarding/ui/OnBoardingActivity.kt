@@ -2,6 +2,7 @@ package info.tommarsh.mynews.onboarding.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.app.AppCompatDelegate
 import dagger.hilt.android.EntryPointAccessors
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.onboarding.databinding.ActivityOnboardingBinding
@@ -17,6 +18,7 @@ class OnBoardingActivity : AppCompatActivity() {
         component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+
     }
 
     internal val component : OnBoardingComponent by lazy {
