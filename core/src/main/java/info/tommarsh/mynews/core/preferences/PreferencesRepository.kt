@@ -10,7 +10,7 @@ interface PreferencesRepository {
 
     fun flagOnBoardingComplete()
 
-    fun saveSources(sources: List<String>)
+    fun saveCountry(country: String)
 
-    fun getSources(): String
+    fun getCountry(): String
 }

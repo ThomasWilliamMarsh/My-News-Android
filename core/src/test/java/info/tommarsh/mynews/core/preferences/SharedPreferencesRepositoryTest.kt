@@ -14,13 +14,13 @@ class SharedPreferencesRepositoryTest {
     private val repository = SharedPreferencesRepository(preferences)
 
     @Test
-    fun `Outputs comma separated sources`() {
-        val expected = "bbc, independent"
+    fun `Outputs comma separated countries`() {
+        val expected = "uk, us"
 
         whenever(preferences.getStringSet(any(), any()))
-            .thenReturn(setOf("bbc", "independent"))
+            .thenReturn(setOf("uk", "us"))
 
-        val actual = repository.getSources()
+        val actual = repository.getCountry()
 
         assertEquals(expected, actual)
     }

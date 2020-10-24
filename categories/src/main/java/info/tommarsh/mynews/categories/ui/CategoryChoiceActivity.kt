@@ -8,6 +8,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import dagger.hilt.android.AndroidEntryPoint
+import info.tommarsh.categories.R
 import info.tommarsh.categories.databinding.ActivityCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
@@ -30,8 +31,9 @@ class CategoryChoiceActivity : AppCompatActivity() {
     }
 
     private fun setUpUi() {
-        setSupportActionBar(activity_choice_toolbar)
+        setSupportActionBar(binding.activityChoiceToolbar)
         supportActionBar?.setDisplayShowTitleEnabled(false)
+        supportActionBar?.setTitle(R.string.edit_my_news)
         binding.activityChoiceRecyclerView.adapter = adapter
         binding.activityChoiceRecyclerView.addItemDecoration(DividerItemDecoration(this, VERTICAL))
     }

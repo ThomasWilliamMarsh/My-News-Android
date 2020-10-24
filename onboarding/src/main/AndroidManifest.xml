@@ -1,5 +1,5 @@
-<manifest xmlns:dist="http://schemas.android.com/apk/distribution"
-        xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:dist="http://schemas.android.com/apk/distribution"
         package="info.tommarsh.mynews.onboarding">
 
     <dist:module
@@ -13,6 +13,7 @@
 
 
     <application>
-        <activity android:name=".ui.OnBoardingActivity"/>
+        <activity
+                android:name=".ui.OnBoardingActivity" />
     </application>
 </manifest>

@@ -9,9 +9,7 @@ import info.tommarsh.mynews.onboarding.model.Choice
 
 internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
 
-    private val _checkedChoices = mutableListOf<String>()
-
-    val checkedChoices: List<String> = _checkedChoices
+    var country = "gb"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChoiceViewholder {
         val binding = ItemChoiceBinding.inflate(LayoutInflater.from(parent.context), parent, false)
@@ -24,9 +22,7 @@ internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
 
     private fun onCheckedChanged(id: String, isChecked: Boolean) {
         if (isChecked) {
-            _checkedChoices.add(id)
-        } else {
-            _checkedChoices.remove(id)
+            country = id
         }
     }
 

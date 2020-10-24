@@ -18,18 +18,8 @@
                 android:layout_gravity="start"
                 android:gravity="start"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/activity_choice_toolbar_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:textAlignment="textStart"
-                    android:textAppearance="?textAppearanceHeadline5"
-                    android:text="@string/edit_my_news"/>
-
-        </com.google.android.material.appbar.MaterialToolbar>
+                app:title="@string/edit_my_news"
+                app:layout_scrollFlags="scroll|enterAlways"/>
 
     </com.google.android.material.appbar.AppBarLayout>
 
