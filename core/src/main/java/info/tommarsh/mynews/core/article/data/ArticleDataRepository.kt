@@ -22,7 +22,7 @@ class ArticleDataRepository
 
     override fun getArticlesForCategory(category: String, pageSize: Int): Flow<PagingData<ArticleModel>> {
         return Pager(
-            config = PagingConfig(pageSize),
+            config = PagingConfig(pageSize = pageSize, initialLoadSize = pageSize * 3, prefetchDistance = pageSize * 3),
             remoteMediator = ArticlesRemoteMediator(category, remote, local)
         ) { local.getArticlesForCategory(category) }.flow.map { page ->
             page.map { article -> article.toDomainModel() }

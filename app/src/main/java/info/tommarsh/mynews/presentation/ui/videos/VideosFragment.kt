@@ -34,8 +34,9 @@ class VideosFragment : ArticleFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.videosRecyclerView.adapter = setUpAdapter()
-        binding.videosRecyclerView.layoutManager = setLayoutManager()
+        val concatAdapter = setUpAdapter()
+        binding.videosRecyclerView.adapter = concatAdapter
+        binding.videosRecyclerView.layoutManager = setLayoutManager(concatAdapter, 2)
         binding.refreshVideo.setOnRefreshListener {
             adapter.refresh()
         }
@@ -67,5 +68,14 @@ class VideosFragment : ArticleFragment() {
         }
     }
 
-    private fun setLayoutManager() = GridLayoutManager(context, 2)
+    private fun setLayoutManager(adapter: ConcatAdapter, spanCount: Int) = GridLayoutManager(context, spanCount).apply {
+        spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+            override fun getSpanSize(position: Int): Int {
+                return when(adapter.getItemViewType(position)) {
+                    1 -> spanCount
+                    else -> 1
+                }
+            }
+        }
+    }
 }

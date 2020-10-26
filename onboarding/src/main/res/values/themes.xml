@@ -2,6 +2,6 @@
 <resources>
 
     <style name="MyNews.DayNight.Onboarding">
-        <item name="android:colorBackground">@color/color_primary</item>
+        <item name="android:textColor">?colorOnBackground</item>
     </style>
 </resources>

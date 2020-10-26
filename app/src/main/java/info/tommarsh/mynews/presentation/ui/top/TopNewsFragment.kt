@@ -1,8 +1,10 @@
 package info.tommarsh.mynews.presentation.ui.top
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -22,9 +24,6 @@ import javax.inject.Inject
 class TopNewsFragment : ArticleFragment() {
 
     private lateinit var binding: FragmentTopNewsBinding
-
-    @Inject
-    lateinit var sharedPreferencesRepository: PreferencesRepository
 
     private val adapter = TopNewsAdapter()
 
@@ -54,27 +53,9 @@ class TopNewsFragment : ArticleFragment() {
         }
     }
 
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        val dayNightItem = menu.findItem(R.id.action_day_night)
-        dayNightItem?.setIcon(
-            when (sharedPreferencesRepository.getNightMode()) {
-                AppCompatDelegate.MODE_NIGHT_YES -> R.drawable.ic_outline_day
-                else -> R.drawable.ic_outline_night
-            }
-        )
-    }
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.top_news_menu, menu)
         super.onCreateOptionsMenu(menu, inflater)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_day_night -> consume { sharedPreferencesRepository.toggleNightMode() }
-            else -> super.onOptionsItemSelected(item)
-        }
     }
 
     @OptIn(InternalCoroutinesApi::class)
@@ -83,8 +64,17 @@ class TopNewsFragment : ArticleFragment() {
             footer = ListLoadStateAdapter { adapter.retry() }
         ).also {
             adapter.addLoadStateListener { loadState ->
+                Log.v("LOAD STATE TOP NEWS", "REFRESH STATE IS ${loadState.refresh}")
                 binding.topNewsRefresher.isRefreshing =
                     loadState.source.refresh is LoadState.Loading
+
+
+                if(loadState.refresh is LoadState.NotLoading) {
+                    binding.topNewsRecyclerView.scrollToPosition(0)
+                }
+
+                binding.topNewsRecyclerView.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading
             }
         }
     }

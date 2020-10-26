@@ -27,7 +27,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:lottie_autoPlay="true"
-            app:lottie_fileName="welcome.json"
+            app:lottie_fileName="welcomeDark.json"
             app:lottie_loop="false"
             app:layout_constraintTop_toBottomOf="@id/onboarding_title"
             app:layout_constraintBottom_toTopOf="@id/onboarding_start_button"

@@ -29,6 +29,10 @@ internal class VideosAdapter :
         val binding = ItemVideoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return VideoViewHolder(binding)
     }
+
+    override fun getItemViewType(position: Int): Int {
+        return R.layout.item_video
+    }
 }
 
 internal class VideoViewHolder(private val binding: ItemVideoBinding) :

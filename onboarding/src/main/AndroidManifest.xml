@@ -4,7 +4,7 @@
 
     <dist:module
             dist:instant="false"
-            dist:title="@string/title_onboarding">
+            dist:title="onboarding">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>
@@ -14,6 +14,6 @@
 
     <application>
         <activity
-                android:name=".ui.OnBoardingActivity" />
+                android:name=".ui.OnBoardingActivity" android:theme="@style/MyNews.DayNight.Onboarding" />
     </application>
 </manifest>

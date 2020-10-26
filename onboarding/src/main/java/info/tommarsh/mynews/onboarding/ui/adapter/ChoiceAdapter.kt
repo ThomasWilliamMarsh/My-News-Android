@@ -16,13 +16,29 @@ internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
         return ChoiceViewholder(binding, ::onCheckedChanged)
     }
 
+    override fun onBindViewHolder(
+        holder: ChoiceViewholder,
+        position: Int,
+        payloads: MutableList<Any>
+    ) {
+        if(payloads.isEmpty()) {
+            onBindViewHolder(holder, position)
+        } else {
+            val checkedPayload = payloads.first() as Payload.Checked
+            val id = getItem(position).id
+
+            holder.setChecked(checkedPayload.id == id)
+        }
+    }
+
     override fun onBindViewHolder(holder: ChoiceViewholder, position: Int) {
         holder.bind(getItem(position))
     }
 
     private fun onCheckedChanged(id: String, isChecked: Boolean) {
-        if (isChecked) {
+        if(isChecked) {
             country = id
+            notifyItemRangeChanged(0, itemCount, Payload.Checked(id))
         }
     }
 
@@ -30,4 +46,8 @@ internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
         val CALLBACK =
             getDiffUtilItemCallback<Choice> { old, new -> old.id == new.id }
     }
+}
+
+private sealed class Payload {
+    data class Checked(val id: String) : Payload()
 }

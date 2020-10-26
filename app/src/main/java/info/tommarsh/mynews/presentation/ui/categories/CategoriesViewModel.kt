@@ -3,6 +3,7 @@ package info.tommarsh.mynews.presentation.ui.categories
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.asLiveData
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.map
 import info.tommarsh.mynews.categories.model.toViewModel
@@ -15,20 +16,19 @@ import info.tommarsh.mynews.presentation.model.toViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.launch
 
 @OptIn(FlowPreview::class)
 class CategoriesViewModel
 @ViewModelInject constructor(
     private val articlesRepository: ArticleRepository,
     private val categoryRepository: CategoryRepository,
-    private val dispatcherProvider: DispatcherProvider,
     private val timeHelper: TimeHelper
 ) : ViewModel() {
 
     val selectedCategories = categoryRepository
         .getSelectedCategories()
         .map { domainModels -> domainModels.map { category -> category.toViewModel() } }
-        .asLiveData(dispatcherProvider.work())
 
     fun getArticlesForCategory(category: String): Flow<PagingData<ArticleViewModel>> {
         return articlesRepository.getArticlesForCategory(category, FEED_PAGE_SIZE)

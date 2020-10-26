@@ -7,11 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import info.tommarsh.mynews.core.util.newTaskIntent
 import info.tommarsh.mynews.onboarding.R
 import info.tommarsh.mynews.onboarding.databinding.FragmentIntroductionBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
+import info.tommarsh.mynews.presentation.ui.ArticlesActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
@@ -42,11 +44,14 @@ internal class IntroductionFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.events.collect { event ->
-                when (event) {
-                    is Event.Finished -> findNavController().navigate(R.id.action_introductionFragment_to_main_nav_graph)
+                if (event is Event.Finished) {
+                    finishedOnBoarding()
                 }
             }
         }
     }
 
+    private fun finishedOnBoarding() {
+        startActivity(requireContext().newTaskIntent<ArticlesActivity>())
+    }
 }

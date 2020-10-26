@@ -26,7 +26,7 @@ internal class ArticlesRemoteMediator constructor(
             LoadType.APPEND -> localArticleSource.getPageForCategory(
                 category,
                 state.config.pageSize
-            )
+            ) + 1
             LoadType.PREPEND -> return MediatorResult.Success(endOfPaginationReached = true)
         }
 
