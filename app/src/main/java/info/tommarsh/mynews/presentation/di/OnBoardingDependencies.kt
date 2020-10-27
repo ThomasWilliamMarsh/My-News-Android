@@ -11,5 +11,5 @@ import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 interface OnBoardingDependencies {
     fun preferences(): PreferencesRepository
 
-    fun dispatcherProvider() : DispatcherProvider
+    fun dispatcherProvider(): DispatcherProvider
 }

@@ -1,27 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.coordinatorlayout.widget.CoordinatorLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-            android:id="@+id/refresh_my_news"
+    <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/my_news_recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior">
-
-        <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/my_news_recycler_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+            android:layout_height="match_parent" />
 
     <include
             android:id="@+id/addCategories"
+            layout="@layout/layout_add_categories"
             android:padding="@dimen/huge_paddding"
-            android:visibility="gone"
-            layout="@layout/layout_add_categories"/>
+            android:visibility="gone" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

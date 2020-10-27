@@ -28,6 +28,10 @@ android {
         }
     }
 
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -56,6 +60,8 @@ dependencies {
     kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
     api 'androidx.hilt:hilt-lifecycle-viewmodel:' + rootProject.jetpackHiltVersion
     api 'androidx.hilt:hilt-work:' + rootProject.jetpackHiltVersion
+    api 'androidx.paging:paging-runtime:' + rootProject.pagingVersion
+
 
     //Work Manager
     api 'androidx.work:work-runtime-ktx:' + rootProject.workmanagerVersion
@@ -106,7 +112,8 @@ dependencies {
     api 'com.airbnb.android:lottie:' + rootProject.lottieVersion
 
     //Testing
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:'+ rootProject.coroutinesTestVersion
+    testImplementation 'androidx.paging:paging-common:' + rootProject.pagingVersion
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion

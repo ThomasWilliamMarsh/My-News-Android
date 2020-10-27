@@ -3,15 +3,16 @@ package info.tommarsh.mynews.presentation.ui.videos
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.model.NetworkException
-import info.tommarsh.mynews.core.util.snack
-import info.tommarsh.mynews.presentation.model.PlaylistItemViewModel
+import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentVideosBinding
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class VideosFragment : ArticleFragment() {
@@ -33,21 +34,22 @@ class VideosFragment : ArticleFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.videosRecyclerView.adapter = adapter
-        binding.videosRecyclerView.layoutManager = setLayoutManager()
+        val concatAdapter = setUpAdapter()
+        binding.videosRecyclerView.adapter = concatAdapter
+        binding.videosRecyclerView.layoutManager = setLayoutManager(concatAdapter, 2)
         binding.refreshVideo.setOnRefreshListener {
-            binding.refreshVideo.isRefreshing = true
-            viewModel.refreshVideos()
+            adapter.refresh()
         }
         binding.refreshVideo.isRefreshing = true
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.videos.observe(viewLifecycleOwner, Observer(::onVideos))
-        viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
-
-        viewModel.refreshVideos()
+        lifecycleScope.launchWhenStarted {
+            viewModel.videos.collectLatest { videos ->
+                adapter.submitData(videos)
+            }
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -55,15 +57,26 @@ class VideosFragment : ArticleFragment() {
         inflater.inflate(R.menu.videos_menu, menu)
     }
 
-    private fun onVideos(videos: List<PlaylistItemViewModel>) {
-        binding.refreshVideo.isRefreshing = false
-        adapter.items = videos
+    private fun setUpAdapter(): ConcatAdapter {
+        return adapter.withLoadStateFooter(
+            footer = ListLoadStateAdapter { adapter.retry() }
+        ).also {
+            adapter.addLoadStateListener { loadState ->
+                binding.refreshVideo.isRefreshing =
+                    loadState.source.refresh is LoadState.Loading
+            }
+        }
     }
 
-    private fun onError(error: NetworkException) {
-        binding.refreshVideo.isRefreshing = false
-        binding.refreshVideo.snack(error.localizedMessage)
-    }
-
-    private fun setLayoutManager() = GridLayoutManager(context, 2)
+    private fun setLayoutManager(adapter: ConcatAdapter, spanCount: Int) =
+        GridLayoutManager(context, spanCount).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (adapter.getItemViewType(position)) {
+                        1 -> spanCount
+                        else -> 1
+                    }
+                }
+            }
+        }
 }

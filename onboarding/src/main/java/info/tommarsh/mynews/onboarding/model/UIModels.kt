@@ -2,7 +2,7 @@ package info.tommarsh.mynews.onboarding.model
 
 internal sealed class Action {
     data class FetchChoices(val key: String) : Action()
-    data class SelectedSources(val sources: List<String>) : Action()
+    data class SelectedCountry(val country: String) : Action()
     object IntroductionSkipped : Action()
 }
 

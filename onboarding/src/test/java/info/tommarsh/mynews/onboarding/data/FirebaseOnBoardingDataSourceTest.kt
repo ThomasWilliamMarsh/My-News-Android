@@ -7,7 +7,7 @@ import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.onboarding.MockProvider.choices
 import info.tommarsh.mynews.onboarding.model.Choices
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Test
 
 class FirebaseOnBoardingDataSourceTest {

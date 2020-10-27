@@ -6,9 +6,4 @@ data class CategoryViewModel(
     val id: String,
     val name: String,
     val selected: Boolean
-) : ViewModel {
-
-    override fun contentsTheSame(other: ViewModel): Boolean {
-        return id == (other as? CategoryViewModel)?.id
-    }
-}
+) : ViewModel

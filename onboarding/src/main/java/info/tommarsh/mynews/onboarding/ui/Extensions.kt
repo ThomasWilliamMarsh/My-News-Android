@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.navGraphViewModels
 
-internal inline fun Fragment.onBoardingViewModel(
+internal fun Fragment.onBoardingViewModel(
     @IdRes navGraphId: Int
 ) = navGraphViewModels<OnBoardingViewModel>(navGraphId) {
     object : ViewModelProvider.Factory {

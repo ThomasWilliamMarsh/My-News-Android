@@ -59,4 +59,7 @@ object NetworkModule {
             .client(client)
             .build()
             .create(VideoApiService::class.java)
+
+
+    const val STANDARD_PAGE_SIZE = 20
 }

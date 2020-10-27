@@ -2,27 +2,23 @@ package info.tommarsh.mynews.presentation.ui.top
 
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.model.NetworkException
-import info.tommarsh.mynews.core.preferences.PreferencesRepository
-import info.tommarsh.mynews.core.util.consume
-import info.tommarsh.mynews.core.util.snack
-import info.tommarsh.mynews.presentation.model.ArticleViewModel
+import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
-import javax.inject.Inject
+import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class TopNewsFragment : ArticleFragment() {
 
     private lateinit var binding: FragmentTopNewsBinding
-
-    @Inject
-    lateinit var sharedPreferencesRepository: PreferencesRepository
 
     private val adapter = TopNewsAdapter()
 
@@ -39,25 +35,17 @@ class TopNewsFragment : ArticleFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.topNewsRecyclerView.adapter = adapter
-        binding.refreshTopNews.setOnRefreshListener { viewModel.refreshBreakingNews() }
+        binding.topNewsRecyclerView.adapter = setUpAdapter()
+        binding.topNewsRefresher.setOnRefreshListener { adapter.refresh() }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel.articles.observe(viewLifecycleOwner, Observer(::onArticlesReceived))
-        viewModel.errors.observe(viewLifecycleOwner, Observer(::onError))
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
-        val dayNightItem = menu.findItem(R.id.action_day_night)
-        dayNightItem?.setIcon(
-            when (sharedPreferencesRepository.getNightMode()) {
-                AppCompatDelegate.MODE_NIGHT_YES -> R.drawable.ic_outline_day
-                else -> R.drawable.ic_outline_night
+        lifecycleScope.launchWhenCreated {
+            viewModel.articles.collect { data ->
+                adapter.submitData(data)
             }
-        )
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -65,20 +53,18 @@ class TopNewsFragment : ArticleFragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            R.id.action_day_night -> consume { sharedPreferencesRepository.toggleNightMode() }
-            else -> super.onOptionsItemSelected(item)
+    @OptIn(InternalCoroutinesApi::class)
+    private fun setUpAdapter(): ConcatAdapter {
+        return adapter.withLoadStateFooter(
+            footer = ListLoadStateAdapter { adapter.retry() }
+        ).also {
+            adapter.addLoadStateListener { loadState ->
+                binding.topNewsRefresher.isRefreshing =
+                    loadState.source.refresh is LoadState.Loading
+
+                binding.topNewsRecyclerView.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading
+            }
         }
-    }
-
-    private fun onArticlesReceived(articles: List<ArticleViewModel>?) {
-        adapter.items = articles
-        binding.refreshTopNews.isRefreshing = false
-    }
-
-    private fun onError(error: NetworkException) {
-        binding.refreshTopNews.isRefreshing = false
-        binding.refreshTopNews.snack(error.localizedMessage)
     }
 }

@@ -9,9 +9,9 @@ class SharedPreferencesRepository
     PreferencesRepository {
 
     companion object {
-        private const val KEY_PREFERENCE_NIGHT_MODE = "pref_night_mode"
-        private const val KEY_PREFERENCE_SOURCES = "sources"
-        private const val KEY_PREFERENCE_SHOW_ONBOARDING = "pref_on_boarding"
+        internal const val KEY_PREFERENCE_NIGHT_MODE = "pref_night_mode"
+        internal const val KEY_PREFERENCE_COUNTRY = "country"
+        internal const val KEY_PREFERENCE_SHOW_ONBOARDING = "pref_on_boarding"
     }
 
     override fun getNightMode(): Int {
@@ -33,13 +33,11 @@ class SharedPreferencesRepository
         sharedPreferences.edit().putBoolean(KEY_PREFERENCE_SHOW_ONBOARDING, false).apply()
     }
 
-    override fun saveSources(sources: List<String>) {
-        sharedPreferences.edit().putStringSet(KEY_PREFERENCE_SOURCES, sources.toSet()).apply()
+    override fun saveCountry(country: String) {
+        sharedPreferences.edit().putString(KEY_PREFERENCE_COUNTRY, country).apply()
     }
 
-    override fun getSources(): String {
-        val sources =
-            sharedPreferences.getStringSet(KEY_PREFERENCE_SOURCES, mutableSetOf("bbc-news"))!!
-        return sources.joinToString()
+    override fun getCountry(): String {
+        return sharedPreferences.getString(KEY_PREFERENCE_COUNTRY, "gb")!!
     }
 }

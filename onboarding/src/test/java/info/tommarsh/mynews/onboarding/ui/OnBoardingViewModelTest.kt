@@ -27,8 +27,8 @@ class OnBoardingViewModelTest {
 
     private val dataSource = mock<OnBoardingDataSource>()
     private val dispatcher = mock<DispatcherProvider> {
-        on { main() }.thenReturn(Dispatchers.Main)
-        on { work() }.thenReturn(Dispatchers.Main)
+        on { main() }.thenReturn(testCoroutineDispatcher)
+        on { work() }.thenReturn(testCoroutineDispatcher)
     }
     private val preferences = mock<PreferencesRepository>()
     private val dynamicFeatureManager = mock<SplitInstallManager>()
@@ -64,9 +64,9 @@ class OnBoardingViewModelTest {
     @Test
     fun `Save sources, uninstall module, and send finish event when selected sources`() {
 
-        viewModel.postAction(Action.SelectedSources(listOf("bbc", "independent")))
+        viewModel.postAction(Action.SelectedCountry("gb"))
 
-        verify(preferences).saveSources(listOf("bbc", "independent"))
+        verify(preferences).saveCountry("gb")
         verify(preferences).flagOnBoardingComplete()
         verify(dynamicFeatureManager).deferredUninstall(listOf("onboarding"))
 

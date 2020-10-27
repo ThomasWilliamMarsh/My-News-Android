@@ -3,10 +3,8 @@ package info.tommarsh.mynews.core.article.data.local.source
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.article
 import info.tommarsh.mynews.core.MockProvider.articleModel
-import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
@@ -21,19 +19,26 @@ class ArticlesLocalDataStoreTest {
     private val localDataStore = ArticlesLocalDataStore(dao)
 
     @Test
-    fun `get breaking news from DB`() {
-        whenever(dao.getBreakingArticles()).thenReturn(flowOf())
+    fun `get articles for category`() = runBlocking<Unit> {
 
-        localDataStore.getBreakingNews()
+        localDataStore.getArticlesForCategory("business")
 
-        verify(dao).getBreakingArticles()
+        verify(dao).getArticlesForCategory("business")
     }
 
     @Test
-    fun `Save breaking news to DB`() = runBlocking {
+    fun `clear categories from db`() = runBlocking {
 
-        localDataStore.saveArticles(listOf(articleModel, articleModel))
+        localDataStore.clearCategory("business")
 
-        verify(dao).replaceBreakingArticles(listOf(article, article))
+        verify(dao).deleteCategory("business")
+    }
+
+    @Test
+    fun `insert articles to db`() = runBlocking {
+
+        localDataStore.insertArticles(listOf(articleModel, articleModel))
+
+        verify(dao).insertArticles(article, article)
     }
 }

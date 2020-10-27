@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:dist="http://schemas.android.com/apk/distribution"
-          package="marsh.tommarsh.article">
+        xmlns:dist="http://schemas.android.com/apk/distribution"
+        package="marsh.tommarsh.article">
 
     <dist:module
             dist:instant="false"
             dist:onDemand="false"
             dist:title="@string/title_activity_article">
-        <dist:fusing dist:include="true"/>
+        <dist:fusing dist:include="true" />
     </dist:module>
 
     <application>
         <activity
                 android:name="info.tommarsh.mynews.article.ui.ArticleActivity"
-                android:theme="@style/MyNews.DayNight"/>
+                android:theme="@style/MyNews.DayNight" />
     </application>
 
 </manifest>

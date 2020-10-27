@@ -1,7 +1,7 @@
 package info.tommarsh.mynews.core.util
 
+import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.model.NetworkException.*
-import info.tommarsh.mynews.core.model.Outcome
 import retrofit2.Response
 import javax.inject.Inject
 
@@ -14,12 +14,14 @@ internal class NetworkHelper @Inject constructor(private val connectionManager: 
         return try {
             val response = block()
             when {
+                response.code() == 426 -> throw MaxLimitException()
+                response.code() == 429 -> throw LimitRatedException()
                 response.body() == null -> throw NoResponseException()
                 !response.isSuccessful -> throw ServerException()
                 else -> response.body()!!
             }
-        } catch (exception: Exception) {
-            throw ServerException()
+        } catch (exception: NetworkException) {
+            throw exception
         }
     }
 }

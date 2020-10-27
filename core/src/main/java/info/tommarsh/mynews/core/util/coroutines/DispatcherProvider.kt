@@ -4,7 +4,7 @@ import kotlinx.coroutines.CoroutineDispatcher
 
 interface DispatcherProvider {
 
-    fun main() : CoroutineDispatcher
+    fun main(): CoroutineDispatcher
 
-    fun work() : CoroutineDispatcher
+    fun work(): CoroutineDispatcher
 }

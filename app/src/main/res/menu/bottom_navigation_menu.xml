@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/navigation_top_news"
-          android:icon="@drawable/ic_outline_view_headline"
-          android:title="@string/top_news"/>
+    <item
+            android:id="@+id/navigation_top_news"
+            android:icon="@drawable/ic_outline_view_headline"
+            android:title="@string/top_news" />
 
-    <item android:id="@+id/navigation_my_news"
-          android:icon="@drawable/ic_outline_category"
-          android:title="@string/my_news"/>
+    <item
+            android:id="@+id/navigation_my_news"
+            android:icon="@drawable/ic_outline_category"
+            android:title="@string/my_news" />
 
-    <item android:id="@+id/navigation_videos"
-          android:icon="@drawable/ic_outline_videocam"
-          android:title="@string/videos"/>
+    <item
+            android:id="@+id/navigation_videos"
+            android:icon="@drawable/ic_outline_videocam"
+            android:title="@string/videos" />
 
 </menu>

@@ -1,23 +1,19 @@
 package info.tommarsh.mynews.core.article.data
 
+import androidx.paging.PagingData
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
-import info.tommarsh.mynews.core.category.domain.CategoryModel
-import info.tommarsh.mynews.core.model.Outcome
-import info.tommarsh.mynews.core.util.ErrorLiveData
+import info.tommarsh.mynews.core.di.NetworkModule.STANDARD_PAGE_SIZE
 import kotlinx.coroutines.flow.Flow
 
 interface ArticleRepository {
 
-    val errors: ErrorLiveData
+    fun getArticlesForCategory(
+        category: String,
+        pageSize: Int = STANDARD_PAGE_SIZE
+    ): Flow<PagingData<ArticleModel>>
 
-    fun getBreakingNews(): Flow<List<ArticleModel>>
-
-    fun getFeed(): Flow<List<ArticleModel>>
-
-    suspend fun refreshBreakingNews()
-
-    suspend fun refreshFeed(categories: List<CategoryModel>)
-
-    suspend fun searchArticles(query: String): Outcome<List<ArticleModel>>
-
+    fun searchArticles(
+        query: String,
+        pageSize: Int = STANDARD_PAGE_SIZE
+    ): Flow<PagingData<ArticleModel>>
 }

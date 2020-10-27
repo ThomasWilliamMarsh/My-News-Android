@@ -3,8 +3,6 @@ package info.tommarsh.mynews.core.category.data.local.source.local
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import info.tommarsh.mynews.core.MockProvider.category
-import info.tommarsh.mynews.core.MockProvider.categoryModel
 import info.tommarsh.mynews.core.category.data.local.source.CategoryDao
 import info.tommarsh.mynews.core.category.data.local.source.CategoryLocalDataStore
 import kotlinx.coroutines.flow.flowOf

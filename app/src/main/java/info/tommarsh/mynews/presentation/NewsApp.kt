@@ -1,39 +1,38 @@
 package info.tommarsh.mynews.presentation
 
 import android.app.Application
-import androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode
-import androidx.hilt.work.HiltWorkerFactory
-import androidx.work.Configuration
-import androidx.work.WorkManager
+import android.content.Context
+import androidx.appcompat.app.AppCompatDelegate.*
+import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import dagger.hilt.android.HiltAndroidApp
-import info.tommarsh.mynews.core.offline.OfflineSyncScheduler
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.presentation.R
 import javax.inject.Inject
 
 @HiltAndroidApp
-class NewsApp : Application(), Configuration.Provider {
+class NewsApp : Application() {
 
     @Inject
     lateinit var preferences: PreferencesRepository
 
-    @Inject
-    lateinit var workerFactory: HiltWorkerFactory
+    override fun attachBaseContext(base: Context?) {
+        super.attachBaseContext(base)
+        SplitCompat.install(this)
+    }
 
     override fun onCreate() {
         super.onCreate()
         setNightMode()
-        scheduleOfflineSync()
         getRemoteConfigValues()
     }
 
     private fun setNightMode() {
-        setDefaultNightMode(preferences.getNightMode())
-    }
-
-    private fun scheduleOfflineSync() {
-        OfflineSyncScheduler(WorkManager.getInstance(this)).schedule()
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            setDefaultNightMode(MODE_NIGHT_FOLLOW_SYSTEM)
+        } else {
+            setDefaultNightMode(MODE_NIGHT_AUTO_BATTERY)
+        }
     }
 
     private fun getRemoteConfigValues() {
@@ -41,8 +40,4 @@ class NewsApp : Application(), Configuration.Provider {
         remoteConfig.setDefaultsAsync(R.xml.remote_config_default_values)
         remoteConfig.fetchAndActivate()
     }
-
-    override fun getWorkManagerConfiguration() = Configuration.Builder()
-        .setWorkerFactory(workerFactory)
-        .build()
 }

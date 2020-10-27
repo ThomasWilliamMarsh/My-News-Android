@@ -2,13 +2,13 @@ package info.tommarsh.mynews.search.ui.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.ListAdapter
+import androidx.paging.PagingDataAdapter
 import info.tommarsh.mynews.core.util.getDiffUtilItemCallback
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.ui.adapter.viewholder.ArticleViewHolder
 import info.tommarsh.search.databinding.ItemSearchArticleBinding
 
-class SearchAdapter : ListAdapter<SearchItemViewModel, ArticleViewHolder>(
+class SearchAdapter : PagingDataAdapter<SearchItemViewModel, ArticleViewHolder>(
     callback
 ) {
     companion object {
@@ -23,5 +23,5 @@ class SearchAdapter : ListAdapter<SearchItemViewModel, ArticleViewHolder>(
     }
 
     override fun onBindViewHolder(holder: ArticleViewHolder, position: Int) =
-        holder.bind(getItem(position))
+        holder.bind(getItem(position)!!)
 }

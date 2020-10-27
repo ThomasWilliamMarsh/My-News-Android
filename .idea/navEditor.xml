@@ -116,13 +116,13 @@
                       </LayoutPositions>
                     </value>
                   </entry>
-                  <entry key="nav_graph">
+                  <entry key="main_graph">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="225" />
-                            <option name="y" value="10" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>

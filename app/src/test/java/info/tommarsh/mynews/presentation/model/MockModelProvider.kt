@@ -14,6 +14,7 @@ object MockModelProvider {
 
     //region category
     val footballCategoryModel = CategoryModel("id-football", "Football", false)
+    val footballCategoryViewModel = CategoryViewModel("id-football", "Football", false)
     val entertainmentCategoryModel = CategoryModel("id-entertainment", "Entertainment", false)
     //endregion
 
@@ -42,7 +43,7 @@ object MockModelProvider {
         "author", "content", "description",
         fakeIsoTime,
         sourceModel, "title",
-        "url", "imageUrl", "top-news"
+        "url", "imageUrl", "business"
     )
     val footballArticleModel = ArticleModel(
         "author", "content", "description",
@@ -68,7 +69,7 @@ object MockModelProvider {
             "content",
             "url",
             "imageUrl",
-            "top-news"
+            "business"
         )
     val footballArticleViewModel =
         ArticleViewModel(
@@ -92,17 +93,6 @@ object MockModelProvider {
             "imageUrl",
             "id-entertainment"
         )
-
-    //region carousel
-    val footballCarousel = CarouselViewModel(
-        name = footballCategoryModel.name,
-        articles = listOf(footballArticleViewModel)
-    )
-    val entertainmentCarousel = CarouselViewModel(
-        name = entertainmentCategoryModel.name, articles = listOf(
-            entertainmentArticleViewModel
-        )
-    )
     //endregion
 
     /**

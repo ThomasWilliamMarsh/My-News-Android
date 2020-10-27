@@ -17,7 +17,7 @@ interface CategoryDao {
     fun getCategories(): Flow<List<Category>>
 
     @Query("SELECT * FROM CATEGORY_TABLE WHERE selected = :selected")
-    suspend fun getSelectedCategories(selected: Boolean = true): List<Category>
+    fun getSelectedCategories(selected: Boolean = true): Flow<List<Category>>
 
     @Query("UPDATE CATEGORY_TABLE SET selected = :selected where id = :id")
     suspend fun updateCategory(id: String, selected: Boolean)

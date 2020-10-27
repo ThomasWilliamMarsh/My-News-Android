@@ -6,11 +6,11 @@
 
     <fragment
             android:id="@+id/sourcesFragment"
-            android:name="info.tommarsh.mynews.onboarding.ui.screens.SourcesFragment"
+            android:name="info.tommarsh.mynews.onboarding.ui.screens.CountryFragment"
             android:label="Sources Fragment">
         <argument
                 android:name="extra_key"
-                android:defaultValue="onboarding_sources"
+                android:defaultValue="onboarding_country"
                 app:argType="string" />
         <action
                 android:id="@+id/action_sourcesFragment_to_main_nav_graph"

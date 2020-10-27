@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        xmlns:tools="http://schemas.android.com/tools"
         tools:context="info.tommarsh.mynews.categories.ui.CategoryChoiceActivity">
 
     <com.google.android.material.appbar.AppBarLayout
@@ -15,38 +15,28 @@
         <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/activity_choice_toolbar"
                 android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
                 android:layout_gravity="start"
                 android:gravity="start"
-                android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/activity_choice_toolbar_text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:gravity="start"
-                    android:textAlignment="textStart"
-                    android:textAppearance="?textAppearanceHeadline5"
-                    android:text="@string/edit_my_news"/>
-
-        </com.google.android.material.appbar.MaterialToolbar>
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:title="@string/edit_my_news" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ProgressBar
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/progress_margin_top"
             android:layout_gravity="center_horizontal"
-            android:visibility="gone"/>
+            android:layout_marginTop="@dimen/progress_margin_top"
+            android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/activity_choice_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:paddingBottom="@dimen/normal_padding"
             android:clipToPadding="false"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
+            android:paddingBottom="@dimen/normal_padding"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

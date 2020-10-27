@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+    <!--Navigation Drawer-->
+    <style name="Widget.MyNews.NavigationView" parent="Widget.MaterialComponents.NavigationView">
+        <item name="itemTextAppearance">?textAppearanceBody2</item>
+    </style>
+
+    <!--Toolbar-->
+    <style name="Widget.MyNews.Toolbar" parent="Widget.MaterialComponents.Toolbar.PrimarySurface" />
+
+    <!--AppBarLayout-->
+    <style name="Widget.MyNews.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.PrimarySurface" />
+
+    <!-- Search View -->
+    <style name="Widget.MyNews.SearchView" parent="Widget.AppCompat.SearchView">
+        <item name="searchIcon">@drawable/ic_outline_search</item>
+        <item name="closeIcon">@drawable/ic_baseline_close_24</item>
+    </style>
+
+    <!-- Autocomplete -->
+    <style name="Widget.MyNews.SearchView.AutoComplete" parent="Widget.AppCompat.Light.AutoCompleteTextView">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textColorHint">#CCffffff</item>
+    </style>
+
+</resources>

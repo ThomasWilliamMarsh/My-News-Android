@@ -21,8 +21,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="info.tommarsh.mynews.presentation.ui.ArticlesActivity">
-        </activity>
+        <activity android:name="info.tommarsh.mynews.presentation.ui.ArticlesActivity"></activity>
 
         <!-- Using our own WorkManagerFactory for constructor injection-->
         <provider

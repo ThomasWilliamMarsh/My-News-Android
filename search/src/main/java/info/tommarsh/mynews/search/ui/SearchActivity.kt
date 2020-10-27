@@ -6,14 +6,18 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.paging.LoadState
+import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.util.*
-import info.tommarsh.mynews.search.model.Action
-import info.tommarsh.mynews.search.model.Event
+import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
+import info.tommarsh.mynews.core.util.service
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import info.tommarsh.search.databinding.ActivitySearchBinding
 import kotlinx.android.synthetic.main.activity_search.*
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SearchActivity : AppCompatActivity() {
@@ -22,15 +26,17 @@ class SearchActivity : AppCompatActivity() {
 
     private val adapter = SearchAdapter()
 
+    private var searchJob: Job? = null
+
     private val viewModel by viewModels<SearchViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setSupportActionBar(search_toolbar)
-        setUpViewModel()
         setUpRecyclerView()
         setUpSearchView()
+        setUpRetryButton()
         onIntent(intent)
     }
 
@@ -40,11 +46,7 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setUpRecyclerView() {
-        binding.searchRecyclerView.adapter = adapter
-    }
-
-    private fun setUpViewModel() {
-        viewModel.searchState.observe(this, Observer(::onUIState))
+        binding.searchRecyclerView.adapter = setUpAdapter()
     }
 
     private fun setUpSearchView() {
@@ -56,18 +58,33 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun onIntent(intent: Intent) {
-        if (Intent.ACTION_SEARCH == intent.action) {
-            val query = intent.getStringExtra(SearchManager.QUERY)
-            viewModel.postAction(Action.Search(query))
+    private fun setUpRetryButton() {
+        binding.searchRetryButton.setOnClickListener { adapter.retry() }
+    }
+
+    private fun setUpAdapter(): ConcatAdapter {
+        return adapter.withLoadStateFooter(
+            footer = ListLoadStateAdapter { adapter.retry() }
+        ).also {
+            adapter.addLoadStateListener { loadState ->
+                binding.searchRecyclerView.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading
+                binding.searchProgress.isVisible =
+                    loadState.source.refresh is LoadState.Loading
+                binding.searchRetryButton.isVisible = loadState.source.refresh is LoadState.Error
+            }
         }
     }
 
-    private fun onUIState(state: Event) {
-        binding.searchProgress.isVisible = state is Event.Loading
-        when(state) {
-            is Event.FetchedResults -> adapter.submitList(state.items)
-            is Event.Error -> binding.root.snack(state.throwable.localizedMessage)
+    private fun onIntent(intent: Intent) {
+        if (Intent.ACTION_SEARCH == intent.action) {
+            val query = intent.getStringExtra(SearchManager.QUERY)
+            searchJob?.cancel()
+            searchJob = lifecycleScope.launch {
+                viewModel.searchArticles(query).collect { searchItems ->
+                    adapter.submitData(searchItems)
+                }
+            }
         }
     }
 }

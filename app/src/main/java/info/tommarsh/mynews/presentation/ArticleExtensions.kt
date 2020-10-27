@@ -3,9 +3,8 @@ package info.tommarsh.mynews.presentation
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
-import info.tommarsh.mynews.core.model.ViewModel
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
-import info.tommarsh.mynews.presentation.model.HeaderViewModel
+
 import info.tommarsh.presentation.R
 
 fun ArticleViewModel.setClickListenerFor(view: View) {

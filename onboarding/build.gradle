@@ -24,6 +24,7 @@ android {
 
 dependencies {
     implementation project(":app")
+    implementation project(":core")
 
     //Dagger
     implementation 'com.google.dagger:dagger:' + rootProject.daggerVersion

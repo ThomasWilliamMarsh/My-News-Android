@@ -1,8 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="info.tommarsh.categories">
+        package="info.tommarsh.categories">
 
     <application>
-        <activity android:name="info.tommarsh.mynews.categories.ui.CategoryChoiceActivity"/>
+        <activity android:name="info.tommarsh.mynews.categories.ui.CategoryChoiceActivity" />
     </application>
 
 </manifest>

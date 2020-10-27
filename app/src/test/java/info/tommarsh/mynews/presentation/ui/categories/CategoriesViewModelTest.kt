@@ -1,23 +1,21 @@
 package info.tommarsh.mynews.presentation.ui.categories
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.any
+import androidx.paging.PagingData
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.util.TimeHelper
-import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
-import info.tommarsh.mynews.presentation.model.CarouselViewModel
-import info.tommarsh.mynews.presentation.model.MockModelProvider.entertainmentArticleModel
-import info.tommarsh.mynews.presentation.model.MockModelProvider.entertainmentCarousel
-import info.tommarsh.mynews.presentation.model.MockModelProvider.entertainmentCategoryModel
-import info.tommarsh.mynews.presentation.model.MockModelProvider.footballArticleModel
-import info.tommarsh.mynews.presentation.model.MockModelProvider.footballCarousel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.articleModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.footballCategoryModel
+import info.tommarsh.mynews.presentation.model.MockModelProvider.footballCategoryViewModel
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
@@ -33,43 +31,28 @@ class CategoriesViewModelTest {
 
     private val testCoroutineDispatcher = TestCoroutineDispatcher()
 
-    private val articlesRepository = mock<ArticleRepository> {
-        onBlocking { getFeed() }.thenReturn(
-            flowOf(
-                listOf(
-                    footballArticleModel,
-                    entertainmentArticleModel
+    private val articleRepository = mock<ArticleRepository> {
+        onBlocking { getArticlesForCategory("football", 5) }.thenReturn(
+            flow {
+                emit(
+                    PagingData.from(
+                        listOf(articleModel)
+                    )
                 )
-            )
+            }
         )
     }
     private val categoryRepository = mock<CategoryRepository> {
-        onBlocking { getSelectedCategories() }.thenReturn(
-            listOf(
-                footballCategoryModel,
-                entertainmentCategoryModel
-            )
-        )
+        onBlocking { getSelectedCategories() }.thenReturn(flowOf(listOf(footballCategoryModel)))
     }
 
-    private val timeHelper = mock<TimeHelper> {
-        on { timeBetween(now = any(), isoString = any()) }.thenReturn("1 hour ago")
-    }
+    private val timeHelper = mock<TimeHelper>()
 
-    private val observer = mock<Observer<List<CarouselViewModel>>>()
-
-    private val dispatcherProvider = mock<DispatcherProvider> {
-        on { main() }.thenReturn(testCoroutineDispatcher)
-        on { work() }.thenReturn(testCoroutineDispatcher)
-    }
-
-    private val categoryViewModel =
-        CategoriesViewModel(
-            articlesRepository,
-            categoryRepository,
-            dispatcherProvider,
-            timeHelper
-        )
+    private val viewModel = CategoriesViewModel(
+        articleRepository,
+        categoryRepository,
+        timeHelper
+    )
 
     @Before
     fun `Set up`() {
@@ -84,32 +67,24 @@ class CategoriesViewModelTest {
     }
 
     @Test
-    fun `Gets selected categories and articles and maps to carousels when feed changes`() =
-        runBlockingTest {
-            val livedata = categoryViewModel.feed
+    fun `Get selected categories from live data`() = runBlockingTest {
 
-            livedata.observeForever(observer)
+        val flow = viewModel.selectedCategories
+            .flowOn(testCoroutineDispatcher)
 
-            verify(categoryRepository).getSelectedCategories()
-            verify(observer).onChanged(
-                listOf(
-                    footballCarousel,
-                    entertainmentCarousel
-                )
-            )
-            livedata.removeObserver(observer)
+        flow.collect { cats ->
+            assertEquals(cats, listOf(footballCategoryViewModel))
         }
 
+        verify(categoryRepository).getSelectedCategories()
+    }
+
     @Test
-    fun `Refreshes feed`() = runBlockingTest {
+    fun `Get articles for a category`() = testCoroutineDispatcher.runBlockingTest {
 
-        categoryViewModel.refreshFeed()
+        viewModel.getArticlesForCategory("football")
+            .flowOn(testCoroutineDispatcher)
 
-        verify(articlesRepository).refreshFeed(
-            listOf(
-                footballCategoryModel,
-                entertainmentCategoryModel
-            )
-        )
+        verify(articleRepository).getArticlesForCategory("football", 5)
     }
 }

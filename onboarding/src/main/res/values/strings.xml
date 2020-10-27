@@ -1,4 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="next">Next</string>
+    <string name="select_your_country">Select your country</string>
+    <string name="skip">Skip</string>
+    <string name="welcome_to_my_news">Welcome to My News.</string>
 </resources>

@@ -84,6 +84,7 @@ object MockProvider {
             videoModel
         )
     )
+
     /**
      * DB
      */
@@ -97,10 +98,10 @@ object MockProvider {
         source,
         "title",
         "https://test.com/image.jpg",
-        "top-news"
+        "business"
     )
     val category = Category(
-        "top-news",
+        "business",
         "Top News",
         true
     )
@@ -118,10 +119,10 @@ object MockProvider {
         "title",
         "https://www.test.com",
         "https://test.com/image.jpg",
-        "top-news"
+        "business"
     )
     val categoryModel = CategoryModel(
-        "top-news",
+        "business",
         "Top News",
         true
     )

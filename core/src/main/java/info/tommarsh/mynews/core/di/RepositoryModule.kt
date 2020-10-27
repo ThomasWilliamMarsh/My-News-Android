@@ -26,5 +26,5 @@ abstract class RepositoryModule {
     abstract fun provideVideoRepository(repository: VideoDataRepository): VideoRepository
 
     @Binds
-    abstract fun providePreferencesRepository(repository: SharedPreferencesRepository) : PreferencesRepository
+    abstract fun providePreferencesRepository(repository: SharedPreferencesRepository): PreferencesRepository
 }

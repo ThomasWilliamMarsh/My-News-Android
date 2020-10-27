@@ -37,8 +37,8 @@ internal class OnBoardingViewModel
             is Action.FetchChoices -> {
                 fetchOnBoardingModel(action.key)
             }
-            is Action.SelectedSources -> {
-                preferences.saveSources(action.sources)
+            is Action.SelectedCountry -> {
+                preferences.saveCountry(action.country)
                 preferences.flagOnBoardingComplete()
                 uninstallOnBoardingModule()
                 _events.value = Event.Finished
