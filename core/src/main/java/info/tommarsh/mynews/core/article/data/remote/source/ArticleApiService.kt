@@ -20,5 +20,6 @@ internal interface ArticleApiService {
     suspend fun searchArticles(
         @Query("q") query: String,
         @Query("sortBy") sortBy: String = "publishedAt",
-        @Query("page") page: Int = 0): Response<ArticlesResponse>
+        @Query("page") page: Int = 0
+    ): Response<ArticlesResponse>
 }

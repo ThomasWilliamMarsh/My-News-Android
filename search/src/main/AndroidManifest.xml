@@ -1,13 +1,15 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="info.tommarsh.search">
+        package="info.tommarsh.search">
 
     <application>
-        <activity android:name="info.tommarsh.mynews.search.ui.SearchActivity"
-                  android:launchMode="singleTop">
-            <meta-data android:name="android.app.searchable"
-                       android:resource="@xml/searchable"/>
+        <activity
+                android:name="info.tommarsh.mynews.search.ui.SearchActivity"
+                android:launchMode="singleTop">
+            <meta-data
+                    android:name="android.app.searchable"
+                    android:resource="@xml/searchable" />
             <intent-filter>
-                <action android:name="android.intent.action.SEARCH"/>
+                <action android:name="android.intent.action.SEARCH" />
             </intent-filter>
         </activity>
     </application>

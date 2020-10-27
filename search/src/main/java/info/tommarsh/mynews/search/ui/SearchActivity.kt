@@ -11,7 +11,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
-import info.tommarsh.mynews.core.util.*
+import info.tommarsh.mynews.core.util.service
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import info.tommarsh.search.databinding.ActivitySearchBinding
 import kotlinx.android.synthetic.main.activity_search.*

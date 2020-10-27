@@ -15,9 +15,9 @@ internal class FirebaseOnBoardingDataSource
 
     override fun getOnBoardingChoices(key: String): Outcome<Choices> {
         return try {
-            val data =adapter.fromJson(remoteConfig.getString(key))!!
+            val data = adapter.fromJson(remoteConfig.getString(key))!!
             Outcome.Success(data)
-        } catch(throwable: Throwable) {
+        } catch (throwable: Throwable) {
             Outcome.Error(NetworkException.ServerException())
         }
     }

@@ -4,7 +4,6 @@ import android.content.Context
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.play.core.splitcompat.SplitCompat
-import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.util.contentBehindStatusBar
 import info.tommarsh.mynews.core.util.loadUrl
 import marsh.tommarsh.article.R

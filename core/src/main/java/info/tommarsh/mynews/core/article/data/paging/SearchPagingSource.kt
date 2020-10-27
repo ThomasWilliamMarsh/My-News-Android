@@ -16,7 +16,7 @@ internal class SearchPagingSource constructor(
         return when (val outcome = remoteArticleSource.searchArticles(page, query)) {
             is Outcome.Success -> {
                 val nextKey = if (outcome.data.isEmpty()) null else page + 1
-                val previousKey = if(page == 1) null else page -1
+                val previousKey = if (page == 1) null else page - 1
                 LoadResult.Page(
                     data = outcome.data,
                     nextKey = nextKey,

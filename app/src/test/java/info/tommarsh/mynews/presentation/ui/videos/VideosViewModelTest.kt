@@ -49,7 +49,7 @@ class VideosViewModelTest {
     }
 
     @Test
-    fun `Get flow of videos`() = testCoroutineDispatcher.runBlockingTest{
+    fun `Get flow of videos`() = testCoroutineDispatcher.runBlockingTest {
 
         viewModel.videos.collect()
 

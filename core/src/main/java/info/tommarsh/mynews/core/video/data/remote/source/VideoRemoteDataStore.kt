@@ -10,7 +10,8 @@ import javax.inject.Inject
 internal class VideoRemoteDataStore
 @Inject constructor(
     private val api: VideoApiService,
-    private val networkHelper: NetworkHelper) {
+    private val networkHelper: NetworkHelper
+) {
 
     suspend fun getPlaylist(page: String?): Outcome<PlaylistModel> {
         return try {

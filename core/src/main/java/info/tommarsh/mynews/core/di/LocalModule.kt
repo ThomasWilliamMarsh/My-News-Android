@@ -9,15 +9,17 @@ import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import dagger.hilt.android.qualifiers.ApplicationContext
 import info.tommarsh.mynews.core.database.NewsDatabase
+import javax.inject.Singleton
 
 @Module
 @InstallIn(ApplicationComponent::class)
 object LocalModule {
 
     @Provides
+    @Singleton
     internal fun provideDb(@ApplicationContext app: Context) =
         Room.databaseBuilder(app, NewsDatabase::class.java, "articles-db")
-            .createFromAsset("database/default-db")
+            .createFromAsset("database/prepackaged.db")
             .build()
 
     @Provides
@@ -25,6 +27,9 @@ object LocalModule {
 
     @Provides
     internal fun provideCategoriesDao(db: NewsDatabase) = db.categoriesDao()
+
+    @Provides
+    internal fun providePagingDao(db: NewsDatabase) = db.pagingDao()
 
     @Provides
     internal fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =

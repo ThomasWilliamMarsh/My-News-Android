@@ -8,11 +8,9 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.categories.R
 import info.tommarsh.categories.databinding.ActivityCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
-import kotlinx.android.synthetic.main.activity_category_choice.*
 
 @AndroidEntryPoint
 class CategoryChoiceActivity : AppCompatActivity() {

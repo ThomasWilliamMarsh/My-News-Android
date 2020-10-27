@@ -24,7 +24,8 @@ fun View.makeGone() {
 //endRegion
 
 //region ViewGroup
-fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View = LayoutInflater.from(context).inflate(layoutRes, this, false)
+fun ViewGroup.inflate(@LayoutRes layoutRes: Int): View =
+    LayoutInflater.from(context).inflate(layoutRes, this, false)
 //endregion
 
 //region ImageView

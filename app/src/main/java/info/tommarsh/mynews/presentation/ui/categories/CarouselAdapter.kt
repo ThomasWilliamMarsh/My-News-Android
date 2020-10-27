@@ -27,20 +27,6 @@ internal class CarouselAdapter(
         return CarouselViewHolder(binding, lifecycle, pagingFactory)
     }
 
-    override fun onBindViewHolder(
-        holder: CarouselViewHolder,
-        position: Int,
-        payloads: MutableList<Any>
-    ) {
-        if(payloads.isEmpty()) {
-            onBindViewHolder(holder, position)
-        } else {
-            if(payloads.contains(CarouselPayload.Refresh)) {
-                holder.refresh()
-            }
-        }
-    }
-
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
         holder.bind(getItem(position))
     }
@@ -50,19 +36,11 @@ internal class CarouselAdapter(
         holder.unbind()
     }
 
-    fun refresh() {
-        notifyItemRangeChanged(0, itemCount, CarouselPayload.Refresh)
-    }
-
     companion object {
         private val DIFFER = createDiffItemCallback<CategoryViewModel> { old, new ->
             old.name == new.name
         }
     }
-}
-
-private sealed class CarouselPayload {
-    object Refresh: CarouselPayload()
 }
 
 internal class CarouselViewHolder(
@@ -86,10 +64,6 @@ internal class CarouselViewHolder(
                 adapter!!.submitData(pagingData)
             }
         }
-    }
-
-    fun refresh() {
-        adapter?.refresh()
     }
 
     fun unbind() {

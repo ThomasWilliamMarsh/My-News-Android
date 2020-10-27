@@ -68,14 +68,15 @@ class VideosFragment : ArticleFragment() {
         }
     }
 
-    private fun setLayoutManager(adapter: ConcatAdapter, spanCount: Int) = GridLayoutManager(context, spanCount).apply {
-        spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-            override fun getSpanSize(position: Int): Int {
-                return when(adapter.getItemViewType(position)) {
-                    1 -> spanCount
-                    else -> 1
+    private fun setLayoutManager(adapter: ConcatAdapter, spanCount: Int) =
+        GridLayoutManager(context, spanCount).apply {
+            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
+                override fun getSpanSize(position: Int): Int {
+                    return when (adapter.getItemViewType(position)) {
+                        1 -> spanCount
+                        else -> 1
+                    }
                 }
             }
         }
-    }
 }

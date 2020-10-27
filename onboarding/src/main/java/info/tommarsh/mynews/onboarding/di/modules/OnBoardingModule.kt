@@ -9,9 +9,6 @@ import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import dagger.Module
 import dagger.Provides
-import dagger.hilt.InstallIn
-import dagger.hilt.android.components.FragmentComponent
-import info.tommarsh.mynews.onboarding.di.OnBoardingComponent
 import info.tommarsh.mynews.onboarding.model.Choices
 
 @Module

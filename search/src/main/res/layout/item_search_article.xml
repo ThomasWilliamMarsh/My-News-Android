@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:clickable="true"
-        android:focusable="true"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_margin">
+        android:layout_margin="@dimen/normal_margin"
+        android:clickable="true"
+        android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -17,39 +17,39 @@
                 android:id="@+id/article_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/content_description_image_article"
                 android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                app:layout_constraintHeight_min="@dimen/article_image_size"
-                app:layout_constraintWidth_percent=".3"
                 app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintHeight_min="@dimen/article_image_size"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintWidth_percent=".3" />
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/article_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                tools:text="Flights suspended by drones at Gatwick"
-                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 android:layout_marginStart="@dimen/small_margin"
-                app:layout_constraintStart_toEndOf="@id/article_image"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:textAppearance="@style/TextAppearance.AppCompat.Body1"
                 app:layout_constraintBottom_toTopOf="@id/article_updated"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/article_image"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0"/>
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Flights suspended by drones at Gatwick" />
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/article_updated"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="16 mins ago"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                app:layout_constraintHorizontal_chainStyle="spread"
-                app:layout_constraintStart_toStartOf="@id/article_title"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"/>
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="@id/article_title"
+                tools:text="16 mins ago" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

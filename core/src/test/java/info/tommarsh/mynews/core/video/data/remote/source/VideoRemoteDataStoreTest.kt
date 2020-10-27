@@ -2,15 +2,12 @@ package info.tommarsh.mynews.core.video.data.remote.source
 
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.whenever
-import info.tommarsh.mynews.core.MockProvider.noInternet
 import info.tommarsh.mynews.core.MockProvider.playlist
 import info.tommarsh.mynews.core.MockProvider.playlistModel
 import info.tommarsh.mynews.core.model.NetworkException
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.util.ConnectionManager
 import info.tommarsh.mynews.core.util.NetworkHelper
-import info.tommarsh.mynews.core.video.domain.model.PlaylistModel
-import junit.framework.Assert
 import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.test.runBlockingTest
@@ -30,7 +27,8 @@ class VideoRemoteDataStoreTest {
 
     private val remote = VideoRemoteDataStore(
         api,
-        network)
+        network
+    )
 
     @Test
     fun `Successfully get Videos from network`() = runBlockingTest {

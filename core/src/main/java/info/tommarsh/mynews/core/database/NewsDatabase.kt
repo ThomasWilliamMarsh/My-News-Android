@@ -8,11 +8,18 @@ import info.tommarsh.mynews.core.article.data.local.model.Source
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesDao
 import info.tommarsh.mynews.core.category.data.local.model.Category
 import info.tommarsh.mynews.core.category.data.local.source.CategoryDao
+import info.tommarsh.mynews.core.paging.source.Page
+import info.tommarsh.mynews.core.paging.source.PagingDao
 
-@Database(entities = [Article::class, Source::class, Category::class], version = 1, exportSchema = false)
+@Database(
+    entities = [Article::class, Source::class, Category::class, Page::class],
+    version = 1,
+    exportSchema = true
+)
 @TypeConverters(Converters::class)
 internal abstract class
 NewsDatabase : RoomDatabase() {
     abstract fun articlesDao(): ArticlesDao
     abstract fun categoriesDao(): CategoryDao
+    abstract fun pagingDao(): PagingDao
 }

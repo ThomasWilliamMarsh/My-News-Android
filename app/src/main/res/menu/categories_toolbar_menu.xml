@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
             android:id="@+id/action_search"
             android:layout_width="wrap_content"
             android:icon="@drawable/ic_outline_search"
-            app:showAsAction="always|collapseActionView"
-            android:title="@string/search"/>
+            android:title="@string/search"
+            app:showAsAction="always|collapseActionView" />
 
     <item
             android:id="@+id/action_edit"
             android:layout_width="wrap_content"
             android:icon="@drawable/ic_outline_edit"
-            app:showAsAction="always|collapseActionView"
-            android:title="@string/edit_my_news"/>
+            android:title="@string/edit_my_news"
+            app:showAsAction="always|collapseActionView" />
 </menu>

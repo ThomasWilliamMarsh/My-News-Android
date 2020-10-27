@@ -43,7 +43,7 @@ object MockModelProvider {
         "author", "content", "description",
         fakeIsoTime,
         sourceModel, "title",
-        "url", "imageUrl", "top-news"
+        "url", "imageUrl", "business"
     )
     val footballArticleModel = ArticleModel(
         "author", "content", "description",
@@ -69,7 +69,7 @@ object MockModelProvider {
             "content",
             "url",
             "imageUrl",
-            "top-news"
+            "business"
         )
     val footballArticleViewModel =
         ArticleViewModel(

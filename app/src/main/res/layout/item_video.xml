@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/video_root"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -13,29 +12,31 @@
             android:layout_height="wrap_content"
             android:orientation="?attr/selectableItemBackground">
 
-        <androidx.appcompat.widget.AppCompatImageView android:id="@+id/video_image"
-                   android:layout_width="match_parent"
-                   android:layout_height="96dp"
-                   android:scaleType="fitCenter"
-                   android:contentDescription="@string/content_description_image_article"
-                   android:adjustViewBounds="true"
-                   app:layout_constraintVertical_chainStyle="packed"
-                   app:layout_constraintStart_toStartOf="parent"
-                   app:layout_constraintEnd_toEndOf="parent"
-                   app:layout_constraintTop_toTopOf="parent"
-                   app:layout_constraintHorizontal_bias="0.5"
-                   app:layout_constraintBottom_toTopOf="@+id/video_title"
-                   app:layout_constraintVertical_bias="1.0"/>
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/video_image"
+                android:layout_width="match_parent"
+                android:layout_height="96dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="@string/content_description_image_article"
+                android:scaleType="fitCenter"
+                app:layout_constraintBottom_toTopOf="@+id/video_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="1.0"
+                app:layout_constraintVertical_chainStyle="packed" />
 
-        <androidx.appcompat.widget.AppCompatTextView android:id="@+id/video_title"
-                  android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:padding="@dimen/small_padding"
-                  android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
-                  tools:text="Williams leave Palace for Charlton"
-                  app:layout_constraintStart_toStartOf="parent"
-                  app:layout_constraintTop_toBottomOf="@+id/video_image"
-                  app:layout_constraintBottom_toTopOf="@+id/video_updated"/>
+        <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/video_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/small_padding"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Body1"
+                app:layout_constraintBottom_toTopOf="@+id/video_updated"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/video_image"
+                tools:text="Williams leave Palace for Charlton" />
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/video_updated"
@@ -43,10 +44,10 @@
                 android:layout_height="wrap_content"
                 android:padding="@dimen/small_padding"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                tools:text="18 mins ago"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/video_title"/>
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/video_title"
+                tools:text="18 mins ago" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

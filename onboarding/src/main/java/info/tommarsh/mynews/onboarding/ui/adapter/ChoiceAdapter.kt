@@ -21,7 +21,7 @@ internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
         position: Int,
         payloads: MutableList<Any>
     ) {
-        if(payloads.isEmpty()) {
+        if (payloads.isEmpty()) {
             onBindViewHolder(holder, position)
         } else {
             val checkedPayload = payloads.first() as Payload.Checked
@@ -36,7 +36,7 @@ internal class ChoiceAdapter : ListAdapter<Choice, ChoiceViewholder>(CALLBACK) {
     }
 
     private fun onCheckedChanged(id: String, isChecked: Boolean) {
-        if(isChecked) {
+        if (isChecked) {
             country = id
             notifyItemRangeChanged(0, itemCount, Payload.Checked(id))
         }

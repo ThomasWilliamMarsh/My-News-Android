@@ -7,7 +7,7 @@ import info.tommarsh.mynews.core.MockProvider.playlistModel
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.video.data.remote.source.VideoRemoteDataStore
 import kotlinx.coroutines.test.runBlockingTest
-import org.junit.Assert.*
+import org.junit.Assert.assertTrue
 import org.junit.Test
 
 class VideoPagingSourceTest {
@@ -17,15 +17,17 @@ class VideoPagingSourceTest {
     private val pagingSource = VideoPagingSource(remoteDataStore)
 
     @Test
-    fun `Successfully fetch videos`() = runBlockingTest{
+    fun `Successfully fetch videos`() = runBlockingTest {
         whenever(remoteDataStore.getPlaylist("token"))
             .thenReturn(Outcome.Success(playlistModel))
 
-        val result = pagingSource.load(PagingSource.LoadParams.Refresh(
-            key = "token",
-            loadSize = 20,
-            placeholdersEnabled = false
-        ))
+        val result = pagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = "token",
+                loadSize = 20,
+                placeholdersEnabled = false
+            )
+        )
 
         assertTrue(result is PagingSource.LoadResult.Page)
     }
@@ -35,11 +37,13 @@ class VideoPagingSourceTest {
         whenever(remoteDataStore.getPlaylist("token"))
             .thenReturn(Outcome.Success(playlistModel))
 
-        val result = pagingSource.load(PagingSource.LoadParams.Refresh(
-            key = "token",
-            loadSize = 20,
-            placeholdersEnabled = false
-        ))
+        val result = pagingSource.load(
+            PagingSource.LoadParams.Refresh(
+                key = "token",
+                loadSize = 20,
+                placeholdersEnabled = false
+            )
+        )
 
         assertTrue(result is PagingSource.LoadResult.Page)
     }

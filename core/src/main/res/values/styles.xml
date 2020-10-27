@@ -8,10 +8,10 @@
     </style>
 
     <!--Toolbar-->
-    <style name="Widget.MyNews.Toolbar" parent="Widget.MaterialComponents.Toolbar.PrimarySurface"/>
+    <style name="Widget.MyNews.Toolbar" parent="Widget.MaterialComponents.Toolbar.PrimarySurface" />
 
     <!--AppBarLayout-->
-    <style name="Widget.MyNews.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.PrimarySurface"/>
+    <style name="Widget.MyNews.AppBarLayout" parent="Widget.MaterialComponents.AppBarLayout.PrimarySurface" />
 
     <!-- Search View -->
     <style name="Widget.MyNews.SearchView" parent="Widget.AppCompat.SearchView">

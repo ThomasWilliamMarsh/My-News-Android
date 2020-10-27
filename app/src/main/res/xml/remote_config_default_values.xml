@@ -2,6 +2,8 @@
 <defaultsMap>
     <entry>
         <key>onboarding_country</key>
-        <value>{"choices":[{"id":"gb","name":"Great Britain"},{"id":"us","name":"USA"},{"id":"de","name":"Germany"},{"id":"fr","name":"France"},{"id":"ru","name":"Russia"}]}</value>
+        <value>{"choices":[{"id":"gb","name":"Great
+            Britain"},{"id":"us","name":"USA"},{"id":"de","name":"Germany"},{"id":"fr","name":"France"},{"id":"ru","name":"Russia"}]}
+        </value>
     </entry>
 </defaultsMap>

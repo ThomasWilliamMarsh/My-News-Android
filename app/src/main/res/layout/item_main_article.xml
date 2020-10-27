@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:tools="http://schemas.android.com/tools"
-        android:clickable="true"
-        android:focusable="true"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/normal_margin">
+        android:layout_margin="@dimen/normal_margin"
+        android:clickable="true"
+        android:focusable="true">
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -17,28 +17,28 @@
                 android:id="@+id/main_article_image"
                 android:layout_width="0dp"
                 android:layout_height="@dimen/main_article_image_size"
+                android:adjustViewBounds="true"
                 android:contentDescription="@string/content_description_image_article"
                 android:scaleType="fitCenter"
-                android:adjustViewBounds="true"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/main_article_title"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_chainStyle="packed"
-                app:layout_constraintBottom_toTopOf="@+id/main_article_title"/>
+                app:layout_constraintVertical_chainStyle="packed" />
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/main_article_title"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 android:layout_marginStart="@dimen/small_margin"
                 android:layout_marginBottom="@dimen/normal_margin"
-                tools:text="Flights suspended by drones at Gatwick"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/main_article_image"
+                android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
                 app:layout_constraintBottom_toTopOf="@+id/main_article_updated"
-                tools:layout_editor_absoluteX="0dp"/>
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/main_article_image"
+                tools:layout_editor_absoluteX="0dp"
+                tools:text="Flights suspended by drones at Gatwick" />
 
         <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/main_article_updated"
@@ -47,10 +47,10 @@
                 android:layout_marginStart="@dimen/small_margin"
                 android:paddingBottom="@dimen/small_margin"
                 android:textAppearance="@style/TextAppearance.MaterialComponents.Caption"
-                tools:text="16 mins ago"
+                app:layout_constraintBottom_toTopOf="@+id/main_article_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/main_article_title"
-                app:layout_constraintBottom_toTopOf="@+id/main_article_title"/>
+                tools:text="16 mins ago" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

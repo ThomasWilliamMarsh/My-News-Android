@@ -44,10 +44,6 @@ class CategoriesFragment : ArticleFragment() {
         adapter = CarouselAdapter(lifecycle, viewModel::getArticlesForCategory)
         binding.myNewsRecyclerView.adapter = adapter
         binding.myNewsRecyclerView.layoutManager = LinearLayoutManager(context)
-        binding.refreshMyNews.setOnRefreshListener {
-            binding.refreshMyNews.isRefreshing = true
-            adapter.refresh()
-        }
     }
 
     override fun onResume() {

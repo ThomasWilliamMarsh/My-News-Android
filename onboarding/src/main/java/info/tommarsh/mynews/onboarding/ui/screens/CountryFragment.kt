@@ -5,10 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import info.tommarsh.mynews.core.util.makeGone
-import info.tommarsh.mynews.core.util.makeVisible
 import info.tommarsh.mynews.core.util.newTaskIntent
 import info.tommarsh.mynews.onboarding.R
 import info.tommarsh.mynews.onboarding.databinding.FragmentCountryBinding
@@ -47,9 +46,10 @@ internal class CountryFragment : Fragment() {
 
         lifecycleScope.launchWhenResumed {
             viewModel.events.collect { event ->
-                binding.onboardingProgress.makeGone()
+                binding.onboardingProgress.isVisible = event is Event.Loading
                 when (event) {
-                    is Event.Loading -> binding.onboardingProgress.makeVisible()
+                    is Event.Loading -> {
+                    }
                     is Event.Error -> showErrorToast()
                     is Event.Fetched -> {
                         playAnimation()

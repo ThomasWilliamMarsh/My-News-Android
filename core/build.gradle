@@ -113,7 +113,7 @@ dependencies {
 
     //Testing
     testImplementation 'androidx.paging:paging-common:' + rootProject.pagingVersion
-    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:'+ rootProject.coroutinesTestVersion
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion

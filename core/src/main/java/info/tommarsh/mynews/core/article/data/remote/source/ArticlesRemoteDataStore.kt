@@ -20,7 +20,8 @@ internal class ArticlesRemoteDataStore
             val response = networkHelper.callApi {
                 api.searchArticles(
                     query,
-                    page = page)
+                    page = page
+                )
             }
             Outcome.Success(response.toDomainList())
         } catch (throwable: NetworkException) {

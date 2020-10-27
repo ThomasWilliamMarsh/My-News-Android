@@ -3,7 +3,6 @@ package info.tommarsh.mynews.core.video.data
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import info.tommarsh.mynews.core.di.NetworkModule.STANDARD_PAGE_SIZE
 import info.tommarsh.mynews.core.video.data.remote.paging.VideoPagingSource
 import info.tommarsh.mynews.core.video.data.remote.source.VideoRemoteDataStore
 import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel

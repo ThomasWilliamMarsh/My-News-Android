@@ -3,7 +3,6 @@ package info.tommarsh.mynews.search.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.ListAdapter
 import info.tommarsh.mynews.core.util.getDiffUtilItemCallback
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.ui.adapter.viewholder.ArticleViewHolder

@@ -11,7 +11,7 @@ import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStore
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
 import info.tommarsh.mynews.core.model.Outcome
-import junit.framework.Assert.assertEquals
+import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
@@ -22,6 +22,7 @@ class ArticlesRemoteMediatorTest {
     private val category = "business"
     private val remoteSource = mock<ArticlesRemoteDataStore>()
     private val localArticleSource = mock<ArticlesLocalDataStore>()
+    private val pageSource = mock<PagingLocalDataStore>()
 
     private val config = PagingConfig(pageSize = 20)
     private val pagingState = PagingState<Int, Article>(
@@ -31,7 +32,8 @@ class ArticlesRemoteMediatorTest {
         leadingPlaceholderCount = 1
     )
 
-    private val remoteMediator = ArticlesRemoteMediator(category, remoteSource, localArticleSource)
+    private val remoteMediator =
+        ArticlesRemoteMediator(category, remoteSource, localArticleSource, pageSource)
 
     @Test
     fun `Notify end of pagination`() = runBlockingTest {
@@ -73,8 +75,8 @@ class ArticlesRemoteMediatorTest {
         )
 
         assertTrue(result is RemoteMediator.MediatorResult.Error)
-        verify(localArticleSource).clearCategory(category)
         verify(remoteSource).getArticleForCategory(1, config.initialLoadSize, category)
+        verify(localArticleSource, never()).clearCategory(category)
         verify(localArticleSource, never()).insertArticles(listOf(articleModel))
     }
 
@@ -91,9 +93,9 @@ class ArticlesRemoteMediatorTest {
 
     @Test
     fun `Failed append`() = runBlockingTest {
-        whenever(remoteSource.getArticleForCategory(2, config.pageSize, category))
+        whenever(remoteSource.getArticleForCategory(3, config.pageSize, category))
             .thenReturn(Outcome.Error(noInternet))
-        whenever(localArticleSource.getPageForCategory(category, config.pageSize))
+        whenever(pageSource.getPageForCategory(category))
             .thenReturn(2)
 
         val result = remoteMediator.load(
@@ -102,17 +104,17 @@ class ArticlesRemoteMediatorTest {
         )
 
         assertTrue(result is RemoteMediator.MediatorResult.Error)
-        verify(localArticleSource).getPageForCategory(category, config.pageSize)
+        verify(pageSource).getPageForCategory(category)
         verify(localArticleSource, never()).clearCategory(category)
-        verify(remoteSource).getArticleForCategory(2, config.pageSize, category)
+        verify(remoteSource).getArticleForCategory(3, config.pageSize, category)
         verify(localArticleSource, never()).insertArticles(listOf(articleModel))
     }
 
     @Test
     fun `Successful append`() = runBlockingTest {
-        whenever(remoteSource.getArticleForCategory(2, config.pageSize, category))
+        whenever(remoteSource.getArticleForCategory(3, config.pageSize, category))
             .thenReturn(Outcome.Success(listOf(articleModel)))
-        whenever(localArticleSource.getPageForCategory(category, config.pageSize))
+        whenever(pageSource.getPageForCategory(category))
             .thenReturn(2)
 
         val result = remoteMediator.load(
@@ -121,9 +123,9 @@ class ArticlesRemoteMediatorTest {
         )
 
         assertTrue(result is RemoteMediator.MediatorResult.Success)
-        verify(localArticleSource).getPageForCategory(category, config.pageSize)
+        verify(pageSource).getPageForCategory(category)
         verify(localArticleSource, never()).clearCategory(category)
-        verify(remoteSource).getArticleForCategory(2, config.pageSize, category)
+        verify(remoteSource).getArticleForCategory(3, config.pageSize, category)
         verify(localArticleSource).insertArticles(listOf(articleModel))
     }
 }

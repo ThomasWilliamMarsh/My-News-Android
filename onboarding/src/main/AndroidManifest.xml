@@ -14,6 +14,7 @@
 
     <application>
         <activity
-                android:name=".ui.OnBoardingActivity" android:theme="@style/MyNews.DayNight.Onboarding" />
+                android:name=".ui.OnBoardingActivity"
+                android:theme="@style/MyNews.DayNight.Onboarding" />
     </application>
 </manifest>

@@ -10,7 +10,7 @@ import info.tommarsh.mynews.core.article.data.paging.ArticlesRemoteMediator
 import info.tommarsh.mynews.core.article.data.paging.SearchPagingSource
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
-import info.tommarsh.mynews.core.di.NetworkModule.STANDARD_PAGE_SIZE
+import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
@@ -18,12 +18,17 @@ import javax.inject.Inject
 class ArticleDataRepository
 @Inject internal constructor(
     private val local: ArticlesLocalDataStore,
-    private val remote: ArticlesRemoteDataStore) : ArticleRepository {
+    private val remote: ArticlesRemoteDataStore,
+    private val paging: PagingLocalDataStore
+) : ArticleRepository {
 
-    override fun getArticlesForCategory(category: String, pageSize: Int): Flow<PagingData<ArticleModel>> {
+    override fun getArticlesForCategory(
+        category: String,
+        pageSize: Int
+    ): Flow<PagingData<ArticleModel>> {
         return Pager(
-            config = PagingConfig(pageSize = pageSize, initialLoadSize = pageSize * 3, prefetchDistance = pageSize * 3),
-            remoteMediator = ArticlesRemoteMediator(category, remote, local)
+            config = PagingConfig(pageSize = pageSize, initialLoadSize = pageSize),
+            remoteMediator = ArticlesRemoteMediator(category, remote, local, paging)
         ) { local.getArticlesForCategory(category) }.flow.map { page ->
             page.map { article -> article.toDomainModel() }
         }
@@ -31,7 +36,7 @@ class ArticleDataRepository
 
     override fun searchArticles(query: String, pageSize: Int): Flow<PagingData<ArticleModel>> {
         return Pager(
-            config = PagingConfig(pageSize),
+            config = PagingConfig(pageSize, initialLoadSize = pageSize),
             pagingSourceFactory = { SearchPagingSource(query, remote) }
         ).flow
     }

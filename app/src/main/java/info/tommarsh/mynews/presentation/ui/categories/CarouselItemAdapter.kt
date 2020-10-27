@@ -18,7 +18,7 @@ class CarouselItemAdapter : PagingDataAdapter<ArticleViewModel, CarouselItemView
     }
 
     override fun onBindViewHolder(holder: CarouselItemViewHolder, position: Int) {
-        holder.bind(getItem(position)!!)
+        getItem(position)?.let { holder.bind(it) }
     }
 
     companion object {

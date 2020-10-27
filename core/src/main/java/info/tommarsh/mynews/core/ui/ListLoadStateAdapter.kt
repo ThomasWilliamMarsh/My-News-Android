@@ -9,14 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.core.R
 import info.tommarsh.core.databinding.ItemLoadStateBinding
 
-class ListLoadStateAdapter(private val onRetry: () -> Unit) : LoadStateAdapter<LoadStateViewHolder>() {
+class ListLoadStateAdapter(private val onRetry: () -> Unit) :
+    LoadStateAdapter<LoadStateViewHolder>() {
 
     override fun onBindViewHolder(holder: LoadStateViewHolder, loadState: LoadState) {
         holder.bind(loadState)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, loadState: LoadState): LoadStateViewHolder {
-        val binding = ItemLoadStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        val binding =
+            ItemLoadStateBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return LoadStateViewHolder(binding, onRetry)
     }
 

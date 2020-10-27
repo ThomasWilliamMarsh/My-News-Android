@@ -1,7 +1,6 @@
 package info.tommarsh.mynews.presentation.model
 
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
-import info.tommarsh.mynews.core.category.domain.CategoryModel
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel
 

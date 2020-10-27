@@ -1,20 +1,18 @@
 package info.tommarsh.mynews.presentation.ui.categories
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
 import androidx.paging.PagingData
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
-import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.util.TimeHelper
-import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.presentation.model.MockModelProvider.articleModel
-import info.tommarsh.mynews.presentation.model.MockModelProvider.articleViewModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.footballCategoryModel
 import info.tommarsh.mynews.presentation.model.MockModelProvider.footballCategoryViewModel
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.flow.flowOn
@@ -47,18 +45,12 @@ class CategoriesViewModelTest {
     private val categoryRepository = mock<CategoryRepository> {
         onBlocking { getSelectedCategories() }.thenReturn(flowOf(listOf(footballCategoryModel)))
     }
-    private val dispatcherProvider = mock<DispatcherProvider> {
-        on { work() }.thenReturn(testCoroutineDispatcher)
-        on { main() }.thenReturn(testCoroutineDispatcher)
-    }
-    private val timeHelper = mock<TimeHelper>()
 
-    private val observer = mock<Observer<List<CategoryViewModel>>>()
+    private val timeHelper = mock<TimeHelper>()
 
     private val viewModel = CategoriesViewModel(
         articleRepository,
         categoryRepository,
-        dispatcherProvider,
         timeHelper
     )
 
@@ -75,12 +67,16 @@ class CategoriesViewModelTest {
     }
 
     @Test
-    fun `Get selected categories from live data`() {
-        viewModel.selectedCategories.observeForever(observer)
+    fun `Get selected categories from live data`() = runBlockingTest {
 
-        verify(observer).onChanged(listOf(footballCategoryViewModel))
+        val flow = viewModel.selectedCategories
+            .flowOn(testCoroutineDispatcher)
 
-        viewModel.selectedCategories.removeObserver(observer)
+        flow.collect { cats ->
+            assertEquals(cats, listOf(footballCategoryViewModel))
+        }
+
+        verify(categoryRepository).getSelectedCategories()
     }
 
     @Test

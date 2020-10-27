@@ -1,6 +1,5 @@
 package info.tommarsh.mynews.core.di
 
-import androidx.paging.PagingConfig
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import dagger.Module
 import dagger.Provides
