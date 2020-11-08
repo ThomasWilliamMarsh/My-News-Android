@@ -14,14 +14,13 @@
             android:supportsRtl="true"
             android:theme="@style/MyNews.DayNight"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="info.tommarsh.mynews.presentation.ui.SplashActivity">
+        <activity android:name="info.tommarsh.mynews.presentation.ui.ArticlesActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="info.tommarsh.mynews.presentation.ui.ArticlesActivity"></activity>
 
         <!-- Using our own WorkManagerFactory for constructor injection-->
         <provider

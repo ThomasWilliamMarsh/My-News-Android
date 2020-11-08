@@ -2,26 +2,32 @@ package info.tommarsh.mynews.presentation.ui.videos
 
 import android.os.Bundle
 import android.view.*
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
-import info.tommarsh.mynews.presentation.ui.ArticleFragment
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentVideosBinding
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
-class VideosFragment : ArticleFragment() {
+class VideosFragment : Fragment() {
 
     private lateinit var binding: FragmentVideosBinding
 
     private val adapter = VideosAdapter()
 
     private val viewModel by viewModels<VideosViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -55,6 +61,13 @@ class VideosFragment : ArticleFragment() {
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         super.onCreateOptionsMenu(menu, inflater)
         inflater.inflate(R.menu.videos_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when (item.itemId) {
+            R.id.action_search -> findNavController().navigate(R.id.navigation_search)
+        }
+        return true
     }
 
     private fun setUpAdapter(): ConcatAdapter {
