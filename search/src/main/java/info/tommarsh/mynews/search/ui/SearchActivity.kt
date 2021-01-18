@@ -14,7 +14,6 @@ import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.service
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import info.tommarsh.search.databinding.ActivitySearchBinding
-import kotlinx.android.synthetic.main.activity_search.*
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -33,7 +32,7 @@ class SearchActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setSupportActionBar(search_toolbar)
+        setSupportActionBar(binding.searchToolbar)
         setUpRecyclerView()
         setUpSearchView()
         setUpRetryButton()

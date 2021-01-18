@@ -3,7 +3,7 @@ package info.tommarsh.mynews.core.di
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import info.tommarsh.mynews.core.article.data.ArticleDataRepository
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.category.data.CategoryDataRepository
@@ -14,7 +14,7 @@ import info.tommarsh.mynews.core.video.data.VideoDataRepository
 import info.tommarsh.mynews.core.video.data.VideoRepository
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 abstract class RepositoryModule {
     @Binds
     abstract fun provideArticleRepository(repository: ArticleDataRepository): ArticleRepository

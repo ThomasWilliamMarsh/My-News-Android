@@ -4,7 +4,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import info.tommarsh.core.BuildConfig
 import info.tommarsh.mynews.core.article.data.remote.source.ArticleApiService
 import info.tommarsh.mynews.core.util.NewsApiInterceptor
@@ -24,7 +24,7 @@ annotation class NewsClient
 annotation class YoutubeClient
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object NetworkModule {
 
     @NewsClient

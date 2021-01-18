@@ -8,6 +8,7 @@ import info.tommarsh.mynews.onboarding.di.modules.OnBoardingModule
 import info.tommarsh.mynews.onboarding.ui.OnBoardingActivity
 import info.tommarsh.mynews.onboarding.ui.OnBoardingViewModel
 import info.tommarsh.mynews.presentation.di.OnBoardingDependencies
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 @Component(
     dependencies = [OnBoardingDependencies::class],
@@ -25,5 +26,6 @@ internal interface OnBoardingComponent {
 
     fun inject(onBoardingActivity: OnBoardingActivity)
 
+    @ExperimentalCoroutinesApi
     val viewModel: OnBoardingViewModel
 }

@@ -3,12 +3,12 @@ package info.tommarsh.mynews.core.di
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ApplicationComponent
+import dagger.hilt.components.SingletonComponent
 import info.tommarsh.mynews.core.util.coroutines.CoroutineDispatcherProvider
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 
 @Module
-@InstallIn(ApplicationComponent::class)
+@InstallIn(SingletonComponent::class)
 object CoreModule {
 
     @Provides

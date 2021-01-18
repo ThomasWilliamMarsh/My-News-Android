@@ -1,9 +1,6 @@
 package info.tommarsh.mynews.core.article.data
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
-import androidx.paging.PagingData
-import androidx.paging.map
+import androidx.paging.*
 import info.tommarsh.mynews.core.article.data.local.model.toDomainModel
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStore
 import info.tommarsh.mynews.core.article.data.paging.ArticlesRemoteMediator
@@ -15,6 +12,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
+@OptIn(ExperimentalPagingApi::class)
 class ArticleDataRepository
 @Inject internal constructor(
     private val local: ArticlesLocalDataStore,

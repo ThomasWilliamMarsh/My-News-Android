@@ -3,7 +3,6 @@ package info.tommarsh.mynews.categories.ui.adapter.viewholder
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.categories.databinding.ItemCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
-import kotlinx.android.synthetic.main.item_category_choice.view.*
 
 class CategoryChoiceViewholder(
     private val binding: ItemCategoryChoiceBinding,
@@ -21,7 +20,7 @@ class CategoryChoiceViewholder(
             )
         }
         binding.root.setOnClickListener {
-            category_choice_checkbox.isChecked = !category_choice_checkbox.isChecked
+            binding.categoryChoiceCheckbox.isChecked = !binding.categoryChoiceCheckbox.isChecked
         }
     }
 }
