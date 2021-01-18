@@ -43,7 +43,7 @@ ext {
     navigationVersion = "2.3.1"
     workmanagerVersion = "2.3.4"
     playCoreVersion = "1.7.0"
-    pagingVersion = "3.0.0-alpha11"
+    pagingVersion = "3.0.0-alpha06"
     fragment = "1.2.5"
 
     //Firebase
@@ -67,7 +67,7 @@ ext {
     //ArchComponents
     lifecycleVersion = "2.2.0-rc01"
     lifecycleTestingVersion = "2.1.0"
-    roomVersion = "2.3.0-alpha02"
+    roomVersion = "2.3.0-alpha04"
 
     //AirBnB
     lottieVersion = "3.4.0"

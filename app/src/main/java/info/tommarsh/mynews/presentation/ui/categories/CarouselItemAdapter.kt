@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
+import info.tommarsh.mynews.presentation.setClickListenerFor
 import info.tommarsh.presentation.databinding.ItemCategoryArticleBinding
 
 class CarouselItemAdapter : PagingDataAdapter<ArticleViewModel, CarouselItemViewHolder>(DIFFER) {
@@ -35,5 +36,6 @@ class CarouselItemViewHolder(private val binding: ItemCategoryArticleBinding) :
         binding.categoryArticleImage.loadUrl(article.urlToImage)
         binding.categoryArticleName.text = article.title
         binding.categoryArticleUpdated.text = article.publishedAt
+        article.setClickListenerFor(binding.root)
     }
 }

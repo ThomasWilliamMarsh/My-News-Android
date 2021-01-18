@@ -48,6 +48,7 @@ class TopNewsAdapter :
             )
             else -> throw IllegalArgumentException("Invalid view type for Top News!")
         }
+
     }
 
     override fun getItemViewType(position: Int): Int {

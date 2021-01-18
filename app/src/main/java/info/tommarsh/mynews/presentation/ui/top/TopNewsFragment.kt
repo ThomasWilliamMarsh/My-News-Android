@@ -15,6 +15,8 @@ import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class TopNewsFragment : Fragment() {
@@ -34,7 +36,7 @@ class TopNewsFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentTopNewsBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -70,14 +72,18 @@ class TopNewsFragment : Fragment() {
     private fun setUpAdapter(): ConcatAdapter {
         return adapter.withLoadStateFooter(
             footer = ListLoadStateAdapter { adapter.retry() }
-        ).also {
-            adapter.addLoadStateListener { loadState ->
+        ).also { setUpLoadStateListener() }
+    }
+
+    private fun setUpLoadStateListener() = lifecycleScope.launch {
+        adapter.loadStateFlow
+            .distinctUntilChangedBy { it.mediator?.refresh }
+            .collect { loadState ->
                 binding.topNewsRefresher.isRefreshing =
-                    loadState.source.refresh is LoadState.Loading
+                    loadState.mediator?.refresh is LoadState.Loading
 
                 binding.topNewsRecyclerView.isVisible =
-                    loadState.source.refresh is LoadState.NotLoading
+                    loadState.mediator?.refresh is LoadState.NotLoading
             }
-        }
     }
 }

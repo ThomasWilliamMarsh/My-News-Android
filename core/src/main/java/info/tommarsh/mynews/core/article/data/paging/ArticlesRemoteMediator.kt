@@ -4,9 +4,11 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
+import androidx.room.withTransaction
 import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStore
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
+import info.tommarsh.mynews.core.database.NewsDatabase
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 
@@ -15,7 +17,8 @@ internal class ArticlesRemoteMediator constructor(
     private val category: String,
     private val remoteArticleSource: ArticlesRemoteDataStore,
     private val localArticleSource: ArticlesLocalDataStore,
-    private val pagingSource: PagingLocalDataStore
+    private val pagingSource: PagingLocalDataStore,
+    private val db: NewsDatabase
 ) : RemoteMediator<Int, Article>() {
 
     override suspend fun load(
@@ -36,17 +39,16 @@ internal class ArticlesRemoteMediator constructor(
         return when (val outcome =
             remoteArticleSource.getArticleForCategory(page, pageSize, category)) {
             is Outcome.Success -> {
-                val articles = outcome.data.also { articles ->
-                    articles.forEach { it.category = category }
-                }
+                val articles = outcome.data.onEach { it.category = category }
                 val isEndOfList = articles.size < pageSize
 
-                if (loadType == LoadType.REFRESH) {
-                    localArticleSource.clearCategory(category)
+                db.withTransaction {
+                    if (loadType == LoadType.REFRESH) {
+                        localArticleSource.clearCategory(category)
+                    }
+                    pagingSource.setPageForCategory(category, page)
+                    localArticleSource.insertArticles(articles)
                 }
-
-                pagingSource.setPageForCategory(category, page)
-                localArticleSource.insertArticles(articles)
 
                 MediatorResult.Success(isEndOfList)
             }

@@ -17,7 +17,7 @@ object LocalModule {
 
     @Provides
     @Singleton
-    internal fun provideDb(@ApplicationContext app: Context) =
+    internal fun provideDb(@ApplicationContext app: Context) : NewsDatabase =
         Room.databaseBuilder(app, NewsDatabase::class.java, "articles-db")
             .createFromAsset("database/prepackaged.db")
             .build()
