@@ -33,7 +33,7 @@ class VideosFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentVideosBinding.inflate(layoutInflater, container, false)
         return binding.root
     }

@@ -15,7 +15,9 @@ import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -50,7 +52,7 @@ class TopNewsFragment : Fragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         lifecycleScope.launchWhenCreated {
-            viewModel.articles.collect { data ->
+            viewModel.articles.collectLatest { data ->
                 adapter.submitData(data)
             }
         }
@@ -72,18 +74,23 @@ class TopNewsFragment : Fragment() {
     private fun setUpAdapter(): ConcatAdapter {
         return adapter.withLoadStateFooter(
             footer = ListLoadStateAdapter { adapter.retry() }
-        ).also { setUpLoadStateListener() }
+        ).also {
+            adapter.addLoadStateListener { loadState ->
+                binding.topNewsRefresher.isRefreshing =
+                    loadState.source.refresh is LoadState.Loading
+
+                binding.topNewsRecyclerView.isVisible =
+                    loadState.source.refresh is LoadState.NotLoading
+            }
+            setUpLoadStateListener()
+        }
     }
 
     private fun setUpLoadStateListener() = lifecycleScope.launch {
         adapter.loadStateFlow
-            .distinctUntilChangedBy { it.mediator?.refresh }
-            .collect { loadState ->
-                binding.topNewsRefresher.isRefreshing =
-                    loadState.mediator?.refresh is LoadState.Loading
+            .distinctUntilChangedBy { it.refresh }
+            .filter { it.refresh is LoadState.NotLoading }
+            .collect { binding.topNewsRecyclerView.scrollToPosition(0) }
 
-                binding.topNewsRecyclerView.isVisible =
-                    loadState.mediator?.refresh is LoadState.NotLoading
-            }
     }
 }
