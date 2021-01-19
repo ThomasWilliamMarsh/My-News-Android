@@ -4,13 +4,10 @@ import androidx.paging.PagingSource
 import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.model.toDataModel
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
-import info.tommarsh.mynews.core.database.NewsDatabase
 import javax.inject.Inject
 
 internal class ArticlesLocalDataStore
-@Inject constructor(
-    val db: NewsDatabase,
-    private val articlesDao: ArticlesDao) {
+@Inject constructor(private val articlesDao: ArticlesDao) {
 
     fun getArticlesForCategory(category: String): PagingSource<Int, Article> {
         return articlesDao.getArticlesForCategory(category)

@@ -7,6 +7,7 @@ import info.tommarsh.mynews.core.article.data.paging.ArticlesRemoteMediator
 import info.tommarsh.mynews.core.article.data.paging.SearchPagingSource
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
+import info.tommarsh.mynews.core.database.TransactionRunner
 import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
@@ -17,7 +18,8 @@ class ArticleDataRepository
 @Inject internal constructor(
     private val local: ArticlesLocalDataStore,
     private val remote: ArticlesRemoteDataStore,
-    private val paging: PagingLocalDataStore
+    private val paging: PagingLocalDataStore,
+    private val transactionRunner: TransactionRunner
 ) : ArticleRepository {
 
     override fun getArticlesForCategory(
@@ -31,7 +33,7 @@ class ArticleDataRepository
                 initialLoadSize = pageSize,
                 enablePlaceholders = false
             ),
-            remoteMediator = ArticlesRemoteMediator(category, remote, local, paging, local.db),
+            remoteMediator = ArticlesRemoteMediator(category, remote, local, paging, transactionRunner),
             pagingSourceFactory = pagingFactory
         ).flow.map { page ->
             page.map { article -> article.toDomainModel() }

@@ -10,6 +10,7 @@ import info.tommarsh.mynews.core.MockProvider.noInternet
 import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStore
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
+import info.tommarsh.mynews.core.database.TransactionRunner
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 import junit.framework.Assert.assertTrue
@@ -23,6 +24,7 @@ class ArticlesRemoteMediatorTest {
     private val remoteSource = mock<ArticlesRemoteDataStore>()
     private val localArticleSource = mock<ArticlesLocalDataStore>()
     private val pageSource = mock<PagingLocalDataStore>()
+    private val transactionRunner = SyncTransactionRunner()
 
     private val config = PagingConfig(pageSize = 20)
     private val pagingState = PagingState<Int, Article>(
@@ -33,7 +35,7 @@ class ArticlesRemoteMediatorTest {
     )
 
     private val remoteMediator =
-        ArticlesRemoteMediator(category, remoteSource, localArticleSource, pageSource)
+        ArticlesRemoteMediator(category, remoteSource, localArticleSource, pageSource, transactionRunner)
 
     @Test
     fun `Notify end of pagination`() = runBlockingTest {

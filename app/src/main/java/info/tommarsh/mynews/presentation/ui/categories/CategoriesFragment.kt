@@ -13,7 +13,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentCategoriesBinding
 import kotlinx.coroutines.Job
-import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
 class CategoriesFragment : Fragment() {
@@ -35,7 +35,7 @@ class CategoriesFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCategoriesBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -55,7 +55,7 @@ class CategoriesFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         selectedCategoriesJob = lifecycleScope.launchWhenResumed {
-            viewModel.selectedCategories.collect { categories ->
+            viewModel.selectedCategories.collectLatest { categories ->
                 binding.addCategories.root.isVisible = categories.isEmpty()
                 binding.myNewsRecyclerView.isVisible = categories.isNotEmpty()
                 adapter.submitList(categories)

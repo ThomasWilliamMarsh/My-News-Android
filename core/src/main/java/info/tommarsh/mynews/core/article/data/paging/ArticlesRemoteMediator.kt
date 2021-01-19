@@ -4,11 +4,10 @@ import androidx.paging.ExperimentalPagingApi
 import androidx.paging.LoadType
 import androidx.paging.PagingState
 import androidx.paging.RemoteMediator
-import androidx.room.withTransaction
 import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStore
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
-import info.tommarsh.mynews.core.database.NewsDatabase
+import info.tommarsh.mynews.core.database.TransactionRunner
 import info.tommarsh.mynews.core.model.Outcome
 import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 
@@ -18,7 +17,7 @@ internal class ArticlesRemoteMediator constructor(
     private val remoteArticleSource: ArticlesRemoteDataStore,
     private val localArticleSource: ArticlesLocalDataStore,
     private val pagingSource: PagingLocalDataStore,
-    private val db: NewsDatabase
+    private val transactionRunner: TransactionRunner
 ) : RemoteMediator<Int, Article>() {
 
     override suspend fun load(
@@ -42,7 +41,7 @@ internal class ArticlesRemoteMediator constructor(
                 val articles = outcome.data.onEach { it.category = category }
                 val isEndOfList = articles.size < pageSize
 
-                db.withTransaction {
+                transactionRunner.runTransaction {
                     if (loadType == LoadType.REFRESH) {
                         localArticleSource.clearCategory(category)
                     }

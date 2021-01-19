@@ -15,6 +15,7 @@ import info.tommarsh.presentation.databinding.ItemCarouselBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.collectLatest
 
 internal class CarouselAdapter(
     private val lifecycle: Lifecycle,
@@ -60,7 +61,7 @@ internal class CarouselViewHolder(
         binding.carouselItems.adapter =
             adapter!!.withLoadStateFooter(footer = ListLoadStateAdapter { adapter?.retry() })
         job = lifecycle.coroutineScope.launchWhenCreated {
-            pagingFactory(carousel.id).collect { pagingData ->
+            pagingFactory(carousel.id).collectLatest { pagingData ->
                 adapter!!.submitData(pagingData)
             }
         }
