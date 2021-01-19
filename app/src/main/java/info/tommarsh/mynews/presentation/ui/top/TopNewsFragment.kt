@@ -17,7 +17,7 @@ import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -74,23 +74,21 @@ class TopNewsFragment : Fragment() {
     private fun setUpAdapter(): ConcatAdapter {
         return adapter.withLoadStateFooter(
             footer = ListLoadStateAdapter { adapter.retry() }
-        ).also {
-            adapter.addLoadStateListener { loadState ->
-                binding.topNewsRefresher.isRefreshing =
-                    loadState.source.refresh is LoadState.Loading
-
-                binding.topNewsRecyclerView.isVisible =
-                    loadState.source.refresh is LoadState.NotLoading
-            }
-            setUpLoadStateListener()
-        }
+        ).also { setUpLoadStateListener() }
     }
 
     private fun setUpLoadStateListener() = lifecycleScope.launch {
         adapter.loadStateFlow
             .distinctUntilChangedBy { it.refresh }
-            .filter { it.refresh is LoadState.NotLoading }
-            .collect { binding.topNewsRecyclerView.scrollToPosition(0) }
+            .map { it.refresh }
+            .collect { loadState ->
+                binding.topNewsRecyclerView.isVisible = loadState is LoadState.NotLoading
+                binding.topNewsRefresher.isRefreshing = loadState is LoadState.Loading
+
+                if (loadState is LoadState.NotLoading) {
+                    binding.topNewsRecyclerView.scrollToPosition(0)
+                }
+            }
 
     }
 }

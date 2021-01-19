@@ -1,15 +1,17 @@
 package info.tommarsh.mynews.presentation.ui.videos
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.paging.map
+import dagger.hilt.android.lifecycle.HiltViewModel
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.video.data.VideoRepository
 import info.tommarsh.mynews.presentation.model.toViewModel
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
+@HiltViewModel
 class VideosViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     repository: VideoRepository,
     private val timeHelper: TimeHelper
 ) : ViewModel() {

@@ -1,9 +1,9 @@
 package info.tommarsh.mynews.presentation.ui.categories
 
-import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.ViewModel
 import androidx.paging.PagingData
 import androidx.paging.map
+import dagger.hilt.android.lifecycle.HiltViewModel
 import info.tommarsh.mynews.categories.model.toViewModel
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.category.data.CategoryRepository
@@ -13,10 +13,12 @@ import info.tommarsh.mynews.presentation.model.toViewModel
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
 @OptIn(FlowPreview::class)
+@HiltViewModel
 class CategoriesViewModel
-@ViewModelInject constructor(
+@Inject constructor(
     private val articlesRepository: ArticleRepository,
     private val categoryRepository: CategoryRepository,
     private val timeHelper: TimeHelper
