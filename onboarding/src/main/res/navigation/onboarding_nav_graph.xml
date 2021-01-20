@@ -27,5 +27,5 @@
                 android:id="@+id/action_introductionFragment_to_main_nav_graph"
                 app:destination="@id/main_nav_graph" />
     </fragment>
-    <include app:graph="@navigation/main_graph" />
+    <include app:graph="@navigation/app_graph" />
 </navigation>

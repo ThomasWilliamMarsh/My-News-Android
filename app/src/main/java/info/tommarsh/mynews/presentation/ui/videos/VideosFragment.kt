@@ -42,7 +42,7 @@ class VideosFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val concatAdapter = setUpAdapter()
         binding.videosRecyclerView.adapter = concatAdapter
-        binding.videosRecyclerView.layoutManager = setLayoutManager(concatAdapter, 2)
+        binding.videosRecyclerView.layoutManager = setLayoutManager(concatAdapter)
         binding.refreshVideo.setOnRefreshListener {
             adapter.refresh()
         }
@@ -65,7 +65,7 @@ class VideosFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> findNavController().navigate(R.id.navigation_search)
+            R.id.action_search -> findNavController().navigate(R.id.action_navigation_videos_to_searchActivity)
         }
         return true
     }
@@ -81,8 +81,8 @@ class VideosFragment : Fragment() {
         }
     }
 
-    private fun setLayoutManager(adapter: ConcatAdapter, spanCount: Int) =
-        GridLayoutManager(context, spanCount).apply {
+    private fun setLayoutManager(adapter: ConcatAdapter) =
+        GridLayoutManager(context, VIDEOS_SPAN_COUNT).apply {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     return when (adapter.getItemViewType(position)) {
@@ -92,4 +92,8 @@ class VideosFragment : Fragment() {
                 }
             }
         }
+
+    companion object {
+        private const val VIDEOS_SPAN_COUNT = 2
+    }
 }

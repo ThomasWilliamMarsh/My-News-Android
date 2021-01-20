@@ -65,7 +65,7 @@ class TopNewsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> findNavController().navigate(R.id.navigation_search)
+            R.id.action_search -> findNavController().navigate(R.id.action_navigation_top_news_to_searchActivity)
         }
         return true
     }

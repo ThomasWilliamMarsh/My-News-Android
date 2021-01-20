@@ -14,7 +14,7 @@ fun ArticleViewModel.setClickListenerFor(view: View) {
             "text" to content,
             "url" to urlToImage
         )
-        it.findNavController().navigate(R.id.navigation_article, bundle)
+        it.findNavController().navigate(R.id.articleActivity, bundle)
     }
 }
 

@@ -15,7 +15,7 @@ import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.adapter.ChoiceAdapter
 import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
-import info.tommarsh.mynews.presentation.ui.ArticlesActivity
+import info.tommarsh.mynews.presentation.ui.HomeActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
@@ -64,7 +64,7 @@ internal class CountryFragment : Fragment() {
     }
 
     private fun finishedOnBoarding() {
-        startActivity(requireContext().newTaskIntent<ArticlesActivity>())
+        startActivity(requireContext().newTaskIntent<HomeActivity>())
     }
 
     private fun playAnimation() {

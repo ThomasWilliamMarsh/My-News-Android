@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/main_nav_graph"
+        app:startDestination="@id/navigation_top_news">
+
+    <fragment
+            android:id="@+id/navigation_top_news"
+            android:name="info.tommarsh.mynews.presentation.ui.top.TopNewsFragment"
+            android:label="@string/top_news"
+            tools:layout="@layout/fragment_top_news">
+        <action
+                android:id="@+id/action_navigation_top_news_to_searchActivity"
+                app:destination="@id/searchActivity" />
+        <action
+                android:id="@+id/action_navigation_top_news_to_articleActivity"
+                app:destination="@id/articleActivity" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/navigation_my_news"
+            android:name="info.tommarsh.mynews.presentation.ui.categories.CategoriesFragment"
+            android:label="@string/my_news"
+            tools:layout="@layout/fragment_categories">
+        <action
+                android:id="@+id/action_navigation_my_news_to_articleActivity"
+                app:destination="@id/articleActivity" />
+        <action
+                android:id="@+id/action_navigation_my_news_to_searchActivity"
+                app:destination="@id/searchActivity" />
+        <action
+                android:id="@+id/action_navigation_my_news_to_categoryChoiceActivity"
+                app:destination="@id/categoryChoiceActivity" />
+    </fragment>
+
+    <fragment
+            android:id="@+id/navigation_videos"
+            android:name="info.tommarsh.mynews.presentation.ui.videos.VideosFragment"
+            android:label="@string/videos"
+            tools:layout="@layout/fragment_videos">
+        <action
+                android:id="@+id/action_navigation_videos_to_articleActivity"
+                app:destination="@id/articleActivity" />
+        <action
+                android:id="@+id/action_navigation_videos_to_searchActivity"
+                app:destination="@id/searchActivity" />
+    </fragment>
+    <activity
+            android:id="@+id/searchActivity"
+            android:name="info.tommarsh.mynews.search.ui.SearchActivity"
+            android:label="activity_search"
+            tools:layout="@layout/activity_search" />
+    <activity
+            android:id="@+id/articleActivity"
+            android:name="info.tommarsh.mynews.article.ui.ArticleActivity"
+            app:moduleName="article"
+            android:label="ArticleActivity" />
+    <activity
+            android:id="@+id/categoryChoiceActivity"
+            android:name="info.tommarsh.mynews.categories.ui.CategoryChoiceActivity"
+            android:label="activity_category_choice"
+            tools:layout="@layout/activity_category_choice" />
+    <activity
+            android:id="@+id/onBoardingActivity"
+            android:name="info.tommarsh.mynews.onboarding.ui.OnBoardingActivity"
+            app:moduleName="onboarding"
+            android:label="OnBoardingActivity" />
+
+</navigation>

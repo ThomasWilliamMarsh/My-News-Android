@@ -44,7 +44,7 @@ class CategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         binding.addCategories.addCategoriesButton.setOnClickListener(
             Navigation.createNavigateOnClickListener(
-                R.id.navigation_choice
+                R.id.action_navigation_my_news_to_categoryChoiceActivity
             )
         )
         adapter = CarouselAdapter(lifecycle, viewModel::getArticlesForCategory)
@@ -75,8 +75,8 @@ class CategoriesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> findNavController().navigate(R.id.navigation_search)
-            R.id.action_edit -> findNavController().navigate(R.id.navigation_choice)
+            R.id.action_search -> findNavController().navigate(R.id.action_navigation_my_news_to_searchActivity)
+            R.id.action_edit -> findNavController().navigate(R.id.action_navigation_my_news_to_categoryChoiceActivity)
         }
         return true
     }
