@@ -17,10 +17,14 @@ import javax.inject.Inject
 class HomeActivity : AppCompatActivity() {
 
     @Inject
+    lateinit var fragmentFactory: HomeFragmentFactory
+
+    @Inject
     lateinit var dispatcher: ClickDispatcher
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportFragmentManager.fragmentFactory = fragmentFactory
         setContentView(R.layout.activity_home)
 
         listenToClickEvents()

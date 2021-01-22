@@ -10,7 +10,6 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickDispatcher
@@ -22,13 +21,10 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment : Fragment(), NavController.OnDestinationChangedListener {
-
-    @Inject
-    lateinit var dispatcher: ClickDispatcher
-
-    @Inject
-    lateinit var preferences: PreferencesRepository
+class HomeFragment(
+    private val dispatcher: ClickDispatcher,
+    private val preferences: PreferencesRepository
+) : Fragment(), NavController.OnDestinationChangedListener {
 
     private lateinit var binding: FragmentHomeBinding
 

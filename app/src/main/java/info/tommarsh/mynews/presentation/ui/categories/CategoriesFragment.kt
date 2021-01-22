@@ -18,10 +18,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CategoriesFragment : Fragment() {
-
-    @Inject
-    lateinit var dispatcher: ClickDispatcher
+class CategoriesFragment(
+    private val dispatcher: ClickDispatcher
+) : Fragment() {
 
     lateinit var binding: FragmentCategoriesBinding
 

@@ -23,10 +23,9 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class TopNewsFragment : Fragment() {
-
-    @Inject
-    lateinit var disptacher: ClickDispatcher
+class TopNewsFragment(
+    private val dispatcher: ClickDispatcher
+) : Fragment() {
 
     private lateinit var binding: FragmentTopNewsBinding
 
@@ -70,7 +69,7 @@ class TopNewsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> lifecycleScope.launch { disptacher.dispatch(ClickEvent.Search) }
+            R.id.action_search -> lifecycleScope.launch { dispatcher.dispatch(ClickEvent.Search) }
         }
         return true
     }

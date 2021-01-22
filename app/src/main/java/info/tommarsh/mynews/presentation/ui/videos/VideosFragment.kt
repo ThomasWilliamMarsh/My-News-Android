@@ -19,10 +19,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class VideosFragment : Fragment() {
-
-    @Inject
-    lateinit var dispatcher: ClickDispatcher
+class VideosFragment(private val dispatcher: ClickDispatcher) : Fragment() {
 
     private lateinit var binding: FragmentVideosBinding
 
