@@ -49,7 +49,7 @@ dependencies {
     api 'com.google.android.material:material:' + rootProject.materialVersion
     api 'androidx.appcompat:appcompat:' + rootProject.appCompatVersion
     api 'androidx.cardview:cardview:' + rootProject.cardViewVersion
-    api 'androidx.fragment:fragment-ktx:' +  rootProject.fragment
+    api 'androidx.fragment:fragment-ktx:' + rootProject.fragment
     api 'androidx.recyclerview:recyclerview:' + rootProject.recyclerViewVersion
     api 'androidx.constraintlayout:constraintlayout:' + rootProject.constraintLayoutVersion
     api 'androidx.room:room-runtime:' + rootProject.roomVersion

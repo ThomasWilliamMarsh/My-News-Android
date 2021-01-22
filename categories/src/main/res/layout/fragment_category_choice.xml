@@ -2,33 +2,28 @@
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/search_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="info.tommarsh.mynews.search.ui.SearchActivity">
+        tools:context="info.tommarsh.mynews.categories.ui.CategoryChoiceFragment">
 
     <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:fitsSystemWindows="true"
+            app:elevation="@dimen/none">
 
         <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/search_toolbar"
+                android:id="@+id/activity_choice_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_scrollFlags="scroll|enterAlways">
-
-            <androidx.appcompat.widget.SearchView
-                    android:id="@+id/search_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
-
-        </com.google.android.material.appbar.MaterialToolbar>
+                android:layout_gravity="start"
+                android:gravity="start"
+                app:layout_scrollFlags="scroll|enterAlways"
+                app:title="@string/edit_my_news" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <ProgressBar
-            android:id="@+id/search_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
@@ -36,23 +31,12 @@
             android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/search_recycler_view"
+            android:id="@+id/activity_choice_recycler_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false"
             android:paddingBottom="@dimen/normal_padding"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
-
-    <Button
-            android:id="@+id/search_retry_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/retry"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

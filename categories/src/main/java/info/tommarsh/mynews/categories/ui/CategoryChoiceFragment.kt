@@ -2,40 +2,55 @@ package info.tommarsh.mynews.categories.ui
 
 
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.categories.databinding.ActivityCategoryChoiceBinding
+import info.tommarsh.categories.databinding.FragmentCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
 
 @AndroidEntryPoint
-class CategoryChoiceActivity : AppCompatActivity() {
+class CategoryChoiceFragment : Fragment() {
 
-    private val binding by lazy { ActivityCategoryChoiceBinding.inflate(layoutInflater) }
+    private lateinit var binding: FragmentCategoryChoiceBinding
 
     private val viewModel by viewModels<CategoryChoiceViewModel>()
 
     private val adapter = CategoryChoiceAdapter(::onCategorySelected)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentCategoryChoiceBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setUpViewModel()
         setUpUi()
     }
 
     private fun setUpUi() {
-        setSupportActionBar(binding.activityChoiceToolbar)
         binding.activityChoiceRecyclerView.adapter = adapter
-        binding.activityChoiceRecyclerView.addItemDecoration(DividerItemDecoration(this, VERTICAL))
+        binding.activityChoiceRecyclerView.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                VERTICAL
+            )
+        )
     }
 
     private fun setUpViewModel() {
-        viewModel.categories.observe(this, ::onCategories)
+        viewModel.categories.observe(viewLifecycleOwner, ::onCategories)
     }
 
     private fun onCategories(categories: List<CategoryViewModel>) {

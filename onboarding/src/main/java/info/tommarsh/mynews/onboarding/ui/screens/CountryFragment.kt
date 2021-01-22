@@ -32,7 +32,7 @@ internal class CountryFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCountryBinding.inflate(inflater, container, false)
         setUpRecyclerView()
         setUpNextButton()

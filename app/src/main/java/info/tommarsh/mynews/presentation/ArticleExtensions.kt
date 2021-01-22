@@ -4,7 +4,6 @@ import android.view.View
 import androidx.core.os.bundleOf
 import androidx.navigation.findNavController
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
-
 import info.tommarsh.presentation.R
 
 fun ArticleViewModel.setClickListenerFor(view: View) {

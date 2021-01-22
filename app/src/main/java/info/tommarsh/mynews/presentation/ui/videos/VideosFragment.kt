@@ -5,18 +5,24 @@ import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import info.tommarsh.mynews.core.navigator.ClickDispatcher
+import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentVideosBinding
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class VideosFragment : Fragment() {
+
+    @Inject
+    lateinit var dispatcher: ClickDispatcher
 
     private lateinit var binding: FragmentVideosBinding
 
@@ -65,7 +71,7 @@ class VideosFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> findNavController().navigate(R.id.action_navigation_videos_to_searchActivity)
+            R.id.action_search -> lifecycleScope.launch { dispatcher.dispatch(ClickEvent.Search) }
         }
         return true
     }

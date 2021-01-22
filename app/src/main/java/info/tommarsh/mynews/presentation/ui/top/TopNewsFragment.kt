@@ -6,10 +6,11 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
+import info.tommarsh.mynews.core.navigator.ClickDispatcher
+import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
@@ -19,9 +20,13 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class TopNewsFragment : Fragment() {
+
+    @Inject
+    lateinit var disptacher: ClickDispatcher
 
     private lateinit var binding: FragmentTopNewsBinding
 
@@ -65,7 +70,7 @@ class TopNewsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> findNavController().navigate(R.id.action_navigation_top_news_to_searchActivity)
+            R.id.action_search -> lifecycleScope.launch { disptacher.dispatch(ClickEvent.Search) }
         }
         return true
     }
@@ -89,6 +94,5 @@ class TopNewsFragment : Fragment() {
                     binding.topNewsRecyclerView.scrollToPosition(0)
                 }
             }
-
     }
 }

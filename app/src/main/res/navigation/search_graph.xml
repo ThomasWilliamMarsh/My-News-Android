@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/search_graph"
+        app:startDestination="@id/searchFragment">
+
+    <fragment
+            android:id="@+id/searchFragment"
+            android:name="info.tommarsh.mynews.search.ui.SearchFragment"
+            android:label="fragment_search"
+            tools:layout="@layout/fragment_search">
+        <action
+                android:id="@+id/action_searchFragment_to_articleActivity2"
+                app:destination="@id/articleActivity2" />
+    </fragment>
+    <activity
+            android:id="@+id/articleActivity2"
+            android:name="info.tommarsh.mynews.article.ui.ArticleActivity"
+            android:label="ArticleActivity"
+            app:moduleName="my-news-android.article" />
+</navigation>

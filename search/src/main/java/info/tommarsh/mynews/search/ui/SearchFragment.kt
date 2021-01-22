@@ -1,27 +1,27 @@
 package info.tommarsh.mynews.search.ui
 
-import android.app.SearchManager
-import android.content.Intent
 import android.os.Bundle
-import androidx.activity.viewModels
-import androidx.appcompat.app.AppCompatActivity
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
 import androidx.core.view.isVisible
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
-import info.tommarsh.mynews.core.util.service
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
-import info.tommarsh.search.databinding.ActivitySearchBinding
+import info.tommarsh.search.databinding.FragmentSearchBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SearchActivity : AppCompatActivity() {
+class SearchFragment : Fragment() {
 
-    private val binding by lazy { ActivitySearchBinding.inflate(layoutInflater) }
+    private lateinit var binding: FragmentSearchBinding
 
     private val adapter = SearchAdapter()
 
@@ -29,19 +29,20 @@ class SearchActivity : AppCompatActivity() {
 
     private val viewModel by viewModels<SearchViewModel>()
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(binding.root)
-        setSupportActionBar(binding.searchToolbar)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View {
+        binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setUpRecyclerView()
         setUpSearchView()
         setUpRetryButton()
-        onIntent(intent)
-    }
-
-    override fun onNewIntent(intent: Intent) {
-        super.onNewIntent(intent)
-        onIntent(intent)
     }
 
     private fun setUpRecyclerView() {
@@ -49,11 +50,12 @@ class SearchActivity : AppCompatActivity() {
     }
 
     private fun setUpSearchView() {
-        val searchManager = service<SearchManager>(SEARCH_SERVICE)
         binding.searchView.apply {
-            setSearchableInfo(searchManager.getSearchableInfo(componentName))
             isIconified = false
             setIconifiedByDefault(false)
+            setOnSearchClickListener {
+                onNewQuery(binding.searchView.query.toString())
+            }
         }
     }
 
@@ -75,14 +77,11 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
-    private fun onIntent(intent: Intent) {
-        if (Intent.ACTION_SEARCH == intent.action) {
-            val query = intent.getStringExtra(SearchManager.QUERY)
-            searchJob?.cancel()
-            searchJob = lifecycleScope.launch {
-                viewModel.searchArticles(query).collect { searchItems ->
-                    adapter.submitData(searchItems)
-                }
+    private fun onNewQuery(query: String) {
+        searchJob?.cancel()
+        searchJob = lifecycleScope.launch {
+            viewModel.searchArticles(query).collect { searchItems ->
+                adapter.submitData(searchItems)
             }
         }
     }

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/category_choice_graph"
+        app:startDestination="@id/categoryChoiceFragment">
+
+    <fragment
+            android:id="@+id/categoryChoiceFragment"
+            android:name="info.tommarsh.mynews.categories.ui.CategoryChoiceFragment"
+            android:label="fragment_category_choice"
+            tools:layout="@layout/fragment_category_choice" />
+</navigation>

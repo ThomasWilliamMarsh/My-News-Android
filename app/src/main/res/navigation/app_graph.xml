@@ -9,5 +9,32 @@
             android:id="@+id/homeFragment"
             android:name="info.tommarsh.mynews.presentation.ui.HomeFragment"
             android:label="HomeFragment"
-            tools:layout="@layout/fragment_home"/>
+            tools:layout="@layout/fragment_home">
+        <action
+                android:id="@+id/action_homeFragment_to_search_graph"
+                app:destination="@id/search_graph" />
+        <action
+                android:id="@+id/action_homeFragment_to_category_choice_graph"
+                app:destination="@id/category_choice_graph" />
+        <action
+                android:id="@+id/action_homeFragment_to_articleActivity"
+                app:destination="@id/articleActivity" />
+        <action
+                android:id="@+id/action_homeFragment_to_onBoardingActivity"
+                app:destination="@id/onBoardingActivity" />
+    </fragment>
+    <include app:graph="@navigation/search_graph" />
+    <include app:graph="@navigation/category_choice_graph" />
+
+    <activity
+            android:id="@+id/articleActivity"
+            android:name="info.tommarsh.mynews.article.ui.ArticleActivity"
+            android:label="ArticleActivity"
+            app:moduleName="article" />
+
+    <activity
+            android:id="@+id/onBoardingActivity"
+            android:name="info.tommarsh.mynews.onboarding.ui.OnBoardingActivity"
+            android:label="OnBoardingActivity"
+            app:moduleName="onboarding" />
 </navigation>

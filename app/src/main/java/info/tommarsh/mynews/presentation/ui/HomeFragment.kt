@@ -6,18 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
+import info.tommarsh.mynews.core.navigator.ClickDispatcher
+import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentHomeBinding
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment : Fragment(), NavController.OnDestinationChangedListener {
+
+    @Inject
+    lateinit var dispatcher: ClickDispatcher
 
     @Inject
     lateinit var preferences: PreferencesRepository
@@ -45,9 +53,7 @@ class HomeFragment : Fragment(), NavController.OnDestinationChangedListener {
     }
 
     private fun setUpToolbar() {
-        (requireActivity() as? AppCompatActivity)?.let {  activity ->
-            activity.setSupportActionBar(binding.homeToolbar)
-        }
+        (requireActivity() as? AppCompatActivity)?.setSupportActionBar(binding.homeToolbar)
     }
 
     private fun setUpNavigation() {
@@ -55,8 +61,7 @@ class HomeFragment : Fragment(), NavController.OnDestinationChangedListener {
             childFragmentManager.findFragmentById(R.id.home_nav_host) as NavHostFragment
         val controller = navHost.navController
         if (preferences.shouldShowOnBoarding()) {
-            controller.navigate(R.id.onBoardingActivity)
-            requireActivity().finish()
+            lifecycleScope.launch { dispatcher.dispatch(ClickEvent.OnBoarding) }
         }
         controller.addOnDestinationChangedListener(this)
         binding.homeBottomNavigation.setupWithNavController(controller)

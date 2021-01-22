@@ -19,17 +19,18 @@ object LocalModule {
 
     @Provides
     @Singleton
-    internal fun provideDb(@ApplicationContext app: Context) : NewsDatabase =
+    internal fun provideDb(@ApplicationContext app: Context): NewsDatabase =
         Room.databaseBuilder(app, NewsDatabase::class.java, "articles-db")
             .createFromAsset("database/prepackaged.db")
             .build()
 
     @Provides
-    internal fun provideTransactionsRunner(db: NewsDatabase) : TransactionRunner = object: TransactionRunner {
-        override suspend fun runTransaction(block: suspend () -> Unit) {
-            db.withTransaction { block() }
+    internal fun provideTransactionsRunner(db: NewsDatabase): TransactionRunner =
+        object : TransactionRunner {
+            override suspend fun runTransaction(block: suspend () -> Unit) {
+                db.withTransaction { block() }
+            }
         }
-    }
 
     @Provides
     internal fun provideArticlesDao(db: NewsDatabase) = db.articlesDao()

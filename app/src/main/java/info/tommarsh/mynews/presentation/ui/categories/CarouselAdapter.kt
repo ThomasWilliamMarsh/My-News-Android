@@ -14,7 +14,6 @@ import info.tommarsh.mynews.presentation.model.ArticleViewModel
 import info.tommarsh.presentation.databinding.ItemCarouselBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 
 internal class CarouselAdapter(

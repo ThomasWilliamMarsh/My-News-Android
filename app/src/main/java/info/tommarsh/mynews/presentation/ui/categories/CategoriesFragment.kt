@@ -6,17 +6,22 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
+import info.tommarsh.mynews.core.navigator.ClickDispatcher
+import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentCategoriesBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class CategoriesFragment : Fragment() {
+
+    @Inject
+    lateinit var dispatcher: ClickDispatcher
 
     lateinit var binding: FragmentCategoriesBinding
 
@@ -42,11 +47,6 @@ class CategoriesFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding.addCategories.addCategoriesButton.setOnClickListener(
-            Navigation.createNavigateOnClickListener(
-                R.id.action_navigation_my_news_to_categoryChoiceActivity
-            )
-        )
         adapter = CarouselAdapter(lifecycle, viewModel::getArticlesForCategory)
         binding.myNewsRecyclerView.adapter = adapter
         binding.myNewsRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -75,8 +75,8 @@ class CategoriesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> findNavController().navigate(R.id.action_navigation_my_news_to_searchActivity)
-            R.id.action_edit -> findNavController().navigate(R.id.action_navigation_my_news_to_categoryChoiceActivity)
+            R.id.action_search -> lifecycleScope.launch { dispatcher.dispatch(ClickEvent.Search) }
+            R.id.action_edit -> lifecycleScope.launch { dispatcher.dispatch(ClickEvent.Categories) }
         }
         return true
     }
