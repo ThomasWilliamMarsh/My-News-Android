@@ -2,7 +2,6 @@ package info.tommarsh.mynews.presentation.ui.top
 
 import android.os.Bundle
 import android.view.*
-import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
@@ -16,6 +15,7 @@ import info.tommarsh.mynews.presentation.ui.NavigationViewModel
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentTopNewsBinding
 import kotlinx.coroutines.InternalCoroutinesApi
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -52,12 +52,9 @@ class TopNewsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.topNewsRecyclerView.adapter = setUpAdapter()
+        binding.topNewsRecyclerView.itemAnimator = null
         binding.topNewsRefresher.setOnRefreshListener { adapter.refresh() }
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        lifecycleScope.launchWhenCreated {
+        lifecycleScope.launchWhenResumed {
             viewModel.articles.collectLatest { data ->
                 adapter.submitData(data)
             }
@@ -88,7 +85,6 @@ class TopNewsFragment : Fragment() {
             .distinctUntilChangedBy { it.refresh }
             .map { it.refresh }
             .collect { loadState ->
-                binding.topNewsRecyclerView.isVisible = loadState is LoadState.NotLoading
                 binding.topNewsRefresher.isRefreshing = loadState is LoadState.Loading
 
                 if (loadState is LoadState.NotLoading) {

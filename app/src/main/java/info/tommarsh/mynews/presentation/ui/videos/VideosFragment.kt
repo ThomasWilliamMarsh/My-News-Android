@@ -46,6 +46,7 @@ class VideosFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val concatAdapter = setUpAdapter()
         binding.videosRecyclerView.adapter = concatAdapter
+        binding.videosRecyclerView.itemAnimator = null
         binding.videosRecyclerView.layoutManager = setLayoutManager(concatAdapter)
         binding.refreshVideo.setOnRefreshListener {
             adapter.refresh()

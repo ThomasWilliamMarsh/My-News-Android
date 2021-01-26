@@ -55,16 +55,16 @@ internal class CarouselViewHolder(
 
     private var job: Job? = null
 
-    private var adapter: CarouselItemAdapter? = null
-
     fun bind(carousel: CategoryViewModel) {
-        adapter = CarouselItemAdapter(onClickEvent)
+        val adapter = CarouselItemAdapter(onClickEvent)
         binding.carouselName.text = carousel.name
-        binding.carouselItems.adapter =
-            adapter!!.withLoadStateFooter(footer = ListLoadStateAdapter { adapter?.retry() })
+        binding.carouselItems.adapter = adapter.withLoadStateFooter(ListLoadStateAdapter {
+            adapter.retry()
+        })
+        binding.carouselItems.itemAnimator = null
         job = lifecycle.coroutineScope.launchWhenCreated {
             pagingFactory(carousel.id).collectLatest { pagingData ->
-                adapter!!.submitData(pagingData)
+                adapter.submitData(pagingData)
             }
         }
     }

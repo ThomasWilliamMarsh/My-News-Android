@@ -53,6 +53,11 @@
                                 <LayoutPositions />
                               </value>
                             </entry>
+                            <entry key="action_homeFragment_to_onBoardingActivity">
+                              <value>
+                                <LayoutPositions />
+                              </value>
+                            </entry>
                             <entry key="action_homeFragment_to_search_graph">
                               <value>
                                 <LayoutPositions />
@@ -73,6 +78,11 @@
                           </Point>
                         </option>
                       </LayoutPositions>
+                    </value>
+                  </entry>
+                  <entry key="searchFragment2">
+                    <value>
+                      <LayoutPositions />
                     </value>
                   </entry>
                   <entry key="search_graph">
@@ -465,13 +475,13 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="articleActivity2">
+                  <entry key="articleActivity">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="132" />
-                            <option name="y" value="-202" />
+                            <option name="x" value="12" />
+                            <option name="y" value="12" />
                           </Point>
                         </option>
                       </LayoutPositions>
@@ -482,13 +492,13 @@
                       <LayoutPositions>
                         <option name="myPosition">
                           <Point>
-                            <option name="x" value="-157" />
-                            <option name="y" value="-63" />
+                            <option name="x" value="-219" />
+                            <option name="y" value="-58" />
                           </Point>
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_searchFragment_to_articleActivity2">
+                            <entry key="action_searchFragment_to_articleActivity">
                               <value>
                                 <LayoutPositions />
                               </value>

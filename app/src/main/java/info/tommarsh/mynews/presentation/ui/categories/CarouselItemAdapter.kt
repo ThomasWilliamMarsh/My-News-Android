@@ -39,7 +39,7 @@ class CarouselItemViewHolder(private val binding: ItemCategoryArticleBinding,
         binding.categoryArticleName.text = article.title
         binding.categoryArticleUpdated.text = article.publishedAt
         binding.root.setOnClickListener {
-            onClickEvent(ClickEvent.Article(article.url, article.title))
+            onClickEvent(ClickEvent.Article(article.urlToImage, article.title))
         }
     }
 }

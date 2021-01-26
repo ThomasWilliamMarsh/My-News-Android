@@ -46,12 +46,16 @@ class CategoriesFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapter = CarouselAdapter(
-            lifecycle,
-            { event: ClickEvent -> navigationViewModel.dispatchClick(event) },
-            viewModel::getArticlesForCategory
+            lifecycle = lifecycle,
+            onClickEvent = { event: ClickEvent -> navigationViewModel.dispatchClick(event) },
+            pagingFactory = viewModel::getArticlesForCategory
         )
         binding.myNewsRecyclerView.adapter = adapter
+        binding.myNewsRecyclerView.itemAnimator = null
         binding.myNewsRecyclerView.layoutManager = LinearLayoutManager(context)
+        binding.addCategories.addCategoriesButton.setOnClickListener {
+            navigationViewModel.dispatchClick(ClickEvent.Categories)
+        }
     }
 
     override fun onResume() {

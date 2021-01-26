@@ -11,12 +11,18 @@
             android:label="fragment_search"
             tools:layout="@layout/fragment_search">
         <action
-                android:id="@+id/action_searchFragment_to_articleActivity2"
-                app:destination="@id/articleActivity2" />
+                android:id="@+id/action_searchFragment_to_articleActivity"
+                app:destination="@id/articleActivity" />
     </fragment>
     <activity
-            android:id="@+id/articleActivity2"
+            android:id="@+id/articleActivity"
             android:name="info.tommarsh.mynews.article.ui.ArticleActivity"
             android:label="ArticleActivity"
-            app:moduleName="my-news-android.article" />
+            app:moduleName="article" >
+        <argument
+                android:name="url"
+                app:argType="string" />
+        <argument android:name="title"
+                app:argType="string" />
+    </activity>
 </navigation>
