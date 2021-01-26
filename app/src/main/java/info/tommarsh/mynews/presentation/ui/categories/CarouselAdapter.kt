@@ -11,6 +11,7 @@ import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
+import info.tommarsh.mynews.presentation.ui.onClickEvent
 import info.tommarsh.presentation.databinding.ItemCarouselBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
@@ -18,13 +19,14 @@ import kotlinx.coroutines.flow.collectLatest
 
 internal class CarouselAdapter(
     private val lifecycle: Lifecycle,
+    private val onClickEvent: onClickEvent,
     private val pagingFactory: (category: String) -> Flow<PagingData<ArticleViewModel>>
 ) : ListAdapter<CategoryViewModel, CarouselViewHolder>(DIFFER) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselViewHolder {
         val binding =
             ItemCarouselBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return CarouselViewHolder(binding, lifecycle, pagingFactory)
+        return CarouselViewHolder(binding, lifecycle, onClickEvent, pagingFactory)
     }
 
     override fun onBindViewHolder(holder: CarouselViewHolder, position: Int) {
@@ -46,6 +48,7 @@ internal class CarouselAdapter(
 internal class CarouselViewHolder(
     private val binding: ItemCarouselBinding,
     private val lifecycle: Lifecycle,
+    private val onClickEvent: onClickEvent,
     private val pagingFactory: (category: String) -> Flow<PagingData<ArticleViewModel>>
 ) :
     RecyclerView.ViewHolder(binding.root) {
@@ -55,7 +58,7 @@ internal class CarouselViewHolder(
     private var adapter: CarouselItemAdapter? = null
 
     fun bind(carousel: CategoryViewModel) {
-        adapter = CarouselItemAdapter()
+        adapter = CarouselItemAdapter(onClickEvent)
         binding.carouselName.text = carousel.name
         binding.carouselItems.adapter =
             adapter!!.withLoadStateFooter(footer = ListLoadStateAdapter { adapter?.retry() })

@@ -1,12 +1,12 @@
 package info.tommarsh.mynews.presentation.ui
 
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.navigator.ClickDispatcher
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.presentation.R
 import kotlinx.coroutines.flow.collectLatest
@@ -19,8 +19,7 @@ class HomeActivity : AppCompatActivity() {
     @Inject
     lateinit var fragmentFactory: HomeFragmentFactory
 
-    @Inject
-    lateinit var dispatcher: ClickDispatcher
+    private val viewModel by viewModels<NavigationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,7 +36,7 @@ class HomeActivity : AppCompatActivity() {
     }
 
     private fun listenToClickEvents() = lifecycleScope.launch {
-        dispatcher.clicks.collectLatest { event ->
+        viewModel.clicks.collectLatest { event ->
             when (event) {
                 is ClickEvent.Search -> {
                     findNavController(R.id.nav_host_fragment).navigate(

@@ -6,27 +6,25 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.navigator.ClickDispatcher
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentHomeBinding
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class HomeFragment(
-    private val dispatcher: ClickDispatcher,
     private val preferences: PreferencesRepository
 ) : Fragment(), NavController.OnDestinationChangedListener {
 
     private lateinit var binding: FragmentHomeBinding
+
+    private val navigationViewModel by activityViewModels<NavigationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -57,7 +55,7 @@ class HomeFragment(
             childFragmentManager.findFragmentById(R.id.home_nav_host) as NavHostFragment
         val controller = navHost.navController
         if (preferences.shouldShowOnBoarding()) {
-            lifecycleScope.launch { dispatcher.dispatch(ClickEvent.OnBoarding) }
+            navigationViewModel.dispatchClick(ClickEvent.OnBoarding)
         }
         controller.addOnDestinationChangedListener(this)
         binding.homeBottomNavigation.setupWithNavController(controller)

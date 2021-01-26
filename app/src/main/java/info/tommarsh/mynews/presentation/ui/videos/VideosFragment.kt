@@ -3,29 +3,30 @@ package info.tommarsh.mynews.presentation.ui.videos
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.navigator.ClickDispatcher
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
+import info.tommarsh.mynews.presentation.ui.NavigationViewModel
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentVideosBinding
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class VideosFragment(private val dispatcher: ClickDispatcher) : Fragment() {
+class VideosFragment : Fragment() {
 
     private lateinit var binding: FragmentVideosBinding
 
     private val adapter = VideosAdapter()
 
     private val viewModel by viewModels<VideosViewModel>()
+
+    private val navigationViewModel by activityViewModels<NavigationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +69,7 @@ class VideosFragment(private val dispatcher: ClickDispatcher) : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> lifecycleScope.launch { dispatcher.dispatch(ClickEvent.Search) }
+            R.id.action_search -> navigationViewModel.dispatchClick(ClickEvent.Search)
         }
         return true
     }

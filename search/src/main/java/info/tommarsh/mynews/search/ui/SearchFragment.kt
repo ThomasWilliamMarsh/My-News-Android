@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -53,9 +54,7 @@ class SearchFragment : Fragment() {
         binding.searchView.apply {
             isIconified = false
             setIconifiedByDefault(false)
-            setOnSearchClickListener {
-                onNewQuery(binding.searchView.query.toString())
-            }
+            doOnSubmit { query -> onNewQuery(query) }
         }
     }
 
@@ -84,5 +83,18 @@ class SearchFragment : Fragment() {
                 adapter.submitData(searchItems)
             }
         }
+    }
+
+    private fun SearchView.doOnSubmit(block: (query: String) -> Unit) {
+        setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                block(query.orEmpty())
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                return true
+            }
+        })
     }
 }

@@ -4,14 +4,15 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
+import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.presentation.model.ArticleViewModel
-import info.tommarsh.mynews.presentation.setClickListenerFor
+import info.tommarsh.mynews.presentation.ui.onClickEvent
 import info.tommarsh.presentation.databinding.ItemArticleBinding
 import info.tommarsh.presentation.databinding.ItemMainArticleBinding
 
-class TopNewsAdapter :
+class TopNewsAdapter(private val onClickEvent: onClickEvent) :
     PagingDataAdapter<ArticleViewModel, RecyclerView.ViewHolder>(DIFFER) {
 
     companion object {
@@ -37,14 +38,16 @@ class TopNewsAdapter :
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                onClickEvent = onClickEvent
             )
             TYPE_SECONDARY_ARTICLE -> SecondaryViewHolder(
                 binding = ItemArticleBinding.inflate(
                     LayoutInflater.from(parent.context),
                     parent,
                     false
-                )
+                ),
+                onClickEvent = onClickEvent
             )
             else -> throw IllegalArgumentException("Invalid view type for Top News!")
         }
@@ -59,7 +62,10 @@ class TopNewsAdapter :
     }
 }
 
-private class PrimaryViewHolder(private val binding: ItemMainArticleBinding) :
+private class PrimaryViewHolder(
+    private val binding: ItemMainArticleBinding,
+    private val onClickEvent: onClickEvent
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(article: ArticleViewModel) {
@@ -67,11 +73,16 @@ private class PrimaryViewHolder(private val binding: ItemMainArticleBinding) :
         binding.mainArticleTitle.text = article.title
         binding.mainArticleUpdated.text = article.publishedAt
 
-        article.setClickListenerFor(itemView)
+        binding.root.setOnClickListener {
+            onClickEvent(ClickEvent.Article(article.url, article.title))
+        }
     }
 }
 
-private class SecondaryViewHolder(private val binding: ItemArticleBinding) :
+private class SecondaryViewHolder(
+    private val binding: ItemArticleBinding,
+    private val onClickEvent: onClickEvent
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(article: ArticleViewModel) {
@@ -79,6 +90,8 @@ private class SecondaryViewHolder(private val binding: ItemArticleBinding) :
         binding.articleTitle.text = article.title
         binding.articleUpdated.text = article.publishedAt
 
-        article.setClickListenerFor(itemView)
+        binding.root.setOnClickListener {
+            onClickEvent(ClickEvent.Article(article.url, article.title))
+        }
     }
 }

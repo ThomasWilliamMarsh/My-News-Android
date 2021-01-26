@@ -4,27 +4,26 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.navigator.ClickDispatcher
 import info.tommarsh.mynews.core.navigator.ClickEvent
+import info.tommarsh.mynews.presentation.ui.NavigationViewModel
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentCategoriesBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
-import javax.inject.Inject
 
 @AndroidEntryPoint
-class CategoriesFragment(
-    private val dispatcher: ClickDispatcher
-) : Fragment() {
+class CategoriesFragment : Fragment() {
 
     lateinit var binding: FragmentCategoriesBinding
 
     private val viewModel by viewModels<CategoriesViewModel>()
+
+    private val navigationViewModel by activityViewModels<NavigationViewModel>()
 
     private lateinit var adapter: CarouselAdapter
 
@@ -46,7 +45,11 @@ class CategoriesFragment(
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        adapter = CarouselAdapter(lifecycle, viewModel::getArticlesForCategory)
+        adapter = CarouselAdapter(
+            lifecycle,
+            { event: ClickEvent -> navigationViewModel.dispatchClick(event) },
+            viewModel::getArticlesForCategory
+        )
         binding.myNewsRecyclerView.adapter = adapter
         binding.myNewsRecyclerView.layoutManager = LinearLayoutManager(context)
     }
@@ -74,8 +77,8 @@ class CategoriesFragment(
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> lifecycleScope.launch { dispatcher.dispatch(ClickEvent.Search) }
-            R.id.action_edit -> lifecycleScope.launch { dispatcher.dispatch(ClickEvent.Categories) }
+            R.id.action_search -> navigationViewModel.dispatchClick(ClickEvent.Search)
+            R.id.action_edit -> navigationViewModel.dispatchClick(ClickEvent.Categories)
         }
         return true
     }
