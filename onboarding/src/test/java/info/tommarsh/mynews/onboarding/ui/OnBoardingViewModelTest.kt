@@ -4,7 +4,7 @@ import com.google.android.play.core.splitinstall.SplitInstallManager
 import com.nhaarman.mockitokotlin2.mock
 import com.nhaarman.mockitokotlin2.verify
 import com.nhaarman.mockitokotlin2.whenever
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.onboarding.MockProvider.choices
@@ -75,7 +75,7 @@ class OnBoardingViewModelTest {
 
     @Test
     fun `Successfully fetch choices`() = runBlockingTest {
-        whenever(dataSource.getOnBoardingChoices("key")).thenReturn(Outcome.Success(choices))
+        whenever(dataSource.getOnBoardingChoices("key")).thenReturn(Resource.Data(choices))
 
         viewModel.postAction(Action.FetchChoices("key"))
 
@@ -87,7 +87,7 @@ class OnBoardingViewModelTest {
 
     @Test
     fun `Fail to fetch choices`() = runBlockingTest {
-        whenever(dataSource.getOnBoardingChoices("key")).thenReturn(Outcome.Error(exception))
+        whenever(dataSource.getOnBoardingChoices("key")).thenReturn(Resource.Error(exception))
 
         viewModel.postAction(Action.FetchChoices("key"))
 

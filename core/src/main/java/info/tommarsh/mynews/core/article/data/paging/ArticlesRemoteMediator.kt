@@ -8,7 +8,7 @@ import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStore
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
 import info.tommarsh.mynews.core.database.TransactionRunner
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 
 @OptIn(ExperimentalPagingApi::class)
@@ -35,10 +35,10 @@ internal class ArticlesRemoteMediator constructor(
             else -> state.config.pageSize
         }
 
-        return when (val outcome =
+        return when (val resource =
             remoteArticleSource.getArticleForCategory(page, pageSize, category)) {
-            is Outcome.Success -> {
-                val articles = outcome.data.onEach { it.category = category }
+            is Resource.Data -> {
+                val articles = resource.data.onEach { it.category = category }
                 val isEndOfList = articles.size < pageSize
 
                 transactionRunner.runTransaction {
@@ -51,8 +51,8 @@ internal class ArticlesRemoteMediator constructor(
 
                 MediatorResult.Success(isEndOfList)
             }
-            is Outcome.Error -> {
-                MediatorResult.Error(outcome.error)
+            is Resource.Error -> {
+                MediatorResult.Error(resource.error)
             }
         }
     }

@@ -3,7 +3,7 @@ package info.tommarsh.mynews.onboarding.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.android.play.core.splitinstall.SplitInstallManager
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
 import info.tommarsh.mynews.onboarding.data.OnBoardingDataSource
@@ -49,9 +49,9 @@ internal class OnBoardingViewModel
     private fun fetchOnBoardingModel(key: String) {
         viewModelScope.launch(dispatcherProvider.work()) {
             _events.value = Event.Loading
-            _events.value = when (val outcome = dataSource.getOnBoardingChoices(key)) {
-                is Outcome.Success -> Event.Fetched(outcome.data.choices)
-                is Outcome.Error -> Event.Error(outcome.error)
+            _events.value = when (val resource = dataSource.getOnBoardingChoices(key)) {
+                is Resource.Data -> Event.Fetched(resource.data.choices)
+                is Resource.Error -> Event.Error(resource.error)
             }
         }
     }

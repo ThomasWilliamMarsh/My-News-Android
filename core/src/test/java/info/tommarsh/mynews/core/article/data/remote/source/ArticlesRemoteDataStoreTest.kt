@@ -7,7 +7,7 @@ import info.tommarsh.mynews.core.MockProvider.articleModel
 import info.tommarsh.mynews.core.MockProvider.articlesResponse
 import info.tommarsh.mynews.core.di.NetworkModule.STANDARD_PAGE_SIZE
 import info.tommarsh.mynews.core.model.NetworkException
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.ConnectionManager
 import info.tommarsh.mynews.core.util.NetworkHelper
@@ -51,7 +51,7 @@ class ArticlesRemoteDataStoreTest {
 
     @Test
     fun `Successfully search for articles`() = runBlockingTest {
-        val expected = Outcome.Success(listOf(articleModel, articleModel))
+        val expected = Resource.Data(listOf(articleModel, articleModel))
 
         val actual = remoteDataStore.searchArticles(
             page = 1,
@@ -70,19 +70,19 @@ class ArticlesRemoteDataStoreTest {
     fun `Fail to search for articles `() = runBlockingTest {
         whenever(connectionManager.isConnected).thenReturn(false)
 
-        val outcome = remoteDataStore.searchArticles(
+        val resource = remoteDataStore.searchArticles(
             page = 1,
             query = "query"
         )
 
 
-        assertTrue(outcome is Outcome.Error)
-        assertTrue((outcome as Outcome.Error).error is NetworkException.NoInternetException)
+        assertTrue(resource is Resource.Error)
+        assertTrue((resource as Resource.Error).error is NetworkException.NoInternetException)
     }
 
     @Test
     fun `Successfully get articles from category`() = runBlockingTest {
-        val expected = Outcome.Success(listOf(articleModel, articleModel))
+        val expected = Resource.Data(listOf(articleModel, articleModel))
 
         val actual = remoteDataStore.getArticleForCategory(
             page = 1,
@@ -103,13 +103,13 @@ class ArticlesRemoteDataStoreTest {
     fun `Fail to get articles from category`() = runBlockingTest {
         whenever(connectionManager.isConnected).thenReturn(false)
 
-        val outcome = remoteDataStore.getArticleForCategory(
+        val resource = remoteDataStore.getArticleForCategory(
             page = 1,
             pageSize = STANDARD_PAGE_SIZE,
             category = "category"
         )
 
-        assertTrue(outcome is Outcome.Error)
-        assertTrue((outcome as Outcome.Error).error is NetworkException.NoInternetException)
+        assertTrue(resource is Resource.Error)
+        assertTrue((resource as Resource.Error).error is NetworkException.NoInternetException)
     }
 }

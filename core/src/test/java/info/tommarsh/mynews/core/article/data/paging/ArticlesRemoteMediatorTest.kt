@@ -10,7 +10,7 @@ import info.tommarsh.mynews.core.MockProvider.noInternet
 import info.tommarsh.mynews.core.article.data.local.model.Article
 import info.tommarsh.mynews.core.article.data.local.source.ArticlesLocalDataStore
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.test.runBlockingTest
@@ -45,7 +45,7 @@ class ArticlesRemoteMediatorTest {
     @Test
     fun `Notify end of pagination`() = runBlockingTest {
         whenever(remoteSource.getArticleForCategory(1, config.initialLoadSize, category))
-            .thenReturn(Outcome.Success(emptyList()))
+            .thenReturn(Resource.Data(emptyList()))
 
         val actual = remoteMediator.load(
             loadType = LoadType.REFRESH,
@@ -59,7 +59,7 @@ class ArticlesRemoteMediatorTest {
     @Test
     fun `Successful refresh`() = runBlockingTest {
         whenever(remoteSource.getArticleForCategory(1, config.initialLoadSize, category))
-            .thenReturn(Outcome.Success(listOf(articleModel)))
+            .thenReturn(Resource.Data(listOf(articleModel)))
 
         remoteMediator.load(
             loadType = LoadType.REFRESH,
@@ -74,7 +74,7 @@ class ArticlesRemoteMediatorTest {
     @Test
     fun `Failed refresh`() = runBlockingTest {
         whenever(remoteSource.getArticleForCategory(1, config.initialLoadSize, category))
-            .thenReturn(Outcome.Error(noInternet))
+            .thenReturn(Resource.Error(noInternet))
 
         val result = remoteMediator.load(
             loadType = LoadType.REFRESH,
@@ -101,7 +101,7 @@ class ArticlesRemoteMediatorTest {
     @Test
     fun `Failed append`() = runBlockingTest {
         whenever(remoteSource.getArticleForCategory(3, config.pageSize, category))
-            .thenReturn(Outcome.Error(noInternet))
+            .thenReturn(Resource.Error(noInternet))
         whenever(pageSource.getPageForCategory(category))
             .thenReturn(2)
 
@@ -120,7 +120,7 @@ class ArticlesRemoteMediatorTest {
     @Test
     fun `Successful append`() = runBlockingTest {
         whenever(remoteSource.getArticleForCategory(3, config.pageSize, category))
-            .thenReturn(Outcome.Success(listOf(articleModel)))
+            .thenReturn(Resource.Data(listOf(articleModel)))
         whenever(pageSource.getPageForCategory(category))
             .thenReturn(2)
 

@@ -3,7 +3,7 @@ package info.tommarsh.mynews.core.article.data.paging
 import androidx.paging.PagingSource
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 
 internal class SearchPagingSource constructor(
     private val query: String,
@@ -13,17 +13,17 @@ internal class SearchPagingSource constructor(
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, ArticleModel> {
         val page = params.key ?: 1
 
-        return when (val outcome = remoteArticleSource.searchArticles(page, query)) {
-            is Outcome.Success -> {
-                val nextKey = if (outcome.data.isEmpty()) null else page + 1
+        return when (val resource = remoteArticleSource.searchArticles(page, query)) {
+            is Resource.Data -> {
+                val nextKey = if (resource.data.isEmpty()) null else page + 1
                 val previousKey = if (page == 1) null else page - 1
                 LoadResult.Page(
-                    data = outcome.data,
+                    data = resource.data,
                     nextKey = nextKey,
                     prevKey = previousKey
                 )
             }
-            is Outcome.Error -> LoadResult.Error(throwable = outcome.error)
+            is Resource.Error -> LoadResult.Error(throwable = resource.error)
         }
     }
 }

@@ -1,7 +1,7 @@
 package info.tommarsh.mynews.core.video.data.remote.source
 
 import info.tommarsh.mynews.core.model.NetworkException
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.util.NetworkHelper
 import info.tommarsh.mynews.core.video.data.remote.model.toDomainModel
 import info.tommarsh.mynews.core.video.domain.model.PlaylistModel
@@ -13,12 +13,12 @@ internal class VideoRemoteDataStore
     private val networkHelper: NetworkHelper
 ) {
 
-    suspend fun getPlaylist(page: String?): Outcome<PlaylistModel> {
+    suspend fun getPlaylist(page: String?): Resource<PlaylistModel> {
         return try {
             val response = networkHelper.callApi { api.getPlaylistItems(page) }
-            Outcome.Success(response.toDomainModel())
+            Resource.Data(response.toDomainModel())
         } catch (throwable: NetworkException) {
-            Outcome.Error(throwable)
+            Resource.Error(throwable)
         }
     }
 }

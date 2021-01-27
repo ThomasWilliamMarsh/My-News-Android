@@ -5,7 +5,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.playlist
 import info.tommarsh.mynews.core.MockProvider.playlistModel
 import info.tommarsh.mynews.core.model.NetworkException
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.util.ConnectionManager
 import info.tommarsh.mynews.core.util.NetworkHelper
 import junit.framework.Assert.assertEquals
@@ -32,7 +32,7 @@ class VideoRemoteDataStoreTest {
 
     @Test
     fun `Successfully get Videos from network`() = runBlockingTest {
-        val expected = Outcome.Success(playlistModel)
+        val expected = Resource.Data(playlistModel)
 
         val actual = remote.getPlaylist("token")
 
@@ -43,9 +43,9 @@ class VideoRemoteDataStoreTest {
     fun `Fail to get videos from network`() = runBlockingTest {
         whenever(connectionManager.isConnected).thenReturn(false)
 
-        val outcome = remote.getPlaylist(page = "token")
+        val resource = remote.getPlaylist(page = "token")
 
-        assertTrue(outcome is Outcome.Error)
-        assertTrue((outcome as Outcome.Error).error is NetworkException.NoInternetException)
+        assertTrue(resource is Resource.Error)
+        assertTrue((resource as Resource.Error).error is NetworkException.NoInternetException)
     }
 }

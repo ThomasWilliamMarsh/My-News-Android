@@ -3,7 +3,7 @@ package info.tommarsh.mynews.core.article.data.remote.source
 import info.tommarsh.mynews.core.article.data.remote.model.toDomainList
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
 import info.tommarsh.mynews.core.model.NetworkException
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.NetworkHelper
 import javax.inject.Inject
@@ -15,7 +15,7 @@ internal class ArticlesRemoteDataStore
     private val preferencesRepository: PreferencesRepository
 ) {
 
-    suspend fun searchArticles(page: Int = 1, query: String): Outcome<List<ArticleModel>> {
+    suspend fun searchArticles(page: Int = 1, query: String): Resource<List<ArticleModel>> {
         return try {
             val response = networkHelper.callApi {
                 api.searchArticles(
@@ -23,9 +23,9 @@ internal class ArticlesRemoteDataStore
                     page = page
                 )
             }
-            Outcome.Success(response.toDomainList())
+            Resource.Data(response.toDomainList())
         } catch (throwable: NetworkException) {
-            Outcome.Error(throwable)
+            Resource.Error(throwable)
         }
     }
 
@@ -33,7 +33,7 @@ internal class ArticlesRemoteDataStore
         page: Int = 1,
         pageSize: Int,
         category: String
-    ): Outcome<List<ArticleModel>> {
+    ): Resource<List<ArticleModel>> {
         return try {
             val response = networkHelper.callApi {
                 api.getArticlesForCategory(
@@ -43,9 +43,9 @@ internal class ArticlesRemoteDataStore
                     country = preferencesRepository.getCountry()
                 )
             }
-            Outcome.Success(response.toDomainList())
+            Resource.Data(response.toDomainList())
         } catch (throwable: NetworkException) {
-            Outcome.Error(throwable)
+            Resource.Error(throwable)
         }
     }
 }

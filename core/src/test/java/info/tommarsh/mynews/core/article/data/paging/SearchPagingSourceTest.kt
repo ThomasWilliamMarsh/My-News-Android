@@ -6,7 +6,7 @@ import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.articleModel
 import info.tommarsh.mynews.core.MockProvider.noInternet
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -20,7 +20,7 @@ class SearchPagingSourceTest {
     @Test
     fun `Fail loading search articles`() = runBlockingTest {
         whenever(remoteDataSource.searchArticles(page = 1, query = "query"))
-            .thenReturn(Outcome.Error(noInternet))
+            .thenReturn(Resource.Error(noInternet))
 
         val result = pagingSource.load(
             params = PagingSource.LoadParams.Refresh(
@@ -36,7 +36,7 @@ class SearchPagingSourceTest {
     @Test
     fun `load search articles`() = runBlockingTest {
         whenever(remoteDataSource.searchArticles(page = 3, query = "query"))
-            .thenReturn(Outcome.Success(listOf(articleModel)))
+            .thenReturn(Resource.Data(listOf(articleModel)))
 
         val result = pagingSource.load(
             params = PagingSource.LoadParams.Refresh(
@@ -58,7 +58,7 @@ class SearchPagingSourceTest {
     fun `No next key if we have no data`() = runBlockingTest {
 
         whenever(remoteDataSource.searchArticles(page = 2, query = "query"))
-            .thenReturn(Outcome.Success(emptyList()))
+            .thenReturn(Resource.Data(emptyList()))
 
         val result = pagingSource.load(
             params = PagingSource.LoadParams.Refresh(
@@ -75,7 +75,7 @@ class SearchPagingSourceTest {
     @Test
     fun `No previous key if current page is 1`() = runBlockingTest {
         whenever(remoteDataSource.searchArticles(page = 1, query = "query"))
-            .thenReturn(Outcome.Success(emptyList()))
+            .thenReturn(Resource.Data(emptyList()))
 
         val result = pagingSource.load(
             params = PagingSource.LoadParams.Refresh(

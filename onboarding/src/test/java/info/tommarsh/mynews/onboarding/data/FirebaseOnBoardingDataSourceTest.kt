@@ -4,7 +4,7 @@ import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import com.nhaarman.mockitokotlin2.mock
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import info.tommarsh.mynews.core.model.Outcome
+import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.onboarding.MockProvider.choices
 import info.tommarsh.mynews.onboarding.model.Choices
 import org.junit.Assert.assertEquals
@@ -26,7 +26,7 @@ class FirebaseOnBoardingDataSourceTest {
 
     @Test
     fun `Get onboarding choices from firebase`() {
-        val expected = Outcome.Success(choices)
+        val expected = Resource.Data(choices)
 
         val actual = datasource.getOnBoardingChoices("key")
 
