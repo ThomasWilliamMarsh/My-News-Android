@@ -7,19 +7,19 @@
         tools:context="info.tommarsh.mynews.categories.ui.CategoryChoiceFragment">
 
     <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/choice_app_bar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fitsSystemWindows="true"
             app:elevation="@dimen/none">
 
         <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/activity_choice_toolbar"
+                android:id="@+id/choice_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
+                android:layout_height="match_parent"
                 android:layout_gravity="start"
-                android:gravity="start"
-                app:layout_scrollFlags="scroll|enterAlways"
+                app:layout_scrollFlags="noScroll"
                 app:title="@string/edit_my_news" />
+
 
     </com.google.android.material.appbar.AppBarLayout>
 

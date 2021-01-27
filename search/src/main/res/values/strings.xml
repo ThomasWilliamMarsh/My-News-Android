@@ -1,4 +1,5 @@
 <resources>
     <string name="app_name">search</string>
     <string name="search_hint">Search articles</string>
+    <string name="search_for_articles">Search for articles</string>
 </resources>

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.observe
@@ -14,6 +15,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.categories.databinding.FragmentCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
+import info.tommarsh.mynews.core.util.doOnInsets
 
 @AndroidEntryPoint
 class CategoryChoiceFragment : Fragment() {
@@ -36,10 +38,11 @@ class CategoryChoiceFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setUpViewModel()
-        setUpUi()
+        setUpRecyclerView()
+        setUpWindowInsets()
     }
 
-    private fun setUpUi() {
+    private fun setUpRecyclerView() {
         binding.activityChoiceRecyclerView.adapter = adapter
         binding.activityChoiceRecyclerView.addItemDecoration(
             DividerItemDecoration(
@@ -59,5 +62,11 @@ class CategoryChoiceFragment : Fragment() {
 
     private fun onCategorySelected(category: CategoryViewModel, selected: Boolean) {
         viewModel.updateCategory(category.copy(selected = selected))
+    }
+
+    private fun setUpWindowInsets() {
+        binding.root.doOnInsets { systemBarInsets, _ ->
+            binding.choiceAppBar        .updatePadding(top = systemBarInsets.top)
+        }
     }
 }

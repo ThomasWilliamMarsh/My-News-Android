@@ -61,9 +61,9 @@
         <item name="autoCompleteTextViewStyle">@style/Widget.MyNews.SearchView.AutoComplete</item>
 
         <!-- System styles -->
-        <item name="android:statusBarColor">?colorPrimarySurface</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="android:windowLightStatusBar">false</item>
-        <item name="android:navigationBarColor">?android:colorBackground</item>
         <item name="android:windowLightNavigationBar" tools:ignore="NewApi">true</item>
         <item name="android:navigationBarDividerColor" tools:ignore="NewApi">
             ?colorControlHighlight

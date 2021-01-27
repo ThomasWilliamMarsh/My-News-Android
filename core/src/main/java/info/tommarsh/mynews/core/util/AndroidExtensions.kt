@@ -2,20 +2,18 @@ package info.tommarsh.mynews.core.util
 
 import android.content.Context
 import android.content.Intent
-import android.view.Menu
+import android.view.View
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
+import androidx.core.graphics.Insets
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat.CONSUMED
+import androidx.core.view.WindowInsetsCompat.Type.navigationBars
+import androidx.core.view.WindowInsetsCompat.Type.systemBars
 import androidx.recyclerview.widget.DiffUtil
 
 //region context
-fun Context.navigateToClass(className: String) {
-    val intent = Intent(Intent.ACTION_VIEW).setClassName(packageName, className)
-    startActivity(intent)
-}
-
-
 inline fun <reified T : AppCompatActivity> Context.newTaskIntent(): Intent {
     return Intent(this, T::class.java).apply {
         flags =
@@ -23,7 +21,6 @@ inline fun <reified T : AppCompatActivity> Context.newTaskIntent(): Intent {
 
     }
 }
-
 //endregion
 
 //region listadapter
@@ -35,10 +32,6 @@ fun <T> getDiffUtilItemCallback(compare: (T, T) -> Boolean) =
     }
 //endregion
 
-//region menu
-inline fun <reified T> Menu.getActionItem(item: Int): T = findItem(item).actionView as T
-//endregion
-
 //region Activity
 inline fun <reified T> AppCompatActivity.service(type: String) = getSystemService(type) as T
 
@@ -48,13 +41,7 @@ fun AppCompatActivity.contentBehindStatusBar() = with(window) {
 
     statusBarColor = ContextCompat.getColor(window.context, android.R.color.transparent)
 }
-//endregion
 
-//region Fragment
-fun Fragment.consume(block: () -> Unit): Boolean {
-    block()
-    return false
-}
 //endregion
 
 inline fun <reified T : Any> createDiffItemCallback(crossinline contentsTheSame: (old: T, new: T) -> Boolean) =
@@ -68,3 +55,12 @@ inline fun <reified T : Any> createDiffItemCallback(crossinline contentsTheSame:
             return contentsTheSame(oldItem, newItem)
         }
     }
+
+fun View.doOnInsets(block: (systemBarInsets: Insets, navigationBarInsets: Insets) -> Unit) {
+    ViewCompat.setOnApplyWindowInsetsListener(this) { _, insets ->
+        val systemBarInsets = insets.getInsets(systemBars())
+        val navigationInsets = insets.getInsets(navigationBars())
+        block(systemBarInsets, navigationInsets)
+        CONSUMED
+    }
+}

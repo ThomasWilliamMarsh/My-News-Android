@@ -2,6 +2,7 @@ package info.tommarsh.mynews.presentation.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.WindowCompat
 import androidx.navigation.findNavController
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.presentation.R
@@ -17,6 +18,7 @@ class HomeActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         supportFragmentManager.fragmentFactory = fragmentFactory
         setContentView(R.layout.activity_home)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 
     override fun onBackPressed() {

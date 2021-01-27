@@ -7,16 +7,16 @@
         tools:context="info.tommarsh.mynews.presentation.ui.HomeActivity">
 
     <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/home_app_bar"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fitsSystemWindows="true">
+            android:layout_height="wrap_content">
 
         <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/home_toolbar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:layout_gravity="start"
-                app:layout_scrollFlags="scroll|enterAlways" />
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|enterAlways"
+                 />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -26,7 +26,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintBottom_toTopOf="@id/home_bottom_navigation"
             app:navGraph="@navigation/home_graph" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -36,7 +35,6 @@
             android:layout_gravity="bottom"
             app:hideOnScroll="true"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            app:layout_constraintTop_toBottomOf="@id/nav_host_fragment"
             app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

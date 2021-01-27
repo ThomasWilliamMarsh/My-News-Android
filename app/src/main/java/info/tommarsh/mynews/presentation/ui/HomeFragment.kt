@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
@@ -17,6 +18,7 @@ import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
+import info.tommarsh.mynews.core.util.doOnInsets
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentHomeBinding
 import kotlinx.coroutines.flow.collectLatest
@@ -49,6 +51,7 @@ class HomeFragment(
         super.onViewCreated(view, savedInstanceState)
         setUpNavigation()
         setUpToolbar()
+        setWindowInsets()
     }
 
     private fun setUpToolbar() {
@@ -64,6 +67,13 @@ class HomeFragment(
         }
         controller.addOnDestinationChangedListener(this)
         binding.homeBottomNavigation.setupWithNavController(controller)
+    }
+
+    private fun setWindowInsets() {
+        binding.root.doOnInsets { systemBarInsets, navigationBarInsets ->
+            binding.homeToolbar.updatePadding(top = systemBarInsets.top)
+            binding.homeBottomNavigation.updatePadding(bottom = navigationBarInsets.bottom)
+        }
     }
 
     override fun onDestinationChanged(

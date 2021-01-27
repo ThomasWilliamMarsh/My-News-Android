@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
+import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -13,6 +14,7 @@ import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
+import info.tommarsh.mynews.core.util.doOnInsets
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import info.tommarsh.search.databinding.FragmentSearchBinding
 import kotlinx.coroutines.Job
@@ -44,10 +46,17 @@ class SearchFragment : Fragment() {
         setUpRecyclerView()
         setUpSearchView()
         setUpRetryButton()
+        setUpWindowInsets()
     }
 
     private fun setUpRecyclerView() {
         binding.searchRecyclerView.adapter = setUpAdapter()
+    }
+
+    private fun setUpWindowInsets() {
+        binding.root.doOnInsets { systemBarInsets, _ ->
+            binding.searchToolbar.updatePadding(top = systemBarInsets.top)
+        }
     }
 
     private fun setUpSearchView() {

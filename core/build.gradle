@@ -60,6 +60,8 @@ dependencies {
     api 'androidx.hilt:hilt-lifecycle-viewmodel:' + rootProject.jetpackHiltVersion
     api 'androidx.hilt:hilt-work:' + rootProject.jetpackHiltVersion
     api 'androidx.paging:paging-runtime:' + rootProject.pagingVersion
+    api "androidx.core:core-ktx:" + rootProject.coreKtxVersion
+
 
 
     //Work Manager
