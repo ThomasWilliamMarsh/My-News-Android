@@ -103,7 +103,7 @@ class HomeFragment: Fragment(), NavController.OnDestinationChangedListener {
                 }
                 is ClickEvent.Article -> {
                     findNavController().navigate(
-                        R.id.action_homeFragment_to_articleActivity,
+                        R.id.action_homeFragment_to_articleFragment,
                         bundleOf("url" to event.id, "title" to event.title)
                     )
                 }

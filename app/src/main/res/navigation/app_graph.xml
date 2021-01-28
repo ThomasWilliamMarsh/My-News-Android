@@ -17,8 +17,8 @@
                 android:id="@+id/action_homeFragment_to_category_choice_graph"
                 app:destination="@id/category_choice_graph" />
         <action
-                android:id="@+id/action_homeFragment_to_articleActivity"
-                app:destination="@id/articleActivity" />
+                android:id="@+id/action_homeFragment_to_articleFragment"
+                app:destination="@id/articleFragment" />
 
         <action
                 android:id="@+id/action_homeFragment_to_onboardingGraph"
@@ -36,10 +36,10 @@
             app:graphResName="onboarding_nav_graph"
             app:graphPackage="info.tommarsh.mynews.onboarding" />
 
-    <activity
-            android:id="@+id/articleActivity"
-            android:name="info.tommarsh.mynews.article.ui.ArticleActivity"
-            android:label="ArticleActivity"
+    <fragment
+            android:id="@+id/articleFragment"
+            android:name="info.tommarsh.mynews.article.ui.ArticleFragment"
+            android:label="Article Fragment"
             app:moduleName="article" />
 
 </navigation>

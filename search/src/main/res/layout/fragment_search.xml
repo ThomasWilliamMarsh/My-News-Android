@@ -20,9 +20,9 @@
 
             <androidx.appcompat.widget.SearchView
                     android:id="@+id/search_view"
-                    app:queryHint="@string/search_for_articles"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent" />
+                    android:layout_height="match_parent"
+                    app:queryHint="@string/search_for_articles" />
 
         </com.google.android.material.appbar.MaterialToolbar>
 
@@ -32,8 +32,7 @@
             android:id="@+id/search_progress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginTop="@dimen/progress_margin_top"
+            android:layout_gravity="center"
             android:visibility="gone" />
 
     <androidx.recyclerview.widget.RecyclerView

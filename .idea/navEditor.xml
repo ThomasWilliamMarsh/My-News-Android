@@ -20,6 +20,18 @@
                       </LayoutPositions>
                     </value>
                   </entry>
+                  <entry key="articleFragment">
+                    <value>
+                      <LayoutPositions>
+                        <option name="myPosition">
+                          <Point>
+                            <option name="x" value="653" />
+                            <option name="y" value="-48" />
+                          </Point>
+                        </option>
+                      </LayoutPositions>
+                    </value>
+                  </entry>
                   <entry key="category_choice_graph">
                     <value>
                       <LayoutPositions>
@@ -470,7 +482,7 @@
             <LayoutPositions>
               <option name="myPositions">
                 <map>
-                  <entry key="articleActivity">
+                  <entry key="articleFragment">
                     <value>
                       <LayoutPositions>
                         <option name="myPosition">
@@ -493,7 +505,7 @@
                         </option>
                         <option name="myPositions">
                           <map>
-                            <entry key="action_searchFragment_to_articleActivity">
+                            <entry key="action_searchFragment_to_articleFragment">
                               <value>
                                 <LayoutPositions />
                               </value>
