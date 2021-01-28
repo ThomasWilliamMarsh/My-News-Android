@@ -8,6 +8,7 @@ A News app with personalised categories. Using [NewsAPI](https://newsapi.org/)
 
 ## Features:
 
+- Single Activity Architecture
 - Select news article from a list of sources
 - Personalised categories
 - Day night mode
