@@ -6,7 +6,7 @@ import androidx.paging.PagingDataAdapter
 import info.tommarsh.mynews.core.util.getDiffUtilItemCallback
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 import info.tommarsh.mynews.search.ui.adapter.viewholder.ArticleViewHolder
-import info.tommarsh.search.databinding.ItemSearchArticleBinding
+import info.tommarsh.mynews.search.databinding.ItemSearchArticleBinding
 
 class SearchAdapter : PagingDataAdapter<SearchItemViewModel, ArticleViewHolder>(
     callback

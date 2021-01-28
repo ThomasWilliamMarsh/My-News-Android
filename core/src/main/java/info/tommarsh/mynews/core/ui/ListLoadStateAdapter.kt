@@ -6,8 +6,8 @@ import androidx.core.view.isVisible
 import androidx.paging.LoadState
 import androidx.paging.LoadStateAdapter
 import androidx.recyclerview.widget.RecyclerView
-import info.tommarsh.core.R
-import info.tommarsh.core.databinding.ItemLoadStateBinding
+import info.tommarsh.mynews.core.R
+import info.tommarsh.mynews.core.databinding.ItemLoadStateBinding
 
 class ListLoadStateAdapter(private val onRetry: () -> Unit) :
     LoadStateAdapter<LoadStateViewHolder>() {

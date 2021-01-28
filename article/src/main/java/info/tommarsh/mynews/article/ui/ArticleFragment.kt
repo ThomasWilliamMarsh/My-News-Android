@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import info.tommarsh.mynews.core.util.loadUrl
-import marsh.tommarsh.article.R
-import marsh.tommarsh.article.databinding.FragmentArticleBinding
+import info.tommarsh.mynews.article.R
+import info.tommarsh.mynews.article.databinding.FragmentArticleBinding
 
 class ArticleFragment : Fragment() {
 

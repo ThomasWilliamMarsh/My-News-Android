@@ -5,8 +5,8 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.search.model.SearchItemViewModel
-import info.tommarsh.search.R
-import info.tommarsh.search.databinding.ItemSearchArticleBinding
+import info.tommarsh.mynews.search.R
+import info.tommarsh.mynews.search.databinding.ItemSearchArticleBinding
 
 class ArticleViewHolder(private val binding: ItemSearchArticleBinding) :
     RecyclerView.ViewHolder(binding.root) {

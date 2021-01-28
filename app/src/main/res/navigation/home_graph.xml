@@ -7,19 +7,19 @@
 
     <fragment
             android:id="@+id/navigation_top_news"
-            android:name="info.tommarsh.mynews.presentation.ui.top.TopNewsFragment"
+            android:name="info.tommarsh.mynews.home.ui.top.TopNewsFragment"
             android:label="@string/top_news"
             tools:layout="@layout/fragment_top_news" />
 
     <fragment
             android:id="@+id/navigation_my_news"
-            android:name="info.tommarsh.mynews.presentation.ui.categories.CategoriesFragment"
+            android:name="info.tommarsh.mynews.home.ui.categories.CategoriesFragment"
             android:label="@string/my_news"
             tools:layout="@layout/fragment_categories" />
 
     <fragment
             android:id="@+id/navigation_videos"
-            android:name="info.tommarsh.mynews.presentation.ui.videos.VideosFragment"
+            android:name="info.tommarsh.mynews.home.ui.videos.VideosFragment"
             android:label="@string/videos"
             tools:layout="@layout/fragment_videos" />
 

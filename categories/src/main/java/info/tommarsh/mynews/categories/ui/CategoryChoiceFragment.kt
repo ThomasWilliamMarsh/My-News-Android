@@ -12,7 +12,7 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.categories.databinding.FragmentCategoryChoiceBinding
+import info.tommarsh.mynews.categories.databinding.FragmentCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
 import info.tommarsh.mynews.core.util.doOnInsets

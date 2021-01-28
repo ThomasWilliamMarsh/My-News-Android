@@ -1,6 +1,6 @@
 package info.tommarsh.mynews.core.util
 
-import info.tommarsh.core.BuildConfig
+import info.tommarsh.mynews.core.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.Response
 

@@ -1,7 +1,7 @@
 package info.tommarsh.mynews.categories.ui.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
-import info.tommarsh.categories.databinding.ItemCategoryChoiceBinding
+import info.tommarsh.mynews.categories.databinding.ItemCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 
 class CategoryChoiceViewholder(

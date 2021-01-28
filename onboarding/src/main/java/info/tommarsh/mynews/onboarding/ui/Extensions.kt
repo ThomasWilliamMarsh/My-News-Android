@@ -7,8 +7,8 @@ import androidx.navigation.navGraphViewModels
 import dagger.hilt.android.EntryPointAccessors
 import info.tommarsh.mynews.onboarding.di.DaggerOnBoardingComponent
 import info.tommarsh.mynews.onboarding.di.OnBoardingComponent
-import info.tommarsh.mynews.presentation.di.OnBoardingDependencies
-import info.tommarsh.presentation.R.id.onboarding_nav_graph
+import info.tommarsh.mynews.home.di.OnBoardingDependencies
+import info.tommarsh.mynews.home.R.id.onboarding_nav_graph
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private fun Fragment.createComponent(): OnBoardingComponent {

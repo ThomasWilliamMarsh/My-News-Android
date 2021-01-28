@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:tools="http://schemas.android.com/tools"
-        package="info.tommarsh.presentation">
+        package="info.tommarsh.mynews.home">
 
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:name="info.tommarsh.mynews.presentation.NewsApp"
+            android:name="info.tommarsh.mynews.home.NewsApp"
             android:allowBackup="true"
             android:icon="@mipmap/ic_launcher"
             android:label="@string/app_name"
@@ -14,7 +14,7 @@
             android:supportsRtl="true"
             android:theme="@style/MyNews.DayNight"
             tools:ignore="GoogleAppIndexingWarning">
-        <activity android:name="info.tommarsh.mynews.presentation.ui.MainActivity">
+        <activity android:name="info.tommarsh.mynews.home.ui.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

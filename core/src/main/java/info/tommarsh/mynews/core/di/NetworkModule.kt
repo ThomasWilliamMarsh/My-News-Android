@@ -5,7 +5,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import info.tommarsh.core.BuildConfig
+import info.tommarsh.mynews.core.BuildConfig
 import info.tommarsh.mynews.core.article.data.remote.source.ArticleApiService
 import info.tommarsh.mynews.core.util.NewsApiInterceptor
 import info.tommarsh.mynews.core.util.YoutubeApiInterceptor

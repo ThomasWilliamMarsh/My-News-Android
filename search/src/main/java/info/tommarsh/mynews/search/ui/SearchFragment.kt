@@ -16,7 +16,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.doOnInsets
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
-import info.tommarsh.search.databinding.FragmentSearchBinding
+import info.tommarsh.mynews.search.databinding.FragmentSearchBinding
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch

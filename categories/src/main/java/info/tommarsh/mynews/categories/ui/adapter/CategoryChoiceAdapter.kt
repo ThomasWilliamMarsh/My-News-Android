@@ -3,7 +3,7 @@ package info.tommarsh.mynews.categories.ui.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
-import info.tommarsh.categories.databinding.ItemCategoryChoiceBinding
+import info.tommarsh.mynews.categories.databinding.ItemCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.viewholder.CategoryChoiceViewholder
 import info.tommarsh.mynews.core.util.getDiffUtilItemCallback
