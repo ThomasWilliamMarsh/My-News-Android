@@ -8,7 +8,6 @@ A News app with personalised categories. Using [NewsAPI](https://newsapi.org/)
 
 ## Features:
 
-- Single Activity Architecture
 - Select news article from a list of sources
 - Personalised categories
 - Day night mode
@@ -22,5 +21,6 @@ A News app with personalised categories. Using [NewsAPI](https://newsapi.org/)
 - Room
 - Retrofit
 - Hilt dependency injection
+- Navigation components / Single Activity architecture
 
 
