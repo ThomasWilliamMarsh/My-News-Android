@@ -12,14 +12,13 @@ import info.tommarsh.mynews.onboarding.databinding.FragmentIntroductionBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
-import info.tommarsh.presentation.R.id.onboarding_nav_graph
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
 internal class IntroductionFragment : Fragment() {
 
-    private val viewModel by onBoardingViewModel(onboarding_nav_graph)
+    private val viewModel by onBoardingViewModel()
 
     private lateinit var binding: FragmentIntroductionBinding
 

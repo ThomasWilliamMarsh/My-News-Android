@@ -9,22 +9,19 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import info.tommarsh.mynews.core.util.newTaskIntent
 import info.tommarsh.mynews.onboarding.R
-import info.tommarsh.presentation.R.id.onboarding_nav_graph
 import info.tommarsh.mynews.onboarding.databinding.FragmentCountryBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.adapter.ChoiceAdapter
 import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
-import info.tommarsh.mynews.presentation.ui.HomeActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
 internal class CountryFragment : Fragment() {
 
-    private val viewModel by onBoardingViewModel(onboarding_nav_graph)
+    private val viewModel by onBoardingViewModel()
 
     private val adapter = ChoiceAdapter()
 
