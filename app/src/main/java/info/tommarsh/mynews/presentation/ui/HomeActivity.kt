@@ -11,14 +11,12 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class HomeActivity : AppCompatActivity() {
 
-    @Inject
-    lateinit var fragmentFactory: HomeFragmentFactory
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        supportFragmentManager.fragmentFactory = fragmentFactory
         setContentView(R.layout.activity_home)
         WindowCompat.setDecorFitsSystemWindows(window, false)
+
+
     }
 
     override fun onBackPressed() {

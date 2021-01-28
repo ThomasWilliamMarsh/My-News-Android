@@ -8,8 +8,10 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import info.tommarsh.mynews.core.util.newTaskIntent
 import info.tommarsh.mynews.onboarding.R
+import info.tommarsh.presentation.R.id.onboarding_nav_graph
 import info.tommarsh.mynews.onboarding.databinding.FragmentCountryBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
@@ -22,7 +24,7 @@ import kotlinx.coroutines.flow.collect
 @ExperimentalCoroutinesApi
 internal class CountryFragment : Fragment() {
 
-    private val viewModel by onBoardingViewModel(R.id.onboarding_nav_graph)
+    private val viewModel by onBoardingViewModel(onboarding_nav_graph)
 
     private val adapter = ChoiceAdapter()
 
@@ -64,7 +66,7 @@ internal class CountryFragment : Fragment() {
     }
 
     private fun finishedOnBoarding() {
-        startActivity(requireContext().newTaskIntent<HomeActivity>())
+        findNavController().navigate(R.id.action_countryFragment_to_app_graph)
     }
 
     private fun playAnimation() {

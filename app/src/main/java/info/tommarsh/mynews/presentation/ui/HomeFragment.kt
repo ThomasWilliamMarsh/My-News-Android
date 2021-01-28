@@ -12,8 +12,10 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import androidx.navigation.NavOptionsBuilder
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.navOptions
 import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
@@ -22,11 +24,13 @@ import info.tommarsh.mynews.core.util.doOnInsets
 import info.tommarsh.presentation.R
 import info.tommarsh.presentation.databinding.FragmentHomeBinding
 import kotlinx.coroutines.flow.collectLatest
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment(
-    private val preferences: PreferencesRepository
-) : Fragment(), NavController.OnDestinationChangedListener {
+class HomeFragment: Fragment(), NavController.OnDestinationChangedListener {
+
+    @Inject
+    lateinit var preferences: PreferencesRepository
 
     private lateinit var binding: FragmentHomeBinding
 
@@ -84,7 +88,7 @@ class HomeFragment(
         binding.homeToolbar.title = destination.label
     }
 
-    private fun listenToClickEvents() = lifecycleScope.launchWhenResumed {
+    private fun listenToClickEvents() = lifecycleScope.launchWhenCreated {
         navigationViewModel.clicks.collectLatest { event ->
             when (event) {
                 is ClickEvent.Search -> {
@@ -105,9 +109,8 @@ class HomeFragment(
                 }
                 is ClickEvent.OnBoarding -> {
                     findNavController().navigate(
-                        R.id.action_homeFragment_to_onBoardingActivity
+                        R.id.action_homeFragment_to_onboardingGraph,
                     )
-                    requireActivity().finish()
                 }
             }
         }

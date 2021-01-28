@@ -7,20 +7,19 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import info.tommarsh.mynews.core.util.newTaskIntent
 import info.tommarsh.mynews.onboarding.R
 import info.tommarsh.mynews.onboarding.databinding.FragmentIntroductionBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
-import info.tommarsh.mynews.presentation.ui.HomeActivity
+import info.tommarsh.presentation.R.id.onboarding_nav_graph
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
 @ExperimentalCoroutinesApi
 internal class IntroductionFragment : Fragment() {
 
-    private val viewModel by onBoardingViewModel(R.id.onboarding_nav_graph)
+    private val viewModel by onBoardingViewModel(onboarding_nav_graph)
 
     private lateinit var binding: FragmentIntroductionBinding
 
@@ -36,7 +35,7 @@ internal class IntroductionFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.onboardingStartButton.setOnClickListener {
-            findNavController().navigate(R.id.action_introductionFragment_to_sourcesFragment)
+            findNavController().navigate(R.id.action_introductionFragment_to_countryFragment)
         }
         binding.onboardingSkipButton.setOnClickListener {
             viewModel.postAction(Action.IntroductionSkipped)
@@ -52,6 +51,6 @@ internal class IntroductionFragment : Fragment() {
     }
 
     private fun finishedOnBoarding() {
-        startActivity(requireContext().newTaskIntent<HomeActivity>())
+        findNavController().navigate(R.id.action_introductionFragment_to_app_graph)
     }
 }

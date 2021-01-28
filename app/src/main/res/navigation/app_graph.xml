@@ -19,12 +19,22 @@
         <action
                 android:id="@+id/action_homeFragment_to_articleActivity"
                 app:destination="@id/articleActivity" />
+
         <action
-                android:id="@+id/action_homeFragment_to_onBoardingActivity"
-                app:destination="@id/onBoardingActivity" />
+                android:id="@+id/action_homeFragment_to_onboardingGraph"
+                app:destination="@id/onboarding_nav_graph"
+                app:popUpTo="@id/onboarding_nav_graph"
+                app:popUpToInclusive="false" />
     </fragment>
+
     <include app:graph="@navigation/search_graph" />
     <include app:graph="@navigation/category_choice_graph" />
+
+    <include-dynamic
+            android:id="@+id/onboarding_nav_graph"
+            app:moduleName="onboarding"
+            app:graphResName="onboarding_nav_graph"
+            app:graphPackage="info.tommarsh.mynews.onboarding" />
 
     <activity
             android:id="@+id/articleActivity"
@@ -32,9 +42,4 @@
             android:label="ArticleActivity"
             app:moduleName="article" />
 
-    <activity
-            android:id="@+id/onBoardingActivity"
-            android:name="info.tommarsh.mynews.onboarding.ui.OnBoardingActivity"
-            android:label="OnBoardingActivity"
-            app:moduleName="onboarding" />
 </navigation>
