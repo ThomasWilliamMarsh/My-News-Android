@@ -9,14 +9,12 @@ import info.tommarsh.presentation.R
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeActivity : AppCompatActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_home)
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-
     }
 
     override fun onBackPressed() {
