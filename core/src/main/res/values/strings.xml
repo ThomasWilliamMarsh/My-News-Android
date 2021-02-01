@@ -1,3 +1,4 @@
 <resources>
     <string name="content_description_image_article">Article Image</string>
+    <string name="content_description_image_video">Video Poster Image</string>
 </resources>

@@ -12,9 +12,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
-import info.tommarsh.mynews.home.ui.NavigationViewModel
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentVideosBinding
+import info.tommarsh.mynews.home.ui.NavigationViewModel
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
@@ -91,7 +91,7 @@ class VideosFragment : Fragment() {
             spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
                 override fun getSpanSize(position: Int): Int {
                     return when (adapter.getItemViewType(position)) {
-                        1 -> spanCount
+                        0 -> spanCount
                         else -> 1
                     }
                 }

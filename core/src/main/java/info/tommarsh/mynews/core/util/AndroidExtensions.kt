@@ -1,5 +1,8 @@
 package info.tommarsh.mynews.core.util
 
+import android.content.Context
+import android.content.Intent
+import android.net.Uri
 import android.view.View
 import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
@@ -38,5 +41,16 @@ fun View.doOnInsets(block: (systemBarInsets: Insets, navigationBarInsets: Insets
         block(systemBarInsets, navigationInsets)
         CONSUMED
     }
+}
+//endregion
+
+//region Context
+fun Context.launchExternal(url: String) {
+    startActivity(
+        Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse(url)
+        )
+    )
 }
 //endregion
