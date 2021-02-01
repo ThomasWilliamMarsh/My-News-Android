@@ -21,5 +21,6 @@ A News app with personalised categories. Using [NewsAPI](https://newsapi.org/)
 - Room
 - Retrofit
 - Hilt dependency injection
+- Navigation components / Single Activity architecture
 
 
