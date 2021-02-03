@@ -59,8 +59,8 @@ ext {
 
     //DI
     daggerVersion = "2.31"
-    hiltVersion = "2.31-alpha"
-    jetpackHiltVersion = "1.0.0-alpha02"
+    hiltVersion = "2.31.2-alpha"
+    jetpackHiltVersion = "1.0.0-alpha03"
 
     //Moshi
     moshiVersion = "1.9.2"
