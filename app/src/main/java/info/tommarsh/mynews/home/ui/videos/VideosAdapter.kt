@@ -63,6 +63,7 @@ private class PrimaryVideoViewHolder(private val binding: ItemMainVideoBinding) 
         val context = binding.root.context
         binding.mainVideoImage.loadUrl(video.thumbnail)
         binding.mainVideoTitle.text = video.title
+        binding.mainVideoUpdated.text = video.publishedAt
         binding.root.setOnClickListener {
             context.launchExternal(context.getString(R.string.youtube_url, video.videoId))
         }

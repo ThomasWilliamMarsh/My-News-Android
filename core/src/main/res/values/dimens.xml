@@ -6,6 +6,7 @@
     <dimen name="main_article_image_size">216dp</dimen>
     <dimen name="main_video_image_size">216dp</dimen>
     <dimen name="article_image_size">72dp</dimen>
+    <dimen name="video_image_size">72dp</dimen>
     <dimen name="small_margin">4dp</dimen>
     <dimen name="normal_margin">8dp</dimen>
     <dimen name="huge_margin">24dp</dimen>

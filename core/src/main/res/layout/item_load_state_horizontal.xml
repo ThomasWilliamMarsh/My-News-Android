@@ -12,7 +12,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:textAlignment="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            android:textAppearance="?textAppearanceBody1"
             android:textColor="?android:textColorPrimary"
             tools:text="Timeout" />
 

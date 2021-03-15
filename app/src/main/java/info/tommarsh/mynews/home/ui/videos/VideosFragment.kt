@@ -47,7 +47,6 @@ class VideosFragment : Fragment() {
         val concatAdapter = setUpAdapter()
         binding.videosRecyclerView.adapter = concatAdapter
         binding.videosRecyclerView.itemAnimator = null
-        binding.videosRecyclerView.layoutManager = setLayoutManager(concatAdapter)
         binding.refreshVideo.setOnRefreshListener {
             adapter.refresh()
         }
@@ -84,21 +83,5 @@ class VideosFragment : Fragment() {
                     loadState.source.refresh is LoadState.Loading
             }
         }
-    }
-
-    private fun setLayoutManager(adapter: ConcatAdapter) =
-        GridLayoutManager(context, VIDEOS_SPAN_COUNT).apply {
-            spanSizeLookup = object : GridLayoutManager.SpanSizeLookup() {
-                override fun getSpanSize(position: Int): Int {
-                    return when (adapter.getItemViewType(position)) {
-                        0 -> spanCount
-                        else -> 1
-                    }
-                }
-            }
-        }
-
-    companion object {
-        private const val VIDEOS_SPAN_COUNT = 2
     }
 }

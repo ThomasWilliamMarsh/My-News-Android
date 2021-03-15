@@ -29,19 +29,19 @@
         <item name="colorOnError">@color/color_on_error</item>
 
         <!--Material type attributes-->
-        <item name="textAppearanceHeadline1">@style/TextAppearance.MyTheme.Headline1</item>
-        <item name="textAppearanceHeadline2">@style/TextAppearance.MyTheme.Headline2</item>
-        <item name="textAppearanceHeadline3">@style/TextAppearance.MyTheme.Headline3</item>
-        <item name="textAppearanceHeadline4">@style/TextAppearance.MyTheme.Headline4</item>
-        <item name="textAppearanceHeadline5">@style/TextAppearance.MyTheme.Headline5</item>
-        <item name="textAppearanceHeadline6">@style/TextAppearance.MyTheme.Headline6</item>
-        <item name="textAppearanceSubtitle1">@style/TextAppearance.MyTheme.Subtitle1</item>
-        <item name="textAppearanceSubtitle2">@style/TextAppearance.MyTheme.Subtitle2</item>
-        <item name="textAppearanceBody1">@style/TextAppearance.MyTheme.Body1</item>
-        <item name="textAppearanceBody2">@style/TextAppearance.MyTheme.Body2</item>
-        <item name="textAppearanceButton">@style/TextAppearance.MyTheme.Button</item>
-        <item name="textAppearanceCaption">@style/TextAppearance.MyTheme.Caption</item>
-        <item name="textAppearanceOverline">@style/TextAppearance.MyTheme.Overline</item>
+        <item name="textAppearanceHeadline1">@style/TextAppearance.MyNews.Headline1</item>
+        <item name="textAppearanceHeadline2">@style/TextAppearance.MyNews.Headline2</item>
+        <item name="textAppearanceHeadline3">@style/TextAppearance.MyNews.Headline3</item>
+        <item name="textAppearanceHeadline4">@style/TextAppearance.MyNews.Headline4</item>
+        <item name="textAppearanceHeadline5">@style/TextAppearance.MyNews.Headline5</item>
+        <item name="textAppearanceHeadline6">@style/TextAppearance.MyNews.Headline6</item>
+        <item name="textAppearanceSubtitle1">@style/TextAppearance.MyNews.Subtitle1</item>
+        <item name="textAppearanceSubtitle2">@style/TextAppearance.MyNews.Subtitle2</item>
+        <item name="textAppearanceBody1">@style/TextAppearance.MyNews.Body1</item>
+        <item name="textAppearanceBody2">@style/TextAppearance.MyNews.Body2</item>
+        <item name="textAppearanceButton">@style/TextAppearance.MyNews.Button</item>
+        <item name="textAppearanceCaption">@style/TextAppearance.MyNews.Caption</item>
+        <item name="textAppearanceOverline">@style/TextAppearance.MyNews.Overline</item>
 
         <!--Material shape attributes-->
         <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyTheme.SmallComponent
