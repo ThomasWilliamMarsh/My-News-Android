@@ -23,6 +23,7 @@
     <style name="Widget.MyNews.SearchView.AutoComplete" parent="Widget.AppCompat.Light.AutoCompleteTextView">
         <item name="android:textColor">#ffffff</item>
         <item name="android:textColorHint">#CCffffff</item>
+        <item name="fontFamily">@font/roboto_slab_medium</item>
     </style>
 
 </resources>
