@@ -44,11 +44,11 @@
         <item name="textAppearanceOverline">@style/TextAppearance.MyNews.Overline</item>
 
         <!--Material shape attributes-->
-        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyTheme.SmallComponent
+        <item name="shapeAppearanceSmallComponent">@style/ShapeAppearance.MyNews.SmallComponent
         </item>
-        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyTheme.MediumComponent
+        <item name="shapeAppearanceMediumComponent">@style/ShapeAppearance.MyNews.MediumComponent
         </item>
-        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyTheme.LargeComponent
+        <item name="shapeAppearanceLargeComponent">@style/ShapeAppearance.MyNews.LargeComponent
         </item>
 
         <!--Component styles-->

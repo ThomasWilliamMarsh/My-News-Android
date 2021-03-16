@@ -2,30 +2,56 @@
 
     <!--Typography-->
 
-    <style name="TextAppearance.MyNews.Headline1" parent="TextAppearance.MaterialComponents.Headline1"/>
+    <style name="TextAppearance.MyNews.Headline1" parent="TextAppearance.MaterialComponents.Headline1">
+        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Headline2" parent="TextAppearance.MaterialComponents.Headline2"/>
+    <style name="TextAppearance.MyNews.Headline2" parent="TextAppearance.MaterialComponents.Headline2">
+        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Headline3" parent="TextAppearance.MaterialComponents.Headline3"/>
+    <style name="TextAppearance.MyNews.Headline3" parent="TextAppearance.MaterialComponents.Headline3">
+        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Headline4" parent="TextAppearance.MaterialComponents.Headline4"/>
+    <style name="TextAppearance.MyNews.Headline4" parent="TextAppearance.MaterialComponents.Headline4">
+        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Headline5" parent="TextAppearance.MaterialComponents.Headline5"/>
+    <style name="TextAppearance.MyNews.Headline5" parent="TextAppearance.MaterialComponents.Headline5">
+        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Headline6" parent="TextAppearance.MaterialComponents.Headline6"/>
+    <style name="TextAppearance.MyNews.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1"/>
+    <style name="TextAppearance.MyNews.Subtitle1" parent="TextAppearance.MaterialComponents.Subtitle1">
+        <item name="fontFamily">@font/roboto_slab_medium</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2"/>
+    <style name="TextAppearance.MyNews.Subtitle2" parent="TextAppearance.MaterialComponents.Subtitle2">
+        <item name="fontFamily">@font/roboto_slab_medium</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Body1" parent="TextAppearance.MaterialComponents.Body1"/>
+    <style name="TextAppearance.MyNews.Body1" parent="TextAppearance.MaterialComponents.Body1">
+        <item name="fontFamily">@font/roboto_slab_regular</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Body2" parent="TextAppearance.MaterialComponents.Body2"/>
+    <style name="TextAppearance.MyNews.Body2" parent="TextAppearance.MaterialComponents.Body2">
+        <item name="fontFamily">@font/roboto_slab_regular</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Button" parent="TextAppearance.MaterialComponents.Button"/>
+    <style name="TextAppearance.MyNews.Button" parent="TextAppearance.MaterialComponents.Button">
+        <item name="fontFamily">@font/roboto_slab_semi_bold</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Caption" parent="TextAppearance.MaterialComponents.Caption"/>
+    <style name="TextAppearance.MyNews.Caption" parent="TextAppearance.MaterialComponents.Caption">
+        <item name="fontFamily">@font/roboto_slab_regular</item>
+    </style>
 
-    <style name="TextAppearance.MyNews.Overline" parent="TextAppearance.MaterialComponents.Overline"/>
+    <style name="TextAppearance.MyNews.Overline" parent="TextAppearance.MaterialComponents.Overline">
+        <item name="fontFamily">@font/roboto_slab_medium</item>
+    </style>
 
 </resources>
