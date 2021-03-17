@@ -1,0 +1,10 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+        package="info.tommarsh.mynews.home">
+
+    <application>
+        <activity
+                android:name="info.tommarsh.mynews.HiltTestActivity"
+                android:exported="false" />
+    </application>
+
+</manifest>
