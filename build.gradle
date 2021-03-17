@@ -44,7 +44,7 @@ ext {
     navigationVersion = "2.3.1"
     workmanagerVersion = "2.3.4"
     playCoreVersion = "1.7.0"
-    pagingVersion = "3.0.0-alpha11"
+    pagingVersion = "3.0.0-beta02"
     fragment = "1.2.5"
 
     //Firebase

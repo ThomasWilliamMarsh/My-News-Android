@@ -1,6 +1,7 @@
 package info.tommarsh.mynews.core.video.data.remote.paging
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.video.data.remote.source.VideoRemoteDataStore
 import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel
@@ -23,4 +24,6 @@ internal class VideoPagingSource(private val remote: VideoRemoteDataStore) :
             is Resource.Error -> LoadResult.Error(throwable = resource.error)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<String, PlaylistItemModel>) = ""
 }

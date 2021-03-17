@@ -1,6 +1,7 @@
 package info.tommarsh.mynews.core.article.data.paging
 
 import androidx.paging.PagingSource
+import androidx.paging.PagingState
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
 import info.tommarsh.mynews.core.model.Resource
@@ -26,4 +27,6 @@ internal class SearchPagingSource constructor(
             is Resource.Error -> LoadResult.Error(throwable = resource.error)
         }
     }
+
+    override fun getRefreshKey(state: PagingState<Int, ArticleModel>) = 1
 }
