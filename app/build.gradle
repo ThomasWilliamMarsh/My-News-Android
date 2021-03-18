@@ -70,6 +70,7 @@ dependencies {
     debugImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
 
     //Espresso
+    androidTestImplementation 'org.mockito:mockito-android:3.8.0'
     androidTestImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
     androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.espressoVersion
     androidTestImplementation 'androidx.test:runner:' + rootProject.espressoRunnerVersion
