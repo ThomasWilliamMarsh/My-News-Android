@@ -17,7 +17,7 @@ android {
 
         buildConfigField 'String', 'API_KEY', '"d5ee3082f9e947d7868482d8f1199266"'
         buildConfigField 'String', 'YOUTUBE_API_KEY', '"AIzaSyBKHdX73GIAGcXCIdgz78o0ON_qZLboI64"'
-        buildConfigField 'String', 'YOUTUBE_PLAYLIST', '"PLS3XGZxi7cBVNadbxDqZCUgISvabEpu-g"'
+        buildConfigField 'String', 'YOUTUBE_PLAYLIST', '"PLS3XGZxi7cBVTzEE4Sim9UuNKnUJq9Vkh"'
     }
 
     buildTypes {
