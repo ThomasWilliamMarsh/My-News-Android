@@ -7,10 +7,10 @@ import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.core.util.loadUrl
-import info.tommarsh.mynews.home.model.ArticleViewModel
-import info.tommarsh.mynews.home.ui.onClickEvent
 import info.tommarsh.mynews.home.databinding.ItemArticleBinding
 import info.tommarsh.mynews.home.databinding.ItemMainArticleBinding
+import info.tommarsh.mynews.home.model.ArticleViewModel
+import info.tommarsh.mynews.home.ui.onClickEvent
 
 class TopNewsAdapter(private val onClickEvent: onClickEvent) :
     PagingDataAdapter<ArticleViewModel, RecyclerView.ViewHolder>(DIFFER) {

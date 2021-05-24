@@ -32,9 +32,9 @@
 
     <include-dynamic
             android:id="@+id/onboarding_nav_graph"
-            app:moduleName="onboarding"
+            app:graphPackage="info.tommarsh.mynews.onboarding"
             app:graphResName="onboarding_nav_graph"
-            app:graphPackage="info.tommarsh.mynews.onboarding" />
+            app:moduleName="onboarding" />
 
     <fragment
             android:id="@+id/articleFragment"

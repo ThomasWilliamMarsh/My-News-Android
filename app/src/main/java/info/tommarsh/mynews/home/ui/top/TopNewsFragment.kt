@@ -11,11 +11,10 @@ import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
-import info.tommarsh.mynews.home.ui.NavigationViewModel
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentTopNewsBinding
+import info.tommarsh.mynews.home.ui.NavigationViewModel
 import kotlinx.coroutines.InternalCoroutinesApi
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy

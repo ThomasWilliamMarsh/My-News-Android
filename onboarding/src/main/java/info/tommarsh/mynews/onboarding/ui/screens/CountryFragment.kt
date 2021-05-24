@@ -63,7 +63,7 @@ internal class CountryFragment : Fragment() {
     }
 
     private fun finishedOnBoarding() {
-        findNavController().navigate(R.id.action_countryFragment_to_app_graph)
+        findNavController().navigate(R.id.action_countryFragment_to_homeFragment)
     }
 
     private fun playAnimation() {

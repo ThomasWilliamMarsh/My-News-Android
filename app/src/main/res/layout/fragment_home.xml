@@ -22,11 +22,10 @@
 
     <androidx.fragment.app.FragmentContainerView
             android:id="@+id/home_nav_host"
-            android:name="androidx.navigation.dynamicfeatures.fragment.DynamicNavHostFragment"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:navGraph="@navigation/home_graph" />
+            android:name="info.tommarsh.mynews.home.ui.top.TopNewsFragment"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/home_bottom_navigation"
@@ -35,6 +34,6 @@
             android:layout_gravity="bottom"
             app:hideOnScroll="true"
             app:layout_behavior="@string/hide_bottom_view_on_scroll_behavior"
-            app:menu="@menu/bottom_navigation_menu" />
+            app:menu="@menu/home_menu" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

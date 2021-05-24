@@ -7,11 +7,12 @@ import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.core.util.loadUrl
+import info.tommarsh.mynews.home.databinding.ItemCategoryArticleBinding
 import info.tommarsh.mynews.home.model.ArticleViewModel
 import info.tommarsh.mynews.home.ui.onClickEvent
-import info.tommarsh.mynews.home.databinding.ItemCategoryArticleBinding
 
-class CarouselItemAdapter(private val onClickEvent: onClickEvent) : PagingDataAdapter<ArticleViewModel, CarouselItemViewHolder>(DIFFER) {
+class CarouselItemAdapter(private val onClickEvent: onClickEvent) :
+    PagingDataAdapter<ArticleViewModel, CarouselItemViewHolder>(DIFFER) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CarouselItemViewHolder {
         val binding =
@@ -30,8 +31,10 @@ class CarouselItemAdapter(private val onClickEvent: onClickEvent) : PagingDataAd
     }
 }
 
-class CarouselItemViewHolder(private val binding: ItemCategoryArticleBinding,
-                             private val onClickEvent: onClickEvent) :
+class CarouselItemViewHolder(
+    private val binding: ItemCategoryArticleBinding,
+    private val onClickEvent: onClickEvent
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(article: ArticleViewModel) {

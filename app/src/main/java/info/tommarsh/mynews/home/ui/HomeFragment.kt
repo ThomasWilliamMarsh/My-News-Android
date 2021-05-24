@@ -10,13 +10,7 @@ import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.NavController
-import androidx.navigation.NavDestination
-import androidx.navigation.NavOptionsBuilder
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.navOptions
-import androidx.navigation.ui.setupWithNavController
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
@@ -27,7 +21,7 @@ import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class HomeFragment: Fragment(), NavController.OnDestinationChangedListener {
+class HomeFragment : Fragment() {
 
     @Inject
     lateinit var preferences: PreferencesRepository
@@ -63,32 +57,21 @@ class HomeFragment: Fragment(), NavController.OnDestinationChangedListener {
     }
 
     private fun setUpNavigation() {
-        val navHost =
-            childFragmentManager.findFragmentById(R.id.home_nav_host) as NavHostFragment
-        val controller = navHost.navController
-        if (preferences.shouldShowOnBoarding()) {
-            navigationViewModel.dispatchClick(ClickEvent.OnBoarding)
+        val navigator = HomeFragmentMenuNavigator(childFragmentManager) { label ->
+            binding.homeToolbar.title = label
         }
-        controller.addOnDestinationChangedListener(this)
-        binding.homeBottomNavigation.setupWithNavController(controller)
+        binding.homeBottomNavigation?.setOnItemSelectedListener(navigator)
+        binding.homeNavigationRail?.setOnItemSelectedListener(navigator)
     }
 
     private fun setWindowInsets() {
         binding.root.doOnInsets { systemBarInsets, navigationBarInsets ->
             binding.homeToolbar.updatePadding(top = systemBarInsets.top)
-            binding.homeBottomNavigation.updatePadding(bottom = navigationBarInsets.bottom)
+            binding.homeBottomNavigation?.updatePadding(bottom = navigationBarInsets.bottom)
         }
     }
 
-    override fun onDestinationChanged(
-        controller: NavController,
-        destination: NavDestination,
-        arguments: Bundle?
-    ) {
-        binding.homeToolbar.title = destination.label
-    }
-
-    private fun listenToClickEvents() = lifecycleScope.launchWhenCreated {
+    private fun listenToClickEvents() = lifecycleScope.launchWhenResumed {
         navigationViewModel.clicks.collectLatest { event ->
             when (event) {
                 is ClickEvent.Search -> {

@@ -8,7 +8,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
@@ -51,10 +50,6 @@ class VideosFragment : Fragment() {
             adapter.refresh()
         }
         binding.refreshVideo.isRefreshing = true
-    }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
         lifecycleScope.launchWhenStarted {
             viewModel.videos.collectLatest { videos ->
                 adapter.submitData(videos)

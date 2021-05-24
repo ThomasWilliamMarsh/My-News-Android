@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.doOnInsets
-import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import info.tommarsh.mynews.search.databinding.FragmentSearchBinding
+import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -95,7 +95,7 @@ class SearchFragment : Fragment() {
     }
 
     private fun SearchView.doOnSubmit(block: (query: String) -> Unit) {
-        setOnQueryTextListener(object: SearchView.OnQueryTextListener {
+        setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 block(query.orEmpty())
                 return true

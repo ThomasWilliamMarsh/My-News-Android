@@ -7,7 +7,6 @@ import com.google.android.play.core.splitcompat.SplitCompat
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
 import dagger.hilt.android.HiltAndroidApp
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
-import info.tommarsh.mynews.home.R
 import javax.inject.Inject
 
 @HiltAndroidApp

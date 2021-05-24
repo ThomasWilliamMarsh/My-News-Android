@@ -13,8 +13,9 @@
                 android:defaultValue="onboarding_country"
                 app:argType="string" />
         <action
-                android:id="@+id/action_countryFragment_to_app_graph"
-                app:destination="@id/app_graph" />
+                android:id="@+id/action_countryFragment_to_homeFragment"
+                app:destination="@id/homeFragment"
+                app:popUpTo="@id/homeFragment" />
     </fragment>
     <fragment
             android:id="@+id/introductionFragment"
@@ -25,9 +26,12 @@
                 app:destination="@id/countryFragment"
                 app:popUpTo="@id/app_graph" />
         <action
-                android:id="@+id/action_introductionFragment_to_app_graph"
-                app:destination="@id/app_graph"
-                app:popUpTo="@id/app_graph" />
+                android:id="@+id/action_introductionFragment_to_homeFragment"
+                app:destination="@id/homeFragment"
+                app:popUpTo="@id/homeFragment" />
     </fragment>
-    <include app:graph="@navigation/app_graph" />
+    <fragment
+            android:id="@+id/homeFragment"
+            android:name="info.tommarsh.mynews.home.ui.HomeFragment"
+            android:label="HomeFragment" />
 </navigation>

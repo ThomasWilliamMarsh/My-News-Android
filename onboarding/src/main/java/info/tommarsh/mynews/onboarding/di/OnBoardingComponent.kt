@@ -3,10 +3,10 @@ package info.tommarsh.mynews.onboarding.di
 import android.content.Context
 import dagger.BindsInstance
 import dagger.Component
+import info.tommarsh.mynews.home.di.OnBoardingDependencies
 import info.tommarsh.mynews.onboarding.di.modules.DataSourceModule
 import info.tommarsh.mynews.onboarding.di.modules.OnBoardingModule
 import info.tommarsh.mynews.onboarding.ui.OnBoardingViewModel
-import info.tommarsh.mynews.home.di.OnBoardingDependencies
 
 @Component(
     dependencies = [OnBoardingDependencies::class],

@@ -50,6 +50,6 @@ internal class IntroductionFragment : Fragment() {
     }
 
     private fun finishedOnBoarding() {
-        findNavController().navigate(R.id.action_introductionFragment_to_app_graph)
+        findNavController().navigate(R.id.action_introductionFragment_to_homeFragment)
     }
 }

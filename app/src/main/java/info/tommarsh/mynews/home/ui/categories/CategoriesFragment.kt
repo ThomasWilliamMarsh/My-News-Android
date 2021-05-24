@@ -10,9 +10,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
-import info.tommarsh.mynews.home.ui.NavigationViewModel
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentCategoriesBinding
+import info.tommarsh.mynews.home.ui.NavigationViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 
