@@ -27,7 +27,7 @@ class HomeFragmentMenuNavigator(
         onDestinationChanged(data.first)
 
         fragmentManager.commit {
-            replace(R.id.home_nav_host, data.second)
+            replace(R.id.home_container, data.second)
         }
         return true
     }
