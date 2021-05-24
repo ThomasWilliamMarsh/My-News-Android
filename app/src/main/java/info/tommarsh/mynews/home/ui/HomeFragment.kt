@@ -57,7 +57,7 @@ class HomeFragment : Fragment() {
     }
 
     private fun setUpNavigation() {
-        val navigator = HomeFragmentMenuNavigator(childFragmentManager) { label ->
+        val navigator = HomeFragmentMenuNavigator(childFragmentManager, requireContext()) { label ->
             binding.homeToolbar.title = label
         }
         binding.homeBottomNavigation?.setOnItemSelectedListener(navigator)
