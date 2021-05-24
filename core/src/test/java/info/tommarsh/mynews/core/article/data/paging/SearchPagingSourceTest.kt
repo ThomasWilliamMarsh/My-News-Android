@@ -1,8 +1,6 @@
 package info.tommarsh.mynews.core.article.data.paging
 
 import androidx.paging.PagingSource
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.articleModel
 import info.tommarsh.mynews.core.MockProvider.noInternet
 import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataStore
@@ -10,6 +8,8 @@ import info.tommarsh.mynews.core.model.Resource
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class SearchPagingSourceTest {
 

@@ -1,10 +1,6 @@
 package info.tommarsh.mynews.core.article.data.paging
 
 import androidx.paging.*
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.never
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.articleModel
 import info.tommarsh.mynews.core.MockProvider.noInternet
 import info.tommarsh.mynews.core.article.data.local.model.Article
@@ -15,6 +11,10 @@ import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.never
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 @OptIn(ExperimentalPagingApi::class)
 class ArticlesRemoteMediatorTest {

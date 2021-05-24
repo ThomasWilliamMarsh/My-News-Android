@@ -2,9 +2,6 @@ package info.tommarsh.mynews.search.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.search.model.MockModelProvider.articleModel
@@ -18,6 +15,9 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.Mockito.verify
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class SearchViewModelTest {
     @get:Rule

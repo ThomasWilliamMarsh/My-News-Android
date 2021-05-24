@@ -1,13 +1,13 @@
 package info.tommarsh.mynews.core.category.data.local.source.local
 
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.category.data.local.source.CategoryDao
 import info.tommarsh.mynews.core.category.data.local.source.CategoryLocalDataStore
 import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.runBlocking
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class CategoryLocalDataStoreTest {
     private val dao = mock<CategoryDao>()

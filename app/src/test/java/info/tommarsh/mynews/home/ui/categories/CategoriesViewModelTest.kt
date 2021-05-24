@@ -2,8 +2,6 @@ package info.tommarsh.mynews.home.ui.categories
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.util.TimeHelper
@@ -24,6 +22,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class CategoriesViewModelTest {
     @get:Rule

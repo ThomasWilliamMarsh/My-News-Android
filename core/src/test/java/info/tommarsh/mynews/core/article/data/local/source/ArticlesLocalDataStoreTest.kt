@@ -1,14 +1,14 @@
 package info.tommarsh.mynews.core.article.data.local.source
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.core.MockProvider.article
 import info.tommarsh.mynews.core.MockProvider.articleModel
 import kotlinx.coroutines.runBlocking
 import org.junit.Rule
 import org.junit.Test
 import org.junit.rules.TestRule
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class ArticlesLocalDataStoreTest {
 

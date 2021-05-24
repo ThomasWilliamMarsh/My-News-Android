@@ -64,7 +64,7 @@ dependencies {
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
-    testImplementation 'com.nhaarman.mockitokotlin2:mockito-kotlin:' + rootProject.mockitoKotlinVersion
+    testImplementation 'org.mockito.kotlin:mockito-kotlin:' + rootProject.mockitoKotlinVersion
     testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
     debugImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion

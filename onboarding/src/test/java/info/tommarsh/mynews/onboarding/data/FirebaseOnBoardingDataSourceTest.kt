@@ -1,7 +1,6 @@
 package info.tommarsh.mynews.onboarding.data
 
 import com.google.firebase.remoteconfig.FirebaseRemoteConfig
-import com.nhaarman.mockitokotlin2.mock
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import info.tommarsh.mynews.core.model.Resource
@@ -9,6 +8,7 @@ import info.tommarsh.mynews.onboarding.MockProvider.choices
 import info.tommarsh.mynews.onboarding.model.Choices
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.mockito.kotlin.mock
 
 class FirebaseOnBoardingDataSourceTest {
 

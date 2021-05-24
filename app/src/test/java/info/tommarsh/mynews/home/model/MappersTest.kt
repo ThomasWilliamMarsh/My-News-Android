@@ -1,7 +1,5 @@
 package info.tommarsh.mynews.home.model
 
-import com.nhaarman.mockitokotlin2.any
-import com.nhaarman.mockitokotlin2.mock
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.home.model.MockModelProvider.articleModel
 import info.tommarsh.mynews.home.model.MockModelProvider.articleViewModel
@@ -9,6 +7,8 @@ import info.tommarsh.mynews.home.model.MockModelProvider.playlistItemModel
 import info.tommarsh.mynews.home.model.MockModelProvider.playlistItemViewModel
 import org.junit.Assert.assertEquals
 import org.junit.Test
+import org.mockito.kotlin.any
+import org.mockito.kotlin.mock
 
 class MappersTest {
 

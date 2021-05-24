@@ -1,14 +1,14 @@
 package info.tommarsh.mynews.core.video.data.remote.paging
 
 import androidx.paging.PagingSource
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.playlistModel
 import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.video.data.remote.source.VideoRemoteDataStore
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Assert.assertTrue
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 
 class VideoPagingSourceTest {
 

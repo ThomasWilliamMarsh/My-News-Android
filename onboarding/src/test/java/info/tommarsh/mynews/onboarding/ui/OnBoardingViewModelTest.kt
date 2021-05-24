@@ -1,9 +1,6 @@
 package info.tommarsh.mynews.onboarding.ui
 
 import com.google.android.play.core.splitinstall.SplitInstallManager
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
@@ -21,6 +18,9 @@ import kotlinx.coroutines.test.setMain
 import org.junit.After
 import org.junit.Before
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 
 class OnBoardingViewModelTest {
     private val testCoroutineDispatcher = TestCoroutineDispatcher()

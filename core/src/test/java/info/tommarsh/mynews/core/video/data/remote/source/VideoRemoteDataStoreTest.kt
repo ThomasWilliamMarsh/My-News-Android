@@ -1,7 +1,5 @@
 package info.tommarsh.mynews.core.video.data.remote.source
 
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.playlist
 import info.tommarsh.mynews.core.MockProvider.playlistModel
 import info.tommarsh.mynews.core.model.NetworkException
@@ -12,6 +10,8 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.whenever
 import retrofit2.Response
 
 class VideoRemoteDataStoreTest {

@@ -1,8 +1,5 @@
 package info.tommarsh.mynews.core.article.data.remote.source
 
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
-import com.nhaarman.mockitokotlin2.whenever
 import info.tommarsh.mynews.core.MockProvider.articleModel
 import info.tommarsh.mynews.core.MockProvider.articlesResponse
 import info.tommarsh.mynews.core.di.NetworkModule.STANDARD_PAGE_SIZE
@@ -15,6 +12,9 @@ import junit.framework.Assert.assertEquals
 import junit.framework.Assert.assertTrue
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
+import org.mockito.kotlin.whenever
 import retrofit2.Response
 
 class ArticlesRemoteDataStoreTest {

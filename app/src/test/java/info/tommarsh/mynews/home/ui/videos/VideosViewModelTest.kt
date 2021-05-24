@@ -2,8 +2,6 @@ package info.tommarsh.mynews.home.ui.videos
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.core.video.data.VideoRepository
 import info.tommarsh.mynews.home.model.MockModelProvider.playlistItemModel
@@ -18,6 +16,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class VideosViewModelTest {
     @get:Rule

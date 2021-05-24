@@ -2,8 +2,6 @@ package info.tommarsh.mynews.categories.ui
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.lifecycle.Observer
-import com.nhaarman.mockitokotlin2.mock
-import com.nhaarman.mockitokotlin2.verify
 import info.tommarsh.mynews.categories.MockModelProvider.categoryViewModel
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.core.category.data.CategoryRepository
@@ -17,6 +15,8 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test
+import org.mockito.kotlin.mock
+import org.mockito.kotlin.verify
 
 class CategoryChoiceViewModelTest {
     @get:Rule
