@@ -23,6 +23,7 @@ private fun Fragment.createComponent(): OnBoardingComponent {
         )
 }
 
+@Suppress("UNCHECKED_CAST")
 private fun Fragment.onBoardingViewModelFactory(): ViewModelProvider.Factory {
     return object : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
