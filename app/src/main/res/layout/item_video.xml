@@ -14,10 +14,10 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/video_image_size"
             android:contentDescription="@string/content_description_image_video"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".3" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/video_title"
@@ -35,9 +35,9 @@
             android:id="@+id/video_updated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/normal_padding"
             android:paddingTop="@dimen/small_margin"
             android:paddingBottom="@dimen/small_margin"
-            android:paddingHorizontal="@dimen/normal_padding"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"

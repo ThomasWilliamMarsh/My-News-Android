@@ -14,10 +14,10 @@
             android:layout_width="0dp"
             android:layout_height="@dimen/article_image_size"
             android:contentDescription="@string/content_description_image_article"
-            android:scaleType="fitCenter"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintWidth_percent=".3" />
+            app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/article_title"
