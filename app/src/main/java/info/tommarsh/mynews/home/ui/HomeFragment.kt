@@ -74,27 +74,19 @@ class HomeFragment : Fragment() {
     private fun listenToClickEvents() = lifecycleScope.launchWhenResumed {
         navigationViewModel.clicks.collectLatest { event ->
             when (event) {
-                is ClickEvent.Search -> {
-                    findNavController().navigate(
-                        R.id.action_homeFragment_to_search_graph
-                    )
-                }
-                is ClickEvent.Categories -> {
-                    findNavController().navigate(
-                        R.id.action_homeFragment_to_category_choice_graph
-                    )
-                }
-                is ClickEvent.Article -> {
-                    findNavController().navigate(
-                        R.id.action_homeFragment_to_articleFragment,
-                        bundleOf("url" to event.id, "title" to event.title)
-                    )
-                }
-                is ClickEvent.OnBoarding -> {
-                    findNavController().navigate(
-                        R.id.action_homeFragment_to_onboardingGraph,
-                    )
-                }
+                is ClickEvent.Search -> findNavController().navigate(
+                    R.id.action_homeFragment_to_search_graph
+                )
+                is ClickEvent.Categories -> findNavController().navigate(
+                    R.id.action_homeFragment_to_category_choice_graph
+                )
+                is ClickEvent.Article -> findNavController().navigate(
+                    R.id.action_homeFragment_to_articleFragment,
+                    bundleOf("url" to event.id, "title" to event.title)
+                )
+                is ClickEvent.OnBoarding -> findNavController().navigate(
+                    R.id.action_homeFragment_to_onboardingGraph,
+                )
             }
         }
     }

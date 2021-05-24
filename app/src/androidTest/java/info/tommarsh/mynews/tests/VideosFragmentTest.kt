@@ -10,10 +10,10 @@ import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
 import info.tommarsh.mynews.core.di.VideoRepositoryModule
 import info.tommarsh.mynews.core.video.data.VideoRepository
-import info.tommarsh.mynews.videosResponse
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.ui.videos.VideosFragment
 import info.tommarsh.mynews.launchFragmentInHiltContainer
+import info.tommarsh.mynews.videosResponse
 import org.junit.Before
 import org.junit.Rule
 import org.junit.Test

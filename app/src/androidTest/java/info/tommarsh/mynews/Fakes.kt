@@ -8,7 +8,6 @@ import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel
 import kotlinx.coroutines.flow.flowOf
 import org.joda.time.DateTime
 import org.joda.time.DateTimeZone
-import javax.xml.transform.Source
 
 val videoModel =
     PlaylistItemModel(
