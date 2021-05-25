@@ -15,10 +15,8 @@ import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.adapter.ChoiceAdapter
 import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
-@ExperimentalCoroutinesApi
 internal class CountryFragment : Fragment() {
 
     private val viewModel by onBoardingViewModel()

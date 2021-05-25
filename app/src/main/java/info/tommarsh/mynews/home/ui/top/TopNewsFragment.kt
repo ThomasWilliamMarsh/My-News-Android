@@ -14,7 +14,6 @@ import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentTopNewsBinding
 import info.tommarsh.mynews.home.ui.NavigationViewModel
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -72,7 +71,6 @@ class TopNewsFragment : Fragment() {
         return true
     }
 
-    @OptIn(InternalCoroutinesApi::class)
     private fun setUpAdapter(): ConcatAdapter {
         return adapter.withLoadStateFooter(
             footer = ListLoadStateAdapter { adapter.retry() }

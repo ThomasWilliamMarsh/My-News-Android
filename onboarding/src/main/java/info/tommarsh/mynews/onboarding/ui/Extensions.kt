@@ -9,7 +9,6 @@ import info.tommarsh.mynews.home.R.id.onboarding_nav_graph
 import info.tommarsh.mynews.home.di.OnBoardingDependencies
 import info.tommarsh.mynews.onboarding.di.DaggerOnBoardingComponent
 import info.tommarsh.mynews.onboarding.di.OnBoardingComponent
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 
 private fun Fragment.createComponent(): OnBoardingComponent {
     val context = requireContext()
@@ -32,7 +31,6 @@ private fun Fragment.onBoardingViewModelFactory(): ViewModelProvider.Factory {
     }
 }
 
-@OptIn(ExperimentalCoroutinesApi::class)
 internal fun Fragment.onBoardingViewModel() =
     navGraphViewModels<OnBoardingViewModel>(onboarding_nav_graph) {
         onBoardingViewModelFactory()

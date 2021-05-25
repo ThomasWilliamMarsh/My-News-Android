@@ -12,10 +12,8 @@ import info.tommarsh.mynews.onboarding.databinding.FragmentIntroductionBinding
 import info.tommarsh.mynews.onboarding.model.Action
 import info.tommarsh.mynews.onboarding.model.Event
 import info.tommarsh.mynews.onboarding.ui.onBoardingViewModel
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.collect
 
-@ExperimentalCoroutinesApi
 internal class IntroductionFragment : Fragment() {
 
     private val viewModel by onBoardingViewModel()
