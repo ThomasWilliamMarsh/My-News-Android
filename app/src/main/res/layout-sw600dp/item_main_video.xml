@@ -10,43 +10,43 @@
         android:focusable="true">
 
     <com.google.android.material.imageview.ShapeableImageView
-            android:id="@+id/main_article_image"
+            android:id="@+id/main_video_image"
             android:layout_width="0dp"
-            android:layout_height="@dimen/main_article_image_size"
-            android:contentDescription="@string/content_description_image_article"
+            android:layout_height="@dimen/main_video_image_size"
+            android:contentDescription="@string/content_description_image_video"
             android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyNews.RoundedCorner"/>
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyNews.RoundedCorner" />
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/main_article_title"
+            android:id="@+id/main_video_title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:paddingHorizontal="@dimen/normal_padding"
-            android:textAppearance="?textAppearanceHeadline5"
+            android:textAppearance="?textAppearanceBody1"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/main_article_image"
+            app:layout_constraintStart_toEndOf="@id/main_video_image"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.0"
             tools:text="Flights suspended by drones at Gatwick" />
 
     <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/main_article_updated"
+            android:id="@+id/main_video_updated"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/normal_padding"
             android:paddingTop="@dimen/small_margin"
             android:paddingBottom="@dimen/small_margin"
-            android:paddingHorizontal="@dimen/normal_padding"
             android:textAppearance="?textAppearanceCaption"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@id/main_article_title"
-            app:layout_constraintTop_toBottomOf="@id/main_article_title"
+            app:layout_constraintStart_toStartOf="@id/main_video_title"
+            app:layout_constraintTop_toBottomOf="@id/main_video_title"
             app:layout_constraintVertical_bias="1.0"
             tools:text="16 mins ago" />
 
