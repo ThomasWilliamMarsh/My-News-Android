@@ -3,12 +3,17 @@
     <!--Shape-->
 
     <!--Shape Appearance for small components like chips, buttons, text fields and FABs-->
-    <style name="ShapeAppearance.MyNews.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent"/>
+    <style name="ShapeAppearance.MyNews.SmallComponent" parent="ShapeAppearance.MaterialComponents.SmallComponent" />
 
     <!--Shape Appearance for medium components like cards, alert dialogs-->
-    <style name="ShapeAppearance.MyNews.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent"/>
+    <style name="ShapeAppearance.MyNews.MediumComponent" parent="ShapeAppearance.MaterialComponents.MediumComponent" />
 
     <!--Shape Appearance for large components like side and bottom navigation drawers-->
-    <style name="ShapeAppearance.MyNews.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent"/>
+    <style name="ShapeAppearance.MyNews.LargeComponent" parent="ShapeAppearance.MaterialComponents.LargeComponent" />
+
+    <!-- Used for ShapeableImageView in articles -->
+    <style name="ShapeAppearanceOverlay.MyNews.RoundedCorner" parent="">
+        <item name="cornerSize">8%</item>
+    </style>
 
 </resources>

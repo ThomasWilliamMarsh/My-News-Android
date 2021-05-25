@@ -10,12 +10,10 @@ import info.tommarsh.mynews.core.category.data.CategoryRepository
 import info.tommarsh.mynews.core.util.TimeHelper
 import info.tommarsh.mynews.home.model.ArticleViewModel
 import info.tommarsh.mynews.home.model.toViewModel
-import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-@OptIn(FlowPreview::class)
 @HiltViewModel
 class CategoriesViewModel
 @Inject constructor(

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_article_image_size">216dp</dimen>
+    <dimen name="main_video_image_size">216dp</dimen>
+    <dimen name="article_image_size">128dp</dimen>
+    <dimen name="video_image_size">128dp</dimen>
+</resources>

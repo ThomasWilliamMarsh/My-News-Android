@@ -9,7 +9,7 @@
         android:clickable="true"
         android:focusable="true">
 
-    <androidx.appcompat.widget.AppCompatImageView
+<com.google.android.material.imageview.ShapeableImageView
             android:id="@+id/article_image"
             android:layout_width="0dp"
             android:layout_height="@dimen/article_image_size"
@@ -17,7 +17,9 @@
             android:scaleType="centerCrop"
             app:layout_constraintDimensionRatio="16:9"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyNews.RoundedCorner"/>
 
     <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/article_title"
