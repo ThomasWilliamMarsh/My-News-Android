@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/normal_margin"
+        android:background="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true">
+
+    <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/main_article_image"
+            android:layout_width="0dp"
+            android:layout_height="256dp"
+            android:contentDescription="@string/content_description_image_article"
+            android:scaleType="centerCrop"
+            app:layout_constraintDimensionRatio="16:9"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:shapeAppearanceOverlay="@style/ShapeAppearanceOverlay.MyNews.RoundedCorner"/>
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/main_article_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="@dimen/normal_padding"
+            android:textAppearance="?textAppearanceHeadline5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/main_article_image"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Flights suspended by drones at Gatwick" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/main_article_updated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingTop="@dimen/small_margin"
+            android:paddingBottom="@dimen/small_margin"
+            android:paddingHorizontal="@dimen/normal_padding"
+            android:textAppearance="?textAppearanceCaption"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="@id/main_article_title"
+            app:layout_constraintTop_toBottomOf="@id/main_article_title"
+            app:layout_constraintVertical_bias="1.0"
+            tools:text="16 mins ago" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

@@ -13,7 +13,7 @@
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless">
 
-        <androidx.appcompat.widget.AppCompatImageView
+        <com.google.android.material.imageview.ShapeableImageView
                 android:id="@+id/main_article_image"
                 android:layout_width="0dp"
                 android:layout_height="0dp"

@@ -13,7 +13,7 @@
 
     <!-- Used for ShapeableImageView in articles -->
     <style name="ShapeAppearanceOverlay.MyNews.RoundedCorner" parent="">
-        <item name="cornerSize">8%</item>
+        <item name="cornerSize">4%</item>
     </style>
 
 </resources>
