@@ -4,8 +4,10 @@
 
     <dist:module
             dist:instant="false"
-            dist:onDemand="false"
             dist:title="@string/title_activity_article">
+        <dist:delivery>
+            <dist:on-demand />
+        </dist:delivery>
         <dist:fusing dist:include="true" />
     </dist:module>
 

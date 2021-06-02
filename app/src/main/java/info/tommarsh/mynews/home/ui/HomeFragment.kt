@@ -62,6 +62,9 @@ class HomeFragment : Fragment() {
         }
         binding.homeBottomNavigation?.setOnItemSelectedListener(navigator)
         binding.homeNavigationRail?.setOnItemSelectedListener(navigator)
+        if(preferences.shouldShowOnBoarding()){
+            findNavController().navigate(R.id.action_homeFragment_to_onboardingGraph)
+        }
     }
 
     private fun setWindowInsets() {
@@ -81,7 +84,7 @@ class HomeFragment : Fragment() {
                     R.id.action_homeFragment_to_category_choice_graph
                 )
                 is ClickEvent.Article -> findNavController().navigate(
-                    R.id.action_homeFragment_to_articleFragment,
+                    R.id.action_homeFragment_to_article_nav_graph,
                     bundleOf("url" to event.id, "title" to event.title)
                 )
                 is ClickEvent.OnBoarding -> findNavController().navigate(

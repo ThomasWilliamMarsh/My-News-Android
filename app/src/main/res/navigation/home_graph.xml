@@ -2,7 +2,8 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/app_graph"
+        android:id="@+id/home_graph"
+        app:progressDestination="@id/articleProgressFragment"
         app:startDestination="@id/homeFragment">
 
     <fragment
@@ -16,18 +17,19 @@
         <action
                 android:id="@+id/action_homeFragment_to_category_choice_graph"
                 app:destination="@id/category_choice_graph" />
-        <action
-                android:id="@+id/action_homeFragment_to_articleFragment"
-                app:destination="@id/articleFragment" />
 
         <action
                 android:id="@+id/action_homeFragment_to_onboardingGraph"
                 app:destination="@id/onboarding_nav_graph"
                 app:popUpTo="@id/onboarding_nav_graph"
                 app:popUpToInclusive="false" />
+        <action
+                android:id="@+id/action_homeFragment_to_article_nav_graph"
+                app:destination="@id/article_nav_graph" />
     </fragment>
 
     <include app:graph="@navigation/search_graph" />
+
     <include app:graph="@navigation/category_choice_graph" />
 
     <include-dynamic
@@ -36,10 +38,14 @@
             app:graphResName="onboarding_nav_graph"
             app:moduleName="onboarding" />
 
-    <fragment
-            android:id="@+id/articleFragment"
-            android:name="info.tommarsh.mynews.article.ui.ArticleFragment"
-            android:label="Article Fragment"
+    <include-dynamic
+            android:id="@+id/article_nav_graph"
+            app:graphResName="article_nav_graph"
             app:moduleName="article" />
+
+    <fragment
+            android:id="@+id/articleProgressFragment"
+            android:name="info.tommarsh.mynews.home.feature.ArticleProgressFragment"
+            android:label="ArticleProgressFragment" />
 
 </navigation>

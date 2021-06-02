@@ -20,7 +20,6 @@ android {
                                       "$projectDir/schemas".toString()]
             }
         }
-
     }
 
     buildTypes {
