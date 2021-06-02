@@ -4,7 +4,9 @@
 
 A News app with personalised categories. Using [NewsAPI](https://newsapi.org/)
 
-![MyNews](https://user-images.githubusercontent.com/3704910/111330593-fd0a5b80-8667-11eb-878d-a4ec90ec5ba4.gif)
+![Screenshot_20210525_100822](https://user-images.githubusercontent.com/3704910/119471792-86619c80-bd41-11eb-9061-33d49fd59b75.png)
+![Screenshot_20210525_100655](https://user-images.githubusercontent.com/3704910/119471804-895c8d00-bd41-11eb-9184-cf77cd7b0b19.png)
+
 
 ## Features:
 
