@@ -4,7 +4,7 @@
 
     <dist:module
             dist:instant="false"
-            dist:title="@string/title_activity_article">
+            dist:title="@string/module_title_article">
         <dist:delivery>
             <dist:on-demand />
         </dist:delivery>

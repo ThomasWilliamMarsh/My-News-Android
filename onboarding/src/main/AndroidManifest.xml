@@ -3,7 +3,7 @@
 
     <dist:module
             dist:instant="false"
-            dist:title="onboarding">
+            dist:title="@string/module_title_onboarding">
         <dist:delivery>
             <dist:install-time />
         </dist:delivery>

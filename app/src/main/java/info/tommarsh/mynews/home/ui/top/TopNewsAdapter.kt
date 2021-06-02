@@ -74,7 +74,13 @@ private class PrimaryViewHolder(
         binding.mainArticleUpdated.text = article.publishedAt
 
         binding.root.setOnClickListener {
-            onClickEvent(ClickEvent.Article(article.urlToImage, article.title))
+            onClickEvent(
+                ClickEvent.Article(
+                    webUrl = article.url,
+                    imageUrl = article.urlToImage,
+                    title = article.title
+                )
+            )
         }
     }
 }
@@ -91,7 +97,13 @@ private class SecondaryViewHolder(
         binding.articleUpdated.text = article.publishedAt
 
         binding.root.setOnClickListener {
-            onClickEvent(ClickEvent.Article(article.urlToImage, article.title))
+            onClickEvent(
+                ClickEvent.Article(
+                    webUrl = article.url,
+                    imageUrl = article.urlToImage,
+                    title = article.title
+                )
+            )
         }
     }
 }

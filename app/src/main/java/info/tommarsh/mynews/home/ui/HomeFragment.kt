@@ -62,7 +62,7 @@ class HomeFragment : Fragment() {
         }
         binding.homeBottomNavigation?.setOnItemSelectedListener(navigator)
         binding.homeNavigationRail?.setOnItemSelectedListener(navigator)
-        if(preferences.shouldShowOnBoarding()){
+        if (preferences.shouldShowOnBoarding()) {
             findNavController().navigate(R.id.action_homeFragment_to_onboardingGraph)
         }
     }
@@ -85,7 +85,11 @@ class HomeFragment : Fragment() {
                 )
                 is ClickEvent.Article -> findNavController().navigate(
                     R.id.action_homeFragment_to_article_nav_graph,
-                    bundleOf("url" to event.id, "title" to event.title)
+                    bundleOf(
+                        "url" to event.imageUrl,
+                        "title" to event.title,
+                        "webUrl" to event.webUrl
+                    )
                 )
                 is ClickEvent.OnBoarding -> findNavController().navigate(
                     R.id.action_homeFragment_to_onboardingGraph,
