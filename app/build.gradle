@@ -48,11 +48,11 @@ dependencies {
     implementation project(':search')
 
     //Dagger
-    implementation "com.google.dagger:hilt-android:" + rootProject.hiltVersion
-    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.hiltVersion
+    implementation "com.google.dagger:hilt-android:" + rootProject.daggerVersion
+    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.daggerVersion
     kapt 'androidx.hilt:hilt-compiler:' + rootProject.jetpackHiltVersion
-    androidTestImplementation "com.google.dagger:hilt-android-testing:" + rootProject.hiltVersion
-    kaptAndroidTest "com.google.dagger:hilt-android-compiler:" + rootProject.hiltVersion
+    androidTestImplementation "com.google.dagger:hilt-android-testing:" + rootProject.daggerVersion
+    kaptAndroidTest "com.google.dagger:hilt-android-compiler:" + rootProject.daggerVersion
 
     implementation "androidx.appcompat:appcompat:" + rootProject.appCompatVersion
 
@@ -66,10 +66,11 @@ dependencies {
     testImplementation 'org.mockito.kotlin:mockito-kotlin:' + rootProject.mockitoKotlinVersion
     testImplementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
+    testImplementation 'app.cash.turbine:turbine:' + rootProject.turbineVersion
     debugImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
 
     //Espresso
-    androidTestImplementation 'org.mockito:mockito-android:3.8.0'
+    androidTestImplementation 'org.mockito:mockito-android:' + rootProject.mockitoAndroidVersion
     androidTestImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
     androidTestImplementation 'androidx.test.espresso:espresso-core:' + rootProject.espressoVersion
     androidTestImplementation 'androidx.test:runner:' + rootProject.espressoRunnerVersion

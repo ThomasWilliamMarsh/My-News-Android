@@ -26,7 +26,7 @@ dependencies {
     implementation project(':app')
 
     //Dagger
-    implementation "com.google.dagger:hilt-android:" + rootProject.hiltVersion
-    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.hiltVersion
+    implementation "com.google.dagger:hilt-android:" + rootProject.daggerVersion
+    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.daggerVersion
     kapt 'androidx.hilt:hilt-compiler:' + rootProject.jetpackHiltVersion
 }

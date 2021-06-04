@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.observe
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import dagger.hilt.android.AndroidEntryPoint
@@ -53,7 +53,7 @@ class CategoryChoiceFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        viewModel.categories.observe(viewLifecycleOwner, ::onCategories)
+        viewModel.categories.observe(viewLifecycleOwner, { onCategories(it) })
     }
 
     private fun onCategories(categories: List<CategoryViewModel>) {
@@ -66,7 +66,7 @@ class CategoryChoiceFragment : Fragment() {
 
     private fun setUpWindowInsets() {
         binding.root.doOnInsets { systemBarInsets, _ ->
-            binding.choiceAppBar        .updatePadding(top = systemBarInsets.top)
+            binding.choiceAppBar.updatePadding(top = systemBarInsets.top)
         }
     }
 }

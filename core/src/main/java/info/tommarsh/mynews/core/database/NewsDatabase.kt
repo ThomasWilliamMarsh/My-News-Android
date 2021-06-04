@@ -14,7 +14,7 @@ import info.tommarsh.mynews.core.paging.source.PagingDao
 @Database(
     entities = [Article::class, Source::class, Category::class, Page::class],
     version = 1,
-    exportSchema = true
+    exportSchema = false
 )
 @TypeConverters(Converters::class)
 internal abstract class

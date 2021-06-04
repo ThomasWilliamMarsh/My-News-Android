@@ -57,7 +57,6 @@ dependencies {
     api 'com.google.firebase:firebase-config:' + rootProject.remoteConfigVersion
     implementation 'com.google.android.play:core-ktx:' + rootProject.playCoreVersion
     kapt 'androidx.room:room-compiler:' + rootProject.roomVersion
-    api 'androidx.hilt:hilt-lifecycle-viewmodel:' + rootProject.jetpackHiltVersion
     api 'androidx.hilt:hilt-work:' + rootProject.jetpackHiltVersion
     api 'androidx.paging:paging-runtime:' + rootProject.pagingVersion
     api "androidx.core:core-ktx:" + rootProject.coreKtxVersion
@@ -81,7 +80,6 @@ dependencies {
     api "androidx.navigation:navigation-dynamic-features-fragment:" + rootProject.navigationVersion
 
     //Lifecycle
-    api 'android.arch.lifecycle:extensions:' + rootProject.lifecycleVersion
     api 'androidx.lifecycle:lifecycle-viewmodel-ktx:' + rootProject.lifecycleVersion
     api 'androidx.lifecycle:lifecycle-livedata-ktx:' + rootProject.lifecycleVersion
 
@@ -91,9 +89,9 @@ dependencies {
     api 'com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:' + rootProject.coroutinesAdapter
 
     //Dagger
-    implementation "com.google.dagger:hilt-android:" + rootProject.hiltVersion
-    api "com.google.dagger:hilt-android:" + rootProject.hiltVersion
-    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.hiltVersion
+    implementation "com.google.dagger:hilt-android:" + rootProject.daggerVersion
+    api "com.google.dagger:hilt-android:" + rootProject.daggerVersion
+    kapt "com.google.dagger:hilt-android-compiler:" + rootProject.daggerVersion
     kapt 'androidx.hilt:hilt-compiler:' + rootProject.jetpackHiltVersion
 
     //Gson
