@@ -15,17 +15,27 @@ buildscript {
     }
 }
 
+subprojects {
+
+    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).configureEach {
+        kotlinOptions {
+            // Enable experimental coroutines APIs, including Flow
+            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.ExperimentalCoroutinesApi"
+            freeCompilerArgs += "-Xopt-in=kotlinx.coroutines.FlowPreview"
+            freeCompilerArgs += "-Xopt-in=kotlin.Experimental"
+            freeCompilerArgs += "-Xopt-in=kotlin.time.ExperimentalTime"
+
+            // Set JVM target to 1.8
+            jvmTarget = "1.8"
+        }
+    }
+}
+
 allprojects {
     repositories {
         mavenCentral()
         google()
         jcenter()
-    }
-
-    tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
-        kotlinOptions {
-            jvmTarget = "1.8"
-        }
     }
 }
 
@@ -83,6 +93,7 @@ ext {
     mockitoInlineVersion = "3.10.0"
     mockitoAndroidVersion = "3.11.0"
     turbineVersion = "0.5.2"
+    fixtureVersion = "1.1.0"
 
     //Kotlin
     coroutinesVersion = "1.5.0"

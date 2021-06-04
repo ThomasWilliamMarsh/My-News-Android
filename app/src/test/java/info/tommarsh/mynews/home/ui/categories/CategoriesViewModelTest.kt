@@ -1,90 +1,80 @@
 package info.tommarsh.mynews.home.ui.categories
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
+import app.cash.turbine.test
+import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.core.article.data.ArticleRepository
+import info.tommarsh.mynews.core.article.domain.model.ArticleModel
 import info.tommarsh.mynews.core.category.data.CategoryRepository
-import info.tommarsh.mynews.core.util.TimeHelper
-import info.tommarsh.mynews.home.model.MockModelProvider.articleModel
-import info.tommarsh.mynews.home.model.MockModelProvider.footballCategoryModel
-import info.tommarsh.mynews.home.model.MockModelProvider.footballCategoryViewModel
+import info.tommarsh.mynews.core.category.domain.CategoryModel
+import info.tommarsh.mynews.home.mappers.ArticlePageMapper
+import info.tommarsh.mynews.home.model.ArticleViewModel
+import info.tommarsh.mynews.test.UnitTest
 import junit.framework.Assert.assertEquals
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.flow.flowOn
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-class CategoriesViewModelTest {
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
+class CategoriesViewModelTest : UnitTest<CategoriesViewModel>() {
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val categoryModel = fixture<CategoryModel>()
+    private val categoryViewModel = CategoryViewModel(
+        categoryModel.id,
+        categoryModel.name,
+        categoryModel.selected
+    )
+
+    private val articleModels = fixture<List<ArticleModel>>()
+    private val pagedArticleModels = PagingData.from(articleModels)
+
+    private val articleViewModels = fixture<List<ArticleViewModel>>()
+    private val pagedArticleViewModels = PagingData.from(articleViewModels)
 
     private val articleRepository = mock<ArticleRepository> {
         onBlocking { getArticlesForCategory("football", 5) }.thenReturn(
-            flow {
-                emit(
-                    PagingData.from(
-                        listOf(articleModel)
-                    )
-                )
-            }
+            flow { emit(pagedArticleModels) }
         )
     }
     private val categoryRepository = mock<CategoryRepository> {
-        onBlocking { getSelectedCategories() }.thenReturn(flowOf(listOf(footballCategoryModel)))
+        onBlocking { getSelectedCategories() }.thenReturn(flowOf(listOf(categoryModel)))
     }
 
-    private val timeHelper = mock<TimeHelper>()
-
-    private val viewModel = CategoriesViewModel(
-        articleRepository,
-        categoryRepository,
-        timeHelper
-    )
-
-    @Before
-    fun `Set up`() {
-        Dispatchers.setMain(testCoroutineDispatcher)
-    }
-
-
-    @After
-    fun `Tear down`() {
-        Dispatchers.resetMain()
-        testCoroutineDispatcher.cleanupTestCoroutines()
+    private val pageMapper = mock<ArticlePageMapper> {
+        on { map(pagedArticleModels) }.thenReturn(pagedArticleViewModels)
     }
 
     @Test
     fun `Get selected categories from live data`() = runBlockingTest {
 
-        val flow = viewModel.selectedCategories
-            .flowOn(testCoroutineDispatcher)
-
-        flow.collect { cats ->
-            assertEquals(cats, listOf(footballCategoryViewModel))
-        }
+        sut.selectedCategories
+            .test {
+                assertEquals(listOf(categoryViewModel), expectItem())
+                expectComplete()
+            }
 
         verify(categoryRepository).getSelectedCategories()
     }
 
     @Test
-    fun `Get articles for a category`() = testCoroutineDispatcher.runBlockingTest {
+    fun `Get articles for a category`() = runBlockingTest {
 
-        viewModel.getArticlesForCategory("football")
-            .flowOn(testCoroutineDispatcher)
+        sut.getArticlesForCategory("football")
+            .test {
+                assertEquals(expectItem(), pagedArticleViewModels)
+                expectComplete()
+            }
 
         verify(articleRepository).getArticlesForCategory("football", 5)
+    }
+
+    override fun createSut(): CategoriesViewModel {
+        return CategoriesViewModel(
+            articleRepository,
+            pageMapper,
+            categoryRepository,
+        )
     }
 }

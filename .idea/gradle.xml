@@ -16,10 +16,10 @@
             <option value="$PROJECT_DIR$/core" />
             <option value="$PROJECT_DIR$/onboarding" />
             <option value="$PROJECT_DIR$/search" />
+            <option value="$PROJECT_DIR$/test-helpers" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
-        <option name="useQualifiedModuleNames" value="true" />
       </GradleProjectSettings>
     </option>
   </component>

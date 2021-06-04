@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 
 typealias onClickEvent = (ClickEvent) -> Unit
 
-internal class NavigationViewModel : ViewModel() {
+class NavigationViewModel : ViewModel() {
 
     private val _clicks = MutableSharedFlow<ClickEvent>()
     val clicks = _clicks.asSharedFlow()

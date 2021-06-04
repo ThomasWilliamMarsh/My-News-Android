@@ -60,6 +60,7 @@ dependencies {
     implementation 'com.hannesdorfmann:adapterdelegates4-kotlin-dsl-layoutcontainer:' + rootProject.adapterDelegatesVersion
 
     //Testing
+    testImplementation project(':test-helpers')
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion

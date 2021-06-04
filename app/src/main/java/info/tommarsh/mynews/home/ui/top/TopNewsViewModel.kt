@@ -1,11 +1,9 @@
 package info.tommarsh.mynews.home.ui.top
 
 import androidx.lifecycle.ViewModel
-import androidx.paging.map
 import dagger.hilt.android.lifecycle.HiltViewModel
 import info.tommarsh.mynews.core.article.data.ArticleRepository
-import info.tommarsh.mynews.core.util.TimeHelper
-import info.tommarsh.mynews.home.model.toViewModel
+import info.tommarsh.mynews.home.mappers.ArticlePageMapper
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
@@ -13,9 +11,9 @@ import javax.inject.Inject
 class TopNewsViewModel
 @Inject constructor(
     repository: ArticleRepository,
-    private val timeHelper: TimeHelper
+    private val pageMapper: ArticlePageMapper
 ) : ViewModel() {
 
     val articles = repository.getArticlesForCategory("general")
-        .map { page -> page.map { model -> model.toViewModel(timeHelper) } }
+        .map { pageMapper.map(it) }
 }

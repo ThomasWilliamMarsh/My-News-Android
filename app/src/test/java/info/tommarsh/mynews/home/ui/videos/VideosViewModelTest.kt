@@ -1,58 +1,48 @@
 package info.tommarsh.mynews.home.ui.videos
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
-import info.tommarsh.mynews.core.util.TimeHelper
+import app.cash.turbine.test
 import info.tommarsh.mynews.core.video.data.VideoRepository
-import info.tommarsh.mynews.home.model.MockModelProvider.playlistItemModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel
+import info.tommarsh.mynews.home.mappers.PlaylistPageMapper
+import info.tommarsh.mynews.home.model.PlaylistItemViewModel
+import info.tommarsh.mynews.test.UnitTest
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-class VideosViewModelTest {
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
+class VideosViewModelTest : UnitTest<VideosViewModel>() {
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val playlistItemModels = fixture<List<PlaylistItemModel>>()
+    private val pagedPlaylistItemModels = PagingData.from(playlistItemModels)
 
+    private val playlistItemViewModels = fixture<List<PlaylistItemViewModel>>()
+    private val pagedPlaylistItemViewModels = PagingData.from(playlistItemViewModels)
+
+    private val pageMapper = mock<PlaylistPageMapper> {
+        on { map(pagedPlaylistItemModels) }.thenReturn(pagedPlaylistItemViewModels)
+    }
     private val repository = mock<VideoRepository> {
         onBlocking { getPlaylist() }.thenReturn(
-            flow {
-                emit(PagingData.from(listOf(playlistItemModel)))
-            }
+            flow { emit(pagedPlaylistItemModels) }
         )
     }
 
-    private val timeHelper = mock<TimeHelper>()
-
-    private val viewModel = VideosViewModel(repository, timeHelper)
-
-    @Before
-    fun `Set up`() {
-        Dispatchers.setMain(testCoroutineDispatcher)
-    }
-
-    @After
-    fun `Tear down`() {
-        Dispatchers.resetMain()
-        testCoroutineDispatcher.cleanupTestCoroutines()
-    }
-
     @Test
-    fun `Get flow of videos`() = testCoroutineDispatcher.runBlockingTest {
+    fun `Get flow of videos`() = runBlockingTest {
 
-        viewModel.videos.collect()
+        sut.videos.test {
+            assertEquals(expectItem(), pagedPlaylistItemViewModels)
+            expectComplete()
+        }
 
         verify(repository).getPlaylist()
+    }
+
+    override fun createSut(): VideosViewModel {
+        return VideosViewModel(repository, pageMapper)
     }
 }

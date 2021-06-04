@@ -1,0 +1,33 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+
+android {
+    compileSdkVersion rootProject.compileSdk
+
+    defaultConfig {
+        minSdkVersion rootProject.minSdk
+        targetSdkVersion rootProject.targetSdk
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+
+    //Unit tests
+    implementation 'junit:junit:' + rootProject.jUnitVersion
+    implementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
+    implementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
+    implementation 'org.mockito.kotlin:mockito-kotlin:' + rootProject.mockitoKotlinVersion
+    implementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
+    implementation 'app.cash.turbine:turbine:' + rootProject.turbineVersion
+    api 'com.appmattus.fixture:fixture:' + rootProject.fixtureVersion
+
+    //UI tests
+    debugImplementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
+}

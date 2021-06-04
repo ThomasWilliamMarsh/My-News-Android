@@ -1,58 +1,48 @@
 package info.tommarsh.mynews.home.ui.top
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
+import app.cash.turbine.test
 import info.tommarsh.mynews.core.article.data.ArticleRepository
-import info.tommarsh.mynews.core.util.TimeHelper
-import info.tommarsh.mynews.home.model.MockModelProvider.articleModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.collect
+import info.tommarsh.mynews.core.article.domain.model.ArticleModel
+import info.tommarsh.mynews.home.mappers.ArticlePageMapper
+import info.tommarsh.mynews.home.model.ArticleViewModel
+import info.tommarsh.mynews.test.UnitTest
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-class TopNewsViewModelTest {
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
+class TopNewsViewModelTest : UnitTest<TopNewsViewModel>() {
 
-    private val timeHelper = mock<TimeHelper>()
+    private val articleModels = fixture<List<ArticleModel>>()
+    private val pagedArticleModels = PagingData.from(articleModels)
 
+    private val articleViewModels = fixture<List<ArticleViewModel>>()
+    private val pagedArticleViewModels = PagingData.from(articleViewModels)
+
+    private val pageMapper = mock<ArticlePageMapper> {
+        on { map(pagedArticleModels) }.thenReturn(pagedArticleViewModels)
+    }
     private val repository = mock<ArticleRepository> {
         onBlocking { getArticlesForCategory("general") }.thenReturn(
-            flow {
-                emit(PagingData.from(listOf(articleModel)))
-            }
+            flow { emit(pagedArticleModels) }
         )
     }
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
-
-    private val viewModel = TopNewsViewModel(repository, timeHelper)
-
-    @Before
-    fun `Set up`() {
-        Dispatchers.setMain(testCoroutineDispatcher)
-    }
-
-    @After
-    fun `Tear down`() {
-        Dispatchers.resetMain()
-        testCoroutineDispatcher.cleanupTestCoroutines()
-    }
-
     @Test
-    fun `Get flow of top stories`() = testCoroutineDispatcher.runBlockingTest {
+    fun `Get flow of top stories`() = runBlockingTest {
 
-        viewModel.articles.collect()
+        sut.articles.test {
+            assertEquals(expectItem(), pagedArticleViewModels)
+            expectComplete()
+        }
 
         verify(repository).getArticlesForCategory("general")
+    }
+
+    override fun createSut(): TopNewsViewModel {
+        return TopNewsViewModel(repository, pageMapper)
     }
 }

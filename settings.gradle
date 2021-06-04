@@ -1,2 +1,3 @@
 include ':onboarding'
 include ':app', ':core', ':article', ':categories', ':search'
+include ':test-helpers'
