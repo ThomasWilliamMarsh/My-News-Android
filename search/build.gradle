@@ -32,6 +32,7 @@ android {
 
 dependencies {
     implementation project(':core')
+    implementation project(':test-helpers')
 
     //Dagger
     implementation "com.google.dagger:hilt-android:" + rootProject.daggerVersion
@@ -39,6 +40,7 @@ dependencies {
     kapt 'androidx.hilt:hilt-compiler:' + rootProject.jetpackHiltVersion
 
     //Testing
+    testImplementation 'app.cash.turbine:turbine:' + rootProject.turbineVersion
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'org.mockito.kotlin:mockito-kotlin:' + rootProject.mockitoKotlinVersion

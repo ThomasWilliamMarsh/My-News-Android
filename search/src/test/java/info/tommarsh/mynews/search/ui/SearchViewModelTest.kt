@@ -1,61 +1,48 @@
 package info.tommarsh.mynews.search.ui
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import androidx.paging.PagingData
+import app.cash.turbine.test
 import info.tommarsh.mynews.core.article.data.ArticleRepository
-import info.tommarsh.mynews.core.util.TimeHelper
-import info.tommarsh.mynews.search.model.MockModelProvider.articleModel
-import kotlinx.coroutines.Dispatchers
+import info.tommarsh.mynews.core.article.domain.model.ArticleModel
+import info.tommarsh.mynews.search.mappers.SearchItemPageMapper
+import info.tommarsh.mynews.search.model.SearchItemViewModel
+import info.tommarsh.mynews.test.UnitTest
+import junit.framework.Assert.assertEquals
 import kotlinx.coroutines.flow.flowOf
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.Mockito.verify
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
-class SearchViewModelTest {
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
+class SearchViewModelTest : UnitTest<SearchViewModel>() {
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
-
-    private val timeHelper = mock<TimeHelper>()
+    private val pageMapper = mock<SearchItemPageMapper>()
 
     private val repository = mock<ArticleRepository>()
 
-    private val viewModel = SearchViewModel(repository, timeHelper)
+    private val articleModelList = fixture<List<ArticleModel>>()
+    private val articleModelPage = PagingData.from(articleModelList)
 
-    @Before
-    fun `Set up`() {
-        Dispatchers.setMain(testCoroutineDispatcher)
-    }
-
-    @After
-    fun `Tear down`() {
-        Dispatchers.resetMain()
-        testCoroutineDispatcher.cleanupTestCoroutines()
-    }
+    private val searchItems = fixture<List<SearchItemViewModel>>()
+    private val searchItemsPage = PagingData.from(searchItems)
 
     @Test
     fun `Fetches query from repository`() = runBlockingTest {
+        whenever(pageMapper.map(articleModelPage)).thenReturn(searchItemsPage)
         whenever(repository.searchArticles("Dogs")).thenReturn(
-            flowOf(
-                PagingData.from(
-                    listOf(
-                        articleModel
-                    )
-                )
-            )
+            flowOf(articleModelPage)
         )
 
-        viewModel.searchArticles("Dogs")
+        sut.searchArticles("Dogs").test {
+            assertEquals(expectItem(), articleModelPage)
+            expectComplete()
+        }
 
         verify(repository).searchArticles("Dogs")
+    }
+
+    override fun createSut(): SearchViewModel {
+        return SearchViewModel(repository, pageMapper)
     }
 }

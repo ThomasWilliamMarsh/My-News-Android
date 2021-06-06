@@ -14,7 +14,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CategoriesViewModel
-@Inject constructor(
+@Inject internal constructor(
     private val articlesRepository: ArticleRepository,
     private val articlePageMapper: ArticlePageMapper,
     private val categoryRepository: CategoryRepository

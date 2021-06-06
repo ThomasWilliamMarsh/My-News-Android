@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class VideosViewModel
-@Inject constructor(
+@Inject internal constructor(
     repository: VideoRepository,
     private val pageMapper: PlaylistPageMapper
 ) : ViewModel() {

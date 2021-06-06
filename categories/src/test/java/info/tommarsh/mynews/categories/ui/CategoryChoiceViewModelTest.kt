@@ -1,57 +1,38 @@
 package info.tommarsh.mynews.categories.ui
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import androidx.lifecycle.Observer
-import info.tommarsh.mynews.categories.MockModelProvider.categoryViewModel
+import app.cash.turbine.test
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.core.category.data.CategoryRepository
-import info.tommarsh.mynews.core.util.coroutines.DispatcherProvider
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.test.TestCoroutineDispatcher
-import kotlinx.coroutines.test.resetMain
+import info.tommarsh.mynews.core.category.domain.CategoryModel
+import info.tommarsh.mynews.test.UnitTest
+import junit.framework.Assert.assertEquals
+import kotlinx.coroutines.flow.flowOf
 import kotlinx.coroutines.test.runBlockingTest
-import kotlinx.coroutines.test.setMain
-import org.junit.After
-import org.junit.Before
-import org.junit.Rule
 import org.junit.Test
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-class CategoryChoiceViewModelTest {
-    @get:Rule
-    val rule = InstantTaskExecutorRule()
+class CategoryChoiceViewModelTest : UnitTest<CategoryChoiceViewModel>() {
 
-    private val testCoroutineDispatcher = TestCoroutineDispatcher()
+    private val categoryModel = fixture<CategoryModel>()
+    private val categoryViewModel = CategoryViewModel(
+        id = categoryModel.id,
+        name = categoryModel.name,
+        selected = categoryModel.selected
+    )
 
-    private val dispatcherProvider = mock<DispatcherProvider> {
-        on { main() }.thenReturn(testCoroutineDispatcher)
-        on { work() }.thenReturn(testCoroutineDispatcher)
-    }
+
     private val categoryRepository = mock<CategoryRepository> {
-        on { getCategories() }.thenReturn(mock())
-    }
-
-    private val categoryChoiceViewModel =
-        CategoryChoiceViewModel(categoryRepository, dispatcherProvider)
-    private val categoryObserver = mock<Observer<List<CategoryViewModel>>>()
-
-    @Before
-    fun `Before`() {
-        Dispatchers.setMain(testCoroutineDispatcher)
-    }
-
-    @After
-    fun `Tear Down`() {
-        categoryChoiceViewModel.categories.removeObserver(categoryObserver)
-        Dispatchers.resetMain()
-        testCoroutineDispatcher.cleanupTestCoroutines()
+        on { getCategories() }.thenReturn(flowOf(listOf(categoryModel)))
     }
 
     @Test
     fun `Get Categories`() = runBlockingTest {
 
-        categoryChoiceViewModel.categories.observeForever(categoryObserver)
+        sut.categories.test {
+            assertEquals(expectItem(), listOf(categoryViewModel))
+            expectComplete()
+        }
 
         verify(categoryRepository).getCategories()
     }
@@ -59,8 +40,12 @@ class CategoryChoiceViewModelTest {
     @Test
     fun `Update Category`() = runBlockingTest {
 
-        categoryChoiceViewModel.updateCategory(categoryViewModel)
+        sut.updateCategory(categoryViewModel)
 
-        verify(categoryRepository).updateCategory("id", false)
+        verify(categoryRepository).updateCategory(categoryViewModel.id, categoryViewModel.selected)
+    }
+
+    override fun createSut(): CategoryChoiceViewModel {
+        return CategoryChoiceViewModel(categoryRepository)
     }
 }

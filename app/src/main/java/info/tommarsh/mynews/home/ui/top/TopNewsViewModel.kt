@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class TopNewsViewModel
-@Inject constructor(
+@Inject internal constructor(
     repository: ArticleRepository,
     private val pageMapper: ArticlePageMapper
 ) : ViewModel() {

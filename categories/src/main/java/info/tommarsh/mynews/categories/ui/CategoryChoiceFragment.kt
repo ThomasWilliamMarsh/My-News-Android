@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.RecyclerView.VERTICAL
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,6 +16,7 @@ import info.tommarsh.mynews.categories.databinding.FragmentCategoryChoiceBinding
 import info.tommarsh.mynews.categories.model.CategoryViewModel
 import info.tommarsh.mynews.categories.ui.adapter.CategoryChoiceAdapter
 import info.tommarsh.mynews.core.util.doOnInsets
+import kotlinx.coroutines.flow.collect
 
 @AndroidEntryPoint
 class CategoryChoiceFragment : Fragment() {
@@ -53,7 +54,9 @@ class CategoryChoiceFragment : Fragment() {
     }
 
     private fun setUpViewModel() {
-        viewModel.categories.observe(viewLifecycleOwner, { onCategories(it) })
+        lifecycleScope.launchWhenResumed {
+            viewModel.categories.collect { categories -> onCategories(categories) }
+        }
     }
 
     private fun onCategories(categories: List<CategoryViewModel>) {
