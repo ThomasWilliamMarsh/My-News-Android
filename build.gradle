@@ -91,7 +91,7 @@ ext {
     jUnitVersion = "4.12"
     mockitoKotlinVersion = "3.2.0"
     mockitoInlineVersion = "3.10.0"
-    mockitoAndroidVersion = "3.11.0"
+    mockitoAndroidVersion = "3.8.0"
     turbineVersion = "0.5.2"
     fixtureVersion = "1.1.0"
 
