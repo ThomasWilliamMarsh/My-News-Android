@@ -33,6 +33,7 @@ dependencies {
     implementation 'com.squareup.moshi:moshi-kotlin:' + rootProject.moshiVersion
 
     //Testing
+    testImplementation project(':test-helpers')
     testImplementation 'junit:junit:' + rootProject.jUnitVersion
     testImplementation 'org.mockito:mockito-inline:' + rootProject.mockitoInlineVersion
     testImplementation 'org.mockito.kotlin:mockito-kotlin:' + rootProject.mockitoKotlinVersion

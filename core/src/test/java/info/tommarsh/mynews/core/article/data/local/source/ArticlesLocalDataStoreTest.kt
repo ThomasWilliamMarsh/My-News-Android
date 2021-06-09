@@ -1,44 +1,45 @@
 package info.tommarsh.mynews.core.article.data.local.source
 
-import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import info.tommarsh.mynews.core.MockProvider.article
-import info.tommarsh.mynews.core.MockProvider.articleModel
+import info.tommarsh.mynews.core.article.data.local.model.toDataModel
+import info.tommarsh.mynews.core.article.domain.model.ArticleModel
+import info.tommarsh.mynews.test.UnitTest
 import kotlinx.coroutines.runBlocking
-import org.junit.Rule
 import org.junit.Test
-import org.junit.rules.TestRule
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 
-class ArticlesLocalDataStoreTest {
-
-    @get:Rule
-    var rule: TestRule = InstantTaskExecutorRule()
+class ArticlesLocalDataStoreTest : UnitTest<ArticlesLocalDataStore>() {
 
     private val dao = mock<ArticlesDao>()
-    private val localDataStore = ArticlesLocalDataStore(dao)
+    private val category = fixture<String>()
 
     @Test
     fun `get articles for category`() = runBlocking<Unit> {
 
-        localDataStore.getArticlesForCategory("business")
+        sut.getArticlesForCategory(category)
 
-        verify(dao).getArticlesForCategory("business")
+        verify(dao).getArticlesForCategory(category)
     }
 
     @Test
     fun `clear categories from db`() = runBlocking {
 
-        localDataStore.clearCategory("business")
+        sut.clearCategory(category)
 
-        verify(dao).deleteCategory("business")
+        verify(dao).deleteCategory(category)
     }
 
     @Test
     fun `insert articles to db`() = runBlocking {
+        val articleModel = fixture<ArticleModel>()
+        val article = articleModel.toDataModel()
 
-        localDataStore.insertArticles(listOf(articleModel, articleModel))
+        sut.insertArticles(listOf(articleModel))
 
-        verify(dao).insertArticles(article, article)
+        verify(dao).insertArticles(article)
+    }
+
+    override fun createSut(): ArticlesLocalDataStore {
+        return ArticlesLocalDataStore(dao)
     }
 }

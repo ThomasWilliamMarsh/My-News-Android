@@ -18,6 +18,8 @@ android {
 
 dependencies {
 
+    implementation project(":core")
+
     //Unit tests
     implementation 'junit:junit:' + rootProject.jUnitVersion
     implementation "androidx.fragment:fragment-testing:" + rootProject.fragmentVersion
@@ -26,6 +28,8 @@ dependencies {
     implementation 'androidx.arch.core:core-testing:' + rootProject.lifecycleTestingVersion
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
     implementation 'app.cash.turbine:turbine:' + rootProject.turbineVersion
+
+
     api 'com.appmattus.fixture:fixture:' + rootProject.fixtureVersion
 
     //UI tests

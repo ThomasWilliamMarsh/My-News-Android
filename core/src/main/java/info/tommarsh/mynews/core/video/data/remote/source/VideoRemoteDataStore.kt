@@ -7,8 +7,8 @@ import info.tommarsh.mynews.core.video.data.remote.model.toDomainModel
 import info.tommarsh.mynews.core.video.domain.model.PlaylistModel
 import javax.inject.Inject
 
-internal class VideoRemoteDataStore
-@Inject constructor(
+class VideoRemoteDataStore
+@Inject internal constructor(
     private val api: VideoApiService,
     private val networkHelper: NetworkHelper
 ) {

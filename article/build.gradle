@@ -24,7 +24,6 @@ android {
 dependencies {
 
     implementation project(':app')
-    implementation project(':test-helpers')
 
     //Dagger
     implementation "com.google.dagger:hilt-android:" + rootProject.daggerVersion

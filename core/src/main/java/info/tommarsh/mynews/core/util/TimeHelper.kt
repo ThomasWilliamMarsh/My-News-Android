@@ -5,7 +5,7 @@ import org.joda.time.Minutes
 import javax.inject.Inject
 
 class TimeHelper
-@Inject constructor() {
+@Inject internal constructor() {
 
     companion object {
         private const val MINUTES_IN_DAY = 1440

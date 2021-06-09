@@ -8,8 +8,8 @@ import info.tommarsh.mynews.core.preferences.PreferencesRepository
 import info.tommarsh.mynews.core.util.NetworkHelper
 import javax.inject.Inject
 
-internal class ArticlesRemoteDataStore
-@Inject constructor(
+class ArticlesRemoteDataStore
+@Inject internal constructor(
     private val networkHelper: NetworkHelper,
     private val api: ArticleApiService,
     private val preferencesRepository: PreferencesRepository

@@ -12,7 +12,7 @@ import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.paging.PagingLocalDataStore
 
 @OptIn(ExperimentalPagingApi::class)
-internal class ArticlesRemoteMediator constructor(
+class ArticlesRemoteMediator internal constructor(
     private val category: String,
     private val remoteArticleSource: ArticlesRemoteDataStore,
     private val localArticleSource: ArticlesLocalDataStore,

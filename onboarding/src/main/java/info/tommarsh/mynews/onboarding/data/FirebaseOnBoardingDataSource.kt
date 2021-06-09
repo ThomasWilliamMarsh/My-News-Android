@@ -7,8 +7,8 @@ import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.onboarding.model.Choices
 import javax.inject.Inject
 
-internal class FirebaseOnBoardingDataSource
-@Inject constructor(
+class FirebaseOnBoardingDataSource
+@Inject internal constructor(
     private val remoteConfig: FirebaseRemoteConfig,
     private val adapter: JsonAdapter<Choices>
 ) : OnBoardingDataSource {

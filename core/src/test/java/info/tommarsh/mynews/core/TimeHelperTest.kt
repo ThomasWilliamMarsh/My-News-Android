@@ -1,11 +1,12 @@
 package info.tommarsh.mynews.core
 
 import info.tommarsh.mynews.core.util.TimeHelper
+import info.tommarsh.mynews.test.UnitTest
 import junit.framework.Assert.assertEquals
 import org.joda.time.DateTime
 import org.junit.Test
 
-class TimeHelperTest {
+class TimeHelperTest : UnitTest<TimeHelper>() {
 
     private val timeHelper = TimeHelper()
 
@@ -19,5 +20,9 @@ class TimeHelperTest {
         )
 
         assertEquals(expected, actual)
+    }
+
+    override fun createSut(): TimeHelper {
+        return TimeHelper()
     }
 }

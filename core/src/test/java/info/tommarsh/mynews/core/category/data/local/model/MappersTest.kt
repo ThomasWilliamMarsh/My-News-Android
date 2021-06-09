@@ -1,15 +1,22 @@
 package info.tommarsh.mynews.core.category.data.local.model
 
-import info.tommarsh.mynews.core.MockProvider.category
-import info.tommarsh.mynews.core.MockProvider.categoryModel
+import com.appmattus.kotlinfixture.kotlinFixture
+import info.tommarsh.mynews.core.category.domain.CategoryModel
 import junit.framework.Assert.assertEquals
 import org.junit.Test
 
 class MappersTest {
 
+    private val fixture = kotlinFixture()
+
     @Test
     fun `Map to domain layer`() {
-        val expected = categoryModel
+        val category = fixture<Category>()
+        val expected = CategoryModel(
+            id = category.id,
+            name = category.name,
+            selected = category.selected
+        )
 
         val actual = category.toDomainModel()
 
@@ -18,7 +25,12 @@ class MappersTest {
 
     @Test
     fun `Map to data layer`() {
-        val expected = category
+        val categoryModel = fixture<CategoryModel>()
+        val expected = Category(
+            id = categoryModel.id,
+            name = categoryModel.name,
+            selected = categoryModel.selected
+        )
 
         val actual = categoryModel.toDataModel()
 

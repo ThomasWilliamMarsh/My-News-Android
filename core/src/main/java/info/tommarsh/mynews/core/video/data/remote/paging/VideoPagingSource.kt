@@ -6,7 +6,7 @@ import info.tommarsh.mynews.core.model.Resource
 import info.tommarsh.mynews.core.video.data.remote.source.VideoRemoteDataStore
 import info.tommarsh.mynews.core.video.domain.model.PlaylistItemModel
 
-internal class VideoPagingSource(private val remote: VideoRemoteDataStore) :
+class VideoPagingSource internal constructor(private val remote: VideoRemoteDataStore) :
     PagingSource<String, PlaylistItemModel>() {
 
     override suspend fun load(params: LoadParams<String>): LoadResult<String, PlaylistItemModel> {

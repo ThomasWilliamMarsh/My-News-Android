@@ -7,8 +7,8 @@ import info.tommarsh.mynews.core.article.domain.model.ArticleModel
 import org.joda.time.DateTime
 import javax.inject.Inject
 
-internal class ArticlesLocalDataStore
-@Inject constructor(private val articlesDao: ArticlesDao) {
+class ArticlesLocalDataStore
+@Inject internal constructor(private val articlesDao: ArticlesDao) {
 
     fun getArticlesForCategory(category: String): PagingSource<Int, Article> {
         return articlesDao.getArticlesForCategory(category)

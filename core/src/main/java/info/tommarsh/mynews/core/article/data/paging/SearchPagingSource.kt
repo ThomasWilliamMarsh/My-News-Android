@@ -6,7 +6,7 @@ import info.tommarsh.mynews.core.article.data.remote.source.ArticlesRemoteDataSt
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
 import info.tommarsh.mynews.core.model.Resource
 
-internal class SearchPagingSource constructor(
+class SearchPagingSource internal constructor(
     private val query: String,
     private val remoteArticleSource: ArticlesRemoteDataStore
 ) : PagingSource<Int, ArticleModel>() {

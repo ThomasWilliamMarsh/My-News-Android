@@ -6,8 +6,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-internal class CategoryLocalDataStore
-@Inject constructor(private val dao: CategoryDao) {
+class CategoryLocalDataStore
+@Inject internal constructor(private val dao: CategoryDao) {
 
     fun getCategories(): Flow<List<CategoryModel>> =
         dao.getCategories()

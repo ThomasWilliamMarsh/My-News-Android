@@ -40,7 +40,7 @@ android {
 dependencies {
 
     // Kotlin
-    api "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$rootProject.kotlinVersion"
+    api "org.jetbrains.kotlin:kotlin-stdlib-jdk8:$rootProject.kotlinVersion"
 
     //Ktx
     api 'androidx.core:core-ktx:' + rootProject.coreKtxVersion
@@ -60,8 +60,6 @@ dependencies {
     api 'androidx.hilt:hilt-work:' + rootProject.jetpackHiltVersion
     api 'androidx.paging:paging-runtime:' + rootProject.pagingVersion
     api "androidx.core:core-ktx:" + rootProject.coreKtxVersion
-
-
 
     //Work Manager
     api 'androidx.work:work-runtime-ktx:' + rootProject.workmanagerVersion
@@ -111,6 +109,8 @@ dependencies {
     api 'com.airbnb.android:lottie:' + rootProject.lottieVersion
 
     //Testing
+    testImplementation project(':test-helpers')
+    testImplementation 'app.cash.turbine:turbine:' + rootProject.turbineVersion
     testImplementation 'androidx.paging:paging-common:' + rootProject.pagingVersion
     testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:' + rootProject.coroutinesTestVersion
     testImplementation 'junit:junit:' + rootProject.jUnitVersion

@@ -3,7 +3,7 @@ package info.tommarsh.mynews.core.database
 import androidx.room.TypeConverter
 import info.tommarsh.mynews.core.article.data.local.model.Source
 
-internal class Converters {
+class Converters internal constructor() {
 
     companion object {
         private const val NUM_FIELDS = 2
