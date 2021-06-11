@@ -1,4 +1,4 @@
-package info.tommarsh.mynews
+package info.tommarsh.mynews.util
 
 import android.content.ComponentName
 import android.content.Intent
@@ -8,6 +8,7 @@ import androidx.core.util.Preconditions
 import androidx.fragment.app.Fragment
 import androidx.test.core.app.ActivityScenario
 import androidx.test.core.app.ApplicationProvider
+import info.tommarsh.mynews.HiltTestActivity
 import info.tommarsh.mynews.home.R
 
 inline fun <reified T : Fragment> launchFragmentInHiltContainer(

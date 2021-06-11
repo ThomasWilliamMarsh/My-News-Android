@@ -12,7 +12,7 @@ android {
         targetSdkVersion rootProject.targetSdk
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "info.tommarsh.mynews.runner.HiltTestRunner"
+        testInstrumentationRunner "info.tommarsh.mynews.util.HiltTestRunner"
 
         javaCompileOptions {
             annotationProcessorOptions {

@@ -1,63 +1,55 @@
 package info.tommarsh.mynews.tests
 
-import androidx.test.espresso.Espresso.onView
-import androidx.test.espresso.assertion.ViewAssertions.matches
-import androidx.test.espresso.matcher.ViewMatchers.withId
-import androidx.test.espresso.matcher.ViewMatchers.withText
 import dagger.hilt.android.testing.BindValue
-import dagger.hilt.android.testing.HiltAndroidRule
 import dagger.hilt.android.testing.HiltAndroidTest
 import dagger.hilt.android.testing.UninstallModules
-import info.tommarsh.mynews.articlesResponse
+import info.tommarsh.mynews.UITest
 import info.tommarsh.mynews.core.article.data.ArticleRepository
 import info.tommarsh.mynews.core.di.ArticleRepositoryModule
-import info.tommarsh.mynews.home.R
+import info.tommarsh.mynews.dsl.articles
+import info.tommarsh.mynews.dsl.given
+import info.tommarsh.mynews.dsl.then
+import info.tommarsh.mynews.dsl.whenever
 import info.tommarsh.mynews.home.ui.top.TopNewsFragment
-import info.tommarsh.mynews.launchFragmentInHiltContainer
-import org.junit.Before
-import org.junit.Rule
+import info.tommarsh.mynews.util.article1
+import info.tommarsh.mynews.util.article2
 import org.junit.Test
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
-import org.mockito.MockitoAnnotations
 
 @HiltAndroidTest
 @UninstallModules(ArticleRepositoryModule::class)
-class TopNewsFragmentTest {
-
-    @get:Rule
-    val rule = HiltAndroidRule(this)
+class TopNewsFragmentTest : UITest() {
 
     @BindValue
     @Mock
     lateinit var articleRepository: ArticleRepository
 
-    @Before
-    fun inject_mocks() {
-        MockitoAnnotations.initMocks(this)
-    }
-
     @Test
     fun successful_response_shows_list_of_articles() {
-        `when`(articleRepository.getArticlesForCategory("general"))
-            .thenReturn(articlesResponse)
 
-        launchFragmentInHiltContainer<TopNewsFragment>()
+        given {
+            articles {
+                articleRepository returnsTopStories listOf(article1, article2)
+            }
+        }
 
-        //Ensure that first article is a large card
-        onView(withId(R.id.main_article_title))
-            .check(matches(withText("title1")))
+        whenever {
+            launchesFragment<TopNewsFragment>()
+        }
 
-        onView(withId(R.id.main_article_updated))
-            .check(matches(withText("1 hour ago")))
-
-        //Ensure that second article is a small card
-        onView(withId(R.id.article_title))
-            .check(matches(withText("title2")))
-
-        onView(withId(R.id.article_updated))
-            .check(matches(withText("1 hour ago")))
-
-
+        then {
+            sees {
+                articles {
+                    mainArticle {
+                        title = "title1"
+                        lastUpdated = "1 hour ago"
+                    }
+                    secondaryArticle {
+                        title = "title2"
+                        lastUpdated = "1 hour ago"
+                    }
+                }
+            }
+        }
     }
 }

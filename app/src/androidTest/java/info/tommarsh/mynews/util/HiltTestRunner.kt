@@ -1,4 +1,4 @@
-package info.tommarsh.mynews.runner
+package info.tommarsh.mynews.util
 
 import android.app.Application
 import android.content.Context

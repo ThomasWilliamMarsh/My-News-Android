@@ -1,4 +1,4 @@
-package info.tommarsh.mynews
+package info.tommarsh.mynews.util
 
 import androidx.paging.PagingData
 import info.tommarsh.mynews.core.article.domain.model.ArticleModel
