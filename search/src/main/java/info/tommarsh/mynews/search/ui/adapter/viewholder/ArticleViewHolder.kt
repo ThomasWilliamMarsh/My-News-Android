@@ -1,14 +1,15 @@
 package info.tommarsh.mynews.search.ui.adapter.viewholder
 
-import androidx.core.os.bundleOf
-import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.util.loadUrl
-import info.tommarsh.mynews.search.R
 import info.tommarsh.mynews.search.databinding.ItemSearchArticleBinding
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 
-class ArticleViewHolder(private val binding: ItemSearchArticleBinding) :
+class ArticleViewHolder(
+    private val binding: ItemSearchArticleBinding,
+    private val onClickEvent: (clickEvent: ClickEvent) -> Unit
+) :
     RecyclerView.ViewHolder(binding.root) {
 
     fun bind(article: SearchItemViewModel) = with(itemView) {
@@ -17,13 +18,12 @@ class ArticleViewHolder(private val binding: ItemSearchArticleBinding) :
         binding.articleUpdated.text = article.publishedAt
 
         binding.root.setOnClickListener {
-            findNavController().navigate(
-                R.id.action_searchFragment_to_articleFragment,
-                bundleOf(
-                    "url" to article.urlToImage,
-                    "title" to article.title,
-                    "webUrl" to article.url,
-                    "content" to article.content
+            onClickEvent(
+                ClickEvent.Article(
+                    webUrl = article.url,
+                    imageUrl = article.urlToImage,
+                    title = article.title,
+                    content = article.content
                 )
             )
         }
