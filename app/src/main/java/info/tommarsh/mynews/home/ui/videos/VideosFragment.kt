@@ -3,7 +3,6 @@ package info.tommarsh.mynews.home.ui.videos
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -13,7 +12,7 @@ import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentVideosBinding
-import info.tommarsh.mynews.home.ui.NavigationViewModel
+import info.tommarsh.mynews.home.ui.consumeClick
 import kotlinx.coroutines.flow.collectLatest
 
 @AndroidEntryPoint
@@ -24,8 +23,6 @@ class VideosFragment : Fragment() {
     private val adapter = VideosAdapter()
 
     private val viewModel by viewModels<VideosViewModel>()
-
-    private val navigationViewModel by activityViewModels<NavigationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -64,7 +61,7 @@ class VideosFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> navigationViewModel.dispatchClick(ClickEvent.Search)
+            R.id.action_search -> parentFragment?.consumeClick(ClickEvent.Search)
         }
         return true
     }

@@ -3,7 +3,6 @@ package info.tommarsh.mynews.home.ui.top
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.paging.LoadState
@@ -13,7 +12,7 @@ import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentTopNewsBinding
-import info.tommarsh.mynews.home.ui.NavigationViewModel
+import info.tommarsh.mynews.home.ui.consumeClick
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.distinctUntilChangedBy
@@ -25,13 +24,11 @@ class TopNewsFragment : Fragment() {
 
     private lateinit var binding: FragmentTopNewsBinding
 
-    private val adapter = TopNewsAdapter { event ->
-        navigationViewModel.dispatchClick(event)
+    private val adapter = TopNewsAdapter { event: ClickEvent ->
+        parentFragment?.consumeClick(event)
     }
 
     private val viewModel by viewModels<TopNewsViewModel>()
-
-    private val navigationViewModel by activityViewModels<NavigationViewModel>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,7 +63,7 @@ class TopNewsFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> navigationViewModel.dispatchClick(ClickEvent.Search)
+            R.id.action_search -> parentFragment?.consumeClick(ClickEvent.Search)
         }
         return true
     }

@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.mynews.core.navigator.ClickEvent
+import info.tommarsh.mynews.core.navigator.onClickEvent
 import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.home.databinding.ItemCategoryArticleBinding
 import info.tommarsh.mynews.home.model.ArticleViewModel
-import info.tommarsh.mynews.home.ui.onClickEvent
 
 class CarouselItemAdapter(private val onClickEvent: onClickEvent) :
     PagingDataAdapter<ArticleViewModel, CarouselItemViewHolder>(DIFFER) {

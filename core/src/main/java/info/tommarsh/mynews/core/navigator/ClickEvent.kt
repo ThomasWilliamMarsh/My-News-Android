@@ -1,5 +1,7 @@
 package info.tommarsh.mynews.core.navigator
 
+typealias onClickEvent = (ClickEvent) -> Unit
+
 sealed class ClickEvent {
 
     object Search : ClickEvent()

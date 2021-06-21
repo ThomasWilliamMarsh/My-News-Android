@@ -8,11 +8,11 @@ import androidx.paging.PagingData
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.mynews.categories.model.CategoryViewModel
+import info.tommarsh.mynews.core.navigator.onClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.createDiffItemCallback
 import info.tommarsh.mynews.home.databinding.ItemCarouselBinding
 import info.tommarsh.mynews.home.model.ArticleViewModel
-import info.tommarsh.mynews.home.ui.onClickEvent
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest

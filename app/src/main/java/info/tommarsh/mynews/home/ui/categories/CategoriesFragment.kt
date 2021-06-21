@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -12,7 +11,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentCategoriesBinding
-import info.tommarsh.mynews.home.ui.NavigationViewModel
+import info.tommarsh.mynews.home.ui.consumeClick
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 
@@ -22,8 +21,6 @@ class CategoriesFragment : Fragment() {
     lateinit var binding: FragmentCategoriesBinding
 
     private val viewModel by viewModels<CategoriesViewModel>()
-
-    private val navigationViewModel by activityViewModels<NavigationViewModel>()
 
     private lateinit var adapter: CarouselAdapter
 
@@ -47,14 +44,14 @@ class CategoriesFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         adapter = CarouselAdapter(
             lifecycle = lifecycle,
-            onClickEvent = { event: ClickEvent -> navigationViewModel.dispatchClick(event) },
+            onClickEvent = { event: ClickEvent -> parentFragment?.consumeClick(event) },
             pagingFactory = viewModel::getArticlesForCategory
         )
         binding.myNewsRecyclerView.adapter = adapter
         binding.myNewsRecyclerView.itemAnimator = null
         binding.myNewsRecyclerView.layoutManager = LinearLayoutManager(context)
         binding.addCategories.addCategoriesButton.setOnClickListener {
-            navigationViewModel.dispatchClick(ClickEvent.Categories)
+            parentFragment?.consumeClick(ClickEvent.Categories)
         }
     }
 
@@ -81,8 +78,8 @@ class CategoriesFragment : Fragment() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
-            R.id.action_search -> navigationViewModel.dispatchClick(ClickEvent.Search)
-            R.id.action_edit -> navigationViewModel.dispatchClick(ClickEvent.Categories)
+            R.id.action_search -> parentFragment?.consumeClick(ClickEvent.Search)
+            R.id.action_edit -> parentFragment?.consumeClick(ClickEvent.Categories)
         }
         return true
     }

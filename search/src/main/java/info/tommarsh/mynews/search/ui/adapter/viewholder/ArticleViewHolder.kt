@@ -2,13 +2,14 @@ package info.tommarsh.mynews.search.ui.adapter.viewholder
 
 import androidx.recyclerview.widget.RecyclerView
 import info.tommarsh.mynews.core.navigator.ClickEvent
+import info.tommarsh.mynews.core.navigator.onClickEvent
 import info.tommarsh.mynews.core.util.loadUrl
 import info.tommarsh.mynews.search.databinding.ItemSearchArticleBinding
 import info.tommarsh.mynews.search.model.SearchItemViewModel
 
 class ArticleViewHolder(
     private val binding: ItemSearchArticleBinding,
-    private val onClickEvent: (clickEvent: ClickEvent) -> Unit
+    private val onClickEvent: onClickEvent
 ) :
     RecyclerView.ViewHolder(binding.root) {
 

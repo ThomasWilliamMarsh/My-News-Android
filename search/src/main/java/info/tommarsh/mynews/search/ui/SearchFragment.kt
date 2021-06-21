@@ -5,20 +5,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.widget.SearchView
-import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.core.view.updatePadding
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.recyclerview.widget.ConcatAdapter
 import dagger.hilt.android.AndroidEntryPoint
-import info.tommarsh.mynews.core.navigator.ClickEvent
 import info.tommarsh.mynews.core.ui.ListLoadStateAdapter
 import info.tommarsh.mynews.core.util.doOnInsets
-import info.tommarsh.mynews.search.R
 import info.tommarsh.mynews.search.databinding.FragmentSearchBinding
 import info.tommarsh.mynews.search.ui.adapter.SearchAdapter
 import kotlinx.coroutines.Job
@@ -30,20 +26,7 @@ class SearchFragment : Fragment() {
 
     private lateinit var binding: FragmentSearchBinding
 
-    private val adapter = SearchAdapter { event ->
-        when (event) {
-            is ClickEvent.Article -> findNavController().navigate(
-                R.id.action_searchFragment_to_articleFragment,
-                bundleOf(
-                    "url" to event.imageUrl,
-                    "title" to event.title,
-                    "webUrl" to event.webUrl,
-                    "content" to event.content
-                )
-            )
-            else -> throw IllegalArgumentException("Unhandled click event $event")
-        }
-    }
+    private val adapter = SearchAdapter { event -> consumeClick(event) }
 
     private var searchJob: Job? = null
 
