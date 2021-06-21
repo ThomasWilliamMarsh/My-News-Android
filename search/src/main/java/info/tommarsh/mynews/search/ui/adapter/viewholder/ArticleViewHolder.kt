@@ -19,7 +19,12 @@ class ArticleViewHolder(private val binding: ItemSearchArticleBinding) :
         binding.root.setOnClickListener {
             findNavController().navigate(
                 R.id.action_searchFragment_to_articleFragment,
-                bundleOf("url" to article.urlToImage, "title" to article.title)
+                bundleOf(
+                    "url" to article.urlToImage,
+                    "title" to article.title,
+                    "webUrl" to article.url,
+                    "content" to article.content
+                )
             )
         }
     }

@@ -46,7 +46,8 @@ class CarouselItemViewHolder(
                 ClickEvent.Article(
                     webUrl = article.url,
                     imageUrl = article.urlToImage,
-                    title = article.title
+                    title = article.title,
+                    content = article.content
                 )
             )
         }

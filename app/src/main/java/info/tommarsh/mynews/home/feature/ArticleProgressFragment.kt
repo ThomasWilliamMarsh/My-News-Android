@@ -1,14 +1,12 @@
 package info.tommarsh.mynews.home.feature
 
-import android.content.Intent
-import android.content.Intent.ACTION_VIEW
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.navigation.dynamicfeatures.fragment.ui.AbstractProgressFragment
+import info.tommarsh.mynews.core.util.launchExternal
 import info.tommarsh.mynews.home.R
 import info.tommarsh.mynews.home.databinding.FragmentArticleProgressBinding
 
@@ -32,8 +30,8 @@ class ArticleProgressFragment : AbstractProgressFragment() {
             val bundleKey = "dfn:destinationArgs"
             val navArgs = requireArguments().get(bundleKey) as? Bundle
             navArgs?.let { bundle ->
-                val webUri =  bundle.getString("webUrl")!!.toUri()
-                startActivity(Intent(ACTION_VIEW, webUri))
+                val url = bundle.getString("webUrl")!!
+                requireContext().launchExternal(url)
             }
         }
     }

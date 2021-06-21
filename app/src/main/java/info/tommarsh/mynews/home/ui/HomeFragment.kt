@@ -88,7 +88,8 @@ class HomeFragment : Fragment() {
                     bundleOf(
                         "url" to event.imageUrl,
                         "title" to event.title,
-                        "webUrl" to event.webUrl
+                        "webUrl" to event.webUrl,
+                        "content" to event.content
                     )
                 )
                 is ClickEvent.OnBoarding -> findNavController().navigate(

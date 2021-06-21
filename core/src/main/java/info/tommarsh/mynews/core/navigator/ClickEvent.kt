@@ -8,6 +8,7 @@ sealed class ClickEvent {
     data class Article(
         val webUrl: String,
         val imageUrl: String,
-        val title: String
+        val title: String,
+        val content: String
     ) : ClickEvent()
 }

@@ -6,13 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import info.tommarsh.mynews.core.util.loadUrl
-import info.tommarsh.mynews.article.R
 import info.tommarsh.mynews.article.databinding.FragmentArticleBinding
+import info.tommarsh.mynews.core.util.launchExternal
+import info.tommarsh.mynews.core.util.loadUrl
 
 class ArticleFragment : Fragment() {
 
-    private lateinit var binding : FragmentArticleBinding
+    private lateinit var binding: FragmentArticleBinding
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -28,7 +28,11 @@ class ArticleFragment : Fragment() {
         arguments?.let { bundle ->
             binding.articleTitle.text = bundle.getString("title")
             binding.articleMainPicture.loadUrl(bundle.getString("url").orEmpty())
-            binding.articleText.text = getString(R.string.lorem_ipsum)
+            binding.articleText.text = bundle.getString("content")
+            binding.articleReadMore.setOnClickListener {
+                val url = bundle.getString("webUrl")!!
+                requireContext().launchExternal(url)
+            }
         } ?: findNavController().popBackStack()
     }
 }

@@ -78,7 +78,8 @@ private class PrimaryViewHolder(
                 ClickEvent.Article(
                     webUrl = article.url,
                     imageUrl = article.urlToImage,
-                    title = article.title
+                    title = article.title,
+                    content = article.content
                 )
             )
         }
@@ -101,7 +102,8 @@ private class SecondaryViewHolder(
                 ClickEvent.Article(
                     webUrl = article.url,
                     imageUrl = article.urlToImage,
-                    title = article.title
+                    title = article.title,
+                    content = article.content
                 )
             )
         }

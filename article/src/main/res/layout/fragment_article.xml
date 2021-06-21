@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/article_root"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -45,18 +46,26 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:padding="@dimen/article_padding"
-                    android:textColor="?colorOnBackground"
-                    android:textAppearance="?textAppearanceHeadline4" />
+                    android:textAppearance="?textAppearanceHeadline4"
+                    android:textColor="?colorOnBackground" />
 
             <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/article_text"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/article_padding"
                     android:paddingBottom="@dimen/article_padding"
+                    android:textAppearance="?textAppearanceBody1"
                     android:textColor="?colorOnBackground"
-                    android:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
-                    android:textAppearance="?textAppearanceBody1" />
+                    tools:text="@string/lorem_ipsum" />
+
+            <com.google.android.material.button.MaterialButton
+                    android:id="@+id/article_read_more"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_margin="@dimen/article_margin"
+                    android:text="@string/read_full_article" />
         </LinearLayout>
 
 
